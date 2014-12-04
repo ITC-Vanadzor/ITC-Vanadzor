@@ -1,0 +1,16 @@
+Homework for Dec 3
+-------------------
+  >  Գրել string.py սկրիպտ որում կօգտագործվեն հետևյալ ֆունկցիաները։
+ 
+    lower() ,upper() ,strip() ,isalpha() ,isdigit() ,isspace() ,startswith(str) ,endswith(str) ,find(str) ,replace(old, new) ,split(delimiter) ,join(list)
+
+  >  Գրել list.py սկրիպտ որում կօգտագործվեն հետևյալ ֆունկցիաները։
+
+    append(elem) ,insert(index, elem) ,extend(list2) ,index(elem) ,remove(elem) ,sort() ,reverse() ,pop(index)
+
+  >  Գրել dictionary.py սկրիպտ որում կօգտագործվեն հետևյալ ֆունկցիաները։
+
+    keys(),values(),items()
+
+  >  Գրել factorial.py սկրիպտ որը -n հրամանյին տողի flag ով ներմուծված integer թվի համար կհաշվի ֆակտորյալ և կտպի կոնսոլին
+      -  https://docs.python.org/2/library/argparse.html
