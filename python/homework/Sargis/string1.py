@@ -3,6 +3,9 @@
 working with python's string methods
 
 '''
+
+
+
 var = "Hello ITC team"
 print "lower",var.lower()
 print "upper()", var.upper()
