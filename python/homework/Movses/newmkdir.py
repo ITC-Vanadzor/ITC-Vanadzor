@@ -6,16 +6,17 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-p',help="TODO")
 parser.add_argument('path',help="TODO")
+args = parser.parse_args()
 path = args.path
 
 if path and args.p:
     try:
-        makedirs(path)
+        os.makedirs(path)
     except Exception:
         print 'error' 
 
 if path:
-    mkdir(path, 0755)
+    os.mkdir(path, 0755)
 
 
 
