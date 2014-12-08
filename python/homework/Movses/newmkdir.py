@@ -6,7 +6,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-p',help="TODO")
 parser.add_argument('path',help="TODO")
-os.path.basename()
+path = args.path
 
 if path and args.p:
     try:
