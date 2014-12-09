@@ -6,6 +6,7 @@ import argparse
 def my_parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', help="TODO")
+    parser.add_argument('-p', action='store_true', help="TODO")
     return parser.parse_args()
 
 def my_parse_args1():
@@ -47,12 +48,9 @@ def my_mkdir(poxos):
         return False
     try:
         os.mkdir(poxos)
-        #makedirs(path)
     except OSError, e:
         echo("something wrong, Error is " + str(e))
     return True
-    #except Exception:
-    #print 'error'
 
 if "__main__" == __name__:
     args = my_parse_args()
@@ -62,5 +60,4 @@ if "__main__" == __name__:
     elif not is_created and not args.p:
         my_parse_args1()
          
-    echo("chem haskanum inch cheq haskanum")
     echo_name()
