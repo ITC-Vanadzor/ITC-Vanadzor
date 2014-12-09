@@ -1,0 +1,29 @@
+.. my_homework documentation master file, created by
+   sphinx-quickstart on Tue Dec  9 13:14:39 2014.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to my_homework's documentation!
+=======================================
+
+This is documentation to Homework_Dec_9.
+
+Requrements:
+
+This project depends on python packages.
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   code
+   
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
