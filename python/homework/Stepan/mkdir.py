@@ -27,6 +27,7 @@ def create_dir_rec(poxos):
     
     karen = os.path.abspath(os.path.join(poxos, os.pardir))
     my_list = []
+    my_list.append(poxos)
     my_list.append(karen)
     while(not os.path.exists(karen)):
         karen = os.path.abspath(os.path.join(karen, os.pardir))
