@@ -3,6 +3,7 @@
 import argparse
 import shutil
 
+#input arguments
 def set_parameters():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('file_name', help='Please set file(or directory) name for copying.')
@@ -10,6 +11,7 @@ def set_parameters():
 	parser.add_argument('-r','--recursive', action='store_true', help='Please set -r flag.')
 	return parser.parse_args()
 
+#copy file by path
 def method_cp(file_name, copy_name, recursive=False):
 	if recursive:
 		try:
