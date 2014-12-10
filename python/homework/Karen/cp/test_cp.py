@@ -21,15 +21,21 @@ class NegativeTestCp(unittest.TestCase):
 	def setUpClass(self):
 		pass
 
-	#invalid file name
+	#Invalid file name
 	def test_1_cp(self):
-		file_name = "invalid_file_name" #file not exist
+		file_name = "invalid_file_name" #File is not exist
 		copy_name = 'copy_file_name'
 		self.assertTrue(not cp.method_cp(file_name, copy_name ), 'Error! File (or directory) not found.')
 
-	#flag = False
+	#Flag = False
 	def test_2_cp(self):
 		file_name = "Test_Dir" #Test_Dir is exist
 		copy_name = 'copy_dir_name'
 		self.assertTrue(not cp.method_cp(file_name, copy_name ), 'Error! Please set -r flag.')
+
+    #Empty copy name
+	def test_3_cp(self):
+		file_name = "cp.py" #File(or directory) is exist
+		copy_name = ''#Empty copy name
+		self.assertTrue(not cp.method_cp(file_name, copy_name ), 'Error! Please set copy name.')
 
