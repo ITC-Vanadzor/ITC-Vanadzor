@@ -13,18 +13,18 @@ def set_parameters():
 
 #copy file by path
 def method_cp(file_name, copy_name, recursive=False):
-	if recursive:
-		try:
-			shutil.copytree(file_name, copy_name)
-			return True
-		except OSError:
-			print "cp: cannot stat '{}': No such file or directory".format(file_name)
-	else:
-		try:
-			shutil.copy(file_name, copy_name)
-			return True
-		except IOError:
-			print "cp: omitting directory '{}'".format(file_name)
+    try:
+        if recursive:
+            shutil.copytree(file_name, copy_name)
+        else:
+		    shutil.copy(file_name, copy_name)
+        return True    
+
+    except OSError:
+    	print "cp: cannot stat '{}': No such file or directory".format(file_name)
+    except IOError:
+    	print "cp: omitting directory '{}'".format(file_name)
+    return False
 
 if __name__ == '__main__':
 	args = set_parameters()
