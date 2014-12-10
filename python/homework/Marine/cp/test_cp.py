@@ -4,20 +4,33 @@ import os
 import unittest
 import cp
 
-class Test_copy(unittest.TestCase):
+class PositivTest_copy(unittest.TestCase):
     def test_cp1(self):
-        path = "/home/marine/Documents"
-        path1 = "/home/marine/Desktop"
-        cp_dir = cp.copy_r(path,path1)
-        cp_dir2=os.path.isdir(path)
-        self.assertEqual(cp_dir, cp_dir1, 'Please input directory')
-def test_cp2(self):
-        path = "/home/marine/cp.py"
-        path1 = "/home/marine/Desktop"
-        cp_dir = cp.copy_r(path,path1)
-        cp_dir2=os.path.isfile(path)
-        self.assertEqual(cp_dir, cp_dir1, 'Please input file')
+        path = "/home/employee/Documents"
+        path1 ="/home/employee/Desktop/ut"
+        rec = True
+        self.assertTrue(cp.copy_r(path, path1, rec), "TODO")
+        self.assertTrue(os.path.isdir(path1), 'Please input directory')
+                                            
+    def test_cp2(self):
+        path = "cp.py"
+        path1 = "/home/employee/Desktop/12"
+        rec = False
+        self.assertTrue(cp.copy_r(path, path1, rec), "TODO")
+        self.assertTrue(os.path.isfile(path1), 'Please input directory')
+ 
+class NegativTest_copy(unittest.TestCase):
+
+    def test_cp3(self):
+        path = "/home/student/dd"
+        path1 ="/home/employee/Desktop/ut"
+        rec = True
+
+        self.assertTrue(cp.copy_r(None, path1, rec), "TODO")
 
 
-if __name__=='__main__':
-    unittest.main()
+    def test_cp4(self):
+        path = "/home/student/dd"
+        path1 ="/home/employee/Desktop/ut"
+        rec = True
+        self.assertFalse(os.path.exists(path), 'No directory')

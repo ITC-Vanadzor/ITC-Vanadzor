@@ -7,37 +7,38 @@ import errno
 
 def flags():
     parser = argparse.ArgumentParser(description = 'copy')
-    parser.add_argument('path', help = 'copy')
-    parser.add_argument('path1', help = 'copy')
-    parser.add_argument('-r', action = 'store_true', dest = 'rec', help = 'copy rec')
-    args = parser.parse_args()
-    return parser.parse.args
+    parser.add_argument('path', help='copy')
+    parser.add_argument('path1', help='copy')
+    parser.add_argument('-r', action='store_true', dest = 'rec', help = 'copy rec')
+    return parser.parse_args()
   
-def copy_r(file_name, copy_file_name, recursive = false):
-    if recursive:
-        try:        
-            shutil.copytree(file_name, copy_file_name)
-            return true
-        except OSError, e:
-            print "something went wrong, Error is",str(e) 
-    else:
-        try:
-            shutil.copy(file_name, copy_file_name)
-            return true        
-        except OSError, e:
-            print "something went wrong, Error is",str(e)     
+def copy_r(path, path1, rec):
+    if not check_path(path):
+        print 'No such file or directory'
+        return False
 
+    try:        
+        if rec:
+            shutil.copytree(path, path1)
+        elif not os.path.isdir(path):
+            shutil.copy(path, path1)
+        else:
+            print "bls bls"
+            return False
+        return True        
+    except OSError, e:
+        print "something went wrong, Error is",str(e) 
+    except IOError, e:
+        print "bla", str(e)
+    return False
 
-if __name__=='__main__':
+def check_path(path):
+    return os.path.exists(path)
+
+if '__main__' == __name__:
     args = flags()
-    file_path=args.path
-    copy_file_path=args.path1
-    recursive=args.rec
-    copy_r(file_path, copy_file_path1, recursive)
-
-
-
-
-
-
+    path = args.path
+    path1 = args.path1
+    rec = args.rec
+    copy_r(path, path1, rec)
 
