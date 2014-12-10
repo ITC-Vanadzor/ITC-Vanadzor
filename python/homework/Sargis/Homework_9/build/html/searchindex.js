@@ -1,0 +1,1 @@
+Search.setIndex({envversion:46,terms:{index:0,search:0,depend:0,python:0,modul:0,project:0,packag:0,requr:0,thi:0,homework_dec_9:0,content:0,page:0},objtypes:{},objnames:{},filenames:["homework_Dec_9.py"],titles:["Welcome to my_homework&#8217;s documentation!"],objects:{},titleterms:{my_homework:0,document:0,welcom:0,indic:0,tabl:0}})
