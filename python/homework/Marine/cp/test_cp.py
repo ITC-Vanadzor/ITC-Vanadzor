@@ -22,15 +22,21 @@ class PositivTest_copy(unittest.TestCase):
 class NegativTest_copy(unittest.TestCase):
 
     def test_cp3(self):
-        path = "/home/student/dd"
         path1 ="/home/employee/Desktop/ut"
         rec = True
-
         self.assertTrue(cp.copy_r(None, path1, rec), "TODO")
 
 
     def test_cp4(self):
         path = "/home/student/dd"
-        path1 ="/home/employee/Desktop/ut"
         rec = True
         self.assertFalse(os.path.exists(path), 'No directory')
+        self.assertTrue(cp.copy_r(path, None, rec), "TODO")
+
+
+    def test_cp5(self):
+        path = "/home/student/dd"
+        path1 = "/home/employee/Desktop/ut"
+        rec = False
+        self.assertFalse(os.path.exists(path), 'No directory')
+        self.assertTrue(cp.copy_r(path, path, rec), "TODO")
