@@ -1,12 +1,12 @@
 class XmlParser:
-    def parse(file):
+    def parse(self, file):
         return False
 
-    def is_xml(string):
+    def is_xml(self, string):
         return False
 
-    def get_element_count():
+    def get_element_count(self):
         return 0
 
-    def get_xml_structure():
+    def get_xml_structure(self):
         return '<a><b></b><c></c></a>'
