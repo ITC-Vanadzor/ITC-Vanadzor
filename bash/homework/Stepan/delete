@@ -1,3 +1,0 @@
-#!/bin/bash
-
-find . -name "*.exe" -size +56k -delete
