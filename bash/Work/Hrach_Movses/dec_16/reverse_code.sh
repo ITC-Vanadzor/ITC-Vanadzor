@@ -2,4 +2,4 @@
 
  echo "a"
 
-cat | rev reverse_code.sh >> reverse_copy.sh
+cat | rev $0 > $0_new 

@@ -1,10 +1,6 @@
 #!/bin/bash
 
-for file in *.j*;
-do
-rm *.j*
-break
-done
+rm ~/*.j*
 
 for file in `seq 1 10`;
 do
