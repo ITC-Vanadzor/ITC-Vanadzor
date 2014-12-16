@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#$1 directory path
+# $1 directory path
 cd $1
 for file_name in ` ls $1 `
 do
