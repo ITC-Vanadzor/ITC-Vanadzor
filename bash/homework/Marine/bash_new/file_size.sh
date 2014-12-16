@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cd $1
 #$1 directory path
+cd $1
 for file_name in ` ls $1 `
 do
   if [ -f "$file_name" ]
