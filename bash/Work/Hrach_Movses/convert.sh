@@ -1,6 +1,9 @@
 #!/bin/bash
 
+if [ -f *.j* ];
+then
 rm ~/*.j*
+if
 
 for file in `seq 1 10`;
 do
