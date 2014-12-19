@@ -37,7 +37,7 @@ def copy_r(path, path1, rec):
         elif not os.path.isdir(path):
             shutil.copy(path, path1)
         else:
-            print "bls bls"
+            print "Input correct format"
             return False
         return True        
     except OSError, e:

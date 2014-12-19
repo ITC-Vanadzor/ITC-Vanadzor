@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#  open crontab -e and write         
+#  * * * * * ~/Desktop/file_name
+#  It will create file every 1 minute
+
+string1=`date | cut -d ' ' -f 4`  
+echo $string1
+ls > ~/Desktop/"$string1"

@@ -1,98 +1,58 @@
-#!/usr/bin/python
+#usr/bin/python
 
 import os
 import unittest
 import xmlparser
  
-class negativ_xml_test(unittest.TastCase):
+class TestxmlNegativ(unittest.TestCase):
   
     @classmethod
     def setUpClass(self):
-       self.xml1=xmlparser.XmlParser()
+        self._xml_parser=xmlparser.XmlParser()
 
     def test_1(self):
         path='xmlparser.py'
-        self.assertFalse(self.ml1.parse(path), 'File not exists')
+        self.assertTrue(os.path.exists(path), 'TODO')
+        self.assertFalse(self._xml_parser.parse(path), 'TODO')
 
     def test_2(self):
-        self.assertFalse(not self.xml1.parser.parse(none), 'Input file')
+        self.assertFalse(self._xml_parser.parser.parse(None), 'TODO')
 
     def test_3(self):
-        path='cp.py'
-        self.assertFalse(self.xml1.parser.parse(path), 'File not exists')
-        self.assertTrue(os.path.exists(path), 'No such file')
+        path='/home'
+        self.assertFalse(self._xml_parser.parse(path), 'TODO')
 
     def test_4(self):
-        path='/home/marine/Desktop/'
-        self.assertFalse(parser.parse(path), 'Input file')
-        self.assertTrue(not os.path.isdir(path), 'Not input directory')
+        self.assertEqual(self._xml_parser.get_element_count(), 0, 'TODO')
 
     def test_5(self):
-        num=int(5)
-        self.assertEqual(self.xml1.get_element_count(num), 0, 'Input integer number')
+        self.assertFalse(self._xml_parser.is_xml(12), 'TODO')
 
     def test_6(self):
-        num='str'
-        self.assertEqual(self.xml1.get_element_count(num), 0, 'Input integer number')
-        self.assertTrue(num.isdigit(), 'Input integer number')
+        self.assertFalse(self._xml_parser.is_xml('<a> '), 'TODO')
 
     def test_7(self):
-        self.assertEqual(self.xml1.get_element_count(none), 0, 'Input integer number')
-
+        self.assertFalse(self._xml_parser.is_xml(['a', 'b', 'c']), 'TODO')
+    
     def test_8(self):
-        str1 = '<a> </a>'
-        self.assertFalse(self.xml1.is_xml(str1), 'Enter the correct format')
-
+        self.assertFalse(self._xml_parser.is_xml({1: 'a', 2: 'b', 3: 'c'}), 
+            'TODO')
     def test_9(self):
-        str1 = int(666)
-        self.assertFalse(self.xml1.is_xml(str1), 'Input string')
-        self.assertTrue(str1.isalpha(), 'Enter the correct format')
-
+        string=''
+        self.assertFalse(self._xml_parser.is_xml(string), 'TODO')
+    
     def test_10(self):
-        path='<a> 666'
-        self.assertFalse(self.xml1.is_xml(str1), 'Input string')
+        string= 'xmlparser.py'
+        self.assertFalse(os.path.isfile(string, 'TODO')
+        self.assertFalse(self._xml_parser.is_xml(string), 'TODO')
 
     def test_11(self):
-        str1=''
-        self.assertFalse(self.xml1.is_xml(str1), 'Input string')
-        self.assertNoEqual(len(str1), 0, 'Input string')
+        string= '/home'
+        self.assertFalse(os.path.isdir(string), 'TODO')
+        self.assertFalse(self._xml_parser.is_xml(string), 'Input string')
     
-    def test_12(self):
-        str1 = 'xmlparser.py'
-        self.assertFalse(self.xml1.is_xml(str1), 'Input string')
-        self.assertFalse(os.path.isdir(str1) or os.path.isfile(str1), 'Intup string')
-
     def test_13(self):
-        str2='abcabc'
-        self.assertEqual(self.xml1.get_xml_structure(str2), '<a><b></b><c></c></a>', 'Input text')
+        self.assertEqual(self._xml_parser.get_xml_structure(), 'TODO')
 
-    def test_14(self):
-        str2=int(123123)
-        self.assertEqual(self.xml1.get_xml_structure(str2),  '<a><b></b><c></c></a>', 'Input string')
-        self.assertTrue(str2.isalpha(), 'Enter the correct format')
-    
-    def test_15(self):
-        str1 = 'xmlparser.py'
-        self.assertFalse(self.xml1.get_xml_structure(str2), 'Input string')
-        self.assertFalse(os.path.isdir(str2) or os.path.isfile(str2), 'Intup string')
-    
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+if __name__='__main__':
+    unittest.main()
