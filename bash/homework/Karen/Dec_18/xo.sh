@@ -12,9 +12,10 @@ start_game(){
 }
 
 show(){
-	echo "-------------";
+	echo "   __1___2___3__";
 	for i in {1..3};
     do
+		echo -n " $i ";
         for j in {1..3};
         do
 			if [ ${matrix[$i,$j]} -eq 0 ];then
@@ -26,7 +27,7 @@ show(){
 			fi
         done
 		echo "|";
-		echo "-------------";
+		echo "   -------------";
     done
 }
 
@@ -47,7 +48,7 @@ input_x_o(){
     matrix[$row,$col]=$x_or_o
 	empy=$(empty_elements)
 	if [ $empy -gt 0 ];then
-		reset
+		clear
 		show
 		end=$(revise)
 		if [ $end -eq 0 ];then

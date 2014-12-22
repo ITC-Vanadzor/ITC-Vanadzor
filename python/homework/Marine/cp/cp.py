@@ -1,15 +1,29 @@
 #!/usr/bin/python
 
+"""
+Title:Copy Programm
+Desc: This programm for copy files and directoryes
+Author: Marine & Gor
+Creating date: 08.12.2014
+Last Modifed Date: 10.12.2014
+Version: 1.3
+Relise:1.3
+
+"""
+
+
+
+
 import os
 import argparse
 import shutil
 import errno
 
 def flags():
-    parser = argparse.ArgumentParser(description = 'copy')
-    parser.add_argument('path', help='copy')
-    parser.add_argument('path1', help='copy')
-    parser.add_argument('-r', action='store_true', dest = 'rec', help = 'copy rec')
+    parser = argparse.ArgumentParser(description = 'Copy Programm')
+    parser.add_argument('path', help='File or Directory to copy')
+    parser.add_argument('path1', help='New File or Directory')
+    parser.add_argument('-r', action='store_true', dest = 'recursive', help = 'copy rec')
     return parser.parse_args()
   
 def copy_r(path, path1, rec):
@@ -18,7 +32,7 @@ def copy_r(path, path1, rec):
         return False
 
     try:        
-        if rec:
+        if recursive:
             shutil.copytree(path, path1)
         elif not os.path.isdir(path):
             shutil.copy(path, path1)
@@ -39,6 +53,6 @@ if '__main__' == __name__:
     args = flags()
     path = args.path
     path1 = args.path1
-    rec = args.rec
-    copy_r(path, path1, rec)
+    recursive = args.recursive
+    copy_r(path, path1, recursive)
 
