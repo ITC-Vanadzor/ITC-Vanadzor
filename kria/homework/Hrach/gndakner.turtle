@@ -1,0 +1,101 @@
+kturtle-script-v1.0
+@(reset)
+@(sh)
+$n=@(@(ask))"Ներմուծիր գնդակների քանակը"
+$k=@(@(ask))"Ներմուծիր 1 քայլով մաքսիմալ գնդակներ հանելու քանակը"
+$l=(n-1)/(k+1)
+$n1=0
+$n2=0
+$m=$n-$n1-$n2
+@(learn) arkxner {
+@(dir) 180
+@(fw) 200
+@(go) 0@(,) 200
+@(dir) 90
+@(fw) 400
+}
+@(learn) circle {
+@(dir) 0
+@(go) 2@(,) 193
+@(repeat) $m 
+{
+@(repeat) 180 {
+@(fw) 0.2
+@(tr) 2
+}
+@(gox) @(getx)+15
+@(if) ( @(getx)>380){
+@(gox) 2
+@(goy) @(gety)-13
+}
+}
+}
+@(learn) circle1 {
+@(dir) 0
+@(go) 2@(,) 393
+@(repeat) $n1 
+{
+@(repeat) 180 {
+@(fw) 0.2
+@(tr) 2
+}
+@(gox) @(getx)+15
+@(if) ( @(getx)>190){
+@(gox) 2
+@(goy) @(gety)-13
+}
+}
+}
+@(learn) circle2 {
+@(dir) 0
+@(go) 202@(,) 393
+@(repeat) $n2 
+{
+@(repeat) 180 {
+@(fw) 0.2
+@(tr) 2
+}
+@(gox) @(getx)+15
+@(if) ( @(getx)>390){
+@(gox) 202
+@(goy) @(gety)-13
+}
+}
+}
+@(learn) gcel {
+arkxner
+circle
+circle1
+circle2
+}
+gcel
+@(if) ( $l!=$l1)
+$s=$l1
+{
+@(while)
+{
+$n1=$m-$s*($k+1)-1
+gcel
+$s=$s-1
+$n2=@(@(ask)) "ներմուծեք թե քանի գնդակ եք ուզում հանել(0-k)"
+gcel
+@(if) ( $m==0 )
+{
+@(break)
+}
+} @(else) {
+$s=$l1-1
+@(while)
+{
+$n1=@(@(ask)) "ներմուծեք թե քանի գնդակ եք ուզում հանել(0-k)"
+gcel
+@(if) ( $m==0 )
+{
+@(break)
+}
+$n2=$m-$s*($k+1)-1
+gcel
+$s=$s-1
+}
+}
+@(print) "You lost"
