@@ -1,0 +1,25 @@
+kturtle-script-v1.0
+@(reset)
+@(learn) circle $x {
+@(repeat) 36 {
+@(forward) $x
+@(turnleft) 10
+}
+}
+$x=23
+$y=390
+@(for) $n = 1 @(to) 25 {
+@(go) $x@(,)$y
+$x=$x+23
+circle 2
+@(if) @(getx)==391 {
+$y=$y-23
+@(go) $x@(,)$y
+@(turnleft) -90
+
+}
+}
+@(print) @(getx)
+
+
+
