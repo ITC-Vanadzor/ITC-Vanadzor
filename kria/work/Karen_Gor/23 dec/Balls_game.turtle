@@ -1,0 +1,65 @@
+kturtle-script-v1.0
+@(reset)
+@(canvassize) 300@(,)300
+@(canvascolor) 255@(,)204@(,)102
+@(pencolor) 0@(,)61@(,)114
+@(sh)
+
+@(learn) PrintSquire{
+  @(go) 50@(,)250
+  @(repeat) 4 {
+    @(fw) 200
+    @(tr) 90
+  }
+}
+@(learn) PrintCircle $radius{  
+  @(repeat) 36 {
+    @(fw) $radius
+    @(tl) 10
+  }
+}
+@(learn) PrintAllBalls $ball_count{
+  $x=65
+  $y=240  
+  @(pencolor) 172@(,)1@(,)48
+  @(repeat) $ball_count{
+    @(go) $x@(,)$y
+    PrintCircle $radius
+    $x=$x+15
+    @(if) $x>250{
+      $x=65
+      $y=$y-15
+    }
+  }
+}
+@(learn) ClearBalls $count{
+  $x=@(getx)
+  $y=@(gety)
+  @(pencolor) 255@(,)204@(,)102
+  @(penwidth) 2
+  @(repeat) $count{
+    @(go) $x@(,)$y
+    PrintCircle $radius
+    $x=$x-15
+    @(if) $x<65{
+      $x=245
+      $y=$y+15
+    }
+    $ball_count=$ball_count-1
+  }
+  @(print) $ball_count
+}
+
+####Parameters 
+$ball_count=@(ask) "Please Set ball count."
+@(while) ($ball_count>169)@(or)($ball_count<3){
+  $ball_count=@(ask) "Please Set ball count."
+}  
+#size circle
+$radius=1
+
+
+##Main code
+PrintSquire
+PrintAllBalls $ball_count
+ClearBalls 30
