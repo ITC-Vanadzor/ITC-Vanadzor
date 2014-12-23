@@ -1,0 +1,90 @@
+kturtle-script-v1.0
+@(reset)
+@(learn) print_table{
+  @(go) 200@(,)400
+  @(pd)
+  @(go) 0@(,)200
+  @(tr) 90
+  @(fw) 400
+  @(go) 200@(,)200
+  @(tl) 90
+  @(bw) 200
+}
+print_table
+$name=@(ask) "Please insert your name"
+@(go) 210@(,)210
+@(print) $name
+@(go) 10@(,)210
+@(print) "Computer"
+#variables
+$x=18
+$y=190
+$ball_count=@(ask) "input count of balls:"
+$max_step=@(ask) "Please insert maximal count of balls you can remove at 1 step"
+@(learn) circle_print $ball_count {
+  @(repeat) $ball_count {  
+    @(pc) 150@(,)0@(,)0
+    @(if) $x>380 {
+      $x=18
+      $y=$y-18
+    }
+    @(go) $x@(,) $y
+    circle
+    $x=$x+18
+  }
+@(pc) 0@(,)0@(,)0
+}
+
+@(learn) circle{
+  @(sh)
+  @(repeat) 36{
+    @(fw) 1.5
+    @(tl) 10
+  }
+@(ss)
+}
+
+circle_print $ball_count
+@(learn) clear_circle $k {
+@(sh)
+  $x=$x-18
+  @(go) $x@(,)$y
+  @(pc) 255@(,)255@(,)255
+  @(repeat) $k {
+    @(if) $x<18 {
+      $x=396
+      $y=$y+18
+      }
+    circle
+    $x=$x-18
+    @(go) $x@(,)$y
+  }
+  @(pc) 0@(,)0@(,)0
+@(ss)  
+}
+#clear_circle 20
+$main_x=$x
+$main_y=$y
+$comp_step=0
+$temp=($ball_count-1)/($max_step+1)
+@(learn) main_game {
+  @(if) (($ball_count+1)%$max_step == 1){   #vonc enq %-ov bajanelu??
+    @(while) $ball_count > 1 {
+      @(print) "it's your turn "
+      $remove_ball=@(ask) "enter the number of balls to be removed"
+      @(if) $remove_ball <= $max_step @(and) $remove_ball> 0 {
+        clear_cicle $remove_ball
+        $x=210
+        $y=380
+        @(go) $x@(,)$y
+        circle_print $remove_ball
+        $ball_count=$ball_count - $remove_ball
+        $comp_step=$ball_count-($max_step+2+$temp*($max_step+1))
+        @(.)
+        @(.)
+        @(.)To be countinued
+
+      }
+    }
+}
+main_game
