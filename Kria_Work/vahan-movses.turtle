@@ -1,25 +1,82 @@
 kturtle-script-v1.0
 @(reset)
-@(learn) circle $x {
+@(sh)
+@(learn) modul_divide $a@(,) $b {
+$u=$a/$b
+@(if) $u<@(round)($u) {
+$u=$u-1
+}
+$m=@(round)($u)
+$p=$a-($m*$b)
+@(return) $p
+}
+
+@(learn) circle  {
 @(repeat) 36 {
-@(forward) $x
+@(forward) 2
 @(turnleft) 10
 }
 }
+
+
+
+@(learn) print_circles $count {
 $x=23
 $y=390
-@(for) $n = 1 @(to) 25 {
+@(for) $i=1 @(to) $count {
+@(if) $x>399 {
+$x=24
+$y=$y-23.5
+}
 @(go) $x@(,)$y
-$x=$x+23
-circle 2
-@(if) @(getx)==391 {
-$y=$y-23
-@(go) $x@(,)$y
-@(turnleft) -90
+circle
+$x=$x+23.5
 
 }
 }
-@(print) @(getx)
 
 
+@(learn) delete_balls $k {
+@(pc) 255@(,)255@(,)255
+$x=23
+$y=390
+@(repeat) $k {
+@(if) $x>399 {
+$x=23
+$y=$y-23.5
+}
+@(go) $x@(,)$y
+circle
+$x=$x+23.5
+}
+}
 
+
+@(learn) play_game{
+$l=0
+@(if) $count==1 {
+@(message) "Game over, you lost!!!"
+@(break)
+}
+@(if) $count<0 {
+@(message) "Invalid value"
+@(break)
+}
+@(while) $count >0  {
+$k=@(ask) "Insert the number of balls you can pick"
+$l=$l+$k
+delete_balls $l
+
+}
+}
+
+@(learn) main{
+$count=@(ask) "Insert the number of balls"
+$Pick=@(ask) "Maximum number of balls you can pick"
+#we can use mod function, but we knew it later )))
+@(if) modul_divide $count@(,) $Pick == 1 {
+
+}
+
+print_circles $count
+}
