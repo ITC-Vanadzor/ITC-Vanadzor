@@ -1,8 +1,9 @@
 kturtle-script-v1.0
 @(reset)
-
+@(sh)
 @(canvassize) 600@(,)600
 @(go) 100@(,)550
+@(canvascolor) 0@(,)255@(,)255
 $squire_size=400
 @(learn) PrintSquire $size{
   @(pc) 0@(,)0@(,)255 
@@ -11,16 +12,16 @@ $squire_size=400
     @(tr) 90
   }
 }
-@(learn) PrintCircle $l{
-  @(repeat) 36{
-    @(fw) $l
-    @(tr) 10
-  }
+@(learn) Circle $l{
+    @(repeat) 36{
+        @(fw) $l
+        @(tr) 10
+    }
 }
 @(learn) PrintBalls $n@(,)$k{
   $i=1
   $j=1
-@(go) $x@(,)$y
+  @(go) $x@(,)$y
   @(while) $i<=$n{
     @(if) $j>11{
       $x=100
@@ -28,7 +29,7 @@ $squire_size=400
       @(go) $x@(,)$y
       $j=1
     }
-    PrintCircle $circle_size
+    Circle $circle_size
     $x=$x+35
     @(go) $x@(,)$y
     $j=$j+1
@@ -46,65 +47,73 @@ $squire_size=400
   }
   @(return) $a
 }
-@(learn)  Start $a{
-  @(if) $a==0{
-    @(message) "xaxum e YOU"
-    $r="B" 
-  }
+
+@(learn) Count $n@(,)$k@(,)$a{
+    $g=($n-1-$a)/($k+1)
+    @(return) $g
+}
+
+@(learn) Remove_balls $a{
+    @(repeat) $a{
+        @(if) $x==100{
+             $x=485
+             $y=$y+35
+        }  
+        $x=$x-35
+        @(go) $x@(,)$y
+        @(pc) 0@(,)255@(,)255
+        Circle 3
+    }
+}
+@(learn) SmallBallC $a{
+    @(repeat) $a{
+        @(pc) 255@(,)0@(,)0
+        @(go) $x1@(,)$y1
+        Circle 2
+        $y1=$y1-20
+        @(if) $y1<=40{
+            $y1=580
+            $x1=$x1-30
+        }
+    }
+}
+@(learn) SmallBallB $a{
+    @(repeat) $a{
+        @(pc) 255@(,)0@(,)255
+        @(go) $x2@(,)$y2
+        Circle 2
+        $y2=$y2-20
+        @(if) $y2<=40{
+            $y2=580
+            $x2=$x2-30
+        }
+    }
+}
+@(learn) CurrentPlayer{
+    @(if) $player=="B"{
+        $player="A"
+    }
     @(else){
-    @(message) "xaxum e COMPUTER"
-    $r="A"
-  }
-  @(return) $r
+        $player="B"
 }
-@(learn) BeginAorB $a{
-  #if $extra!=0{
-  @(repeat) $a{
-    @(if) $x==100{
-      $x=485
-       $y=$y+35
+}
+@(learn) Win $a{
+    @(if) $a==1{
+       @(message) "Win Computer"
     }
-    $x=$x-35
-    @(go) $x@(,)$y
-    @(pc) 255@(,)255@(,)255
-    PrintCircle  $circle_size
-    $c=Start $extra
-    @(if) $c=="B"{
-      @(go) $x1@(,)$y1
-      circle 2
-      $y1=$y1-20
-      
-    @(if) $y1<=40{
-      $y1=580
-      $x1=$x1-30
-    }
-}
-    @(else){
-      @(go) $x2@(,)$y2
-      circle 2
-      $y2=$y2-20
-      @(if) $y2<=40{
-      $y2=580
-      $x2=$x2-30}}
-    #	go $x1,$y1
-    #	pc 0,0,0
-    #	PrintCircle 2
-    #	$y1=$y1-20
-    }
-    #$r="B"
-  #}
-}
-@(learn) InputStep $r{
-  @(message) $r
-  $in1=@(ask) "input number"
-  @(while) (($in1>$k) @(or) ($in1<1)){
-  $in1=@(ask) "input new number"}
-  $l="A"
-}
+} 
+
 ###Parameters
 #set game args
 $ball_count=@(ask) "Please set ball count."
+@(while) $ball_count<2{
+    $ball_count=@(ask) "Please set ball count ball_count>=2"
+}
 $step=@(ask) "Please set game step."
+@(while) ($step>$ball_count) @(or) ($step<1){
+    $step=@(ask) "Please set game step 0<step<"+$ball_count
+}
+$name=@(ask) "Input your name"
 $circle_size=3
 $x=100
 $y=535
@@ -112,50 +121,47 @@ $x1=20
 $y1=580
 $x2=555
 $y2=580
-
+$player="B"
 
 #main code
 PrintSquire $squire_size
+@(go) 20@(,)20
+@(print) "Computer"
+@(go) 520@(,)20
+@(print) $name
 PrintBalls $ball_count@(,)$step
 $extra=FirstStep $ball_count@(,)$step
+$step_count=Count $ball_count@(,)$step@(,)$extra
+$ball=$ball_count
 @(if) $extra!=0{
-  BeginAorB $extra
-  $r="B"
-}
-$step_count=($ball_count-1-$extra)/($step+1)
-#repeat $step_count{
-@(repeat) $step_count*2{
-$cc=start $r
-@(if) $r=="B"{
-InputStep $r
+    @(message) "Game start computer"
+    Remove_balls $extra
+    SmallBallC $extra
+    $ball=$ball_count-$extra
+    Win $ball 
 }
 @(else){
-@(message) $r
-$in1=$step++1-$in1
-$r="B"
+    @(message) "Game start  "+$name
 }
-@(repeat) $in1{
-BeginAorB $in1
+@(repeat) $step_count*2{
+    @(if) $player=="B"{
+        @(message) "Play   "+$name
+        $p_step=@(ask) "Set your number  "+$name
+        @(while) ($p_step>$step) @(or) ($p_step<1){
+            $p_step=@(ask) "Set new number  0<k<"+$step
+        }
+        Remove_balls $p_step
+        SmallBallB $p_step
+        CurrentPlayer
+        $ball=$ball-$p_step
+        }@(else){
+        @(message) "Play computer"
+       $c_step=$step+1-$p_step
+        Remove_balls $c_step
+        SmallBallC $c_step
+        CurrentPlayer
+        $ball=$ball-$c_step
+       
+    }
+ Win $ball 
 }
-}
-#if $x==100{
-#$x=485
-#$y=$y+35
-#}
-#$x=$x-35
-#go $x,$y
-#pc 255,255,255
-#circle 3
-#pc 0,0,0
-#if $l=="B"{go $x1,$y1
-#circle 2
-#$y1=$y1-20
-#if $y1<=40{
-#$y1=580
-#$x1=$x1-30}}
-#else{go $x2,$y2
-#circle 2
-#$y2=$y2-20
-#if $y2<=40{
-#$y2=580
-#$x2=$x2-30}}#}}
