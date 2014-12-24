@@ -1,0 +1,115 @@
+kturtle-script-v1.0
+#skzbnakan tarberakna, kan voroshaki terutyunner!
+
+@(reset) 
+@(message) "Hello! naxoroq asem vor ushadir exeq, cankacac sxal nermucvac arjeqi depqum xax@ kdadarecvi"
+$x=10
+$y=390
+$oxaki_qanak_toxum=15
+
+$oxakneri_qanak=@(ask) "Nermuceq oxakneri qanak@: 2 - 225"
+$max_jnjel=@(ask) "Nermuceq oxakner@ mek qaylum jnjelu maximal qanak@: 2 - 224"
+
+@(learn) errors1 {
+  @(if) ($oxakneri_qanak <=2) @(or) ($oxakneri_qanak > 225){
+    @(message) "Error: Nermucvac arjeq@ chi bavararum xndri paymannerin"
+    @(exit)
+}
+
+  @(if) ($max_jnjel >= $oxakneri_qanak) @(or) ($max_jnjel < 1) {
+    @(message) "Error: Hmi uzumeq xaxaq te bag enq man gali?"
+  @(exit)
+  }
+}
+errors1
+@(learn) errors2 {
+  @(if) ($player<1) @(or) ($player>$max_jnjel) {
+    @(message) "Error: Nermucvac e sxal arjeq...bager ka miqich, bayc dzvoxa"
+    @(exit)
+  }
+}
+  
+
+@(learn) table {
+  @(go) $x@(,)$y
+  @(repeat) 4 {
+    @(fw) 380
+    @(tr) 90
+  }
+}
+@(learn) oxaki_stacum {
+  @(repeat) 36 {
+  @(tr) 10 @(fw) 2
+  }
+}
+@(learn) oxakneri_stacum {
+  $x=$x + 5
+  $y=$y - 15
+  @(go) $x@(,)$y
+  @(for) $m=1 @(to) $oxakneri_qanak {
+    oxaki_stacum  
+    $x = $x + 25
+    @(go) $x@(,)$y
+  @(if) $x==390 {
+    $x=$x-375
+    $y=$y-25
+    @(go) $x@(,)$y
+    }  
+  }
+}
+
+@(learn) oxaki_jnjum {
+  @(pw) 5
+  @(pc) 255@(,)255@(,)255
+  @(repeat) 36 {
+    @(tl) 10 @(fw) 2
+  }
+}
+
+@(learn) oxakneri_jnjum {
+    @(repeat) $jnjvox_oxakner{
+    oxaki_jnjum  
+    $x = $x - 25
+    @(go) $x@(,)$y
+
+  @(if) $x==15 {
+    $x=$x+375
+    $y=$y+25
+    @(go) $x@(,)$y
+    }  
+  }
+}
+
+table
+oxakneri_stacum
+
+$max_1 = $max_jnjel+1
+$mnacord = @(mod) $oxakneri_qanak@(,)$max_1
+@(if) $mnacord != 1 {
+  @(message) "Es sksem vor dzev chunenaq krelu"
+  $jnjvox_oxakner=$mnacord-1
+  oxakneri_jnjum 
+  @(while) $x!=40 {
+    $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
+    errors2
+    $jnjvox_oxakner=$player
+    oxakneri_jnjum
+    @(message) "Inch huysoveq xaxum?"
+    $jnjvox_oxakner=$max_1-$player
+    oxakneri_jnjum
+  } 
+}
+@(if) $mnacord == 1 {
+  @(message) "Skseq la tenam shateq ujex"
+    @(while) ($x!=40) {
+    $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
+    errors2
+    $jnjvox_oxakner=$player
+    oxakneri_jnjum
+    @(message) "Inch huysoveq xaxum?"
+    $jnjvox_oxakner=$max_1-$player
+    oxakneri_jnjum
+  }
+} 
+@(message) "Vor asumei Krvelueq..."
+  
