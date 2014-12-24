@@ -1,0 +1,132 @@
+kturtle-script-v1.0
+@(reset)
+@(direction) 0
+$x=24
+$y=389
+@(learn) circle {
+  @(repeat) 36 {
+    @(forward) 2
+    @(turnleft) 10
+  }
+}
+@(learn) print_circles $balls {
+  @(repeat) $balls {
+    @(if) $x>400 {
+      $x=24
+      $y=$y-23.5
+    }
+  @(go) $x@(,) $y
+  circle  
+  $x=$x+23.5
+  }
+$x=$x-23.5
+}
+
+@(learn) delete_balls $d {
+  @(pendown)
+  @(pc) 255@(,)255@(,)255
+  @(penwidth) 26
+  #go $x, $y
+  @(direction) -90
+  @(repeat) $d{
+  @(if) $x<24 {
+  $x=400
+  $y=$y+23.5
+  }
+  @(go) $x@(,)$y
+  @(forward) 10
+  @(wait) 0.4
+  $x=$x-23.5
+  
+  }  
+}
+@(learn) discover_comp_pick $n@(,) $k {
+  $m = ($n-1) / ($k+1)
+  $var = @(round)($m)
+  @(if) $var > $m { 
+    $m = $var - 1
+  }
+  @(else) {
+    $m = $var
+  }
+  $pick = $n-1-$m*($k+1)
+  @(return) $pick
+}
+
+@(learn) play_game {
+  @(while) @(true) {
+      $balls=@(ask) "Enter the number of balls:"
+      $max_pick=@(ask) "Enter the maximum number of balls you can pick"
+    @(if) ($balls<0) @(or) (($max_pick>=$balls) @(or)   ($max_pick<0)) {
+      @(wait) 0.5
+      @(message) "please enter valid number!"
+      @(wait) 0.5  
+    }
+    @(else) { @(break) }
+  }
+  $modul = @(mod) $balls@(,) ($max_pick+1)
+  print_circles $balls
+  @(wait) 0.4
+  $player_name=@(ask) "Enter the name of the player:"
+  @(message) "Let's start the game"
+  @(wait) 0.4
+  $current_balls=$balls
+  
+    @(if) $modul==1 {
+      @(message) "Start the game please."
+      @(while) $current_balls > 1 {
+          @(wait) 0.5
+      @(while) @(true) {
+          $my_pick = @(ask) "Enter the number of balls you want to pick"
+          @(if) ($my_pick > $max_pick) @(or) ($my_pick <= 0) {
+            @(wait) 0.5
+            @(message) "invalid input!try again"
+          }
+          @(else) { @(break) }
+      }
+        @(wait) 0.5
+          delete_balls  $my_pick
+          $current_balls=$current_balls - $my_pick
+          $comp_pick=$max_pick+1-$my_pick
+          @(wait) 0.5
+        @(message) "my turn"
+        @(wait) 0.5
+        delete_balls $comp_pick
+        $current_balls=$current_balls -$comp_pick
+      }
+    }
+    @(else) {
+      $comp_pick = discover_comp_pick $balls@(,) $max_pick
+      @(while) $current_balls > 1 { 
+        @(message) "my turn"
+        @(wait) 0.5
+        delete_balls $comp_pick
+        $current_balls=$current_balls -$comp_pick
+        @(if) $current_balls==1 { @(break) }
+        @(while) @(true) {
+          $my_pick = @(ask) "Enter the number of balls you want to pick"
+          @(if) ($my_pick > $max_pick) @(or) ($my_pick <= 0) {
+            @(wait) 0.5
+            @(message) "invalid input!try again"
+          }
+          @(else) { @(break) }
+      }
+        @(wait) 0.5
+        delete_balls  $my_pick
+        @(wait) 0.5
+        $current_balls=$current_balls - $my_pick
+        $comp_pick=$max_pick+1-$my_pick
+      }
+    }
+  
+  @(message) "You lose!!!"
+  @(exit)
+}
+
+play_game
+
+
+
+
+
+
