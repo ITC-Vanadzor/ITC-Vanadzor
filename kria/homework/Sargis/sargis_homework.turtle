@@ -12,13 +12,13 @@ kturtle-script-v1.0
 }
 print_table
 $name=@(ask) "Please insert your name"
-@(go) 210@(,)210
+@(go) 220@(,)400
 @(print) $name
-@(go) 10@(,)210
+@(go) 20@(,)400
 @(print) "Computer"
 #variables
 $x=18
-$y=190
+$y=190 @(go) $x@(,)$y
 $ball_count=@(ask) "input count of balls:"
 $max_step=@(ask) "Please insert maximal count of balls you can remove at 1 step"
 @(learn) circle_print $ball_count {
@@ -69,7 +69,6 @@ circle_print $ball_count
   $main_x=@(getx)+18 $main_y=@(gety)
 }
 @(learn) comp_actions $remove_ball{
-  $ball_count=$ball_count-$remove_ball
   @(go) $first_x@(,)$first_y $x=$first_x $y=$first_y
   circle_print $remove_ball
   $first_y=$first_y-20
@@ -92,12 +91,19 @@ circle_print $ball_count
       $ball_count=$ball_count-$remove_ball
       $temp=$temp-1
       #here begin comp's part
-      $remove_ball =($ball_count -$temp*($max_step+1))-1
+     @(if) ($ball_count <= ($max_step+2)){
+         $remove_ball=$ball_count-1
+        }
+     @(else) {
+         $remove_ball =($ball_count -$temp*($max_step+1))-1
+         }
+      
+      $ball_count=$ball_count-$remove_ball
       comp_actions $remove_ball
-      @(if) $ball_count<=1{
-      remove_in_main_box 1
-      @(go) 240@(,)240
-      @(print) "   You lost!!!!!"
+      @(if) $ball_count==1{
+      #remove_in_main_box 1
+      @(go) 250@(,)400 @(sh)
+      @(print) "       You lost!!!!!"
       @(exit)
       }
     }
@@ -109,16 +115,22 @@ circle_print $ball_count
 
 @(learn) cases {
  @(while) @(true) {   
-  $remove_ball =($ball_count-($max_step+2)-($temp-1)*($max_step+1))
+      @(if) ($ball_count <= ($max_step+2)){
+        $remove_ball=$ball_count-1
+       }
+    @(else) {
+        $remove_ball =($ball_count-1-($temp*($max_step+1)))
+        }
+    $ball_count=$ball_count-$remove_ball
     comp_actions $remove_ball
     @(wait) 0.4
-    @(if) $ball_count <=1 {
+    @(if) $ball_count ==1 {
       #remove_in_main_box 1
-      @(go) 240@(,)240
-      @(print) "   You lost!!!!!"
+      @(go) 250@(,)400
+      @(print) "      You lost!!!!!" @(sh)
       @(exit)
       }
-    @(while) @(true) {
+      @(while) @(true) {
           $remove_ball=@(ask) "your turn, enter a number from 1 to max_step"
        @(if) $remove_ball>0 @(and) $remove_ball<=$max_step {
           user_actions $remove_ball
@@ -144,6 +156,7 @@ $temp=($ball_count-1)/($max_step+1)
   $temp=@(round) $temp 
   }
 $reminder=($ball_count-($temp+1)*$max_step)
+$remove_ball=0
 #main function 
 @(learn) main_game {
   @(if) $reminder == 1{
