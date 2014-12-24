@@ -1,4 +1,33 @@
 kturtle-script-v1.0
+###!
+# Please consider the cases when n>k. n<=0, k<=0
+###!
+
+###!
+# Do not use fixed values assign them to the variables and use them, so that you will avoid mistakes and will make the sources more readable.
+###!
+
+###!
+# Currently  you are just print "You lost" when the remaning count of the balls is 0, but you should add validation for the player to, what's if the player win (even it would never happen) ?
+###!
+
+###!
+# What's f the number of the balls is big? The balls shouldn't be drown outside of the box. Please fix it
+# You can either make the size of the balls dynamic (depends on box size and balls count) or add limit for the params.
+###!
+
+###!
+# Try to fix the issue related to showing ask box 2 times. It's possible
+###!
+
+###!
+# Please add comments also to the functions which are commented now
+###!
+
+###!
+# Thanks for the job.
+# Please fix the notes above and let me know. I will review and provide the final feedback after reviewing the sources deeper.
+###!
 @(reset)
 @(learn) print_table{
   @(go) 200@(,)400
