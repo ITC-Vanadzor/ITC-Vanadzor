@@ -73,7 +73,7 @@ $squire_size=400
         $y1=$y1-20
         @(if) $y1<=40{
             $y1=580
-            $x1=$x1-30
+            $x1=$x1+30
         }
     }
 }
@@ -106,28 +106,28 @@ $squire_size=400
 ###Parameters
 #set game args
 $ball_count=@(ask) "Please set ball count."
-@(while) $ball_count<2{
-    $ball_count=@(ask) "Please set ball count ball_count>=2"
+@(while) ($ball_count<2) @(or) ($ball_count>121){
+    $ball_count=@(ask) "Please set ball count 2<=ball_count<=121"
 }
 $step=@(ask) "Please set game step."
-@(while) ($step>$ball_count) @(or) ($step<1){
+@(while) ($step>=$ball_count) @(or) ($step<1){
     $step=@(ask) "Please set game step 0<step<"+$ball_count
 }
 $name=@(ask) "Input your name"
 $circle_size=3
 $x=100
 $y=535
-$x1=20
+$x1=5
 $y1=580
-$x2=555
+$x2=575
 $y2=580
 $player="B"
 
 #main code
 PrintSquire $squire_size
-@(go) 20@(,)20
+@(go) 20@(,)10
 @(print) "Computer"
-@(go) 520@(,)20
+@(go) 520@(,)10
 @(print) $name
 PrintBalls $ball_count@(,)$step
 $extra=FirstStep $ball_count@(,)$step
@@ -145,7 +145,7 @@ $ball=$ball_count
 }
 @(repeat) $step_count*2{
     @(if) $player=="B"{
-        @(message) "Play   "+$name
+       # message "Play   "+$name
         $p_step=@(ask) "Set your number  "+$name
         @(while) ($p_step>$step) @(or) ($p_step<1){
             $p_step=@(ask) "Set new number  0<k<"+$step
