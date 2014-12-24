@@ -1,4 +1,28 @@
 kturtle-script-v1.0
+###!
+# Good job, keep it up
+###!
+
+###!
+# Please consider the case if the player win, even if t's not possible. Currently you are just printing "You lost" message without any validation. It shouldn't be so
+###!
+
+###!
+# Please join functions like circle1/circle2. It should be difficult and you should learn using functions with arguments in Kria.
+###!
+
+###!
+# Please do not use fixed value assign them to the variables then use them, this way you will do less mistakes, and your code will be more readable.
+###!
+
+###!
+# Please add the game explanation in the beginning
+###!
+
+###!
+# Everything else looks good know. I will review the sources again after you fix the above notes.
+# Thanks for work
+###!
 @(reset)
 @(sh)
 @(cc) 64@(,)228@(,)208

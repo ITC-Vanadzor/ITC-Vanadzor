@@ -1,4 +1,48 @@
 kturtle-script-v1.0
+###!
+# All functions should be commented properly
+###!
+
+###!
+# Do not use fixed values, assign them to the variables. This will help you to avoid miscalculations and will make the code more readable
+###!
+
+###!
+# Add explanation of the game in the beginning
+###!
+
+###!
+# When it's player turn do not show the mesage box 2 times, you can notify it using only ask
+###!
+
+###!
+# In case of having big k and n, the balls are drown outside of the box it should be fixed. Preferable fix is making the size of balls dynamic and / or numbering the balls and using "scrolling" effect
+###!
+
+###!
+# Try to devide play_game function to small parts
+###!
+
+###!
+# Correct the coding styles !!!
+###!
+
+###!
+# The message you are shown in the message box is shown partly; fix this
+###!
+
+###!
+# Add validation for the case if payer won. Now you just showing "You lost". What's if in one case the player win? Even if it's not possible the case shoul dbe properly considered.
+###!
+
+###!
+# Try to fix issue related to showing ask box 2 times
+###!
+
+###!
+# Please do the notes above and let me know. I will review the sources deeper and provide you my final feedback :)
+# Good job, thanks for it
+###!
 @(reset)
 $x=24
 $y=389
@@ -168,8 +212,9 @@ $x=$x-23.5
           @(if) ($my_pick > $max_pick) @(or) ($my_pick <= 0) {
             @(wait) 0.5
             @(message) "invalid input!try again"
-          }
-          @(else) { @(break) }
+          } @(else) { 
+              @(break) 
+         }
       }
         @(wait) 0.5
         delete_balls  $my_pick

@@ -1,4 +1,29 @@
 kturtle-script-v1.0
+###!
+# First of all good job, keep it up
+###!
+
+###!
+# Please comment all the functions properly
+###!
+
+###!
+# Do not use fixed values, assign them to the variables in order to avoid mistakes and make the code more readable
+###!
+
+###!
+# Please add tha game explanation in the beginning
+###!
+
+###!
+# Please include also the information who is the computer, who is the player in the report
+# You can also add functionality to ask the name of the player, than use it, instead of using A and B.
+###!
+
+###!
+# In general everything else looks good. Please fix the mentioned above notes and I will review the sources and provide my final feedback
+# Thanks for the work :)
+###!
 @(learn) PrintSquire{
   @(go) 50@(,)250
   @(repeat) 4 {
