@@ -1,8 +1,30 @@
 kturtle-script-v1.0
 @(reset)
-@(direction) 0
 $x=24
 $y=389
+$x_1=24
+$y_1=169
+$x_2=224
+$y_2=169
+
+@(learn) draw_canvas {
+  @(canvascolor) 0@(,)255@(,)255
+  @(gox) 0
+   @(turnright) 90
+  @(forward) 400
+  @(center)
+  @(turnleft) 90
+  @(forward) 200
+  #gox 0
+  #print "player"
+  @(gox) 200
+  @(print) "computer"
+  @(go) 0@(,) 180
+  @(turnright) 90
+  @(forward) 400
+
+}
+
 @(learn) circle {
   @(repeat) 36 {
     @(forward) 2
@@ -22,20 +44,44 @@ $y=389
 $x=$x-23.5
 }
 
+@(learn) draw_ball_player $count {
+  @(pencolor) 0@(,)0@(,)0
+  @(repeat) $count {
+    @(if) $x_1>199 {
+      $x_1=24
+      $y_1=$y_1-23.5
+    }
+    @(go) $x_1@(,) $y_1
+    circle
+    $x_1=$x_1 + 25
+  }
+}
+
+
+@(learn) draw_ball_comp $count{
+  @(pencolor) 0@(,)0@(,)0
+  @(repeat) $count {
+    @(if) $x_2>400 {
+      $x_2=224
+      $y_2=$y_2-23.5
+    }
+    @(go) $x_2@(,) $y_2
+    circle
+    $x_2=$x_2 + 25
+  }
+}
+
+
 @(learn) delete_balls $d {
-  @(pendown)
-  @(pc) 255@(,)255@(,)255
-  @(penwidth) 26
-  #go $x, $y
-  @(direction) -90
+  @(pc) 0@(,)255@(,)255
   @(repeat) $d{
   @(if) $x<24 {
   $x=400
   $y=$y+23.5
   }
   @(go) $x@(,)$y
-  @(forward) 10
   @(wait) 0.4
+  circle
   $x=$x-23.5
   
   }  
@@ -53,21 +99,32 @@ $x=$x-23.5
   @(return) $pick
 }
 
+
+
+#The main function
 @(learn) play_game {
+  @(direction) 0
+  
   @(while) @(true) {
       $balls=@(ask) "Enter the number of balls:"
       $max_pick=@(ask) "Enter the maximum number of balls you can pick"
-    @(if) ($balls<0) @(or) (($max_pick>=$balls) @(or)   ($max_pick<0)) {
+    @(if) (($balls<0) @(or) ($balls>136)) @(or) (($max_pick>=$balls) @(or)   ($max_pick<=0)) {
       @(wait) 0.5
       @(message) "please enter valid number!"
       @(wait) 0.5  
     }
     @(else) { @(break) }
   }
+  @(go) 0@(,)180
+  @(print) "BALLS = " +  $balls
+  @(go) 200@(,)180
+  @(print) "max pick = " + $max_pick
   $modul = @(mod) $balls@(,) ($max_pick+1)
   print_circles $balls
   @(wait) 0.4
   $player_name=@(ask) "Enter the name of the player:"
+  @(go) 0@(,) 0
+  @(print) $player_name
   @(message) "Let's start the game"
   @(wait) 0.4
   $current_balls=$balls
@@ -86,12 +143,14 @@ $x=$x-23.5
       }
         @(wait) 0.5
           delete_balls  $my_pick
+          draw_ball_player $my_pick
           $current_balls=$current_balls - $my_pick
           $comp_pick=$max_pick+1-$my_pick
           @(wait) 0.5
         @(message) "my turn"
         @(wait) 0.5
         delete_balls $comp_pick
+        draw_ball_comp $comp_pick
         $current_balls=$current_balls -$comp_pick
       }
     }
@@ -101,6 +160,7 @@ $x=$x-23.5
         @(message) "my turn"
         @(wait) 0.5
         delete_balls $comp_pick
+        draw_ball_comp $comp_pick
         $current_balls=$current_balls -$comp_pick
         @(if) $current_balls==1 { @(break) }
         @(while) @(true) {
@@ -113,6 +173,7 @@ $x=$x-23.5
       }
         @(wait) 0.5
         delete_balls  $my_pick
+        draw_ball_player $my_pick
         @(wait) 0.5
         $current_balls=$current_balls - $my_pick
         $comp_pick=$max_pick+1-$my_pick
@@ -123,7 +184,9 @@ $x=$x-23.5
   @(exit)
 }
 
+draw_canvas
 play_game
+
 
 
 
