@@ -1,0 +1,147 @@
+kturtle-script-v1.0
+@(learn) PrintSquire{
+  @(go) 50@(,)250
+  @(repeat) 4 {
+    @(fw) 200
+    @(tr) 90
+  }
+}
+@(learn) PrintCircle $radius{  
+  @(repeat) 36 {
+    @(fw) $radius
+    @(tl) 10
+  }
+}
+@(learn) PrintAllBalls $ball_count{
+  @(repeat) $ball_count{
+    @(pencolor) 255@(,)0@(,)0
+    @(pw) 2
+    @(go) $x@(,)$y
+    PrintCircle $radius
+    $x=$x+15
+    @(if) $x>250{
+      $x=65
+      $y=$y-15
+    }
+    $balls_in=$balls_in+1
+    PrintBallsCountIn
+  }
+  $x=$x-15
+    @(if) $x<65{
+      $x=245
+      $y=$y+15
+  }
+ 
+}
+@(learn) ClearBalls $count{
+  @(repeat) $count{
+    @(if)($balls_in>1){
+        @(pc) 255@(,)204@(,)102
+        @(penwidth) 3
+        @(go) $x@(,)$y
+        PrintCircle $radius
+        $x=$x-15
+        @(if) $x<65{
+        $x=245
+        $y=$y+15
+       }
+        PrintOutside
+        $balls_in=$balls_in-1
+        PrintBallsCountIn
+      }
+  }
+}
+@(learn) PrintOutside{
+  @(go) $outside_x@(,)$outside_y
+  @(pw) 2
+  @(pc) 255@(,)0@(,)0
+  @(if)($player=="A"){
+    @(pc) 255@(,)120@(,)0
+  }
+  PrintCircle 1
+  $outside_x=$outside_x+15
+  @(if) $outside_x>250{
+    $outside_x=65
+    $outside_y=$outside_y+15
+  }
+}
+@(learn) PrintBallsCountIn{
+  @(go) 270@(,)70
+  @(pc) 255@(,)204@(,)102
+  @(pw) 37
+  @(fw) 10
+  @(go) 260@(,)50
+  @(pc) 0@(,)255@(,)0
+  @(print) $balls_in
+}
+@(learn) GetExtraBalls{
+  $m=@(round)(($ball_count-1)/($step+1)-0.5)
+  $extra=$ball_count-1-$m*($step+1)
+  @(return) $extra
+}
+@(learn) ChangePlayer{
+  @(if)($player=="A"){
+    $player="B"
+  }@(else){
+    $player="A"
+  }
+  @(return) $player
+}
+@(learn) FirstPlayer{
+  $extra=GetExtraBalls
+  @(if)($extra!=0){
+    @(message) "You are player B."
+    ClearBalls $extra
+    PrintBallsCountIn
+    ChangePlayer
+  }@(else){
+    @(message) "You are player A."
+  }
+}
+@(learn) InputPoint{
+  $player_input=@(ask) "Your turn:"+$player
+  @(while) ($player_input>$step)@(or)($player_input<1)@(or)($player_input>($balls_in-1)){
+     $player_input=@(ask) "Your turn:"+$player
+  }
+  @(return) $player_input
+}
+@(learn) PlayGame{
+  FirstPlayer
+  @(while) ($balls_in>1){
+      $player_point=InputPoint
+      ClearBalls $player_point 
+      ChangePlayer
+      ClearBalls $step+1-$player_point
+      ChangePlayer
+  }
+  ChangePlayer
+  @(message) $player+" Win!!!"
+}
+#*****Main code****
+@(reset)
+@(canvassize) 300@(,)500
+@(canvascolor) 255@(,)204@(,)102
+@(pencolor) 0@(,)61@(,)114
+@(pw) 2
+@(sh)
+####Parameters 
+$ball_count=@(ask) "Please Set ball count."
+@(while) ($ball_count>169)@(or)($ball_count<3){
+  $ball_count=@(ask) "Please Set ball count."
+} 
+$step=@(ask) "Please Set game step."
+@(while) ($step>($ball_count-2))@(or)($step<2){
+  $step=@(ask) "Please Set game step."
+} 
+#size circle
+$radius=1
+$x=65
+$y=240  
+$outside_x=65
+$outside_y=270
+$balls_in=0 
+$player="A"
+
+PrintSquire
+PrintAllBalls $ball_count
+PlayGame
