@@ -66,7 +66,7 @@ $corner=0
   @(dir) 0 @(pw) 2
   $corner=71.56 @(pc) 0@(,)0@(,)0
   @(tr) 90-$corner @(fw) 60
-  @(pc) 0@(,)0@(,)0 @(tl) 90-$corner   
+  @(tl) 90-$corner   
 }
 
 @(learn) draw_trajectory_case2 {
@@ -74,23 +74,23 @@ $corner=0
   @(dir) 0 @(pw) 2
   @(pc) 0@(,)0@(,)0
   @(tr) 45 @(fw) 56
-  @(pc) 0@(,)0@(,)0 @(tl) 45   
+  @(tl) 45   
 }
 
 @(learn) draw_trajectory_case3 $z {
   @(if) $z==1 {
       @(go) $current_x@(,)$current_y
     @(dir) 0 @(pw) 3
-     @(pc) 150@(,)0@(,)0
+    @(pc) 150@(,)0@(,)0
     @(tr) 90 @(fw) 60
     @(tl) 90  
     } 
   @(else) {
     @(go) $current_x@(,)$current_y
-    @(dir) 0 @(pw) 1
-     @(pc) 0@(,)0@(,)0
+    @(dir) 0 @(pw) 2
+    @(pc) 0@(,)0@(,)0
     @(tr) 90 @(fw) 60
-     @(tl) 90
+    @(tl) 90
     }
 }
 @(learn) draw_points_1case  {
