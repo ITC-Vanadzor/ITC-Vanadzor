@@ -1,0 +1,184 @@
+kturtle-script-v1.0
+@(reset)
+@(canvassize) 500@(,)400
+@(canvascolor) 255@(,)255@(,)204
+#sh
+
+@(learn) xy_line {
+    $y_cor=@(getx)+150
+  @(gox) $y_cor
+  @(turnright) -90 
+  @(pencolor) 0@(,)153@(,)0
+  @(forward) 150
+  @(forward) 150
+  $x_x=@(getx)+150 $x_y=@(gety)+150
+  @(go) $x_x@(,)$x_y
+  @(turnright) 990
+  @(pencolor) 204@(,)0@(,)0
+  @(forward) 300
+}
+
+@(learn) xy_num {
+  @(pencolor) 133@(,)133@(,)133
+  @(go) 235@(,)345
+  @(turnright) 90
+  @(fontsize) 8
+  @(for) $x = -16 @(to) -2 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+  @(go) 235@(,)195
+  @(for) $x = 0 @(to) 14 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+  @(go) 115@(,)210
+  @(turnright) 90
+  @(for) $x = -16 @(to) -3 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+  @(go) 265@(,)210
+  @(for) $x = 0 @(to) 14 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+}
+
+@(learn) coordinate_table{
+  $x=100 $y=60
+  @(go) $x@(,)$y
+  @(pencolor) 194@(,)194@(,)194
+  @(repeat) 900 {
+    @(repeat) 4 {
+      @(forward) 10
+      @(turnright) 90
+    }
+    $x=$x+10
+    @(go) $x@(,)$y
+    @(if) $x==390 {
+      $y=$y+10
+      $x=$x-300
+    }
+  }
+  @(pencolor) 51@(,)0@(,)0
+  @(penwidth) 2
+  @(repeat) 4 {
+    @(forward) 300
+    @(turnright) -90
+  }
+  xy_line
+xy_num
+}
+
+@(learn) players_turn{
+  @(repeat) 2{
+    @(forward) 70
+    @(turnright) 90
+    @(forward) 300
+    @(turnright) 90
+  }
+}
+
+@(learn) player_name1 {
+  $x=10 $y=25
+  @(go) $x@(,)$y
+  @(penwidth) 2
+  @(pencolor) 0@(,)51@(,)102
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+  @(go) 50@(,)4
+  @(print)"PLAYER 1"
+  $y=$y+15
+  @(go) $x@(,)$y
+  @(pencolor) 51@(,)102@(,)153
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+}
+@(learn) player_name2 {
+  $x=340 $y=25
+  @(go) $x@(,)$y
+  @(penwidth) 2
+  @(pencolor) 0@(,)51@(,)102
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+  @(go) 380@(,)4
+  @(print)"PLAYER 2"
+  $y=$y+15
+  @(go) $x@(,)$y
+  @(pencolor) 51@(,)102@(,)153
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+}
+@(learn) game_grid {
+  player_name1
+  player_name2
+  @(go) 10@(,)60
+  @(turnright) 90
+  @(penwidth) 2
+  @(pencolor) 255@(,)102@(,)0
+  players_turn
+  @(go) 420@(,)60
+  @(penwidth) 2
+  @(pencolor) 71@(,)163@(,)255
+  players_turn
+  @(penwidth) 1
+  coordinate_table
+
+
+}
+
+
+
+
+
+
+
+@(learn) process{
+  $a=$x_input
+  $b=$y_input
+  $width=$a
+  $height=$b
+  $c=(($a * $a)+($b * $b))
+  $nerk=@(sqrt) $c
+  @(print) $nerk
+
+}
+
+    #$x=$x+150
+  #	$y=$y+150
+  #go 10,20
+
+#$x_input=ask "Please input X coordinates"
+#$y_input=ask "Please input Y coordinates"
+#while ($x_input>3) and ($x_input<3){
+#  $x_input=ask "Please input X coordinates"
+}
+#while ($y_input<3) or ($y_input>4){
+#  $y_input=ask "Please input Y coordinates"
+}
+
+# GAME MANE COMMANDS
+game_grid
+
+#process
