@@ -1,15 +1,16 @@
 kturtle-script-v1.0
-#skzbnakan tarberakna, kan voroshaki terutyunner!
+#by Eduard Hakobyan
+#grafikan hasaraka jamanaki patcharov, bayc algoritm@ normal ashxatuma arden...pti vor
 
 @(reset) 
-@(message) "Hello! naxoroq asem vor ushadir exeq, cankacac sxal nermucvac arjeqi depqum xax@ kdadarecvi"
+@(message) "Hello! naxoroq asem, vor, ete krveluc nervaynanumeq mek sharunaki,ete voch ushadir exeq, cankacac sxal nermucvac arjeqi depqum xax@ kdadarecvi"
 $x=10
 $y=390
 $oxaki_qanak_toxum=15
 
 $oxakneri_qanak=@(ask) "Nermuceq oxakneri qanak@: 2 - 225"
 $max_jnjel=@(ask) "Nermuceq oxakner@ mek qaylum jnjelu maximal qanak@: 2 - 224"
-
+# errors1 & errors2 funkcianer@ stugumen ardyoq nermucvac arjeq@ bavararum e xndri paymannerin
 @(learn) errors1 {
   @(if) ($oxakneri_qanak <=2) @(or) ($oxakneri_qanak > 225){
     @(message) "Error: Nermucvac arjeq@ chi bavararum xndri paymannerin"
@@ -29,7 +30,7 @@ errors1
   }
 }
   
-
+#table funkcian nkarum e xaxadasht@
 @(learn) table {
   @(go) $x@(,)$y
   @(repeat) 4 {
@@ -37,11 +38,13 @@ errors1
     @(tr) 90
   }
 }
+#oxaki_stacum funkcian nkarum e mek oxak
 @(learn) oxaki_stacum {
   @(repeat) 36 {
   @(tr) 10 @(fw) 2
   }
 }
+#Oxakneri_stacum funkcian nkarum e nermucvac qanakov oxakner
 @(learn) oxakneri_stacum {
   $x=$x + 5
   $y=$y - 15
@@ -50,7 +53,7 @@ errors1
     oxaki_stacum  
     $x = $x + 25
     @(go) $x@(,)$y
-      $mnacord_15= @(mod) $m@(,)15
+      $mnacord_15 = @(mod) $m@(,)15
     @(if) $mnacord_15 == 0 {
       @(if) $m==$oxakneri_qanak {
           @(break)
@@ -62,6 +65,7 @@ errors1
     }
   }
 }
+#oxaki_jnjum funkcian jnjum e mek oxak
 @(learn) oxaki_jnjum {
   @(pw) 5
   @(pc) 255@(,)255@(,)255
@@ -69,12 +73,11 @@ errors1
     @(tl) 10 @(fw) 2
   }
 }
-
+#nerqevi funkcian jnjum e trvac qanakutyamb oxakner
 @(learn) oxakneri_jnjum {
   
-  @(for) $m=1 @(to) $jnjvox_oxakner{
-  $mnacord_15=@(mod) $oxakneri_qanak@(,)15
-  @(if) $mnacord_15==0  {
+  @(for) $m=1 @(to) $jnjvox_oxakner {
+  @(if) $x==15  {
         $x=$x+375
         $y=$y+25
         @(go) $x@(,)$y
@@ -83,38 +86,35 @@ errors1
     $x = $x - 25
     @(go) $x@(,)$y
   }
-  $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner 
 }  
-
+#kanchum enq storin funkcianer@ xaxadashtn u oxakner@ statnlu npatakov
 table
 oxakneri_stacum
 
-$mnacord_1=$oxakneri_qanak
+
 $max_1 = $max_jnjel+1
 $mnacord = @(mod) $oxakneri_qanak@(,)$max_1
 $mnacord_toxum = @(mod) $oxakneri_qanak@(,)15
 
-
-
+#katarum enq stugumner @st xndri algoritmi hamadzayn
 @(if) $mnacord == 0 {
-  @(message) "Es sksem vor dzev chunenaq krelu"
+  @(message) "Es sksem vorovhetev xndri pahanj@ tenca bavararvum, ete inch vor harcer kan im skselu het kapvac dimeq cragir@ kazmoxin"
   $jnjvox_oxakner=$max_jnjel
   oxakneri_jnjum
-
+  $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
   @(while) $oxakneri_qanak!=0 {
-     
+     @(print) "oxakneri qanak"
   $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
   errors2
   $jnjvox_oxakner=$player
   oxakneri_jnjum
   $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
-  @(message) "Inch huysoveq xaxum?"
+  @(message) "Duq OK sxmeq minchev es jnjem"
   $jnjvox_oxakner=$max_1-$player
   oxakneri_jnjum
   $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
-#	print $oxakneri_qanak	
   @(if) $oxakneri_qanak==1 {
-      @(message) "Game Over"
+      @(message) "DUQ PARTVECIQ: ade shatem ujex xom zorov chi :)))"
       @(exit)
     }
   }
@@ -122,30 +122,43 @@ $mnacord_toxum = @(mod) $oxakneri_qanak@(,)15
 
 @(if) $mnacord == 1 {
   @(message) "Skseq la tenam shateq ujex"
-    @(while) ($x!=40) {
-    $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
+    @(while) $oxakneri_qanak !=0 {
+    $player=@(ask) "Dzer hertn e: nermuceq qani oxakeq cankanum jnjel"
+    @(message) "Lurj der huys uneq vor krelueq? Lav de inch asem...sharunakenq..."
     errors2
     $jnjvox_oxakner=$player
     oxakneri_jnjum
-    @(message) "Inch huysoveq xaxum?"
+    $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner    
+    @(message) "Duq OK sxmeq minchev es jnjem"
     $jnjvox_oxakner=$max_1-$player
     oxakneri_jnjum
+    $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
+    @(if) $oxakneri_qanak==1 {
+      @(message) "DUQ PARTVECIQ: ade shatem ujex xom zorov chi :)))"
+      @(exit)
+    }
   }
 } 
-} @(else) {
-  @(message) "Es sksem vor dzev chunenaq krelu"
+ @(else) {
+  @(message) "Es sksem vorovhetev xndri pahanj@ tenca bavararvum, ete inch vor harcer kan im skselu het kapvac dimeq cragir@ kazmoxin :)"
   $jnjvox_oxakner=$mnacord-1
   oxakneri_jnjum 
-  @(while) $x!=40 {
+  $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
+  @(while) $oxakneri_qanak!=0 {
     $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
     errors2
     $jnjvox_oxakner=$player
     oxakneri_jnjum
-    @(message) "Inch huysoveq xaxum?"
+    $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
+    @(message) "Meka kreluem...:)))"
     $jnjvox_oxakner=$max_1-$player
     oxakneri_jnjum
+    $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
+    @(if) $oxakneri_qanak==1 {
+      @(message) "DUQ PARTVECIQ: ade shatem ujex xom zorov chi (-_-)"
+      @(exit)
+    }
   } 
 }
 
-@(message) "Vor asumei Krvelueq..."
-  
+#Verj
