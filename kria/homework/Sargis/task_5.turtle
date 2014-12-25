@@ -2,7 +2,14 @@ kturtle-script-v1.0
 @(reset) 
 @(cc) 255@(,)255@(,)100
 @(pw) 1 @(sh)
+@(go) 0@(,)-50 @(fontsize) 12
+@(print) "If you choose 1: The dib will be moved from current point  to (x+1,y+3)"
+@(go) 0@(,)-35
+@(print) "If you choose 2: The dib will be moved from current point  to (x+2,y+2)"
+@(go) 0@(,)-20 
+@(print) "If you choose 3: The dib will be moved from current point  to (x+3,y)"
 @(message) "Let's start the game, we have a dib in Cartesian co-ordinate system (X,Y). Each player can choose 1 of 3 move choices.	If you choose 1: The dib will be moved from current point  to (x+1,y+3).		If you choose 2: The dib will be moved from current point  to (x+2,y+2).		If you choose 3: The dib will be moved from current point  to (x+3,y). Wins the player whose distance from (0,0) reaches 10 first	"  
+@(fontsize) 10
 #Global variables
 $player=@(ask) "Please input your name"
 $choice=0
@@ -26,7 +33,7 @@ $convert_current_y=($cord_y_0-$current_y)/$one_step
   @(go) 0@(,)300
   @(tr) 90
   $x=-4
-  @(repeat) 20{
+  @(repeat) 19{
   @(fw) 19
   @(pw) 2  @(go) @(getx)-12@(,)@(gety)-1  @(tl) 90 @(print) $x @(tr) 90 @(go) @(getx)+12@(,)@(gety)+1
   $x=$x+1   
@@ -35,7 +42,7 @@ $convert_current_y=($cord_y_0-$current_y)/$one_step
   }
   @(go) 100@(,)400
   @(tl) 90 $x=-4
-  @(repeat) 20 { 
+  @(repeat) 19 { 
   @(if) $x == 0 {
      @(fw) 20
      $x=$x+1
@@ -52,10 +59,44 @@ draw_coordinate_system
   $dist=@(sqrt)($x*$x+$y*$y)  
   @(return) $dist
 }
+
+$corner=0
+@(learn) draw_trajectory_case1 {
+  @(go) $current_x@(,)$current_y
+  @(dir) 0 @(pw) 2
+  $corner=71.56 @(pc) 0@(,)0@(,)0
+  @(tr) 90-$corner @(fw) 60
+  @(pc) 0@(,)0@(,)0 @(tl) 90-$corner   
+}
+
+@(learn) draw_trajectory_case2 {
+  @(go) $current_x@(,)$current_y
+  @(dir) 0 @(pw) 2
+  @(pc) 0@(,)0@(,)0
+  @(tr) 45 @(fw) 56
+  @(pc) 0@(,)0@(,)0 @(tl) 45   
+}
+
+@(learn) draw_trajectory_case3 $z {
+  @(if) $z==1 {
+      @(go) $current_x@(,)$current_y
+    @(dir) 0 @(pw) 3
+     @(pc) 150@(,)0@(,)0
+    @(tr) 90 @(fw) 60
+    @(tl) 90  
+    } 
+  @(else) {
+    @(go) $current_x@(,)$current_y
+    @(dir) 0 @(pw) 1
+     @(pc) 0@(,)0@(,)0
+    @(tr) 90 @(fw) 60
+     @(tl) 90
+    }
+}
 @(learn) draw_points_1case  {
     $current_x=($current_x+$one_step)
-    $current_y=($current_y-3*$one_step)
-    @(go) $current_x@(,)$current_y @(pw) 5 @(pc) 150@(,)0@(,)0 @(fw) 0.0001
+    $current_y=($current_y-3*$one_step) 
+    @(go) $current_x@(,)$current_y @(pw) 5 @(pc) 150@(,)0@(,)0 @(fw) 0.0001 @(pw) 1
     convert_cord
     $DIST=dist_from_0 $convert_current_x@(,)$convert_current_y
     @(print) $DIST+"("+$convert_current_x+","+ $convert_current_y+")"    
@@ -87,16 +128,20 @@ $delim=10
     $choice=@(ask) "Please insert your choice from 1 to 3"
     @(if) ($choice>0) @(and) ($choice<=3) {
       @(if) $choice==1 {
+       draw_trajectory_case1
         draw_points_1case
       }
       @(if) $choice==2 {
-        draw_points_2case
+        draw_trajectory_case2
+         draw_points_2case
         }
       @(if) $choice==3 {
+       draw_trajectory_case3 3
         draw_points_3case
         }
       @(message) "It's my turn"
       @(wait) 0.5
+      draw_trajectory_case3 1
       draw_points_3case
       @(if) $DIST>=10 {
         @(go) 100@(,)410 @(fontsize) 20 

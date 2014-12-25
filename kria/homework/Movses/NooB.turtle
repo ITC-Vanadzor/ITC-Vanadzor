@@ -1,0 +1,199 @@
+kturtle-script-v1.0
+@(reset)
+@(cc) 255@(,)200@(,)0 
+@(message) "Դուք համակարգիչի հետ խաղում եք հետևյալ խաղը։ Կոորդինատային հարթության վրա գտնվում է ֆիշկա։ Խաղի սկզբում այն գտնվում է (0,0) կետում։ Խաղացողները խաղում են հերթով, Դուք սկսում եք։ Քայլը կայանում է հետևյալում՝ խաղացողը տեղափոխում է ֆիշկան (x,y) կոորդինատից դեպի (x,y+2), (x+3,y), (x+2,y+3)  կոորդինատներից մեկը։ Խաղը ավարտվում է, հենց որ խաղացողի դիրքի հեռավորությունը կոորդինատների սկզբնակետից գերազանցում է 9֊ը։ Հաղթում է այն խաղացողը, ով կատարել է վերջին քայլը։"
+@(sh)
+@(learn) verev {
+  @(pw) 2
+  @(dir) 0
+  @(fw) 40
+  @(pc) 0@(,)0@(,)0
+  @(fw) 0
+}
+@(learn) aj_koxm {
+  @(pw) 2
+  @(dir) 90
+  @(fw) 60
+  @(pc) 0@(,)0@(,)0
+  @(fw) 0
+}
+@(learn) ankyunagic {
+  @(pw) 2
+  @(dir) @(arccos)(3/@(sqrt) 13)
+  @(fw) @(sqrt) 5200
+  @(pc) 0@(,)0@(,)0
+  @(fw) 0
+}
+@(pc) 0@(,)0@(,)0
+@(go) 20@(,)380
+@(dir) 0
+@(fw) 360
+@(go) 20@(,)380
+@(dir) 90
+@(fw) 360
+@(go) 380@(,)380
+@(dir) -60
+@(fw) 25
+@(go) 380@(,)380
+@(dir) -120
+@(fw) 25
+@(go) 20@(,)20
+@(dir) 210
+@(fw) 25
+@(go) 20@(,)20
+@(dir) 150
+@(fw) 25
+@(go) 20@(,)380
+@(dir) 0
+@(print) 0
+@(dir) 180
+@(go) 40@(,) 375
+@(repeat) 12 {
+  @(fw) 10
+  @(gox) @(getx)+20
+  @(goy) 375
+}
+@(dir) 90
+@(go) 15@(,) 360
+@(repeat) 12 {
+  @(fw) 10
+  @(goy) @(gety)-20
+  @(gox) 15
+}
+@(go) 20@(,)380
+$i=1
+@(repeat) 12 {
+  @(dir) 90
+  @(fw) 20
+  @(dir) 0
+  @(print) $i
+  $i=$i+1
+}
+@(go) -3@(,) 360
+$i=1
+@(repeat) 12 {
+  @(dir) 0
+  @(goy) @(gety)-20
+  @(dir) 0
+  @(print) $i
+  $i=$i+1
+}
+@(go) 20@(,)200
+@(dir) 90
+@(repeat) 90 {
+  @(fw) 3.116
+  @(tr) 1
+}
+@(go) 20@(,)380
+$t=0
+@(learn) gcel {
+  @(message) "Your turn"
+  $t=@(ask) "If you want to (x,y+2) input ---> 1                                       If you want to (x+3,y) input ---> 2                                        If you want to (x+2,y+3) input ---> 3" 
+@(if) $t!=1 @(and) $t!=2 @(and) $t!=3 {
+@(message) "1, 2, kam 3"
+gcel
+}
+}
+
+gcel
+@(if) $t==1 {
+    @(pc) 12@(,)255@(,)12
+    verev
+    @(message) "Drew computer (x+2,y+3)"
+    @(pc) 44@(,)123@(,)200
+    ankyunagic
+    gcel
+    @(if) $t==1 {
+        @(pc) 12@(,)255@(,)12
+        verev
+        @(message) "Drew computer (x,y+2)"
+        @(pc) 44@(,)123@(,)200
+        verev
+        @(message) "You Lost!!!"
+      }
+      @(if) $t==2 {
+        @(pc) 12@(,)255@(,)12
+        aj_koxm
+        @(message) "Drew computer (x+3,y)"
+        @(pc) 44@(,)123@(,)200
+        aj_koxm
+        @(message) "You Lost!!!"
+      }  
+    @(if) $t==3 {
+         @(pc) 12@(,)255@(,)12
+        ankyunagic
+        @(message) "Drew computer (x,y+2)"
+          @(pc) 44@(,)123@(,)200
+        verev
+        @(message) "You Lost!!!"
+  }
+@(exit)
+}
+
+@(if) $t==2 {
+  @(pc) 12@(,)255@(,)12
+  aj_koxm
+  @(message) "Drew computer (x+3,y)"
+  @(pc) 44@(,)123@(,)200
+  aj_koxm
+  gcel
+  @(if) $t==1 {
+    @(pc) 12@(,)255@(,)12
+    verev
+    @(message) "Drew computer (x+2,y+3)"
+      @(pc) 44@(,)123@(,)200
+    ankyunagic
+    @(message) "You Lost!!!"
+  }
+  @(if) $t==2 {
+     @(pc) 12@(,)255@(,)12
+    aj_koxm
+    @(message) "Drew computer (x+2,y+3)"
+    @(pc) 44@(,)123@(,)200
+    ankyunagic
+    @(message) "You Lost!!!"
+  }
+  @(if) $t==3 {
+    @(pc) 12@(,)255@(,)12
+    ankyunagic
+    @(message) "Drew computer (x+3,y)"
+    @(pc) 44@(,)123@(,)200
+    aj_koxm
+    @(message) "You Lost!!!"
+  }
+@(exit)
+}
+
+@(if) $t==3 {
+  @(pc) 12@(,)255@(,)12
+  ankyunagic
+  @(message) "Drew computer (x,y+2)"
+  @(pc) 44@(,)123@(,)200
+  verev
+  gcel
+  @(if) $t==1 {
+         @(pc) 12@(,)255@(,)12 
+        verev
+        @(message) "Drew computer (x,y+2)"
+        @(pc) 44@(,)123@(,)200
+        verev
+        @(message) "You Lost"
+      }
+      @(if) $t==2 {
+        @(pc) 12@(,)255@(,)12  
+        aj_koxm
+        @(message) "Drew computer (x+3,y)"
+        @(pc) 44@(,)123@(,)200
+        aj_koxm
+        @(message) "You Lost!!!"
+      }  
+    @(if) $t==3 {
+        @(pc) 12@(,)255@(,)12
+        ankyunagic
+        @(message) "Drew computer (x,y+2)"
+        @(pc) 44@(,)123@(,)200
+        verev
+        @(message) "You Lost!!!"
+  }
+@(exit)
+}
