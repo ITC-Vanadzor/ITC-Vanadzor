@@ -50,14 +50,18 @@ errors1
     oxaki_stacum  
     $x = $x + 25
     @(go) $x@(,)$y
-  @(if) $x==390 {
-    $x=$x-375
-    $y=$y-25
-    @(go) $x@(,)$y
-    }  
+      $mnacord_15= @(mod) $m@(,)15
+    @(if) $mnacord_15 == 0 {
+      @(if) $m==$oxakneri_qanak {
+          @(break)
+      } @(else) {
+      $x=$x-375
+        $y=$y-25
+        @(go) $x@(,)$y
+      }  
+    }
   }
 }
-
 @(learn) oxaki_jnjum {
   @(pw) 5
   @(pc) 255@(,)255@(,)255
@@ -67,25 +71,68 @@ errors1
 }
 
 @(learn) oxakneri_jnjum {
-    @(repeat) $jnjvox_oxakner{
+  
+  @(for) $m=1 @(to) $jnjvox_oxakner{
+  $mnacord_15=@(mod) $oxakneri_qanak@(,)15
+  @(if) $mnacord_15==0  {
+        $x=$x+375
+        $y=$y+25
+        @(go) $x@(,)$y
+    }  
     oxaki_jnjum  
     $x = $x - 25
     @(go) $x@(,)$y
-
-  @(if) $x==15 {
-    $x=$x+375
-    $y=$y+25
-    @(go) $x@(,)$y
-    }  
   }
-}
+  $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner 
+}  
 
 table
 oxakneri_stacum
 
+$mnacord_1=$oxakneri_qanak
 $max_1 = $max_jnjel+1
 $mnacord = @(mod) $oxakneri_qanak@(,)$max_1
-@(if) $mnacord != 1 {
+$mnacord_toxum = @(mod) $oxakneri_qanak@(,)15
+
+
+
+@(if) $mnacord == 0 {
+  @(message) "Es sksem vor dzev chunenaq krelu"
+  $jnjvox_oxakner=$max_jnjel
+  oxakneri_jnjum
+
+  @(while) $oxakneri_qanak!=0 {
+     
+  $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
+  errors2
+  $jnjvox_oxakner=$player
+  oxakneri_jnjum
+  $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
+  @(message) "Inch huysoveq xaxum?"
+  $jnjvox_oxakner=$max_1-$player
+  oxakneri_jnjum
+  $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
+#	print $oxakneri_qanak	
+  @(if) $oxakneri_qanak==1 {
+      @(message) "Game Over"
+      @(exit)
+    }
+  }
+} @(else) {
+
+@(if) $mnacord == 1 {
+  @(message) "Skseq la tenam shateq ujex"
+    @(while) ($x!=40) {
+    $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
+    errors2
+    $jnjvox_oxakner=$player
+    oxakneri_jnjum
+    @(message) "Inch huysoveq xaxum?"
+    $jnjvox_oxakner=$max_1-$player
+    oxakneri_jnjum
+  }
+} 
+} @(else) {
   @(message) "Es sksem vor dzev chunenaq krelu"
   $jnjvox_oxakner=$mnacord-1
   oxakneri_jnjum 
@@ -99,17 +146,6 @@ $mnacord = @(mod) $oxakneri_qanak@(,)$max_1
     oxakneri_jnjum
   } 
 }
-@(if) $mnacord == 1 {
-  @(message) "Skseq la tenam shateq ujex"
-    @(while) ($x!=40) {
-    $player=@(ask) "dzer hertne: nermuceq qani oxakeq cankanum jnjel"
-    errors2
-    $jnjvox_oxakner=$player
-    oxakneri_jnjum
-    @(message) "Inch huysoveq xaxum?"
-    $jnjvox_oxakner=$max_1-$player
-    oxakneri_jnjum
-  }
-} 
+
 @(message) "Vor asumei Krvelueq..."
   
