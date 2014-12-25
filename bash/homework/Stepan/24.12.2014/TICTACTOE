@@ -1,0 +1,180 @@
+#!/bin/bash
+
+# enter bash
+
+# create array with 9  index
+
+array=("" "" "" "" "" "" "" "" "")
+
+# create board for game
+board () {
+    clear
+    echo -e "\t ${array[0]:-0} | ${array[1]:-1} | ${array[2]:-2} "
+    echo -e "\t___________"
+    echo -e "\t ${array[3]:-3} | ${array[4]:-4} | ${array[5]:-5} "
+    echo -e "\t___________"
+    echo -e "\t ${array[6]:-6} | ${array[7]:-7} | ${array[8]:-8} "
+}
+
+# print for Player 2
+WINo () {
+    echo "Player 2 you Win"    
+    break
+}
+
+# print for Player 1
+WINx () { 
+    echo "Player 1 you Win"
+    break 
+}
+
+# win test for x (player 1)
+test_x () {
+    if [ "x" == "${array[0]}" ] && [ "x" == "${array[1]}" ] && [ "x" == "${array[2]}" ] ; then
+    WINx
+    elif [ "x" == "${array[3]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[5]}" ] ; then
+    WINx
+    elif [ "x" == "${array[6]}" ] && [ "x" == "${array[7]}" ] && [ "x" == "${array[8]}" ] ; then
+    WINx
+    elif [ "x" == "${array[0]}" ] && [ "x" == "${array[3]}" ] && [ "x" == "${array[6]}" ] ; then
+    WINx
+    elif [ "x" == "${array[1]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[7]}" ] ; then
+    WINx
+    elif [ "x" == "${array[2]}" ] && [ "x" == "${array[5]}" ] && [ "x" == "${array[8]}" ] ; then
+    WINx
+    elif [ "x" == "${array[0]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[8]}" ] ; then
+    WINx
+    elif [ "x" == "${array[2]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[6]}" ] ; then
+    WINx
+    fi
+}
+#win test for o (Player 2)
+test_o () {
+    if [ "o" == "${array[0]}" ] && [ "o" == "${array[1]}" ] && [ "o" == "${array[2]}" ] ; then
+    WINo
+    elif [ "o" == "${array[3]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[5]}" ] ; then
+    WINo
+    elif [ "o" == "${array[6]}" ] && [ "o" == "${array[7]}" ] && [ "o" == "${array[8]}" ] ; then
+    WINo
+    elif [ "o" == "${array[0]}" ] && [ "o" == "${array[3]}" ] && [ "o" == "${array[6]}" ] ; then
+    WINo
+    elif [ "o" == "${array[1]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[7]}" ] ; then
+    WINo
+    elif [ "o" == "${array[2]}" ] && [ "o" == "${array[5]}" ] && [ "o" == "${array[8]}" ] ; then
+    WINo
+    elif [ "o" == "${array[0]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[8]}" ] ; then
+    WINo
+    elif [ "o" == "${array[2]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[6]}" ] ; then
+    WINo
+    fi
+}
+
+
+        game_of_x() {
+        echo "PLAYER1: enter number for x"
+        read i
+        if [ "${array[i]}" == "o" ] || [ "${array[i]}" == "x" ]; 
+        then 
+            echo "the box is full"
+            game_of_x
+        elif [ $i -ge 0 ] && [ $i -le 8 ];
+        then
+            array[i]=x
+        else
+            echo "input valid number"
+            game_of_x
+        fi
+        }
+
+        game_of_o () {
+        echo "PLAYER2: enter number for o"
+        read i
+        if [ "${array[i]}" == "o" ] || [ "${array[i]}" == "x" ]; 
+        then
+            echo "the box is full"
+            game_of_o	
+        elif [ $i -ge 0 ] && [ $i -le 8 ];
+        then
+            array[i]=o
+        else
+            echo "input valid number"
+            game_of_o
+        fi
+        }
+
+# if win nobody
+#win_n () {
+#if ["${array[0-8]}" == "x"] && ["${array[0-8]}" == "o"]
+#    then
+#    echo "nobody won"
+#    new_game
+#else 
+#    echo "kkkk"
+#fi    
+#`}
+
+board
+
+# algorithm for game
+algorithm () {
+while true;
+    do
+        board
+	game_of_x
+        board
+        test_x
+        game_of_o
+        board
+        test_o
+	win_n
+    done
+}
+
+# start algorithm
+algorithm
+
+# new game, if players want to play again
+
+new_game () {
+echo "Do you want to play new game"
+echo "yes or no" 
+read i
+if [$i == "yes"]
+    then
+    new_board 
+    algorithm2
+elif [$i == "no"]
+    then 
+    echo "hhh"
+else 
+    echo "you enter invalid word"
+    new_board
+    algorithm2  
+fi
+}    
+
+new_board () {
+    clear
+    echo -e "\t ${array[0]:-0} | ${array[1]:-1} | ${array[2]:-2} "
+    echo -e "\t___________"
+    echo -e "\t ${array[3]:-3} | ${array[4]:-4} | ${array[5]:-5} "
+    echo -e "\t___________"
+    echo -e "\t ${array[6]:-6} | ${array[7]:-7} | ${array[8]:-8} "
+}
+
+algorithm2 () {
+while true;
+    do
+        new_board
+	game_of_x
+        new_board
+        test_x
+        game_of_o
+        new_board
+        test_o
+	win_n
+    done
+}
+
+new_game
+
