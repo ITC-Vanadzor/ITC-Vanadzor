@@ -1,0 +1,127 @@
+kturtle-script-v1.0
+@(learn) set_canvas {
+  @(reset)
+  @(direction) 0
+  @(sh)
+  @(pc) 0@(,)0@(,)255
+  @(go) 0@(,)0
+  @(bw) 400
+  @(tr) 90
+  @(fw) 400  
+}
+@(learn) draw_dekart {
+  @(while) @(getx)>=0 {
+    @(direction) 0
+    @(print) @(getx)/20
+    @(fw) 2
+    @(go) @(getx)-20@(,)400
+  }
+  @(direction) 90
+  @(while) @(gety)>0 {
+    @(go) 0@(,) @(gety)-20
+    @(direction) 0
+    @(print) 20-@(gety)/20
+    @(direction) 90
+    @(fw) 2
+  }
+}
+
+
+@(learn) abs $x {
+  $tmp = $x*20
+  @(return) $tmp 
+}
+
+@(learn) ord $y {
+  $tmp = 400 - 20*$y  
+  @(return) $tmp
+}
+@(learn) distance $x@(,) $y { 
+@(return) @(sqrt) ( ($x*$x) + ($y*$y) )
+}
+@(learn) print_coord $x@(,) $y {
+  @(direction) 0
+  @(print) "(" + $x + "," + $y + ")" + "  " + distance $x@(,) $y  
+}
+
+@(learn) strategy_1 $x@(,) $y {
+  $x = $x + 2
+  $y = $y + 3
+  $x_temp = abs ($x+2)
+  $y_temp = ord ($y+3)
+  @(go) $x_temp@(,) $y_temp
+  @(pw) 2
+  @(fw) 0
+}
+
+@(learn) strategy_2 $x@(,) $y {
+  $x = $x +3
+  $x_temp = abs ($x+3)
+  $y_temp = ord $y
+  @(go) $x_temp@(,) $y_temp
+  @(pw) 2
+  @(fw) 0
+}
+
+@(learn) strategy_3 $x@(,) $y {
+  $x = $x - 1
+  $y = $y + 4
+  $x_temp = abs ($x-1)
+  $y_temp = ord ($y+4)
+  @(go) $x_temp@(,) $y_temp
+  @(pw) 2
+  @(fw) 0
+}
+
+@(learn) start {
+  @(message) "Choose the path: 1-change coordinates (x+2, y+3); 2-change coordinates (x+3, y); 3-change coordinates (x-1, y+4)"
+  @(wait) 0.4
+ 
+  
+    $case = @(ask) "Choose the path from 1 to 3"
+    @(if) $case == 1 {
+      strategy_1 $x@(,) $y
+      print_coord $x@(,) $y  
+        @(wait) 0.4
+        @(message) "as follows.."
+        strategy_2 $x@(,) $y
+      print_coord $x@(,) $y
+    }
+
+    @(if) $case == 2 {
+      strategy_2 $x@(,) $y
+      print_coord $x@(,) $y
+       @(wait) 0.4
+        @(message) "as follows.."
+        strategy_1 $x@(,) $y
+      print_coord $x@(,) $y
+    }
+    @(if) $case == 3 {
+        strategy_3 $x@(,) $y
+      print_coord $x@(,) $y
+        @(wait) 0.4
+        @(message) "as follows.."
+        strategy_2 $x@(,) $y
+      print_coord $x@(,) $y
+    }
+    
+}
+@(reset)
+$x=1
+$y=1 
+set_canvas
+draw_dekart
+start
+#strategy_1 $x, $y
+#print_coord $x, $y
+
+
+
+
+
+
+
+
+
+
+
