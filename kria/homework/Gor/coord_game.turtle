@@ -1,8 +1,11 @@
 kturtle-script-v1.0
+#Author: Gor Julhakyan
+#Version: 1.01
+#**************************************#
 @(reset)
 @(canvassize) 500@(,)400
 @(canvascolor) 255@(,)255@(,)204
-#sh
+@(sh)
 
 @(learn) xy_line {
     $y_cor=@(getx)+150
@@ -130,6 +133,17 @@ xy_num
     @(turnright) 90    
   }
 }
+@(learn) players_names {
+  @(penwidth) 2
+  @(pencolor) 75@(,) 193@(,) 0 
+  @(fontsize) 12
+  @(direction) 0
+  @(go) 20@(,)21
+  @(print)"PC CPU"
+  @(go) 350@(,)21
+  @(print)($player_name)
+}
+
 @(learn) game_grid {
   player_name1
   player_name2
@@ -148,17 +162,17 @@ xy_num
 
 @(learn) circle {
   @(pendown)
-  @(pencolor) 102@(,)51@(,)102
-  @(penwidth) 1
+  @(pencolor) 255@(,) 29@(,) 0 
+  @(penwidth) 2
   @(repeat) 36 {
-
     @(turnleft) 10
     @(forward) 0.5
   }
 }
 
 @(learn) axis {
-@(direction) 0
+  @(go) 250@(,)210
+  @(direction) 0
   $n=@(sqrt)((2*2) + (5*5))
   $n1=$n*10
   $a=@(arctan) (2/5)
@@ -168,33 +182,24 @@ xy_num
   circle
 
 }
-$x0=0  $y0=0
-
-@(learn) game_ready {
-#sh
-
-    $go_x=$x0+250 $go_y=$y0+210
-    @(go) $go_x@(,)$go_y
-  axis
-}
-
-
-
 
 @(learn) player_turn {
-  $player_turn=@(ask)"PLEASE INPUT 1 FOR (X+3,Y) or 2 FOR (X,Y+3) or 3 FOR (x,y+4)"
   @(if) $player_turn==1 {
-    $a=8 $b=2  
-    @(wait) 2
-    $a=8 $b=6}
+    $a=8 $b=2
+  } 
   @(else) {
   @(if) $player_turn==2 {  
-    $a=5 $b=5 }}
+    $a=5 $b=5
+  }}
   @(else) {
   @(if) $player_turn==3 {  
-    $a=5 $b=6 }}
-    @(else) {
-    player_turn }
+    $a=5 $b=6
+  }}
+    @(else) {  
+    player_turn 
+  }
+  @(pencolor) 79@(,) 209@(,) 255 
+  @(penwidth) 1.5
   @(go) 250@(,)210
   @(direction) 0
   $n=@(sqrt)(($a*$a) + ($b*$b))
@@ -204,63 +209,47 @@ $x0=0  $y0=0
   @(pendown)
   @(forward) $n1
   circle
-
 }
-
-
-
-@(learn) process{
-player_turn
+*
+@(learn) cpu_turn {
+  @(if) $player_turn==1 {
+    $a=8 $b=6 
+  }
+  @(else) {
+  @(if) $player_turn==2 {  
+    $a=5 $b=9
+  }}
+  @(else) {
+  @(if) $player_turn==3 {  
+    $a=5 $b=10 
+  }}
+    @(else) {
+    player_turn }
+  @(pencolor) 255@(,) 84@(,) 0
+  @(penwidth) 1.5
   @(go) 250@(,)210
   @(direction) 0
   $n=@(sqrt)(($a*$a) + ($b*$b))
   $n1= $n*10
   $c=@(arctan) ($a/$b)
-@(print) $n1
   @(turnright) $c
-  @(print) $a
   @(pendown)
   @(forward) $n1
-  #circle
-
+  circle
 }
 
-
-
-
-
+#**************************************#
 # GAME MANE COMMANDS
 game_grid
-game_ready
+$player_name=@(ask)"PLEASE INSERT YOUR NAME"
+players_names
+@(wait) 2
+@(message)"GAME IS STARTED"
+axis
+$player_turn=@(ask)"PLEASE INPUT 1 FOR (X+3,Y) or 2 FOR (X,Y+3) or 3 FOR (x,y+4)"
 player_turn
+@(wait) 2
+@(message)"CPU step"
+cpu_turn
 
-
-
-
-
-
-
-
-
-
-@(learn) new {
-  $x0=@(getx) $y0=@(gety)
-  $go_x=$x0+30
-  @(go) $go_x@(,)$yo
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#**************************************#
