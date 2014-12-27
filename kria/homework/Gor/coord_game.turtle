@@ -144,41 +144,123 @@ xy_num
   players_turn
   @(penwidth) 1
   coordinate_table
+}
 
+@(learn) circle {
+  @(pendown)
+  @(pencolor) 102@(,)51@(,)102
+  @(penwidth) 1
+  @(repeat) 36 {
 
+    @(turnleft) 10
+    @(forward) 0.5
+  }
+}
+
+@(learn) axis {
+@(direction) 0
+  $n=@(sqrt)((2*2) + (5*5))
+  $n1=$n*10
+  $a=@(arctan) (2/5)
+  @(turnright) 90-$a
+  @(pendown)
+  @(forward) $n1
+  circle
+
+}
+$x0=0  $y0=0
+
+@(learn) game_ready {
+#sh
+
+    $go_x=$x0+250 $go_y=$y0+210
+    @(go) $go_x@(,)$go_y
+  axis
 }
 
 
 
 
+@(learn) player_turn {
+  $player_turn=@(ask)"PLEASE INPUT 1 FOR (X+3,Y) or 2 FOR (X,Y+3) or 3 FOR (x,y+4)"
+  @(if) $player_turn==1 {
+    $a=8 $b=2  
+    @(wait) 2
+    $a=8 $b=6}
+  @(else) {
+  @(if) $player_turn==2 {  
+    $a=5 $b=5 }}
+  @(else) {
+  @(if) $player_turn==3 {  
+    $a=5 $b=6 }}
+    @(else) {
+    player_turn }
+  @(go) 250@(,)210
+  @(direction) 0
+  $n=@(sqrt)(($a*$a) + ($b*$b))
+  $n1= $n*10
+  $c=@(arctan) ($a/$b)
+  @(turnright) $c
+  @(pendown)
+  @(forward) $n1
+  circle
+
+}
 
 
 
 @(learn) process{
-  $a=$x_input
-  $b=$y_input
-  $width=$a
-  $height=$b
-  $c=(($a * $a)+($b * $b))
-  $nerk=@(sqrt) $c
-  @(print) $nerk
+player_turn
+  @(go) 250@(,)210
+  @(direction) 0
+  $n=@(sqrt)(($a*$a) + ($b*$b))
+  $n1= $n*10
+  $c=@(arctan) ($a/$b)
+@(print) $n1
+  @(turnright) $c
+  @(print) $a
+  @(pendown)
+  @(forward) $n1
+  #circle
 
 }
 
-    #$x=$x+150
-  #	$y=$y+150
-  #go 10,20
 
-#$x_input=ask "Please input X coordinates"
-#$y_input=ask "Please input Y coordinates"
-#while ($x_input>3) and ($x_input<3){
-#  $x_input=ask "Please input X coordinates"
-}
-#while ($y_input<3) or ($y_input>4){
-#  $y_input=ask "Please input Y coordinates"
-}
+
+
 
 # GAME MANE COMMANDS
 game_grid
+game_ready
+player_turn
 
-#process
+
+
+
+
+
+
+
+
+
+@(learn) new {
+  $x0=@(getx) $y0=@(gety)
+  $go_x=$x0+30
+  @(go) $go_x@(,)$yo
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
