@@ -1,23 +1,26 @@
 kturtle-script-v1.0
 ###!
-# Please consider the cases when n>k. n<=0, k<=0
+# Please consider the cases when n>k. n<=0, k<=0			 fixed
 ###!
 
 ###!
-# Do not use fixed values assign them to the variables and use them, so that you will avoid mistakes and will make the sources more readable.
+# Do not use fixed values assign them to the variables and use them, so that you will avoid mistakes and will make the sources more readable.  
+#		Now fixed values are used only for co-ordinates managing 
 ###!
 
 ###!
-# Currently  you are just print "You lost" when the remaning count of the balls is 0, but you should add validation for the player to, what's if the player win (even it would never happen) ?
+# Currently  you are just print "You lost" when the remaning count of the balls is 0, but you should add validation for the player to, what's if the player win (even it would never happen) ? 
+#		I have added validations after user's moves, but player's victory would never happen 
 ###!
 
 ###!
-# What's f the number of the balls is big? The balls shouldn't be drown outside of the box. Please fix it
-# You can either make the size of the balls dynamic (depends on box size and balls count) or add limit for the params.
+# What's f the number of the balls is big? The balls shouldn't be drown outside of the box. Please fix it  			fixed
+# You can either make the size of the balls dynamic (depends on box size and balls count) or add limit for the params.  fixed
 ###!
 
 ###!
-# Try to fix the issue related to showing ask box 2 times. It's possible
+# Try to fix the issue related to showing ask box 2 times. It's possible 					
+#			 I think it's kria's bug. I have deleted last version, and wrote main game, special case, cases functions from beggining in other way. Every time I put "ask" funcion in "while", which is in other "while", the problem appears again
 ###!
 
 ###!
@@ -28,7 +31,7 @@ kturtle-script-v1.0
 # Thanks for the job.
 # Please fix the notes above and let me know. I will review and provide the final feedback after reviewing the sources deeper.
 ###!
-@(reset)
+@(reset) @(sh)
 @(learn) print_table{
   @(go) 200@(,)400
   @(pd)
@@ -41,158 +44,164 @@ kturtle-script-v1.0
 }
 print_table
 $name=@(ask) "Please insert your name"
-@(go) 220@(,)400
-@(print) $name
-@(go) 20@(,)400
-@(print) "Computer"
+@(go) 200@(,)400      @(fontsize) 20 @(print) $name
+@(go) 20@(,)400      @(print) "Computer" @(fontsize) 20
 #variables
 $x=18
-$y=190 @(go) $x@(,)$y
-$ball_count=@(ask) "input count of balls:"
-$max_step=@(ask) "Please insert maximal count of balls you can remove at 1 step"
+$y=190 
+$ball_count=0
+$max_step=0
+
 @(learn) circle_print $ball_count {
   @(repeat) $ball_count {  
     @(pc) 150@(,)0@(,)0
-    @(if) $x>380 {
+    @(if) $x>396 {
       $x=18
       $y=$y-18
     }
     @(go) $x@(,) $y
     circle
-    $x=$x+18
+    $x=$x+18 
      }
    @(pc) 0@(,)0@(,)0
 }
 # function circle will draw balls
 @(learn) circle{
-  @(sh)
   @(repeat) 36{
     @(fw) 1.5
     @(tl) 10
   }
- @(ss)
 }
-circle_print $ball_count
+
 # clear_circle will delete already drawn circles 
 @(learn) clear_circle $k {         
-@(sh)
+
   $x=$x-18
   @(go) $x@(,)$y
   @(pc) 255@(,)255@(,)255
   @(repeat) $k {
     @(if) $x<18 {
       $x=396
-      $y=$y+18
+      $y=$y+18 @(go) $x@(,)$y
       }
     circle
     $x=$x-18
     @(go) $x@(,)$y
   }
-  @(pc) 0@(,)0@(,)0
-@(ss)  
+  @(pc) 0@(,)0@(,)0  
 }
+#variables  for managing cursor coordinates  
+$main_x=$x   $first_x=20  $first_y=390  $second_x=220  $second_y=390
+$main_y=$y
+
 # function bellow will delete circles in the box, where are stored balls 
 @(learn) remove_in_main_box $remove_ball {
-  $x=$main_x $y=$main_y
+  @(go) $x@(,)$y  $x=$main_x $y=$main_y 
   clear_circle $remove_ball
   $main_x=@(getx)+18 $main_y=@(gety)
 }
+# prints balls in comp's box and delets the same count of balls in main box
 @(learn) comp_actions $remove_ball{
-  @(go) $first_x@(,)$first_y $x=$first_x $y=$first_y
-  circle_print $remove_ball
-  $first_y=$first_y-20
   remove_in_main_box $remove_ball
+  $x=$first_x  $y=$first_y     @(go) $first_x@(,)$first_y
+  circle_print $remove_ball 
+  $first_y=$first_y-20 
+  
 }
-
+#prints balls in player's box and delets the same count of balls in main box
 @(learn) user_actions $remove_ball {
-  @(go) $second_x@(,)$second_y $x=$second_x $y=$second_y
+  remove_in_main_box $remove_ball
+  @(go) $second_x@(,)$second_y    $x=$second_x    $y=$second_y
   circle_print $remove_ball
   $second_y=$second_y-20
-  remove_in_main_box $remove_ball
+  
 }
 #in special_case we consider the case when the player begins game first 
 @(learn) special_case {
-  @(while) @(true) {
-    $remove_ball=@(ask) "Your turn, enter a number from 1 to maximum count, that you entered"
-    @(if) ($remove_ball>0)@(and) ($remove_ball<($max_step+1)) {
+   @(while) @(true) {
+    $remove_ball=@(ask) "Please input the number of balls you want to pick,from 1 to "+ $max_step
+    @(if) $remove_ball>0 @(and) $remove_ball<=$max_step {
+      $ball_count=$ball_count-$remove_ball
       user_actions $remove_ball
-      @(wait) 0.5
-      $ball_count=$ball_count-$remove_ball
-      $temp=$temp-1
-      #here begin comp's part
-     @(if) ($ball_count <= ($max_step+2)){
-         $remove_ball=$ball_count-1
-        }
-     @(else) {
-         $remove_ball =($ball_count -$temp*($max_step+1))-1
-         }
-      
-      $ball_count=$ball_count-$remove_ball
+      @(if) $ball_count==1 {
+        @(go) 270@(,) 400 @(print) "YOU WIN!!"
+        @(exit)
+      }
+  #comp's turn
+      @(message) "My turn"   @(wait) 0.3 
+      $remove_ball=($max_step+1)-$remove_ball
+      $ball_count=$ball_count-$remove_ball      
       comp_actions $remove_ball
-      @(if) $ball_count==1{
-      #remove_in_main_box 1
-      @(go) 250@(,)400 @(sh)
-      @(print) "       You lost!!!!!"
-      @(exit)
+      @(if) $ball_count==1 {
+        @(go) 270@(,) 400 @(print) "YOU LOST!!"
+        @(exit)
       }
     }
     @(else) {
-     @(message) "You inserted illegal number, try again"
-    }  
+      @(message)"you entered not valid number of balls you want to pick"
+    }
   }
 }
-
+#all cases when computer begins game and wins
 @(learn) cases {
- @(while) @(true) {   
-      @(if) ($ball_count <= ($max_step+2)){
-        $remove_ball=$ball_count-1
-       }
-    @(else) {
-        $remove_ball =($ball_count-1-($temp*($max_step+1)))
-        }
-    $ball_count=$ball_count-$remove_ball
+  @(while) @(true) {
+    @(wait) 0.3
+    $remove_ball=@(mod) ($ball_count-1)@(,)($max_step+1)
     comp_actions $remove_ball
-    @(wait) 0.4
-    @(if) $ball_count ==1 {
-      #remove_in_main_box 1
-      @(go) 250@(,)400
-      @(print) "      You lost!!!!!" @(sh)
-      @(exit)
+    $ball_count=$ball_count-$remove_ball 
+    @(if) $ball_count==1 {
+        @(go) 270@(,) 400 @(print) "YOU LOST!!"
+        @(exit)
       }
-      @(while) @(true) {
-          $remove_ball=@(ask) "your turn, enter a number from 1 to max_step"
-       @(if) $remove_ball>0 @(and) $remove_ball<=$max_step {
+    #user's part
+    @(while) @(true) {
+      $remove_ball=@(ask) "Please input the number of balls you want to pick,from 1 to "+ $max_step
+        @(if) $remove_ball>0 @(and) $remove_ball<=$max_step {
+          $ball_count=$ball_count-$remove_ball
           user_actions $remove_ball
-          $ball_count=$ball_count-$remove_ball    
-          $temp=$temp-1
-          @(break)
+        @(if) $ball_count==1 {
+              @(go) 270@(,) 400 @(print) "YOU WIN!!"
+              @(exit)
+              }
+        @(break)
+           }   
+      @(else) {
+          @(message)"you entered not valid number of balls you want to pick"
           }
-       @(else) {
-      @(message) "Sorry but you inserted illegal number or symbol, try again and be attentive next time "
-     }
-    }  
- }
-}
-#temp and reminder are algorithm's variables , others are for managing cursor coordinates  
-$main_x=$x $first_x=20 $first_y=380 $second_x=220 $second_y=380
-$main_y=$y
-$comp_step=0
-$temp=($ball_count-1)/($max_step+1)
-@(if) $temp<@(round) $temp {
-    $temp=@(round) $temp-1
-  }
-@(else) {
-  $temp=@(round) $temp 
-  }
-$reminder=($ball_count-($temp+1)*$max_step)
-$remove_ball=0
-#main function 
-@(learn) main_game {
-  @(if) $reminder == 1{
-    special_case
-    }
-  @(else){
-      cases
       }
+  }
+}
+# remove_ball is a variable, which use comp and player to input number of balls, that will be deleted at one move
+$remove_ball=0
+
+@(learn) main_game {  
+  @(while) @(true) {
+    $ball_count=@(ask) "please insert count of balls from 1 to 200 "
+    @(if) $ball_count >= 0 @(and) $ball_count < 200 {
+      @(while) @(true) {      
+          $max_step=@(ask) "please insert maximum count of balls you can pick at 1 step "
+          @(if) $max_step>0 @(and) $max_step<$ball_count {
+              $remainder=@(mod) $ball_count@(,) ($max_step+1)
+              @(if) $remainder == 1 {
+                circle_print $ball_count
+                $main_x=$x $main_y=$y
+                special_case
+                }
+              @(else) {
+                circle_print $ball_count
+                $main_x=$x $main_y=$y
+              @(wait) 0.3 @(message) "Let's begin. My turn"
+                cases
+                }
+          }
+          @(else) {
+            @(message) "please insert valid number " 
+          }
+      }
+    }
+    @(else) {
+      @(message) "you inserted not valid number or symbol, be attentive"
+    }
+  }
 }
 main_game
