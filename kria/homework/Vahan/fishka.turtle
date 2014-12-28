@@ -1,6 +1,15 @@
 kturtle-script-v1.0
+#Two players play the following game.
+#Тhere is a counter on coordinate surface.At the start of the game it is located at (1,1) point.The players play by turns.The move is: the player move the counter from (x,y) to one this coordinates: (x+2,y+3), (x+3,y),v(x-1,y+4). The game ends when the distance between player`s position and (0,0) exceeds 12.The winner is who did the last move.
+#We must write such algorithm,that computer always wins.
+
+#The variables iniatialized to the start point coordinates.
+$x = 1
+$y = 1
+
 @(learn) set_canvas {
   @(reset)
+  @(cc) 255@(,)255@(,)0
   @(direction) 0
   @(sh)
   @(pc) 0@(,)0@(,)255
@@ -9,6 +18,7 @@ kturtle-script-v1.0
   @(tr) 90
   @(fw) 400  
 }
+#Draws the coordinate system,but only partially,because that's enough for our game.
 @(learn) draw_dekart {
   @(while) @(getx)>=0 {
     @(direction) 0
@@ -24,104 +34,187 @@ kturtle-script-v1.0
     @(direction) 90
     @(fw) 2
   }
+  @(direction) 0
 }
-
-
+#Converts my coordinates system absciss to the real size.
 @(learn) abs $x {
   $tmp = $x*20
   @(return) $tmp 
 }
-
+#Converts my coordinates system ordinate to the real size.
 @(learn) ord $y {
   $tmp = 400 - 20*$y  
   @(return) $tmp
 }
+#Calculates the distance between (x,y) and (0,0)
 @(learn) distance $x@(,) $y { 
 @(return) @(sqrt) ( ($x*$x) + ($y*$y) )
 }
+#Prints (x,y) coordinates and the distance from (0,0)
 @(learn) print_coord $x@(,) $y {
   @(direction) 0
   @(print) "(" + $x + "," + $y + ")" + "  " + distance $x@(,) $y  
 }
-
+#Draws the line connecting the points given as arguments
+@(learn) draw_path $x_1@(,) $y_1@(,) $x_2@(,) $y_2 {
+  $leg_1 = $x_2 - $x_1 # the leg of the right treangle
+  $leg_2 = $y_2 - $y_1 #the second leg
+  $hypotenuse = @(sqrt) ($leg_1*$leg_1 + $leg_2*$leg_2)#this variable is the distance between to points
+  $tg = $leg_2 / $leg_1#the tangens of the corner we need to move from point to point
+  $degree = @(arctan) $tg#the corner's degree
+  @(go) (abs $x_1)@(,) ord ($y_1) 
+  @(if) $degree<0 {
+    @(tl) (90+$degree)
+  }
+  @(else) {
+  @(tl) (270+$degree)
+  }
+  @(fw) $hypotenuse*20
+  }
+#The first way you can move
 @(learn) strategy_1 $x@(,) $y {
   $x = $x + 2
   $y = $y + 3
   $x_temp = abs ($x+2)
   $y_temp = ord ($y+3)
   @(go) $x_temp@(,) $y_temp
+  draw_path $x@(,) $y@(,) ($x+2)@(,) ($y+3)
+  
   @(pw) 2
   @(fw) 0
 }
-
+#The second way you can move
 @(learn) strategy_2 $x@(,) $y {
   $x = $x +3
   $x_temp = abs ($x+3)
   $y_temp = ord $y
   @(go) $x_temp@(,) $y_temp
+  draw_path $x@(,) $y@(,) ($x+3)@(,) $y
   @(pw) 2
   @(fw) 0
 }
-
+#The third way you can move
 @(learn) strategy_3 $x@(,) $y {
   $x = $x - 1
   $y = $y + 4
   $x_temp = abs ($x-1)
   $y_temp = ord ($y+4)
   @(go) $x_temp@(,) $y_temp
+  draw_path $x@(,) $y@(,) ($x-1)@(,) ($y+4)
   @(pw) 2
   @(fw) 0
 }
+#returns a 'true' value if the count distance from (0,0) exceeds 12 
+@(learn) is_reached $x@(,) $y {
+  @(if) (distance $x@(,) $y) > 12 {
+  @(return) @(true)
+  }
+}
+#Returns 'true' if the next player's move whatever he chooses is not the last.
+@(learn) is_far $x@(,) $y {
+  @(if) ( (distance ($x+2)@(,) ($y+3)) <  12 ) @(and) ( (distance ($x+3)@(,) $y) < 12 ) @(and) ( (distance ($x-1)@(,) ($y+4)) < 12 )     {
+    @(return) @(true)  
+  }
+}
+#Algorithm that find out what move to do,but it only solves the problem by to steps.In our game this is enough besides the first step.
+@(learn) smart_strategy $x@(,) $y {
+  @(if) is_far ($x+2)@(,) ($y+3) {
+    strategy_1 $x@(,) $y
+  }
+  @(else) @(if) is_far ($x+3)@(,) $y {
+    strategy_2 $x@(,) $y
+  }
+  @(else) @(if) is_far ($x-1)@(,) ($y+4) {
+    strategy_3 $x@(,) $y
+  }
+  @(else) @(if) is_reached ($x+2)@(,) ($y+3) {
+    strategy_1 $x@(,) $y
+  }
+  @(else) @(if) is_reached ($x+3)@(,) $y {
+    strategy_2 $x@(,) $y
+  }
+  @(else) @(if) is_reached ($x-1)@(,) ($y+4) {
+    strategy_3 $x@(,) $y
+  }
+}
 
+#Starts the game whith dialog box,saying that the computer plays the first.We need this because if the computer plays the second,there is one algorithm the user can win
 @(learn) start {
+  @(go) (abs $x)@(,) (ord $y)
+  print_coord $x@(,) $y
+  @(pw) 2
+  @(fw) 0
+  @(message) "Sorry,but I must play the first."
+  @(pc) 255@(,)0@(,)0
+  strategy_3 $x@(,) $y
+  print_coord $x@(,) $y
   @(message) "Choose the path: 1-change coordinates (x+2, y+3); 2-change coordinates (x+3, y); 3-change coordinates (x-1, y+4)"
   @(wait) 0.4
  
-  
+  @(while) @(true) {
     $case = @(ask) "Choose the path from 1 to 3"
+
     @(if) $case == 1 {
+      @(pc) 0@(,)255@(,)0
       strategy_1 $x@(,) $y
       print_coord $x@(,) $y  
-        @(wait) 0.4
-        @(message) "as follows.."
-        strategy_2 $x@(,) $y
+      @(if) is_reached $x@(,) $y {
+        @(message) "You win!!!"
+        @(break)
+      }
+      @(wait) 0.4
+      @(message) "as follows.."
+      @(pc) 255@(,)0@(,)0
+      smart_strategy $x@(,) $y
       print_coord $x@(,) $y
+      @(if) is_reached $x@(,) $y {
+        @(message) "I win!!!"
+        @(break)
+      }
     }
 
-    @(if) $case == 2 {
+    @(else) @(if) $case == 2 {
+      @(pc) 0@(,)255@(,)0
       strategy_2 $x@(,) $y
       print_coord $x@(,) $y
-       @(wait) 0.4
-        @(message) "as follows.."
-        strategy_1 $x@(,) $y
+      @(if) is_reached $x@(,) $y {
+        @(message) "You win!!!"
+        @(break)
+      }
+      @(wait) 0.4
+      @(message) "as follows.."
+      @(pc) 255@(,)0@(,)0
+      smart_strategy $x@(,) $y
       print_coord $x@(,) $y
+      @(if) is_reached $x@(,) $y {
+        @(message) "I win!!!"
+        @(break)
+      }
     }
-    @(if) $case == 3 {
-        strategy_3 $x@(,) $y
+    @(else) @(if) $case == 3 {
+      @(pc) 0@(,)255@(,)0
+      strategy_3 $x@(,) $y
       print_coord $x@(,) $y
-        @(wait) 0.4
-        @(message) "as follows.."
-        strategy_2 $x@(,) $y
+      @(if) is_reached $x@(,) $y {
+        @(message) "You win!!!"
+        @(break)
+      }
+      @(wait) 0.4
+      @(message) "as follows.."
+      @(pc) 255@(,)0@(,)0
+      smart_strategy $x@(,) $y
       print_coord $x@(,) $y
+      @(if) is_reached $x@(,) $y {
+        @(message) "I win!!!"
+        @(break)
+      }
     }
-    
+  }
 }
-@(reset)
-$x=1
-$y=1 
-set_canvas
-draw_dekart
-start
-#strategy_1 $x, $y
-#print_coord $x, $y
-
-
-
-
-
-
-
-
-
-
-
+@(learn) main {
+  @(reset)
+  set_canvas
+  draw_dekart
+  start  
+}
+main
