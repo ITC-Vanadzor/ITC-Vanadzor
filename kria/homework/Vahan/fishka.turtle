@@ -20,18 +20,21 @@ $y = 1
 }
 #Draws the coordinate system,but only partially,because that's enough for our game.
 @(learn) draw_dekart {
+  @(direction) 0
   @(while) @(getx)>=0 {
-    @(direction) 0
-    @(print) @(getx)/20
     @(fw) 2
-    @(go) @(getx)-20@(,)400
+    @(go) (@(getx)-10)@(,)400
+      @(print) (@(getx)+10)/20
+    @(go) (@(getx)-10)@(,) 400
+    
   }
-  @(direction) 90
+ @(go) 0@(,) 400
   @(while) @(gety)>0 {
-    @(go) 0@(,) @(gety)-20
+    @(go) -20@(,) @(gety)-30
     @(direction) 0
-    @(print) 20-@(gety)/20
+    @(print) 20-(@(gety)+10)/20
     @(direction) 90
+    @(go) 0@(,) (@(gety)+10)
     @(fw) 2
   }
   @(direction) 0
@@ -217,4 +220,5 @@ $y = 1
   draw_dekart
   start  
 }
+
 main
