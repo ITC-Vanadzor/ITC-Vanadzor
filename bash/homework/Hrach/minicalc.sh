@@ -6,6 +6,12 @@ then
 	exit 0
 fi
 
+if [ $2 = "/" ] && [ $3 = 0 ]
+then
+	echo "integer division or modulo by zero"
+	exit 0
+fi
+
 int='^[0-9]+$'
 if ! [[ $1 =~ $int ]]
 then
