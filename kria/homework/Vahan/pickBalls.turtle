@@ -8,10 +8,6 @@ kturtle-script-v1.0
 ###!
 
 ###!
-# Add explanation of the game in the beginning
-###!
-
-###!
 # When it's player turn do not show the mesage box 2 times, you can notify it using only ask
 ###!
 
@@ -40,96 +36,127 @@ kturtle-script-v1.0
 ###!
 
 ###!
-# Please do the notes above and let me know. I will review the sources deeper and provide you my final feedback :)
-# Good job, thanks for it
+# Please do thanks for it
 ###!
-@(reset)
-$x=24
-$y=389
-$x_1=24
-$y_1=169
-$x_2=224
-$y_2=169
 
+#Two players play this game.There is given аmount of balls in the box and the maximum number of balls you can pick in your turn.You play with computer by turn.In your turn you must pick balls (maximum number you can pick is given).Those player lose in whose turn stays one ball to pick.
+#We must create such algorithm that always win the computer.
+
+#Global variables
+@(reset)
+$x = 0
+$y = 0
+$x_1 = 0
+$y_1 = 0
+$x_2 = 0
+$y_2 = 0
+
+$balls = 0
+$max_pick = 0
+$current_balls = 0
+
+$canvas_height = 400
+$canvas_width = 400
+$box_surface = $canvas_height / 2 * $canvas_width
+$diameter = 0
+$my_pick = 0
+$small_diameter = 0
+
+
+#Draw canvas and print paramateres of the game
 @(learn) draw_canvas {
   @(canvascolor) 0@(,)255@(,)255
   @(gox) 0
-   @(turnright) 90
+  @(turnright) 90
   @(forward) 400
   @(center)
   @(turnleft) 90
   @(forward) 200
-  #gox 0
-  #print "player"
   @(gox) 200
   @(print) "computer"
   @(go) 0@(,) 180
   @(turnright) 90
   @(forward) 400
-
 }
 
-@(learn) circle {
+#draws the ball
+@(learn) circle $d {
+  $step=@(pi)*$d/36
   @(repeat) 36 {
-    @(forward) 2
+    @(forward) $step
     @(turnleft) 10
   }
 }
+
+#Draws quantity of balls given as argument
 @(learn) print_circles $balls {
+  $x = 0
+  $y = 400 - $diameter / 2
   @(repeat) $balls {
-    @(if) $x>400 {
-      $x=24
-      $y=$y-23.5
+      @(if) $x > (400 - $diameter) {
+        $x = 0
+        $y = $y - $diameter
+      }
+      $x = $x + $diameter
+    @(go) $x@(,) $y
+      circle $diameter
     }
-  @(go) $x@(,) $y
-  circle  
-  $x=$x+23.5
-  }
-$x=$x-23.5
 }
 
+#Draws the balls picked by the player 
 @(learn) draw_ball_player $count {
   @(pencolor) 0@(,)0@(,)0
   @(repeat) $count {
-    @(if) $x_1>199 {
-      $x_1=24
-      $y_1=$y_1-23.5
+    @(if) $x_1 > 200 {
+      $x_1 = $small_diameter
+      $y_1 = $y_1 - $small_diameter
     }
     @(go) $x_1@(,) $y_1
-    circle
-    $x_1=$x_1 + 25
+    circle $small_diameter
+    $x_1 = $x_1 + $small_diameter
   }
 }
 
-
+#Draws the balls picked by the computer
 @(learn) draw_ball_comp $count{
   @(pencolor) 0@(,)0@(,)0
   @(repeat) $count {
-    @(if) $x_2>400 {
-      $x_2=224
-      $y_2=$y_2-23.5
+    @(if) $x_2 > 400 {
+      $x_2 = 200 + $small_diameter
+      $y_2 = $y_2 - $small_diameter
     }
     @(go) $x_2@(,) $y_2
-    circle
-    $x_2=$x_2 + 25
+    circle $small_diameter
+    $x_2 = $x_2 + $small_diameter
   }
 }
 
+#Round down
+@(learn) round_down $a {
+  $e = $a
+  $a = @(round) $a
+  @(if) $a > $e {
+    @(return) ($a - 1)
+  }   
+  @(return) $a
+}
 
+#Delete number of balls given as argument 
 @(learn) delete_balls $d {
   @(pc) 0@(,)255@(,)255
   @(repeat) $d{
-  @(if) $x<24 {
-  $x=400
-  $y=$y+23.5
+    @(if) $x < $diameter / 2 {
+      $v = round_down (400 / $diameter)
+      $x = $v * $diameter
+      $y = $y + $diameter
+      }
+      @(go) $x@(,)$y
+      circle $diameter
+      $x = $x - $diameter
   }
-  @(go) $x@(,)$y
-  @(wait) 0.4
-  circle
-  $x=$x-23.5
-  
-  }  
 }
+
+#This fuction returns the number of balls to pick at the start of the game in order to win the game.The first argument is the number of balls,the second is the maximum number of balls you can pick.
 @(learn) discover_comp_pick $n@(,) $k {
   $m = ($n-1) / ($k+1)
   $var = @(round)($m)
@@ -143,98 +170,85 @@ $x=$x-23.5
   @(return) $pick
 }
 
-
-
-#The main function
-@(learn) play_game {
-  @(direction) 0
-  
+#Ger input value and validate that
+@(learn) get_input_value $message@(,) $min@(,) $max {
   @(while) @(true) {
-      $balls=@(ask) "Enter the number of balls:"
-      $max_pick=@(ask) "Enter the maximum number of balls you can pick"
-    @(if) (($balls<0) @(or) ($balls>136)) @(or) (($max_pick>=$balls) @(or)   ($max_pick<=0)) {
-      @(wait) 0.5
-      @(message) "please enter valid number!"
-      @(wait) 0.5  
+    $i = @(ask) $message
+    @(if) ($i >= $min @(and) $i <= $max) {
+      @(return) $i
+    } @(else) {
+      @(message) "invalid input!try again"
     }
-    @(else) { @(break) }
   }
+}
+
+#Init variables
+@(learn) set_params {
+  $balls = get_input_value "Enter the number of balls:"@(,) 1@(,) (200 * 400)
+  $diameter = (@(sqrt) $box_surface / $balls) * 0.8
+  $small_diameter = $diameter / 2
+  $x_1 = $small_diameter
+  $y_1 = 180 - $small_diameter / 2
+  $x_2 = $small_diameter + 200
+  $y_2 = 180 - $small_diameter / 2
+  $max_pick = get_input_value "Enter the maximum number of balls you can pick"@(,) 1@(,) $balls
+}
+
+@(learn) print_params {
   @(go) 0@(,)180
   @(print) "BALLS = " +  $balls
   @(go) 200@(,)180
   @(print) "max pick = " + $max_pick
-  $modul = @(mod) $balls@(,) ($max_pick+1)
-  print_circles $balls
-  @(wait) 0.4
   $player_name=@(ask) "Enter the name of the player:"
   @(go) 0@(,) 0
   @(print) $player_name
+}
+
+@(learn) start_game $comp_pick {
+  @(while) $current_balls > 1 {
+    @(if) $comp_pick != 0 { 
+       @(message) "my turn"
+       @(wait) 0.5
+      delete_balls $comp_pick
+      draw_ball_comp $comp_pick
+    }
+    $current_balls = $current_balls - $comp_pick
+    @(if) $current_balls <= 1 {
+      @(return) @(true)
+    }
+    $my_pick = get_input_value "Enter the number of balls you want to pick"@(,) 1@(,) $max_pick
+    delete_balls  $my_pick
+    draw_ball_player $my_pick
+    $current_balls = $current_balls - $my_pick
+    @(if) $current_balls <= 1 {
+      @(return) @(false)
+    }
+    $comp_pick = $max_pick + 1 - $my_pick
+  }
+}
+#The main function
+@(learn) play_game {
+  
+  draw_canvas
+  @(direction) 0
+  set_params
+  print_params
+  print_circles $balls
   @(message) "Let's start the game"
-  @(wait) 0.4
-  $current_balls=$balls
-  
-    @(if) $modul==1 {
-      @(message) "Start the game please."
-      @(while) $current_balls > 1 {
-          @(wait) 0.5
-      @(while) @(true) {
-          $my_pick = @(ask) "Enter the number of balls you want to pick"
-          @(if) ($my_pick > $max_pick) @(or) ($my_pick <= 0) {
-            @(wait) 0.5
-            @(message) "invalid input!try again"
-          }
-          @(else) { @(break) }
-      }
-        @(wait) 0.5
-          delete_balls  $my_pick
-          draw_ball_player $my_pick
-          $current_balls=$current_balls - $my_pick
-          $comp_pick=$max_pick+1-$my_pick
-          @(wait) 0.5
-        @(message) "my turn"
-        @(wait) 0.5
-        delete_balls $comp_pick
-        draw_ball_comp $comp_pick
-        $current_balls=$current_balls -$comp_pick
-      }
-    }
-    @(else) {
-      $comp_pick = discover_comp_pick $balls@(,) $max_pick
-      @(while) $current_balls > 1 { 
-        @(message) "my turn"
-        @(wait) 0.5
-        delete_balls $comp_pick
-        draw_ball_comp $comp_pick
-        $current_balls=$current_balls -$comp_pick
-        @(if) $current_balls==1 { @(break) }
-        @(while) @(true) {
-          $my_pick = @(ask) "Enter the number of balls you want to pick"
-          @(if) ($my_pick > $max_pick) @(or) ($my_pick <= 0) {
-            @(wait) 0.5
-            @(message) "invalid input!try again"
-          } @(else) { 
-              @(break) 
-         }
-      }
-        @(wait) 0.5
-        delete_balls  $my_pick
-        draw_ball_player $my_pick
-        @(wait) 0.5
-        $current_balls=$current_balls - $my_pick
-        $comp_pick=$max_pick+1-$my_pick
-      }
-    }
-  
-  @(message) "You lose!!!"
+  $modul = @(mod) $balls@(,) ($max_pick+1)
+  $current_balls = $balls
+  @(if) $modul == 1 {
+    @(message) "Start the game please."
+    $comp_pick = 0
+  } @(else) {
+    $comp_pick = discover_comp_pick $balls@(,) $max_pick
+  }
+  @(if) start_game $comp_pick {
+      @(message) "You lose!!!"
+  } @(else) {
+    @(message) "You won my algorithm is wrong!!!"
+  }
   @(exit)
 }
 
-draw_canvas
 play_game
-
-
-
-
-
-
-
