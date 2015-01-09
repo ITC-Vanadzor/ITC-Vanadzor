@@ -4,7 +4,8 @@ kturtle-script-v1.0
 @(canvassize) 300@(,)300
 @(canvascolor) 0@(,)250@(,)255
 @(pencolor) 0@(,)0@(,)0
-@(learn) drow_coordinate_system {
+
+@(learn) DrowCoordinateSystem {
     @(go) 0@(,)250
     @(tr) 90
     @(fw) 300
@@ -24,7 +25,8 @@ kturtle-script-v1.0
     @(tl) 150
     @(go) 15@(,)250 
 }
-@(learn) draw_coordinate_numbers {
+
+@(learn) DrawCoordinateNumbers {
     @(go) 2@(,)290
     @(fw) 10
     @(for) $num=-4 @(to) +20 @(step) 4 {
@@ -45,12 +47,14 @@ kturtle-script-v1.0
         @(print) $num
     }   
 }
+
 @(learn) Circle $a{
     @(repeat) 36{
         @(fw) $a
          @(tr) 10
     }
 }
+
 @(learn) OnlyX $a{
    $x=$x+40
    @(repeat) 8{
@@ -147,14 +151,22 @@ kturtle-script-v1.0
     @(go) 15@(,)250
     Circle 0.3
     @(pc) 255@(,)0@(,)$a
-    @(dir) @(arctan) ($x1/$y1) 
+    @(if) $y1==0{
+        @(dir) 90
+         }
+    @(else){
+        @(dir) @(arctan) ($x1/$y1)
+    }
     $mm=($x1*$x1+$y1*$y1)
     $m=(@(sqrt) $mm)
     @(fw) $m
-    @(print) $m
+    @(print) $m/10
 }
-drow_coordinate_system 
-draw_coordinate_numbers
+
+#main code
+@(message) "For the beginning the game enter your name and who begins the game. During the game each of the players has the opportunity to move three side((x,y+4),(x+4,y),(x+4,y+4)). The game will be over at that time when the  distance from 0 to fishka's will be more than 11.  Success to everyone.   
+DrowCoordinateSystem
+DrawCoordinateNumbers
 @(go) 15@(,)250
 $x=14
 $y=290
@@ -164,9 +176,9 @@ $y1=-40
 @(pd) @(pc) 0@(,)0@(,)0
 Circle 0.3 
 $name=@(ask) "INPUT YOUR NAME"        
-$player=@(ask) "Who play first`										1)Computer			2)"+$name
+$player=@(ask) "Who play first										1)Computer					2)"+$name
 @(while) $player!=1 @(and) $player!=2{
-    $player=@(ask) "Set 1 or 2			1)Computer					2)"+$name
+    $player=@(ask) "Set 1 or 2										1)Computer					2)"+$name
 }
 @(if) $player==1{
   XAndY 255
@@ -190,7 +202,7 @@ $player=@(ask) "Who play first`										1)Computer			2)"+$name
         OnlyY 255
         SelectVariant
         XAndY 255
-        Length 255
+       Length 255
         Win 1
       }
       @(else){
@@ -231,31 +243,6 @@ $player=@(ask) "Who play first`										1)Computer			2)"+$name
   }
 }
 
-#{
- # $k1=RandomStep3
-  #$k=SelectVariant
-  #if $k1==1{
-#		if $k==1{
-#			OnlyX
-#			SelectVariant
-#			XAndY
-#			Win
-#		}else{
-#			if $k==2{
-#				OnlyX
-#				SelectVariant
-#				XAndY
-#				WIn
-#			}else{
-#				if $k==3{
-#					RandomStep3
-#					SelectVariant
-#					Win
-#				}
-#			}
-#		}
-#	}
-#}
 
 
 
