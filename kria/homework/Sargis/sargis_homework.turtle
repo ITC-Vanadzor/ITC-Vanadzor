@@ -43,78 +43,127 @@ kturtle-script-v1.0
   @(bw) 200
 }
 print_table
+$table_height=400 $table_width=400
 $name=@(ask) "Please insert your name"
-@(go) 200@(,)400      @(fontsize) 20 @(print) $name
-@(go) 20@(,)400      @(print) "Computer" @(fontsize) 20
+@(go) 200@(,)400      @(fontsize) 20 @(print) $name 
+@(go) 20@(,)400      @(print) "Computer" @(fontsize) 20 
 #variables
-$x=18
-$y=190 
+$ball_size=0
+$player_ball_size=0
+$x=0
+$y= 0
 $ball_count=0
 $max_step=0
+#variables  for managing player's coordinates  
 
+$first_x=0 $first_y=0 $second_x=0 $second_y=0 
+#set ball size which depends on ball count and set coordinates 
+@(learn) set_ball_size{
+  $ball_size=(@(sqrt)($table_height /2 * $table_width)/$ball_count)*0.75
+  $player_ball_size = ($ball_size *0.7)
+  $x = $ball_size
+  $y = ($table_height / 2)-($ball_size / 2)
+  $first_x = $player_ball_size 
+  $first_y = $table_height - ($player_ball_size/2)
+  $second_x = $table_width/2 + $player_ball_size
+  $second_y =$table_height - ($player_ball_size/2)
+}
 @(learn) circle_print $ball_count {
   @(repeat) $ball_count {  
     @(pc) 150@(,)0@(,)0
-    @(if) $x>396 {
-      $x=18
-      $y=$y-18
+    @(if) $x>$table_width {
+      $x=$ball_size
+      $y=$y-$ball_size
     }
     @(go) $x@(,) $y
-    circle
-    $x=$x+18 
+    circle $ball_size
+    $x=$x+$ball_size 
      }
    @(pc) 0@(,)0@(,)0
 }
 # function circle will draw balls
-@(learn) circle{
+@(learn) circle $size{
+  $move = @(pi) * $size / 36
   @(repeat) 36{
-    @(fw) 1.5
+    @(fw) $move
     @(tl) 10
   }
 }
+#draw balls in comp's box
+@(learn) circle_print_for_comp $ball_count {
+  @(repeat) $ball_count {  
+    @(pc) 150@(,)0@(,)0
+    @(if) $first_x > $table_width/2 {
+      $first_x  = $player_ball_size
+      $first_y = $first_y-$player_ball_size
+    }
+    @(go) $first_x@(,) $first_y
+    circle $player_ball_size
+    $first_x = $first_x + $player_ball_size 
+     }
+   @(pc) 0@(,)0@(,)0
+}
+#draw balls in player's box
+@(learn) circle_print_for_player $ball_count {
+  @(repeat) $ball_count {  
+    @(pc) 150@(,)0@(,)0 
+    @(if) $second_x > ($table_width-$player_ball_size/2) {
+      $second_x = ($table_width/2) + $player_ball_size
+      $second_y = $second_y-$player_ball_size
+    }
+    @(go) $second_x@(,) $second_y
+    circle $player_ball_size
+    $second_x = $second_x+$player_ball_size 
+     }
+   @(pc) 0@(,)0@(,)0
+}
 
+@(learn) round_module $number {
+  $l = $number 
+  $number = @(round) $number 
+  @(if) $number > $l {
+    @(return) $number-1 
+  }
+  @(else) {
+    @(return) $number
+  } 
+}
 # clear_circle will delete already drawn circles 
 @(learn) clear_circle $k {         
-
-  $x=$x-18
+  $x=$x-$ball_size
   @(go) $x@(,)$y
   @(pc) 255@(,)255@(,)255
   @(repeat) $k {
-    @(if) $x<18 {
-      $x=396
-      $y=$y+18 @(go) $x@(,)$y
+    @(if) $x < $ball_size/2 {
+      $temp =  $table_width / $ball_size
+      $m = round_module $temp
+      $x = $m * $ball_size
+      $y = $y+$ball_size  @(go) $x@(,)$y
       }
-    circle
-    $x=$x-18
+    circle $ball_size
+    $x=$x-$ball_size
     @(go) $x@(,)$y
   }
   @(pc) 0@(,)0@(,)0  
 }
-#variables  for managing cursor coordinates  
-$main_x=$x   $first_x=20  $first_y=390  $second_x=220  $second_y=390
-$main_y=$y
 
 # function bellow will delete circles in the box, where are stored balls 
 @(learn) remove_in_main_box $remove_ball {
-  @(go) $x@(,)$y  $x=$main_x $y=$main_y 
+  @(go) $x@(,)$y   
   clear_circle $remove_ball
-  $main_x=@(getx)+18 $main_y=@(gety)
+  $x=@(getx)+$ball_size  $y=@(gety)
 }
 # prints balls in comp's box and delets the same count of balls in main box
 @(learn) comp_actions $remove_ball{
   remove_in_main_box $remove_ball
-  $x=$first_x  $y=$first_y     @(go) $first_x@(,)$first_y
-  circle_print $remove_ball 
-  $first_y=$first_y-20 
-  
+  circle_print_for_comp $remove_ball 
+    
 }
-#prints balls in player's box and delets the same count of balls in main box
+#prints balls in player's box and deletes the same count of balls in main box
 @(learn) user_actions $remove_ball {
   remove_in_main_box $remove_ball
-  @(go) $second_x@(,)$second_y    $x=$second_x    $y=$second_y
-  circle_print $remove_ball
-  $second_y=$second_y-20
-  
+  circle_print_for_player $remove_ball
+    
 }
 #in special_case we consider the case when the player begins game first 
 @(learn) special_case {
@@ -178,7 +227,8 @@ $remove_ball=0
   @(while) @(true) {
     $ball_count=@(ask) "please insert count of balls from 1 to 200 "
     @(if) $ball_count >= 0 @(and) $ball_count < 200 {
-      @(while) @(true) {      
+      @(while) @(true) {  
+          set_ball_size      
           $max_step=@(ask) "please insert maximum count of balls you can pick at 1 step "
           @(if) $max_step>0 @(and) $max_step<$ball_count {
               $remainder=@(mod) $ball_count@(,) ($max_step+1)
