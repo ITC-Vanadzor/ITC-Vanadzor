@@ -90,19 +90,19 @@ hide_cards(){
 }
 #This function doesn't work!!!
 move_card(){
-    name_1=$1[@]
-    name_2=$2[@]
-    a=("${!name_1}")
-    b=("${!name_2}")
-    b=("${b[@]}" "${a[${#a[@]}-1]}")
-    unset a[${#a[@]}-1]
+    declare -a src=("${!1}")
+    declare -a dest=("${!2}")
+    count=${#src[@]}
+    dest=("${dest[@]}" "${src[$count - 1]}")
+    unset src[$count-1]
+    
 }
 
 initialize_cards
 pass_cards
 hide_cards
 print_table
-move_card column_1 column_2
+move_card column_1[@] column_2[@]
 #print_table
 #echo ${column_1[@]:(-1)}
 #print_question() {

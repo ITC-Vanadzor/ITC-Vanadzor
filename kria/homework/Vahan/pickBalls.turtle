@@ -131,7 +131,7 @@ $small_diameter = 0
   }
 }
 
-#Round down
+#Round down the given argument 
 @(learn) round_down $a {
   $e = $a
   $a = @(round) $a
@@ -170,7 +170,7 @@ $small_diameter = 0
   @(return) $pick
 }
 
-#Ger input value and validate that
+#Get input value and validate that
 @(learn) get_input_value $message@(,) $min@(,) $max {
   @(while) @(true) {
     $i = @(ask) $message
@@ -182,11 +182,11 @@ $small_diameter = 0
   }
 }
 
-#Init variables
+#Initialize variables
 @(learn) set_params {
-  $balls = get_input_value "Enter the number of balls:"@(,) 1@(,) (200 * 400)
-  $diameter = (@(sqrt) $box_surface / $balls) * 0.8
-  $small_diameter = $diameter / 2
+  $balls = get_input_value "Enter the number of balls:"@(,) 1@(,) $box_surface #this is the number of pixels of box
+  $diameter = (@(sqrt) $box_surface / $balls) * 0.8 #diameter of the ball.It changes dinamically with the quantity of balls.
+  $small_diameter = $diameter / 2 #diameter of the ball drawn on the space of players
   $x_1 = $small_diameter
   $y_1 = 180 - $small_diameter / 2
   $x_2 = $small_diameter + 200
@@ -194,6 +194,7 @@ $small_diameter = 0
   $max_pick = get_input_value "Enter the maximum number of balls you can pick"@(,) 1@(,) $balls
 }
 
+#Print paramateres set at the game start.
 @(learn) print_params {
   @(go) 0@(,)180
   @(print) "BALLS = " +  $balls
@@ -204,10 +205,11 @@ $small_diameter = 0
   @(print) $player_name
 }
 
+#The function gets argument the number of balls the computer must pick.If the argument is 0,it means that player must start,if not computer starts the game and pick balls calculated in another function. 
 @(learn) start_game $comp_pick {
   @(while) $current_balls > 1 {
     @(if) $comp_pick != 0 { 
-       @(message) "my turn"
+      @(message) "my turn"
        @(wait) 0.5
       delete_balls $comp_pick
       draw_ball_comp $comp_pick
@@ -231,6 +233,7 @@ $small_diameter = 0
   
   draw_canvas
   @(direction) 0
+  @(sh)
   set_params
   print_params
   print_circles $balls
