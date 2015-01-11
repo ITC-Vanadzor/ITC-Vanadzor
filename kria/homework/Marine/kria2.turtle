@@ -1,4 +1,25 @@
 kturtle-script-v1.0
+###!
+# All functions should be commented
+###!
+
+###!
+# what will happen if n=121 and k=30 (and other cases like this) ??? :)
+# I would prefer having dynamic size of balls anyway :)
+###!
+
+###!
+# Please add the explanation of the game in the beginning.
+###!
+
+###!
+# Do not use fixed values assign them to some meaningful varaibles in order to make the source more readable.
+###!
+
+###!
+# Please fix the notes above and I will review the sources deeper ;)
+# Thanks for the job :)
+###!
 @(reset)
 @(sh)
 @(canvassize) 600@(,)600

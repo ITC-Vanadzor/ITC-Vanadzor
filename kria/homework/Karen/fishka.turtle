@@ -1,0 +1,155 @@
+kturtle-script-v1.0
+###Two players play the following game. Coordinate plane is a grandmother. 
+#This is the first game (-3,2) point. Players take turns igrayut.
+#Hod consists of the following players are transported to the headstock (x, y) 
+#coordinates (x-1, y + 3), (x + 3, y-1), (x + 2, y + 2) coordinates odin.
+#Igra ends when the player's position exceeds the distance from the initial 8 ch.
+#Pobezhdaet the player who made the last move.
+###################################################
+#Print squire, left-top corner ($top_let_x,$top_let_y),squire size-$squire_size
+@(learn) PrintSquire{
+  @(go) $top_let_x@(,)$top_let_y
+  @(tr) 90
+  @(pc) 0@(,)255@(,)0
+  @(repeat) 4 {
+    @(fw) $squire_size
+    @(tr) 90
+  }
+}
+#Print horizontal and vertical lines for coordinates system
+@(learn) PrintCoordinateSystem{
+  @(tr) 90
+  $x=$top_let_x+$scale
+  $y=$top_let_y
+  @(go) $x@(,)$y
+  @(for) $i=1 @(to) $squire_size/$scale{
+    @(pc) 190@(,)190@(,)190
+    @(if) $i==$squire_size/$scale/2{
+      @(pc) 255@(,)0@(,)0
+    }
+    @(fw) $squire_size
+    $x=$x+$scale
+    $y=$top_let_y
+    @(go) $x@(,)$y
+  }
+  $x=$top_let_x
+  $y=$top_let_y+$scale
+  @(tl) 90
+  @(go) $x@(,)$y
+  @(for) $i=1 @(to) $squire_size/$scale{
+    @(pc) 190@(,)190@(,)190
+    @(if) $i==$squire_size/$scale/2{
+      @(pc) 255@(,)0@(,)0
+    }
+    @(fw) $squire_size
+    $y=$y+$scale
+    $x=$top_let_x
+    @(go) $x@(,)$y
+  }  
+}
+@(learn) PrintDot $dot_x@(,)$dot_y@(,)$a@(,)$b{  
+  $coor_x=$dot_x+$scale*$a
+  $coor_y=$dot_y-$scale*$b
+  @(go) $coor_x@(,)$coor_y
+  @(pw) 1
+  @(fw) 1
+}
+@(learn) PrintLine $rotate@(,)$line_size{
+  @(pw) 1
+  @(tr) $rotate
+  @(fw) $line_size
+  @(tr) -1*$rotate
+}
+@(learn) PrintLineDot $a@(,)$b{
+  $rotate=19
+  $line_size=3.2*$scale
+  @(if) $a==$b{
+    $rotate=-45
+    $line_size=2.8*$scale
+  }
+  @(if) $a==-1{
+    $rotate=-109
+  }
+  PrintLine $rotate@(,)$line_size
+    PrintDot $coor_x@(,)$coor_y@(,)$a@(,)$b
+  $diff=@(sqrt)((($coor_x-$coor_x0)*($coor_x-$coor_x0)+($coor_y-$coor_y0)*($coor_y-$coor_y0))/($scale*$scale))
+  @(print) PrintDiff $diff
+}
+@(learn) PrintDiff $diff{
+  @(go) $top_let_x+$squire_size/2@(,)$top_let_y/2
+  @(tl) 90
+  @(pc) 255@(,)255@(,)255
+  @(pw) 40
+  @(fw) 1
+  @(go) $top_let_x+$squire_size/2+40@(,)$top_let_y/2
+  @(fw) 1
+  @(go) $top_let_x+$squire_size/2-10@(,)$top_let_y/2-10
+  @(pc) 0@(,)200@(,)50
+  @(print) $diff
+  @(tr) 90
+  @(go) $coor_x@(,)$coor_y
+}
+@(learn) PlayerStep{
+  @(pc) 0@(,)0@(,)255
+  @(if) $case==1{
+     PrintLineDot 2@(,)2
+  }
+  @(else) @(if) $case==2{
+    PrintLineDot -1@(,)3
+  }
+  @(else) @(if) $case==3{
+    PrintLineDot 3@(,)-1
+  }
+  @(wait) 1
+}
+@(learn) CompStep{
+  @(pc) 255@(,)100@(,)100
+  @(if) $case==1{
+     PrintLineDot -1@(,)3
+  }
+  @(else) @(if) $case==2{
+    PrintLineDot 2@(,)2
+  }
+  @(else) @(if) $case==3{
+    PrintLineDot 3@(,)-1
+  }
+  @(wait) 1
+}
+@(learn) SetScale{
+  $squire_size=@(ask) "Set Squire size(400,500,600....)"
+  $scale=@(ask)   "Set Scale('Squire size' = a * 'Scale')"
+}
+###Main code
+@(reset)
+@(sh)
+##Parapeters
+$top_let_x=50 #-Squire left top corner coordinate X by pixels 
+$top_let_y=50 #-Squire left top corner coordinate Y by pixels 
+$squire_size=0
+$scale=0
+
+SetScale
+
+$a=-3 #begining coordinate X
+$b=2 #brgining coordinate Y
+##############################
+$coor_x=$top_let_x+$squire_size/2 #Cordinate X, for begining(0,0) by pixelx 
+$coor_y=$top_let_y+$squire_size/2 #Cordinate Y, for begining(0,0) by pixelx
+$coor_x0=$coor_x+$a*$scale #begining coordinate X by pixels
+$coor_y0=$coor_y-$b*$scale #begining coordinate X by pixels
+$diff=0
+$min_diff=8
+
+###Begin
+@(canvassize) $squire_size+100@(,)$squire_size+100
+PrintSquire
+PrintCoordinateSystem
+
+PrintDot $coor_x@(,)$coor_y@(,)$a@(,)$b
+@(pc) 255@(,)100@(,)100
+PrintLineDot 3@(,)-1
+@(while) $diff <= $min_diff{
+  $case=@(ask) "Print 1(x+2,y+2), 2(x-1,y+3)  or  3(x+3,y-1)"
+    PlayerStep
+  CompStep
+}

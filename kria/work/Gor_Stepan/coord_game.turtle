@@ -1,0 +1,297 @@
+kturtle-script-v1.0
+@(reset)
+@(canvassize) 500@(,)400
+@(canvascolor) 255@(,)255@(,)204
+#sh
+
+@(learn) xy_line {
+    $y_cor=@(getx)+150
+  @(gox) $y_cor
+  @(turnright) -90 
+  @(pencolor) 0@(,)153@(,)0
+  @(forward) 150
+  @(forward) 150
+  $x_x=@(getx)+150 $x_y=@(gety)+150
+  @(go) $x_x@(,)$x_y
+  @(turnright) 990
+  @(pencolor) 204@(,)0@(,)0
+  @(forward) 300
+}
+
+@(learn) xy_num {
+  @(pencolor) 133@(,)133@(,)133
+  @(go) 235@(,)345
+  @(turnright) 90
+  @(fontsize) 8
+  @(for) $x = -16 @(to) -2 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+  @(go) 235@(,)195
+  @(for) $x = 0 @(to) 14 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+  @(go) 115@(,)210
+  @(turnright) 90
+  @(for) $x = -16 @(to) -3 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+  @(go) 265@(,)210
+  @(for) $x = 0 @(to) 14 {
+    @(print) $x + 1
+    @(penup)
+    @(forward) 10
+  }
+}
+
+@(learn) coordinate_table{
+  $x=100 $y=60
+  @(go) $x@(,)$y
+  @(pencolor) 194@(,)194@(,)194
+  @(repeat) 900 {
+    @(repeat) 4 {
+      @(forward) 10
+      @(turnright) 90
+    }
+    $x=$x+10
+    @(go) $x@(,)$y
+    @(if) $x==390 {
+      $y=$y+10
+      $x=$x-300
+    }
+  }
+  @(pencolor) 51@(,)0@(,)0
+  @(penwidth) 2
+  @(repeat) 4 {
+    @(forward) 300
+    @(turnright) -90
+  }
+  xy_line
+xy_num
+}
+
+@(learn) players_turn{
+  @(repeat) 2{
+    @(forward) 70
+    @(turnright) 90
+    @(forward) 300
+    @(turnright) 90
+  }
+}
+
+@(learn) player_name1 {
+  $x=10 $y=25
+  @(go) $x@(,)$y
+  @(penwidth) 2
+  @(pencolor) 0@(,)51@(,)102
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+  @(go) 50@(,)4
+  @(print)"PLAYER 1"
+  $y=$y+15
+  @(go) $x@(,)$y
+  @(pencolor) 51@(,)102@(,)153
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+}
+@(learn) player_name2 {
+  $x=340 $y=25
+  @(go) $x@(,)$y
+  @(penwidth) 2
+  @(pencolor) 0@(,)51@(,)102
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+  @(go) 380@(,)4
+  @(print)"PLAYER 2"
+  $y=$y+15
+  @(go) $x@(,)$y
+  @(pencolor) 51@(,)102@(,)153
+  @(repeat) 2{
+    @(forward) 15
+    @(turnright) 90
+    @(forward) 150
+    @(turnright) 90    
+  }
+}
+@(learn) game_grid {
+  player_name1
+  player_name2
+  @(go) 10@(,)60
+  @(turnright) 90
+  @(penwidth) 2
+  @(pencolor) 255@(,)102@(,)0
+  players_turn
+  @(go) 420@(,)60
+  @(penwidth) 2
+  @(pencolor) 71@(,)163@(,)255
+  players_turn
+  @(penwidth) 1
+  coordinate_table
+
+
+}
+
+
+
+@(learn) process{
+  $a=$x_input
+  $b=$y_input
+  $width=$a
+  $height=$b
+  $c=(($a * $a)+($b * $b))
+  $nerk=@(sqrt) $c
+  @(print) $nerk
+
+}
+
+
+
+
+
+# GAME MANE COMMANDS
+game_grid
+#process
+$f_x=0
+$f_y=0
+$s_x=0
+$s_y=0
+$t_x=0
+$t_y=0
+$th_x=0
+$th_y=0
+
+@(learn) circle {
+  @(pendown)
+  @(pencolor) 102@(,)51@(,)102
+  @(penwidth) 1
+  @(repeat) 36 {
+    @(forward) 0.5
+    @(turnleft) 10
+  }
+}
+
+@(learn) first_step {
+  $x=250 $y=213
+  @(go) $x@(,)$y
+  $f_x=$x+50 $f_y=$y-20
+  @(go) $f_x@(,)$f_y
+  circle
+  
+}
+
+@(learn) second_step {
+  $s_x=300+30 $s_y=193
+  @(go) $s_x@(,)$s_y
+  circle
+}
+
+
+@(learn) third_step {
+  $t_x=330 $t_y=193-30
+  @(go) $t_x@(,)$t_y
+  circle
+}
+
+@(learn) forth_step {
+  $ft_x=330 $ft_y=163-40
+  @(go) $ft_x@(,)$ft_y
+  circle 
+}
+
+@(learn) fivth_step {
+  $ft_x=330 $ft_y=193-40
+  @(go) $ft_x@(,)$ft_y
+  circle 
+}
+
+@(learn) sixth_step {
+  $s_x=330+30 $s_y=153
+  @(go) $s_x@(,)$s_y
+  circle
+}
+
+@(learn) game_process {
+  first_step
+@(sh)
+  $n=@(sqrt) ((5*5) + (2*2))
+  $n1=$n*10
+  $a=@(arctan) (2/5)
+  @(turnright) 180-$a
+  @(forward) $n1
+  
+  #print "first step x =" + $f_x
+  #second_step
+  #print "aaaaa" + $s_x
+  #third_step
+  #forth_step
+  #$player_play=ask"WHO IS PLAY FIRST?"
+}
+
+@(learn) player_turn {
+  $player_turn=@(ask)"PLEASE INPUT 1 FOR (X+3,Y) or 2 FOR (X,Y+3) or 3 FOR (x,y+4)"
+  @(if) $player_turn=="1" {
+    $x0=@(getx) $y0=@(gety)
+    $go_x=$x0+30
+    @(go) $go_x@(,)$yo
+    } 
+  @(else) {
+  @(if) $player_turn=="2" {  
+    $x0=@(getx) $y0=@(gety)
+    $go_y=$y0+30
+    @(go) $x0@(,)$yo
+  }
+  @(else) {
+  @(if) $player_turn=="3" {  
+    $x0=@(getx) $y0=@(gety)
+    $go_y=$y0+40
+    @(go) $x0@(,)$yo
+  }
+    @(else) {
+    player_turn
+}
+}
+}
+
+$x0=0  $y0=0
+
+
+@(learn) new {
+  $x0=@(getx) $y0=@(gety)
+  $go_x=$x0+30
+  @(go) $go_x@(,)$yo
+
+}
+
+
+
+
+game_process
+
+
+player_turn
+
+
+
+
+
+
+
+
+
