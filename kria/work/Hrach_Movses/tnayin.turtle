@@ -1,7 +1,25 @@
 kturtle-script-v1.0
 @(reset) 
 @(sh)
-
+@(learn) verev {
+  @(pw) 2
+  @(pc) 12@(,)255@(,)12
+  @(dir) 0
+  @(fw) 40
+}
+@(learn) aj_koxm {
+  @(pw) 2
+  @(pc) 12@(,)255@(,)12
+  @(dir) 90
+  @(fw) 60
+}
+@(learn) ankyunagic {
+  @(pw) 2
+  @(pc) 12@(,)255@(,)12
+  @(dir) @(arccos)(3/@(sqrt) 13)
+  @(fw) @(sqrt) 5200
+}
+@(pc) 0@(,)0@(,)0
 @(go) 20@(,)380
 @(dir) 0
 @(fw) 360
@@ -24,19 +42,148 @@ kturtle-script-v1.0
 @(dir) 0
 @(print) 0
 $i=1
-@(repeat) 15 {
-@(dir) 90
-@(fw) 20
-@(dir) 0
-@(print) $i
-$i=$i+1
+@(repeat) 12 {
+  @(dir) 90
+  @(fw) 20
+  @(dir) 0
+  @(print) $i
+  $i=$i+1
 }
 @(go) -3@(,) 360
 $i=1
-@(repeat) 15 {
+@(repeat) 12 {
+  @(dir) 0
+  @(goy) @(gety)-20
+  @(dir) 0
+  @(print) $i
+  $i=$i+1
+}
+@(go) 20@(,)200
+@(pw) 0.5
+@(dir) 90
+@(fw) 180
+@(dir) 180
+@(fw) 180
+
+@(message) "hamakargichy sksum e arajiny"
+@(message) "hamakargichy katarum e (x,y+2) qayly"
+@(go) 20@(,)380
+@(pw) 2
+@(pc) 12@(,)255@(,)12
 @(dir) 0
-@(goy) @(gety)-20
-@(dir) 0
-@(print) $i
-$i=$i+1
+@(fw) 40
+$t=0
+@(learn) gcel {
+  @(message) "hima dzer hertn e"
+  $t=@(ask) "ete uzum eq (x,y+2) nermuceq ---> 1                                       ete uzum eq (x+3,y) nermuceq ---> 2                          ete uzum eq (x+2,y+3) nermuceq ---> 3" 
+@(if) $t!=1 @(and) $t!=2 @(and) $t!=3 {
+@(message) "1, 2, kam 3"
+gcel
+}
+}
+
+gcel
+@(if) $t==1 {
+  verev
+  @(message) "hamakargichy gcec (x,y+2) qaylov"
+  verev
+  gcel
+  @(if) $t==1 {
+    verev
+    @(message) "hamakargichy gcec (x+2,y+3) qaylov"
+    ankyunagic
+    @(message) "krvecir ։/"
+    @(break)    
+  }
+  @(if) $t==2 {
+    aj_koxm
+    @(message) "hamakargichy gcec (x+3,y) qaylov"
+    aj_koxm
+    @(message) "hima dzer hertn e"
+    gcel
+      @(if) $t==1 {
+        verev
+        @(message) "hamakargichy gcec (x,y+2) qaylov"
+        verev
+        @(message) "partutyun("
+        @(break)
+      }
+      @(if) $t==2 {
+        aj_koxm
+        @(message) "hamakargichy gcec (x+3,y) qaylov"
+        aj_koxm
+        @(message) "krvecir :D"
+        @(break)
+      }  
+    @(if) $t==3 {
+        ankyunagic
+        @(message) "hamakargichy gcec (x,y+2)"
+        verev
+        @(message) "ches karox haxtel"
+        @(break)
+  }
+  }  
+  @(if) $t==3 {
+    ankyunagic
+    @(message) "hamakargichy gcec (x+3,y)"
+    verev
+    @(message) "chstacvec, krvecir eli"
+    @(break)
+  }
+}
+
+@(if) $t==2 {
+  aj_koxm
+  @(message) "hamakargichy gcec (x+2,y+3) qaylov"
+  ankyunagic
+  gcel
+  @(if) $t==1 {
+    verev
+    @(message) "hamakargichy gcec (x+2,y+3) qaylov"
+    ankyunagic
+    @(message) "hanaqy deny krvecir"
+    @(break)
+  }
+  @(if) $t==2 {
+    aj_koxm
+    @(message) "hamakargichy gcec (x+2,y+3) qaylov"
+    ankyunagic
+    @(message) "vonc haskacanq krvecir"
+    @(break)
+  }
+  @(if) $t==3 {
+    ankyunagic
+    @(message) "hamakargichy gcec (x+3,y)"
+    aj_koxm
+    @(message) "ches karox haxtel, krvecir!"
+    @(break)
+  }
+}
+
+@(if) $t==3 {
+  ankyunagic
+  @(message) "hamakargichy gcec (x+3,y) qaylov"
+  aj_koxm
+  gcel
+  @(if) $t==1 {
+    verev
+    @(message) "hamakargichy gcec (x+2,y+3) qaylov"
+    ankyunagic
+    @(message) "hanaqy deny krvecir"
+    @(break)  
+  }
+  @(if) $t==2 {
+    aj_koxm
+    @(message) "hamakargichy gcec (x+2,y+3) qaylov"
+    ankyunagic
+    @(message) "vonc haskacanq krvecir"
+    @(break)
+  }
+  @(if) $t==3 {
+    ankyunagic
+    @(message) "hamakargichy gcec (x+3,y)"
+    aj_koxm
+    @(message) "ches karox haxtel, krvecir!"
+    @(break)
+  }
 }
