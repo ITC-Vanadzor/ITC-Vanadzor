@@ -1,0 +1,149 @@
+body{
+	color: #101A9F;
+	padding-bottom: 30px;
+}
+ul{
+	list-style: none;
+	padding: 0;
+	margin:0;
+}
+.wrapper{
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1000px;
+}  
+.wrapper>div{
+	margin-top: 15px;
+}
+.title{
+	color: #000;
+	background: none repeat scroll 0 0 #9088f5;
+	display: inline-block;
+	margin: 0;
+	padding: 10px 3%;
+	width: 94%;
+}
+.clearfix:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	line-height: 0;
+	visibility: hidden;
+}
+.grey{
+	color: grey;
+}
+.border{
+	border: 1px solid #ccc;
+}
+.floatL{
+	float:left;
+}
+.floatR{
+	float:right;
+}
+.fullWidth{
+	width:100%;
+}
+.alignCenter{
+	text-align: center;
+}
+
+/*Header*/
+.header>ul{
+	float: left;
+	width: 100%;	
+}
+.header>ul>li{
+	float: left
+}
+.header>ul>li img{
+	width: 100%;
+}
+.header>ul>li:first-child{
+	width: 25%;
+}
+.header>ul>li:last-child{
+	display: table-cell;
+	float: right;
+	text-align: center;
+	vertical-align: middle;
+	width: 70%;
+}
+.address li{
+	margin: 5px 0;
+}
+.mail{
+	text-decoration: none;
+}
+.mail:hover{
+	color: #000;
+}
+
+/*Education*/
+.education>ul{
+	padding: 10px 0;
+}
+.education>ul:nth-child(2n+1){
+	background: #ccc;
+}
+.education>ul>li{
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+.education>ul>li:last-child, .education>ul>li:first-child{
+	width: 25%;
+}
+
+/*Skills*/
+.skills>ul{
+	background: none repeat scroll 0 0 #9088f5;
+}
+.skills>ul>li{
+	width: 25%;
+	float:left;
+}
+.skills>ul>li:last-child{
+	width: 71%;
+	background: none repeat scroll 0 0 #fff;
+	float: right;
+	padding-left:3%;
+	border-left:1px solid #ccc;
+}
+.skills>ul ul{
+	padding: 10px 0;
+}
+.skills h2{
+	padding: 10px;
+	margin: 0;
+	color: #000;
+}
+
+/*Media queries************************************/
+/* Smartphones (portrait) ----------- */
+@media screen and (max-width : 480px) {
+	.header>ul>li{
+		width: 100% !important;
+		text-align: center;
+	}
+	.header>ul>li img{
+		max-width: 320px;
+	}
+	.education>ul>li{
+		width: 100% !important;
+		margin: 15px 0;
+	}
+	.skills>ul>li{
+		width: 97% !important;
+		padding-left: 2% !important;
+	}
+}
+
+/* Smartphones (landscape) ----------- */
+@media screen and (min-width : 481px) and (max-width : 1000px) {
+	.skills h2{
+		font-size: 2vw;
+	}
+}
