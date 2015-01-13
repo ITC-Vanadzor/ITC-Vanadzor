@@ -2,18 +2,16 @@
 
 import argparse
 
-def factorial(x):
+def fact(x):
     if x == 0:
         return 1
     elif x < 0:
         print 'Error'
     else: 
-        return x * factorial(x - 1)
+        return x*fact(x-1)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-n', dest='top',
-        action='store', default='0',
-        help='number')
+parser.add_argument('-n',required=True,type=int, nargs=1,  help='number')
 args = parser.parse_args();
 
-print factorial(int(args.top))
+print("fact: {}".format(fact(args.n[0])))
