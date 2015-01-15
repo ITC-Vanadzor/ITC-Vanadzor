@@ -1,0 +1,16 @@
+ #header {
+    text-align: left;
+    height:50px;
+    widht:100%;
+ }
+#sidebar {
+    float: left;
+    height: 300px;
+    widht:50%;
+}
+#article {
+    text-align: center;
+
+    height:300px;
+    widht:50%
+}
