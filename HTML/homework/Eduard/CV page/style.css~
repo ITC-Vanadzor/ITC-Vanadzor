@@ -1,0 +1,66 @@
+body { 
+background: url(fon.jpg); 
+background-attachment: fixed;
+background-repeat: no-repeat;
+}
+#head {
+padding-left:9%;
+
+margin-right: auto;
+
+}
+#my_picture {
+padding-right:5%;
+margin-left: 5%;
+float:left;
+}
+.body2 {
+
+position:relative;
+background:#EFE0C1;
+float:left;
+margin-left:5%;
+opacity: 0.5;
+padding: 2%;
+}
+.text {
+font-style: italic;
+color:#2C3C29;
+font-weight: bolder;
+}
+#p1 {
+font-weight: bolder;
+font-size:180%;
+font-style: italic;
+}
+hr {
+clear:left;
+border: 1;
+width: 90%;
+color: #2C3C29;
+background: #2C3C29;
+height: 3px;
+}
+
+.body3 {
+background: #EFE0C1;
+opacity:0.5;
+font-size:150%;
+margin-left:5%;
+width:90%;
+}
+table {
+border-color:#2C3C29;
+margin-left:5%;
+background-color:#EFE0C1;
+width:90%;
+height:20%;
+
+}
+
+
+
+
+
+
+
