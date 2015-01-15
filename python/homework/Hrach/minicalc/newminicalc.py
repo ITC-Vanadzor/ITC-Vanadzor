@@ -2,6 +2,7 @@
 
 import argparse
 parser = argparse.ArgumentParser()
+parser.print_help()
 parser.add_argument('n1', nargs='?',type=float, help='First argument, please enter number')
 parser.add_argument('op', choices=['+', '-', 'x', '/'], help='Second argument, please enter + or - or x or /')
 parser.add_argument('n2', nargs='?',type=float, help='Third argument, please enter number')

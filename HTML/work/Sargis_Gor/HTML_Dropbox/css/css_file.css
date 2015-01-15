@@ -1,0 +1,34 @@
+body {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+}
+.topmanu a {
+    font-size: 12px;
+    margin-left: 3% ;
+    color: #91A8BA;
+    text-decoration: none;
+
+}
+.content {
+    -moz-column-count: 2;
+    margin-top: 20%;
+    text-align: center;
+}
+.tagline {
+    text-align:center;
+    color:#33536D; 
+    font-size:16px; 
+    width:80%; 
+    margin: 5% auto 5%;
+    line-height:25px;
+}
+#fname, #lname, #email, #pswd {
+    height:1.5em;
+    margin-bottom:0.4em
+}
+#fname:hover::-moz-placeholder, #lname:hover::-moz-placeholder, #email:hover::-moz-placeholder, #pswd:hover::-moz-placeholder {
+    color: #d1d1d1;
+}
+
+

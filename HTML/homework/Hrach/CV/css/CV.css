@@ -1,0 +1,32 @@
+li {
+    margin-left: 10%;
+	font-size: 101%
+}
+
+.logo {
+    height: 5% 
+}
+
+#image {
+    height:50.7%
+}
+
+#div1 {
+    width:50%;
+    float:left
+}
+
+#div2 {
+    width:50%;
+    float:left
+}
+
+#table {
+	background-color:#34343B;
+	width:100%;
+	text-align:center
+}
+
+tr {
+	text-align:center
+}

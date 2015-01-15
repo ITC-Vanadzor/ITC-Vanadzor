@@ -1,0 +1,53 @@
+.block1 { 
+    width: 30%; 
+    padding: 5;
+    padding-left: 5% ;
+    float: left;
+}
+.block2 { 
+    width: 20%; 
+    padding: 5;
+    padding-left: 40% ;
+    float: left;
+}
+
+.block3 { 
+    width: 50%; 
+    padding: 5;
+    margin-top: 10% ;
+    margin-left: 5% ;
+    float: left;
+}
+.block4 { 
+    width: 50%; 
+    padding:5;
+	padding-top:15%;
+    margin-left: 50% ;
+}
+
+#chap {
+    font-size: 150%;
+    color: #33536D
+}
+
+#button {
+    background-color:#0080FF;
+    color:fff;
+    padding: 3%;
+    padding-left: 19%;
+    padding-right: 19%;
+}
+
+.p {
+	margin-left: 8%;
+    height: 3%
+}
+
+.link {
+	color: #2895F1;
+	text-decoration: none;
+}
+
+.input {
+	height: 180%
+}
