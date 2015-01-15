@@ -1,0 +1,36 @@
+#part1 {
+    width: 90%;
+    height:10%;
+    margin-left:5%;
+    margin-top:3%;
+}
+#part2 {
+    width: 40%;
+    height:50%;
+    margin-left:20%;
+    margin-top:10%;
+    float:left;
+}
+#part3 {
+    width: 30%;
+    height:50%;
+    margin-top:15%;
+    float:left;
+}
+.field {
+    width:270px;
+    height:30px;
+}
+#button{
+    width:70px;
+    height:30px;
+    margin-left:24%;
+    margin-top:3%;
+    color:white;
+    background-color:blue;
+}
+
+a:link {
+        text-decoration: none;}
+a:hover {
+        text-decoration: underline;}

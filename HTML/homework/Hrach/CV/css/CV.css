@@ -1,0 +1,28 @@
+h1 {
+    text-align: center;
+    color: red
+}
+
+li {
+    margin-left: 3%
+}
+
+.logo {
+    height: 5% 
+}
+
+#image {
+    height:32%;
+}
+
+#div1 {
+    background-color:gainsboro;
+    width:50%;
+    float:left
+}
+
+#div2 {
+    background-color:gainsboro;
+    width:50%;
+    float:left
+}
