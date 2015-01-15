@@ -1,16 +1,19 @@
  #header {
     text-align: left;
     height:50px;
-    widht:100%;
+    width:100%;
  }
 #sidebar {
     float: left;
     height: 300px;
-    widht:50%;
+    width:50%;
 }
 #article {
     text-align: center;
-
-    height:300px;
-    widht:50%
+    float: right;
+    height:100px;
+    width:26%
+}
+.serif {
+    font-family: "open", serif;
 }
