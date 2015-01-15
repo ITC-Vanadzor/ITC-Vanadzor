@@ -1,7 +1,54 @@
 body {
-background-color: #e0ffff;
+    background-image: url("images/background-body.png");
+    font-family: "Times New Roman";
+    font-size: 120%;
+    font-style: italic;
+}
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    color:  #CD853F;
 }
 #image {
-width:20%;
-height:20%;
+    width:25%;
+    height:35%;
+    margin-top: 3%;
+    margin-left:25%;
+    float:left;
+}
+#uppercase {
+    text-transform: uppercase;
+}
+ul {
+    list-style-type: none;
+    text-align: center;
+}
+.text {
+    margin-top:7%;
+    margin-left:10%;
+    float:left;
+}
+h2 {
+    text-transform: uppercase;
+    text-align: center;
+    margin-top:30%;
+    background-color:#CD853F;
+}
+table {
+    font-size:100%;
+    width:95%;
+    margin-left:2.5%;
+    border-style: double;
+    border-collapse: collapse;
+    border-color: #CD853F;
+}
+#line_height{
+    line-height:5%;
+}
+tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding:1%;
+    text-align: center;
+    border-color: #CD853F;
 }
