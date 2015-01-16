@@ -1,0 +1,21 @@
+.header1 {
+background-color:red;
+width:45%;
+height:20%;
+float:left;
+}
+body {
+margin-left:15%;
+
+}
+.header2 {
+background-color:green;
+width:25%;
+height:20%;
+float:left;
+
+}
+#face {
+width:10%;
+
+}
