@@ -2,13 +2,13 @@
     width: 30%; 
     padding: 5;
     padding-left: 5% ;
-    float: left;
+    float: left
 }
 .block2 { 
     width: 20%; 
     padding: 5;
     padding-left: 40% ;
-    float: left;
+    float: left
 }
 
 .block3 { 
@@ -16,13 +16,13 @@
     padding: 5;
     margin-top: 10% ;
     margin-left: 5% ;
-    float: left;
+    float: left
 }
 .block4 { 
     width: 50%; 
     padding:5;
 	padding-top:15%;
-    margin-left: 50% ;
+    margin-left: 50%
 }
 
 #chap {
@@ -34,18 +34,20 @@
     background-color:#0080FF;
     color:fff;
     padding: 3%;
-    padding-left: 19%;
-    padding-right: 19%;
+    height:5%;
+    width:40%;
+    line-height:10%
 }
 
 .p {
 	margin-left: 8%;
-    height: 3%
+    height: 3%;
+    padding-top:2%
 }
 
 .link {
 	color: #2895F1;
-	text-decoration: none;
+	text-decoration: none
 }
 
 .input {

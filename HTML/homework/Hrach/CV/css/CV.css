@@ -1,6 +1,9 @@
+ul {
+    font-size:150%
+}
+
 li {
     margin-left: 10%;
-	font-size: 101%
 }
 
 .logo {
@@ -8,7 +11,9 @@ li {
 }
 
 #image {
-    height:50.7%
+    height:30%;
+    margin-left:15%;
+    margin-top:5%
 }
 
 #div1 {
@@ -18,15 +23,24 @@ li {
 
 #div2 {
     width:50%;
-    float:left
+    float:left;
 }
+
 
 #table {
 	background-color:#34343B;
 	width:100%;
-	text-align:center
+	text-align:center;
+    margin-top:5%;
+    float:left
 }
 
 tr {
-	text-align:center
+	text-align:center;
+    font-size:200%
+}
+
+table {
+    width:100%; 
+    border-color:white
 }
