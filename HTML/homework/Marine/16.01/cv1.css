@@ -1,0 +1,13 @@
+.cont {
+    background-color: #E6E6FA;
+    width:70%;
+    border:2px solid grey;
+    top: 0;
+    left:0;
+}
+#div1 {
+    width: 30%;
+    height:20%;
+    border-top-style: 2px solid blue;
+    border-bottom-style: 2px solid blue;
+}    
