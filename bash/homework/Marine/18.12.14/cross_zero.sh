@@ -3,9 +3,11 @@
 declare -A grid
 num_rows=3
 num_columns=3
+#TODO -> it is better to keep just the data, not the formatting with it (in this case, we should not store "|" symbols for the grid cells, just print the cells when we want)
 player0="|___|"
 player1="|_X_|"
 player2="|_O_|"
+#TODO -> why do we store X and Y into "a" and "b" variables?
 declare a
 declare b
 declare player
@@ -48,6 +50,7 @@ input_X(){
 input_Y(){
     echo "Input y coordinates"; read b 
     while [ $b -gt 3 -o $b -lt 1 ];do
+        #TODO -> why do we ask to input new b, if we are supposed to input Y?
         echo "input new b"; read b
     done
 }
