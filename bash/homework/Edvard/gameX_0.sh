@@ -1,6 +1,9 @@
 #!/bin/bash
 #Created by Eduard Hakobyan
 #to be continued...
+
+# TODO -> Please move the common game loginc from the cases into functions and call them as necessary.
+# TODO -> We NEED some comments here, especially on global vars and on the functions that you should add (see above ;)
 declare -A matrix
 num_rows=3
 num_columns=3
