@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#TODO -> there should be a generic function, which determines if the given player has won the game. Currently there is a code duplication (almost identical "if"s for X and O). 
+#TODO -> also, the file, functions and everything should have comments :)
+
 echo "PLAYER 1 INPUT YOUR NAME HERE: "; read player1
 echo "PLAYER 2 INPUT YOUR NAME HERE: "; read player2
 
