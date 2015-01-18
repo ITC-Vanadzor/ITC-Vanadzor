@@ -1,0 +1,31 @@
+table, tr, td {
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+#header {
+    text-align: right;
+    background-color:dimgray;
+    height:50px;
+    width:100%;
+}
+#nav {
+    background-color:gainsboro;
+    height:280px;
+    width:100%;
+}
+#article {
+    background-color:#C4C4B4;
+    height:300px;
+    width:100%
+}
+
+aaa {
+    width: 100px;
+    height: 100px;
+    transition: width 2s, height 2s, transform 2s;
+}
+
+aaa:hover {
+    -webkit-transform: rotate(360deg); 
+}

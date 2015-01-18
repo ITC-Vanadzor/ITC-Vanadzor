@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="wrapper clearfix">
+            
+            <!--Header-->
+            <div id="header" class="clearfix">
+                <a id="logo" href="index.html">
+                    <img src="images/logo.png"/>
+                </a>
+            </div>
+            
+            <!--Content-->
+            <div id="content" class="clearfix">
+                <img class="left-img" src="images/sign-in.png"/>
+                <div  class="register-form" id="register-form">
+                    <form action=""  id="form-sign-in">
+                        <div class="clearfix">
+                            <h2 class="form-title">Sign in</h2>
+                            <span class="get-account">
+                                or
+                                <a href="#register-form">creat account</a>
+                            </span>
+                        </div>
+                        <div class="text-input-wrapper">
+                            <input type="email" placeholder="Email"/>
+                        </div>
+                        <div class="text-input-wrapper">
+                            <input type="password" placeholder="Password"/>
+                        </div>
+                        <div class="checkbox-input-wrapper">
+                            <input id='remember-me' type="checkbox">
+                            <label for="remember-me">Remember me</label>
+                        </div>
+                        <div class="submit-input-wrapper">
+                            <input type="submit" value="Sign in"/>
+                        </div>
+                    </form>
+                    
+                    <form action=""  id="form-creat-account">
+                        <div class="clearfix">
+                            <h2 class="form-title">Sign in</h2>
+                            <span class="get-account">
+                                or
+                                <a href="#">creat account</a>
+                            </span>
+                        </div>
+                        <div class="text-input-wrapper">
+                            <input type="text" placeholder="First name"/>
+                        </div>
+                         <div class="text-input-wrapper">
+                            <input type="text" placeholder="Last name"/>
+                        </div>
+                         <div class="text-input-wrapper">
+                            <input type="email" placeholder="Email"/>
+                        </div>
+                        <div class="text-input-wrapper">
+                            <input type="password" placeholder="Password"/>
+                        </div>
+                        <div class="checkbox-input-wrapper">
+                            <input id='agreement' type="checkbox">
+                            <label for='agreement'>I agree <a href='#'>Dropbox terms.</a></label>
+                        </div>
+                        <div class="submit-input-wrapper">
+                            <input type="submit" value="Creat account"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!--Footer-->
+            <div id="footer" class="clearfix">
+                <ul>
+                    <li>Dropbox</li>
+                    <li><a href="#">Install</a></li>
+                    <li><a href="#">Mobile</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Tour</a></li>
+                </ul>
+                <ul>
+                    <li>About us</li>
+                    <li><a href="#">Dropbox Blog</a></li>
+                    <li><a href="#">Our team</a></li>
+                    <li><a href="#">Branding</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Jobs</a></li>
+                </ul>
+                <ul>
+                    <li>Support</li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Get Started</a></li>
+                    <li><a href="#">Privacy &amp; Terms</a></li>
+                    <li><a href="#">Copyright</a></li>
+                    <li><a href="#">Contact us</a></li>
+                </ul>
+                <ul>
+                    <li>Community</li>
+                    <li><a href="#">Referrals</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Developers</a></li>
+                </ul>
+                <a class="language-bnt" href="#languages-list">
+                    <span>English</span>
+                    <i class="arrow"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!--Modal dialog-->
+        <div class='modal-dialog' id='languages-list'>
+            <div class="modal-fon"></div>
+            <div class="modal-cont">
+                <div class="modal-title clearfix">
+                    <h2>Choose a language</h2>
+                    <a href="#" title="Close" class="close-btn"></a>
+                </div>
+                <ul>
+                    <li>
+                        <a class="locale-option" data-locale="id">Bahasa Indonesia</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="ms">Bahasa Malaysia</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="da_DK">Dansk</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="de">Deutsch</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="en">English</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="es_ES">Español (España)</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="es">Español (Latinoamérica)</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="fr">Français</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="it">Italiano</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="nl_NL">Nederlands</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="nb_NO">Norsk (bokmål) [Beta]</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a class="locale-option" data-locale="pl">Polski</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="pt_BR">Português (Brasil)</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="ru">Pусский</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="sv_SE">Svenska</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="uk_UA">Українська [Beta]</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="th_TH">ไทย</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="zh_CN">中文（简体）</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="zh_TW">中文（繁體）</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="ja">日本語</a>
+                    </li>
+                    <li>
+                        <a class="locale-option" data-locale="ko">한국어</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>
