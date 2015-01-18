@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#TODO -> The functions "stugum_x" and "stugum_o" are almost the same - you should just the symbols to be checked as parameter
+#TODO -> i dont see much comments here
+#TODO -> code formatting (tabs) are inconsistent ("krestik" and "nolik" functions are indented, others are not)
+
 array=("" "" "" "" "" "" "" "" "")
 
 vandak () {
