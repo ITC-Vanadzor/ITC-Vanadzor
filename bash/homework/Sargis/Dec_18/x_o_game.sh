@@ -6,6 +6,8 @@
 # 4.input_function will ask players to input x or o and check if that index of array is free or valid.After checking it  
 # will put x or y in that given index
 #P.S. At the very begining of the game players input their names and recieve the symbol, that will be put in board when they choose index. 
+
+#TODO -> there are some similar parts in the game logic which should be moved to a function (lines 78-86 and 88-95) and just called 2 times
 echo "Input the first player name: "; read player1
 echo "${player1} your symbol is x "
 sleep 2
