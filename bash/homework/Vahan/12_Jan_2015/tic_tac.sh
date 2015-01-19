@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#TODO -> comments, comments :)
+
 declare -A deck[3][3]
 
 rows=3
@@ -32,6 +34,7 @@ move(){
     fi
 }
 
+#TODO -> the name of the function hints that it should retunr a boolean, but the function exits on win. Such unexpected behavior makes the code harder to understand
 is_end(){
     if [ "${deck[0,$i_column]}" == "${deck[1,$i_column]}" ] && [ "${deck[1,$i_column]}" == "${deck[2,$i_column]}" ]  
        then 
@@ -84,6 +87,7 @@ h=0
         echo "enter number of column: "
         read i_column
         is_valid_input $i_column
+        #TODO -> the game should automatically determine the current player, and not to ask user to enter that info
         echo "enter the symbol: "
         read symbol
         is_valid_symbol
