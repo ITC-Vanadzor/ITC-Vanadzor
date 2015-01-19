@@ -1,0 +1,29 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <form name="Calc">
+        <input type="text" name="input" size="4">
+        <br>
+        <input type="button" name="plus" value=" + " 
+        OnClick="Calc.Input.value += ' + '">
+        <br>
+        <input type="button" name="minus" value=" - " 
+        OnClick="Calc.Input.value += ' - '">
+        <br>
+        <input type="button" name="div" value=" / " 
+        OnClick="Calc.Input.value += ' / '">
+        <br>
+        <input type="button" name="times" value=" x " 
+        OnClick="Calc.Input.value += ' * '">
+        <br>
+        <input type="text" name="input" size="4">
+        <input type="button" name="DoIt" value=" = "
+        OnClick="Calc.Input.value= 
+        eval(Calc.Input.value)">
+        <input type="text" name="output" size="8">
+
+        </form>
+    </body>
+</html>
+
