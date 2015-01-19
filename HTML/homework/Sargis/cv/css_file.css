@@ -1,14 +1,16 @@
 #head {
-    padding-left: 40% ;
-    padding-top: 2% ;
-    font-size: 1.5em;
+    margin: 3% 0 3% 0;
+    text-align:center;
+    font-size: 2.5em;
 }
 #photo {
     padding-right:10%;
+    padding-bottom:0;
     margin-left: 5%;
     float:left;
 }
 #inform {
+    font-style: italic;
     position:relative;
     float:left;
     margin-left:5%;
@@ -16,15 +18,17 @@
     margin-bottom:15%;
     padding: 2%;
     font-weight: lighter;
+    font-size: 1.1em;
 }
 .titles {
-   width:100%; 
-   font-size:1.5em;
-
-   margin-left:5%;
-   width:90%;
+    width:100%; 
+    font-size:1.7em;
+    color:rgb(64, 47, 215);
+    margin-left:5%;
+    width:90%;
 }
 .part1 {
+    width: 50%;
     float:left;
     padding-left: 5%;
     font-size:1.2em;
@@ -34,3 +38,4 @@
     padding-right:5%;
     font-size: 1.2em;
 }
+

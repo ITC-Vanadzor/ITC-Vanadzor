@@ -1,0 +1,127 @@
+#paper {
+    width: 828px;
+    margin: auto;
+    bac
+}
+
+#paper-top {
+    width: 828px;
+    margin: auto;
+    background-image: url("images/ptop.jpg");
+    background-repeat: no-repeat;
+    height: 126px
+}
+
+#paper-mid {
+    width: 828px;
+    margin: 0 auto;
+    background-image: url("images/pmid.jpg");
+    background-repeat: repeat-y;
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    padding-bottom: 75px;
+    padding-top: 7px;
+}
+
+.entry {
+    width: 720px;
+    display: block;
+    padding-top: 55px;
+    clear: both;
+    margin-left: 4px;
+}
+
+img.portrait {
+    background-image: url("images/frame.jpg");
+    background-repeat: no-repeat;
+    width: 109px;
+    height: 130px;
+    padding-top: 20px;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-bottom: 36px;
+    margin-left: 50px;
+    float: left;
+}
+
+h1.name {
+    width: 250px;
+    font-size: 42px;
+    color: #1b4491;
+    margin-bottom: 3px;
+    clear: both;
+}
+
+.self {
+    width: 350px;
+    float: left;
+    padding-top: 11px;
+    margin-left: 38px;
+    margin-bottom: 15px;
+}
+
+.self ul li.ad {
+    background-image: url("images/icn-ad.gif");
+}
+
+.self ul li {
+    background-repeat: no-repeat;
+    padding-left: 26px;
+    background-position: 0 .1em;
+    height: 25px;
+    display: block;
+    margin-top: -2px;
+}
+
+.self ul li.mail {
+    background-image: url("images/icn-mail.gif");
+}
+
+.self ul li.tel {
+    background-image: url("images/icn-tel.gif");
+}
+
+h2 {
+    width: 180px;
+    height: 23px;
+    text-align: left;
+    float: left;
+    font-size: 22px;
+    color: #1b4491;
+    margin-bottom: -12px;
+}
+
+.entry_left {
+    width: 200px;
+    display: block;
+    padding-top: 55px;
+    clear: both;
+    margin-left: 25px;
+    float: left;
+}
+
+.entry_right, .works {
+    width: 500px;
+    display: block;
+    padding-top: 60px;
+    margin-right: 50px;
+    float: right;
+}
+
+div.works li {
+    margin: 5px;
+    padding: 0;
+    float: left;
+    display: block;
+}
+
+p { 
+    font-size: 18px;
+}
+
+.p_small {
+    font-size: 16px;
+    color: rgb(113, 113, 112);
+    margin-top: -10px;
+}

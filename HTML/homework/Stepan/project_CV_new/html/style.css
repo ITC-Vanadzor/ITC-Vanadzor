@@ -1,0 +1,152 @@
+.sheet {
+width: 45%;
+float:left;
+margin:0px;
+padding:20px;
+border: 1px solid grey;
+border-left:white;
+border-top:white;
+height: 85%;
+}
+.picture {
+margin-left: 6%;
+float:left;
+width: 42%;
+height:17%;
+border-top: 1px solid lightsteelblue;
+border-bottom: 1px solid lightsteelblue;
+}
+.contact {
+float: right;
+margin-top: 6px;
+margin-right:7%;
+width: 40%;
+border: 1px solid lightsteelblue;
+height: 15%;
+}
+
+.info {
+float: left;
+margin:10px 70px 10px 30px;
+padding:1px;
+width: 88%;
+height: 20%;
+border: 1px solid lightsteelblue;
+}
+
+.infoprof {
+float: left;
+margin:10px 70px 10px 30px;
+padding:1px;
+width: 88%;
+height: 30%;
+border: 1px solid lightsteelblue;
+}
+
+.title {
+height: 15%;
+background: lightsteelblue;
+margin: 2px;
+border-bottom: 1px solid steelblue;
+font-size:80%;
+}
+
+.titleprof {
+height: 11%;
+background: lightsteelblue;
+margin: 2px;
+border-bottom: 1px solid steelblue;
+font-size:80%;
+}
+
+.profile{
+margin-left:3px;
+}
+.phone{
+margin:;
+font-size:75%;
+}
+.t1 {
+margin-top:5%;
+margin-bottom:3%;
+text-align:justify;
+}
+.t2{
+margin-top:0%;
+margin-bottom:2%;
+}
+.t3{
+margin-top:3%;
+}
+p.a1{
+text-align:right;
+margin-top:-6%;
+margin-right:2%;
+}
+p.a2{
+text-align:right;
+margin-top:-6%;
+margin-right:2%;
+}
+
+p.a3{
+text-align:right;
+margin-top:-6%;
+margin-right:2%;
+}
+.proftext1{
+width:20%;
+float:left;
+font-size:80%;
+margin-left:2%;
+margin-top:2%;
+}
+.proftext2{
+width:75%;
+float:left;
+font-size:78%;
+margin-top:2%;
+}
+
+.checkbox {
+float: left;
+margin-top:3px;
+width: 100%;
+height: 15%;
+border: 1px solid lightsteelblue;
+text-align:justify;
+}
+
+.words{
+padding:1px;
+margin:1px;
+float:right;
+border: blue;
+}
+
+.ul{
+font-size:90%;
+margin-left:-4%;
+-webkit-column-count:2;
+margin-top:-2%;
+column-gap:20%;
+}
+.skill{
+font-size:80%;
+margin-left:2%;
+margin-bottom:-1%;
+}
+
+.educ{
+text-align:right;
+margin-top:3%;
+margin-right:2;
+font-size:85%;
+}
+
+.degree{
+margin-top:3%;
+margin-left:3%;
+width:35%;
+font-size:85%;
+}

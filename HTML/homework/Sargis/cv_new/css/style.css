@@ -1,0 +1,58 @@
+#general-size{
+    margin: auto;
+    width: 80%;
+}
+#header-left {
+    float: left;
+    margin:2.5% 0 2% 0;
+    border-top:1px solid #C0C0C0;
+    border-bottom:1px solid #C0C0C0;
+    width: 49%;
+    height:30%;
+
+}
+#header-right {
+    margin:3% 0 2% 1%;
+    float: left;
+    border:1px solid #C0C0C0;
+
+    width: 48%;
+    height:28%;
+
+}
+#photo {
+    float: left;
+    width: 35%;height: 80%;
+    padding-top: 3%;
+}
+.title {
+    height: 15%;
+    background: #6098EA;
+    margin: 5px;
+    border-bottom: 1px solid black;
+}
+.block {
+    float: left;
+    margin-top:10px;
+    width: 100%;
+    height: 200px;
+    border: 1px solid black;
+}
+.checkbox-square {
+    width: 80px;    
+    margin: 40px auto;
+    position: relative;
+}
+.checkbox-square label {
+        cursor: pointer;
+        position: absolute;
+        width: 130px;
+        height: 40px;
+        font-size: 18px;
+        text-align: center;
+        top: 1%;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+        background: #fcfff4;
+        -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+

@@ -1,0 +1,157 @@
+/*Copyright Gor Julhakyan ** 2015 ** */
+
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	transition: all .5s;
+	box-sizing: border-box;
+}
+
+body {
+	
+	font: 1.1em 'Roboto Condesend', Arial, Helvetica, sans-serif;
+	color: #000;
+}
+
+
+
+
+
+
+/* CSS Grid
+===================================*/
+
+.container {
+	width: 70%;
+	height: 100%;
+	margin: 0 auto;
+	background: #FDFDFD;
+}
+
+.row {
+	margin-bottom: 20px;
+}
+
+.row:after {
+	display: block;
+	content: '.';
+	height: 0;
+	visibility: hidden;
+	clear: both;
+}
+
+.right {
+	text-align:end !important;
+}
+
+[class*="tab"] {
+	float: left;
+	display: inline;
+	margin-right: 10px
+	margin-left: 10%;
+}
+
+[class*="tab"]:last-child {
+	margin-right: 0;
+	float: right;
+}
+.tab1	{	width:	6.382978723% }
+.tab2	{	width:	14.89361702% }
+.tab3	{	width:	23.40425532% }
+.tab4	{	width:	31.91489362% }	
+.tab5	{	width:	40.42553191% }
+.tab6	{	width:	48.93617021% }
+.tab7	{	width:	57.44680851% }
+.tab8	{	width:	65.95744681% }
+.tab9	{	width:	74.46808511% }
+.tab10	{	width:	82.9787234%  }
+.tab11	{	width:	91.4893617%  }
+.tab12	{	width:	100% }
+
+
+.offset1	{	width:	6.382978723% }
+.offset2	{	width:	14.89361702% }
+.offset3	{	width:	23.40425532% }
+.offset4	{	width:	31.91489362% }
+.offset5	{	width:	40.42553191% }
+.offset6	{	width:	48.93617021% }
+.offset7	{	width:	57.44680851% }
+.offset8	{	width:	65.95744681% }
+.offset9	{	width:	74.46808511% }
+.offset10	{	width:	82.9787234% }
+.offset11	{	width:	91.4893617% }
+.offset12	{	width:	100% }
+
+.cont-content {
+	width: 82.9787234%;
+}
+
+/* Main
+===================================*/
+
+.cont {
+	padding-top:2%;
+	border-top: 2px solid #9FB2CF;
+	border-bottom: 2px solid #9FB2CF;
+}
+.manager {
+	font-size:1em;
+	color: #D88600;
+	margin-top: -1%;
+}
+
+a {
+	font-size: 0.8em;
+	margin-top: -8px;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #7201BC;
+}
+
+.cont1{
+	border: 2px solid #9FB2CF;
+	padding: 2px;
+}
+
+.contact {
+	width: 100%;
+	background: #9FB2CF;
+	padding-left: 5px;
+}
+
+.cont2{
+	column-count: 2;
+	display: table;
+    width: 100%;
+    box-sizing: border-box; 
+    margin-left: 0;
+    margin-right: 0;
+	margin-top: -1.8em
+}
+
+ul {
+	padding-left:;
+	position: relative;
+	left: -2em;	
+}
+
+li {
+	list-style-image: url(../images/arrow.png);
+	padding-left: 12px
+}
+
+/* Responsive CSS Grid
+===================================*/
+
+@media only screen and (max-width: 939px) {
+	.container {
+		width: 300px;
+	}
+
+	.tab1, .tab2, .tab3, .tab4, .tab5, .tab6, .tab7, .tab8, .tab9, .tab10, .tab11, .tab12 {	
+		width: 96% ;
+		font-size: 0.7em;
+	}
