@@ -1,5 +1,10 @@
 #!/bin/bash
 #Parameters
+#TODO -> there should be the other suites too (e.g. spades)
+#TODO -> therefore, it would be better to have a function which generates the cards, not to hand type them ;)
+#TODO -> the game doesnt let the user to get many cards in a column (the bottom cards werent shown properly)
+#TODO -> there are no error messages in case user enters invalid params (e.g. row number == 100)
+#TODO -> not clear when the game should be over; there is a check on game_over var which is never initialized
 cards_structure=(HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA  )
 declare -A showed_cards
 declare -A hidden_cards

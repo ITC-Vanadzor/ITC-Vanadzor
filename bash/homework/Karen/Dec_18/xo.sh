@@ -18,6 +18,7 @@ show(){
 		echo -n " $i ";
         for j in {1..3};
         do
+            #TODO -> i think, it may be easier to save the cell data as symbols (' ' for empty, 'X' for X etc). This will let you to remove the if statements below and simplify the code
 			if [ ${matrix[$i,$j]} -eq 0 ];then
 				echo -n "|   ";
 			elif [ ${matrix[$i,$j]} -eq 1 ]; then
@@ -39,6 +40,7 @@ input_x_o(){
 		input_x_o	
 	fi
 	if [ $x_or_o -eq 1 ];then
+        #TODO -> it would be sufficient to have just 1 var for the current player; no need to keep the same info as num ( 1 / 2 ) and text ( X / O )
 		x_or_o=2
 		player=O
 	else
@@ -46,6 +48,7 @@ input_x_o(){
 		player=X
 	fi
     matrix[$row,$col]=$x_or_o
+    #TODO -> typo in the var name (empy)
 	empy=$(empty_elements)
 	if [ $empy -gt 0 ];then
 		clear
