@@ -1,0 +1,173 @@
+body{
+    padding-bottom: 30px;
+    color: #303234;
+    font-family: arial;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin:0;
+}
+h2{
+    background: none repeat scroll 0 0 #cfdaf1;
+    font-size: 15px;
+    margin: 0;
+    padding: 5px;
+}
+a:hover{
+    text-decoration: underline !important;
+}
+hr{
+    border: 1px solid #aebad5;
+    margin: 2px 0 10px;
+}
+.body{
+    margin: 0 auto;
+    max-width: 1100px;
+    width: 100%;
+    background: url(images/body-bg.png) no-repeat bottom right;
+    border: 1px solid #fafafa;
+    padding-top: 20px; 
+}
+.wrapper{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px; 
+    padding-bottom: 90px;
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+.border{
+    border: 1px solid #AEBAD5;
+    padding: 2px;
+    margin-bottom: 14px;
+}
+.floatL{
+    float:left;
+}
+.floatR{
+    float:right;
+}
+.fullWidth{
+    width:100%;
+}
+.alignCenter{
+    text-align: center;
+}
+/*Header*/
+#header{
+    margin-bottom: 14px;
+}
+#header > div {
+    float: left;
+    width: 49%;
+}
+#header > div:first-child {
+    border-bottom: 1px solid #aebad5;
+    border-top: 1px solid #aebad5;
+    padding: 14px 0;
+}
+#header > div:last-child {
+    float: right;
+    margin-top: 6px;
+}
+#header img{
+    width: 100px;
+    margin: 0 10px;
+}
+#header h1 {
+    margin: 0;
+}
+#header p {
+    color: #f28522;
+    margin: 0;
+}
+#header > div:first-child div {
+    height: 130px;
+    position: relative;
+}
+#header > div:first-child div a {
+    bottom: 0;
+    position: absolute;
+    text-decoration: none;
+    color: #2424ED;
+}
+#header .contacts {
+    float: left;
+    width: 280px;
+}
+#header .contacts > li {
+    background: url("images/tel.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    padding-left: 24px;
+    margin: 10px 5px;
+}
+#header .contacts > li a{
+    color: #303234;
+    text-decoration: none;
+}
+#header .address {
+    margin-top: 30px;
+}
+#header .contacts > li:last-child {
+    background: url("images/mail.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+}
+.content{
+    padding: 17px 14px;
+}
+
+.profile tr td,.education tr td{
+    vertical-align: top;
+    padding: 5px 0;
+}
+.profile tr td:first-child{
+    width: 200px;
+}
+.education{
+    width: 100%;
+}
+.education tr td:last-child{
+    text-align: right;
+    width: 200px;
+}
+.drop-menu{
+    position: relative;
+}
+.drop-menu span {
+    cursor: pointer;
+    font-weight: bold;
+}
+.drop-menu ul {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #ccc;
+    display: none;
+    left: 20px;
+    padding: 10px 20px !important;
+    position: absolute;
+    font-size: 14px;
+}
+.drop-menu>li{
+    height: 30px;
+}
+.drop-menu li:hover ul {
+    display: block;
+}
+.drop-menu li div.arrow-left {
+    border-bottom: 5px solid transparent;
+    border-left: 10px solid #303234;
+    border-top: 5px solid transparent;
+    float: left;
+    height: 0;
+    margin: 5px 5px 0 0;
+    width: 0;
+}
+.drop-menu li:hover div.arrow-left {
+    border-color: #303234 transparent transparent;
+    border-style: solid;
+    border-width: 10px 5px;
+}

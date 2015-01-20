@@ -90,11 +90,11 @@ input:focus::-moz-placeholder {  /* Firefox 19+ */
 #form-creat-account{
     display: none;
 }
-.register-form .text-input-wrapper{
+.register-form .text-input-wrapper, .forgot-page .text-input-wrapper{
     padding-right: 14px; 
     margin: 20px 0;
 }
-.register-form .text-input-wrapper input{
+.register-form .text-input-wrapper input, .forgot-page .text-input-wrapper input{
     padding: 0px 6px;
     border: 1px solid #bdc4c9;
     width: 100%;
@@ -142,7 +142,7 @@ input:focus::-moz-placeholder {  /* Firefox 19+ */
 .register-form .submit-input-wrapper{
     float: right;
 }
-.register-form .submit-input-wrapper input{
+.register-form .submit-input-wrapper input, .forgot-page  .submit-input-wrapper input{
     background: rgba(0,87,237,1);
     background: -moz-linear-gradient(top, rgba(0,87,237,1) 0%, rgba(22,138,221,1) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,87,237,1)), color-stop(100%, rgba(22,138,221,1)));
@@ -288,4 +288,18 @@ input:focus::-moz-placeholder {  /* Firefox 19+ */
 .modal-dialog .modal-cont ul:last-child{
     float: right;
     margin-right: 25px;
+}
+.forgot-link{
+    margin-top: 10px;
+    font-size: 13px;
+}
+.forgot-page{
+    width: 500px;
+    margin: 0 auto;
+}
+.forgot-cont{
+    font-size: 13px;
+}
+.forgot-page .submit-input-wrapper input{
+    float: right;
 }
