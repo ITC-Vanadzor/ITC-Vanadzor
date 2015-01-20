@@ -11,7 +11,7 @@ function ascriptionSubtract() {
 }
 
 function subtract(a, b) {
-	return (+a - +b);
+	return a - b;
 }
 
 function ascriptionMultiply() {
@@ -19,7 +19,7 @@ function ascriptionMultiply() {
 }
 
 function multiply(a, b) {
-	return (+a * +b);
+	return a * b;
 }
 
 function ascriptionDivide() {
@@ -27,7 +27,7 @@ function ascriptionDivide() {
 }
 
 function divide(a, b) {
-	return (+a / +b);
+	return a / b;
 }
 
 function equal() {
