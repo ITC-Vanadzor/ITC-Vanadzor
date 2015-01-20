@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>sort</title>
+	</head>
+	<body>
+		<p>Click the button to sort the array in ascending order.</p>
+		<p>Import to  this format "n1 n2 n3 ... "</p>
+		<input id="str">
+		<button onclick="myFunction()">Try it</button>
+		<p id="demo"></p>
+		<script>
+			function myFunction() {
+				var num=str.value.split(" ");
+				num.sort(function(a, b){return a-b});
+				document.getElementById("demo").innerHTML = num;
+			}			
+		</script>
+	</body>
+</html>
+
