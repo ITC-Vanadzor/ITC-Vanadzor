@@ -1,0 +1,14 @@
+<html>
+<body>
+<button onclick="getDigit()">Try</button>
+<p id="demo"></p>
+<script>
+function getDigit() {
+    var str="sda1sd3asfsd54fsdf7457f7"
+    var result = str.match(/\d/g);
+    console.log(result);
+   document.getElementById("demo").innerHTML = result;
+}
+</script>
+</body>
+</html>
