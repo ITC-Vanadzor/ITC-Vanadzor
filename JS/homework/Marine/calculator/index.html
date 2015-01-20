@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Calculator</title>
+	</head>
+	<body>
+		<script>
+			function plus()
+				{
+					rezult.value=num1.value-(-1)*num2.value;
+				}	
+			function minus()
+				{
+					rezult.value=num1.value-num2.value;
+				}	
+			function umn()
+				{
+					rezult.value=num1.value*num2.value;
+				}
+			function del()
+				{
+					rezult.value=num1.value/num2.value;
+				}	
+		</script>
+		<input type="button" value=" + " onclick="plus()">
+		<input type="button" value=" - " onclick="minus()">
+		<input type="button" value=" * " onclick="umn()">
+		<input type="button" value=" / " onclick="del()">
+		<br><br>
+		<input id="num1" size="15px">
+		<input id="num2" size="15px">
+		<input id="rezult">
+	</body>
+</html>
