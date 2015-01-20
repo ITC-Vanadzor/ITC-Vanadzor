@@ -1,0 +1,76 @@
+
+.link1:link {color:#808080; background-color:transparent; text-decoration:none}
+.link1:hover {color:#808080; background-color:transparent; text-decoration:none}
+.link1:visited {color:#808080; background-color:transparent; text-decoration:none}
+.link2:link {color:#3399FF; background-color:transparent; text-decoration:none}
+.link2:hover {color:#3399FF; background-color:transparent; text-decoration:underline}
+.link2:visited {color:#3399FF; background-color:transparent; text-decoration:none}
+.link3:link {color:#808080; text-decoration:none}
+.link3:hover {color:#808080; text-decoration:underline}
+.link3:visited {color:#808080; text-decoration:none}
+
+#header {
+    color:B5AAAA;
+    padding:2%;
+    font-size:100%;
+    width:50%;
+    float:left;
+}
+#case {
+width:3%;
+}
+#picture {
+    height:86%;
+    width:40%;  
+    float:left;
+    padding:5%;
+    padding-bottom:3%;
+    margin-top:6%;
+}
+.inp {
+	width:63%;
+	padding:2%;
+}
+button {
+color:white;
+background-color:#0080FF;
+padding:4%;
+border-radius: 5px;
+padding-left:27%;
+padding-right:27%;
+}
+#body {
+    width:36%;
+    height:80%;
+    float:left;
+    padding:2%;
+    margin-bottom:13%;
+    margin-left:3%;
+}
+#body2 {
+margin-left:10%;
+}
+p {
+	color: #000066;
+	font-size:200%;
+}
+#sign_in {
+text-align:center;
+width:67%;
+margin-top:2%;
+}
+#download {
+	float:left;
+	padding:2%;
+	margin-left:30%;
+}
+#logo {
+	margin-left:28%;
+}
+#footer {
+    color:B5AAAA;
+    clear:both;
+    text-align:center;
+    padding:2%;
+}
+
