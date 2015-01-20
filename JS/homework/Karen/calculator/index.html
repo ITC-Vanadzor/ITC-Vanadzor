@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/functions.js"></script>
+    </head>
+    <body onload="start()">
+        <div class="wrapper">
+            <table>
+                <tr>
+                    <td id="view" colspan="4"></td>
+                </tr>
+                <tr>
+                    <td><button onclick="reply_click(this.id)" id="num7">7</button></td>
+                    <td><button onclick="reply_click(this.id)" id="num8">8</button></td>
+                    <td><button onclick="reply_click(this.id)" id="num9">9</button></td>
+                    <td><button onclick="reply_click(this.id)" id="obelus">/</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="reply_click(this.id)" id="num4">4</button></td>
+                    <td><button onclick="reply_click(this.id)" id="num5">5</button></td>
+                    <td><button onclick="reply_click(this.id)" id="num6">6</button></td>
+                    <td><button onclick="reply_click(this.id)" id="times">*</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="reply_click(this.id)" id="num1">1</button></td>
+                    <td><button onclick="reply_click(this.id)" id="num2">2</button></td>
+                    <td><button onclick="reply_click(this.id)" id="num3">3</button></td>
+                    <td><button onclick="reply_click(this.id)" id="minus">-</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button onclick="reply_click(this.id)" id="num0">0</button></td>
+                    <td><button onclick="reply_click(this.id)" id="dot">.</button></td>
+                    <td><button onclick="reply_click(this.id)" id="plus">+</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button onclick="reply_click(this.id)" id="clear">C</button></td>
+                    <td colspan="2"><button onclick="reply_click(this.id)" id="result">=</button></td>
+                </tr>
+            </table>   
+            <p id="operation"></p>
+            <p id="temp"></p>
+        </div>
+    </body>
+</html>
