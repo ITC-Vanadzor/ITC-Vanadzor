@@ -1,0 +1,40 @@
+body {
+    font-family: arial;
+}
+input{
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px;
+}
+.wrapper{
+    width: 1000px;
+    margin: 0 auto;
+}
+h2 {
+    color: blue;
+    font-size: 20px;
+    margin: 5px 0;
+}
+button{
+    background: none repeat scroll 0 0 #000;
+    border: 1px solid #ff0000;
+    color: #ffff00;
+    font-weight: bold;
+    width: 100%;
+}
+
+td {
+    background: none repeat scroll 0 0 #000000;
+    color: #00ff00;
+}
+td.view {
+    background: none repeat scroll 0 0 #000;
+}
+td#view {
+    height: 40px;
+    padding: 5px;
+    text-align: right;
+    vertical-align: top;
+    width: 160px;
+}
