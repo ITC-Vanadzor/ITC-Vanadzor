@@ -3,42 +3,42 @@ body {
 }
 
 .header1 {
-	background-color:red;
 	width:40%;
-	height:20%;
+	height:auto;
 	float:left
 }
 
 .header2 {
 	float:left;
 	width:30%;
-	background-color:white;
 }
 
 .header3 {
 	width:65%;
-	height:80%;
+	height:auto;
 	margin-left:38%;
-	background-color:blue;
 }
 
 .header4 {
-	background-color:green;
 	width:30%;
-	height:20%;
+	height:auto;
 	float:left
 }
 
 .header5 {
-	background-color:green;
-    width:12%;
+    width:70%;
     float:left;
-	margin-left:10%;
-	margin-top:10%
+	height:auto
+}
+
+.header6 {
+    width:70%;
+    float:left;
+    height:auto
 }
 
 #face {
-	height:80%;
+	height:6em;
 	margin-left:5%
 }
 
@@ -58,23 +58,23 @@ hr {
 	margin-top:1%
 }
 
-p {
+.p1 {
 	margin-left:3%;
 	border-style:solid;
 	border-width:2px;
-	border-color:blue;
-	height:80%
+	border-color:#B2D1FF;
+	height:auto
 }
 
 .span1 {
 	float:left;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #000;
-	background-color:white;
+	border-bottom-color: blue;
+	background-color:#B2D1FF;
 	margin:1%;
 	padding-right:71%;
-	font-size:100%
+	font-size:auto
 }
 
 .span2 {
@@ -89,6 +89,109 @@ p {
 	font-size:80%
 }
 
+.span4 {
+    float:left;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: blue;
+    background-color:#B2D1FF;
+    margin:1%;
+	width:98%;
+    font-size:auto
+}
+
+.td1 {
+	width:18%
+}
+
+.td2 {
+	width:60%
+}
+
 .logo {
 	height:20%;
 }
+
+
+
+ul.dropdown li { position: relative; }
+ul.dropdown,
+ul.dropdown-inside {
+list-style-type: none;
+padding: 0;
+}
+ul.dropdown-inside {
+position: absolute;
+left: -9999px;
+}
+ul.dropdown li.dropdown-top {
+display: inline;
+float: left;
+margin: 0 1px 0 0;
+}
+ul.dropdown li.dropdown-top a {
+padding: 3px 10px 4px;
+display: block;
+}
+ul.dropdown a.dropdown-top { background: #efefef; }
+ul.dropdown a.dropdown-top:hover { padding: 2px 10px 5px; }
+ul.dropdown li.dropdown-top:hover .dropdown-inside {
+display: block;
+left: 0;
+}
+ul.dropdown .dropdown-inside { background: #fff; }
+ul.dropdown .dropdown-inside a:hover { background: #efefef; }
+
+
+.slideOne {
+	width: 50px;
+	height: 10px;
+	background: #333;
+	margin: 20px auto;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	position: relative;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+}
+
+.slideOne label {
+	display: block;
+	width: 16px;
+	height: 16px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+
+	-webkit-transition: all .4s ease;
+	-moz-transition: all .4s ease;
+	-o-transition: all .4s ease;
+	-ms-transition: all .4s ease;
+	transition: all .4s ease;
+	cursor: pointer;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+
+	-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	background: #fcfff4;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+}
+
+.slideOne input[type=checkbox]:checked + label {
+	left: 37px;
+}
+
