@@ -3,6 +3,9 @@ function isInt(n) {
 }
 function reply_click(clicked_id) {
     click_button = document.getElementById(clicked_id).innerHTML;
+    
+document.getElementById("curr_button").innerHTML = click_button;
+
     if (isInt(click_button) || (click_button==".")) {
         if (flag) {
             document.getElementById("view").innerHTML = "";
@@ -19,8 +22,8 @@ function reply_click(clicked_id) {
             result = temp;
             viewResult(result);
         }
-        //document.getElementById("operation").innerHTML = operation;
-        //document.getElementById("temp").innerHTML = temp;
+document.getElementById("operation").innerHTML = operation;
+document.getElementById("temp").innerHTML = temp;
         flag = true;
     }
 }
@@ -37,7 +40,12 @@ function operations(operation) {
             result *= temp;
             break;
         case "/":
-            result /= temp;
+            if(temp != 0){
+                result /= temp;
+            }else{
+                alert('Error!!!');
+                start();
+            }
             break;
         case "C":
             start();
