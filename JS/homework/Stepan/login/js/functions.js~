@@ -9,6 +9,15 @@ function addSelectYears() {
   }
 }
   
+function addSelectDays(daysCount) {
+  for(i=1;i<=daysCount;i++){
+      var x = document.getElementById("day");
+      var option = document.createElement("option");
+      option.text = i;
+      x.add(option);
+  }
+}
+
 function validateForm() {
     console.log("Entering validation function...");
     var x = document.forms["myForm"]["name"].value;
