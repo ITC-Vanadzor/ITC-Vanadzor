@@ -138,7 +138,7 @@ h1 {
 }
 
 .dropDownList li ul {
-    background: none repeat scroll 0 0 rgba(68, 57, 57, 0.76);
+    background: none repeat scroll 0 0 rgba(68, 57, 57, 1);
     border: 1px solid #ccc;
     display: none;
     left: 20px;
