@@ -63,8 +63,8 @@ font-size:80%;
 margin-left:3px;
 }
 .phone{
-margin:;
 font-size:75%;
+height:auto;
 }
 .t1 {
 margin-top:5%;
@@ -147,6 +147,16 @@ font-size:85%;
 .degree{
 margin-top:3%;
 margin-left:3%;
-width:35%;
 font-size:85%;
+tab-size:80px;
 }
+#tab {
+size:18;
+}
+
+.edu {
+height:auto;
+}
+
+.split-para      { display:block;margin:20px 20px 0px 20px;}
+.split-para span { display:block;float:right;width:13%;margin-left:10px;}
