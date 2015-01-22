@@ -26,10 +26,41 @@
     padding-top: 3%;
 }
 .title {
-    height: 15%;
-    background: #6098EA;
-    margin: 5px;
-    border-bottom: 1px solid black;
+    height: 11%;
+    background: rgba(96, 152, 234, 0.59);
+    margin: 5px; 
+    padding-top: 6px;
+    padding-left:3px;
+}
+.block-content {
+    border-top:1px solid rgba(96, 152, 234, 0.59);
+    width: 99%;
+    margin:auto;
+}
+.block-content ul {
+        width: 48%;
+}
+
+.block-content ul li {
+    background-repeat: no-repeat;
+    padding-left: 26px;
+    height: 25px;
+    display: block;
+    margin-top: -2px;
+    background-position: 0.1em;
+}
+.block-content pre {
+    position: relative;
+    left: 97px;
+    margin-top: -94px;
+}
+
+.block-content ul li.mail {
+    background-image: url("../images/mail.png");
+}
+
+.block-content ul li.tel {
+    background-image: url("../images/tel.png");
 }
 .block {
     float: left;
@@ -37,6 +68,53 @@
     width: 100%;
     height: 200px;
     border: 1px solid black;
+}
+
+.profile-left {
+    float:left;
+    width:20%;
+    padding-top: 2%;
+    padding-left: 2%;
+    border-top: white;
+    height:50px;
+    font-size: solid; 
+}
+.profile-right {
+    width: 67%;
+    height: 60px;
+    float: left;
+    padding: 2% 10px 1% 2%;
+}
+.profile-right ul {
+    width:60px;
+    margin-top: -1px;
+    list-style: none;
+}
+.profile-right ul li {
+    height: 14px;
+    width: 152px;
+    position: relative;
+    color: rgba(23, 33, 232, 0.92);
+}
+.profile-right ul li ul {
+    visibility: hidden;
+}
+.profile-right ul li:hover > ul {
+    visibility: visible;
+    width: 80px;
+    height: 60px;
+    background: #B4C5CB;
+}
+.key-skill {
+    padding-top: 1%;
+    padding-left: 1%;
+    width: 50%;
+}
+ .key-skill ul li {
+    background-position: 0.1em;
+    padding-top: 4px;
+    background-repeat: no-repeat;
+    background-image: url("../images/icon1.png");
 }
 .checkbox-square {
     width: 80px;    
