@@ -1,13 +1,14 @@
 <html>
-  <head>
-  <link rel="stylesheet" href="css/style.css"></link>
-    <script src="js/functions.js"></script>
-  </head>
-  <body onload="addSelectYears()">
-    <div class="wrapper">
-      <form name="myForm" action="request.html" onsubmit="return validateForm()">
+<head>
+<link rel="stylesheet" href="css/style.css"></link>
+<script src="js/functions.js"></script>
+</head>
+<body onload="addSelectYears()">
+<div class="wrapper">
+    <center>
+    <form name="myForm" action="request.html" onsubmit="return validateForm()">
         <div class='input-text'>
-              <input type="text" name="name" placeholder="Name"/>
+            <input type="text" name="name" placeholder="Name"/>
         </div><br>
         <div class='input-text'>
             <input type="text" name="lastname" placeholder="Last name"/>
@@ -18,33 +19,38 @@
         <div class='input-text'>
             <input type="pass" name="pass" placeholder="Password"/>
         </div><br>
-        <div class="checkbox">
+        <div id="hide">
             <input type="radio" name="sex" value="male" checked>Male
             <input type="radio" name="sex" value="female">Female
         </div><br>
-	 <div class='input-select'>
-          <select name="year" id="year">
-              <option>Set year</option>
-          </select>
-          <select name="month" id="month">
-              <option>January</option>
-              <option>Febuary</option>
-              <option>March</option>
-              <option>April</option>
-              <option>May</option>
-              <option>June</option>
-              <option>July</option>
-              <option>August</option>
-              <option>September</option>
-              <option>October</option>
-              <option>November</option>
-              <option>December</option>
-          </select>
-       </div><br>
-            <div class='input-submit'>
-          <input type="submit" name="submit" value="Create account"/>
+        <div id='hid'>
+            <select name="year" id="year">
+                <option>Set year</option>
+            </select>
+            <select name="month" id="month">
+                <option>January</option>
+                <option>Febuary</option>
+                <option>March</option>
+                <option>April</option>
+                <option>May</option>
+                <option>June</option>
+                <option>July</option>
+                <option>August</option>
+                <option>September</option>
+                <option>October</option>
+                <option>November</option>
+                <option>December</option>
+            </select>
+        </div><br>
+        <div class='input-submit'>
+            <input style="background-color:lightseagreen"; type="submit" name="submit" value="Create account"/>
         </div>
-      </form>
-    </div>
-  </body>
+    </form>
+        <div class="onclick">
+            <button style="background-color:darkseagreen"; onclick="hide()">Hide some fields</button>
+            <button style="background-color:darkseagreen"; onclick="show()">Show some fields</button>
+        </div>
+     </center>
+</div>
+</body>
 </html>
