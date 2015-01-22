@@ -2,14 +2,14 @@
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="../css/style.css" type="text/css">
-<script src="../js/script.js" type="text/javascript"></script>
+<script src="../js/calc_functions.js" type="text/javascript"></script>
 <title>Калькулятор</title>
 </head>
 
 <body>
-<form>
+
 	
-<div id="blok1">		<input type="text" id="input1" size="16" class="display" onchange="get_1();"></div>
+<div id="blok1">		<input type="text" id="input1" placeholder="INPUT NUMBER            " size="16" class="display" onchange="get_1();"></div>
 		<div id="blok2"><input type="button" id="plus" value="+" OnClick="plus1();">
 		<br>
 		<input type="button" id="minus" value="-" OnClick="minus1();">
@@ -17,12 +17,12 @@
 		<input type="button" id="mul" value="x" OnClick="mul1();">
 		<br>
 		<input type="button" id="div"  value="/" OnClick="div1();"></div>
-	<div id="blok3">	<input type="text" id="input2" size="16" class="display" onchange="get_2();"></div>
+	<div id="blok3">	<input type="text" id="input2" placeholder="INPUT NUMBER            " size="16" class="display" onchange="get_2();"></div>
 	
 	
 		<div id="blok4"><input type="button" id="doit" value="=" OnClick="doit1();"></div>
 		
-	<div id="blok5">	<input type="text" id="input3" size="16" class="display"></div>
+	<div id="blok5">	<input type="text" id="input3" size="16" class="display" placeholder="RESULT                      " readonly></div>
 <div id="blok6">	<input type="button" id="clear" value="c" OnClick="clear1();"></div>
 		
 
