@@ -121,19 +121,29 @@ hr{
     padding: 17px 14px;
 }
 
-.profile tr td,.education tr td{
-    vertical-align: top;
+.profile ul li,.education ul li{
     padding: 5px 0;
 }
-.profile tr td:first-child{
-    width: 200px;
+.profile li ul li {
+    float: right;
+    width: 75%;
+}
+.profile li ul li:first-child{
+    width: 20%;
+    float: left;
 }
 .education{
     width: 100%;
 }
-.education tr td:last-child{
+.education ul li{
+	float: left;
+	width: 75%;
+	text-align: left;
+}
+.education ul li:last-child{
+    float: right;
+    width: 20%;
     text-align: right;
-    width: 200px;
 }
 .drop-menu{
     position: relative;
