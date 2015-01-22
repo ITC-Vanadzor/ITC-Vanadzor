@@ -1,4 +1,4 @@
-<!Doctype>
+<!Doctype html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -7,15 +7,60 @@
     </head>
     <body>
         <div id="main">
-            <div class="form"> Name : <input type="text" placeholder="Name"> </div>
-            <div class="form"> Surname : <input type="text" placeholder="Surename"></div>
-            <div class="form"> Email: <input type="text" placeholder="Email">  </div>
-            <div class="form"> Password: <input type="text" placeholder="Password"> </div>
-            <div class="form"> Birthday: <select> </div>
-            <div class="form"></div>
-            <div class="form"></div>
-            <div class="form"></div>
+        <form id="reg">
+            <div ><label> Name : </label> <input type="text"  placeholder="Name" > </div>
+            <div ><label> Surname : </label> <input type="text" placeholder="Surename" ></div>
+            <div ><label> Email:</label> <input type="text" placeholder="Email">  </div>
+            <div ><label>  Password:</label> <input type="text" placeholder="Password"> </div>
+            <div ><label> Birthday: </label>
+                <select> 
+                    <option>day</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option> 
+                </select> 
+                &nbsp;
+                <select> 
+                    <option>month</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option> 
+                    <option>8</option> 
+                    <option>9</option> 
+                    <option>10</option> 
+                    <option>11</option> 
+                    <option>12</option> 
+                </select> 
+                &nbsp;
+                <select> 
+                    <option>year</option>
+                    <option>1985</option>
+                    <option>2000</option>
+                    <option>2003</option>
+                    <option>2004</option>
+                    <option>2005</option>
+                    <option>2006</option>
+                    <option>2007</option> 
+                    <option>2008</option> 
+                    <option>2009</option> 
+                    <option>2010</option> 
+                    <option>2011</option> 
+                    <option>2012</option> 
+                </select>      
+            </div>
+            <div id="age-style"> <label> Age : </label> <input type="number"step="1">  </div>
+            <div ></div>
+            <div ></div>
             <input type="submit" value="Submit">
+        </form>
         </div>    
     </body>
 </html>
