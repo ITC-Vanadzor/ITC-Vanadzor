@@ -2,16 +2,22 @@
 <html>
 	<head>
 		<title>Calculator</title>
-		 <script type="text/javascript" src="jasmine 2.1.3/src/calculator.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script type="text/javascript" src="jasmine 2.1.3/src/calculator.js"></script>
 	</head>
 	<body>
-		<input type="button" value=" + " onclick="plus()">
-		<input type="button" value=" - " onclick="minus()">
-		<input type="button" value=" * " onclick="umn()">
-		<input type="button" value=" / " onclick="del()">
+<input class="textbox" type="number" id="num1"> 
+<br><br> 
+
+ 
+<a href="#" class="myButton" onclick="plus()">+</a>
+<a href="#" class="myButton" onclick="minus()">-</a>
+<a href="#" class="myButton" onclick="umn()">*</a>
+<a href="#" class="myButton" onclick="del()">/</a>
+
 		<br><br>
-		<input id="num1" size="15px">
-		<input id="num2" size="15px">
-		<input id="rezult">
+		<input id="num2" class="textbox" type="number"><br><br>
+		<a href="#" class="myButton" onclick="equal()">=</a><br><br>
+		<input id="result" class="textbox" type="text">
 	</body>
 </html>
