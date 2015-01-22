@@ -1,20 +1,27 @@
 #main {
-    width: 293px;
+    box-sizing:border-box;
+    width: 400px;
     height: 330px;
-    border: 1px solid;
+    padding:20px;
     margin: 10% 20% 10% 30%;
     background: rgba(140, 139, 125, 0.45);
     border-radius: 3px;
     border:1px solid; 
 }
-.form {
-    width: 275px;
-    height: 40px; 
-    margin-left:3%;
-    font-size: 18px;
+#reg {
+  font-size:1.2em;
 }
-.form input {
-    width: 50%;
-    margin: 7px 2px auto 0px;
-    font-size: 16px;
+#age-style {
+    position: relative;
+    left: -174px;
+}
+#age-style input {
+    width: 40px;
+  
+}
+
+#reg div {
+   text-align:right;    
+   padding:3px 0;
+   height:30px;
 }
