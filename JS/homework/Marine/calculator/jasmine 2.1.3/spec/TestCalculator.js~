@@ -1,7 +1,0 @@
-window.alert("aaaaaa")
-describe("Calculator", function() {
-var obj=new plus();
-it("plus", function() {
-expect(obj.getState()).toEqual(9);
-});
-});
