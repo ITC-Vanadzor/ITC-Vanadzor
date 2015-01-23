@@ -1,6 +1,6 @@
 describe("Calculator test", function() {
-	it("plus test", function() {
-		expect(plus(0.2,0.1)).toEqual(0.3);
+    it("plus test", function() {
+		expect(plus(2,1)).toEqual(3);
 	});
 	it("plus test", function() {
 		expect(plus(-2,3)).toBe(1);
