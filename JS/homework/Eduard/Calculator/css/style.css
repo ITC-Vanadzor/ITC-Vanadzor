@@ -1,32 +1,82 @@
 body {
-margin-top:20%;
-margin-left:30%;
-
+background-image: url(../images/fon.jpg);
+background-size: cover;
 }
+
 input.display {
-width: 150px; text-align: right;
+width: 100%; 
+text-align: right;
+padding:5%;
 }
 
 input[type= button] {
-width: 40px; height: 30px;
+width:200%; 
+height: 10%;
+background-color:#3f4c6b;
+color:black;
+border-radius:10px;
+
+}
+input[type=text] {
+background-color:#A3DBB9;
+border-radius:10px;
+box-shadow: 0 0 20px rgba(50,0,200,0.5);
+background: rgb(213,206,166);
+background: -moz-radial-gradient(center, ellipse cover,  rgba(213,206,166,1) 0%, rgba(201,193,144,1) 50%, rgba(183,173,112,1) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(213,206,166,1)), color-stop(50%,rgba(201,193,144,1)), color-stop(100%,rgba(183,173,112,1)));
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(213,206,166,1) 0%,rgba(201,193,144,1) 50%,rgba(183,173,112,1) 100%);
+background: -o-radial-gradient(center, ellipse cover,  rgba(213,206,166,1) 0%,rgba(201,193,144,1) 50%,rgba(183,173,112,1) 100%);
+background: -ms-radial-gradient(center, ellipse cover,  rgba(213,206,166,1) 0%,rgba(201,193,144,1) 50%,rgba(183,173,112,1) 100%);
+background: radial-gradient(ellipse at center,  rgba(213,206,166,1) 0%,rgba(201,193,144,1) 50%,rgba(183,173,112,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#b7ad70',GradientType=1 );
+
+}
+
+#input3 {
+box-shadow: 0 0 10px rgba(0,0,100,0.5);
+background: rgb(169,3,41);
+background: -moz-radial-gradient(center, ellipse cover,  rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(169,3,41,1)), color-stop(44%,rgba(143,2,34,1)), color-stop(100%,rgba(109,0,25,1)));
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+background: -o-radial-gradient(center, ellipse cover,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+background: -ms-radial-gradient(center, ellipse cover,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+background: radial-gradient(ellipse at center,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 );
+color:white;
+}
+input[type= button]:hover {
+width: 200%; 
+height: 10%;
+color:white;
+border-radius:10px;
+background-color: orange;
+
 }
 #blok1 {
 float:left;
-background-color:green;
+margin-top:11%;
 }
 #blok2 {
 float:left;
-background-color:red;
+margin-left:1%;
 }
 #blok3 {
 float:left;
-background-color:blue;
+margin-left:4%;
+margin-top:11%;
 }
 #blok4 {
 float:left;
-background-color:yellow;
+margin-left:1%;
+margin-top:10%;
 }
 #blok5 {
 float:left;
-background-color:green;
+margin-left:4%;
+margin-top:11%;
+}
+#blok6 {
+float:left;
+margin-left:1%;
+margin-top:10%;
 }

@@ -109,6 +109,7 @@ function dot() {
 	document.getElementById('equal').value += '.';
 }
 
+
 function equal() {
 	second = document.getElementById('equal').value;
 	if (op == "/" && second == 0) {
