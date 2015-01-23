@@ -1,48 +1,57 @@
 operator=0
+function type(a) {
+    var res1 = /^\d*\.?\d*$/ ;
+           if (! res1.test(a)) {return false; }
+else {return true;}    
+}
 function plus(a,b)
 	{
-		operatop=" + ";
+	   
+        operator=" + ";
 		return ((10*a)+(10*b))/10;
     }   
 function minus(a,b)
     {
+	
 		operator=" - ";       
-		return a-b;
+		
+        return a-b;
+        
     }   
 function umn(a,b)
     {
+	   
 		operator=" * ";        
 		return a*b;
     }
 function del(a,b)
     {
-		try {
-			if (b==0) throw "num2 can not accept the value 0";
-			operator=" / "
+
+					operator=" / "
         	return a/b;
-		}				
-		catch(err) {
-			window.alert(err);
-		}
+		
     }   
 function equal() {
-var num_1=document.getElementById("num1").value;
-console.log(typeof	num_1);
-var num_2=document.getElementById("num2").value;
-console.log(num_2)
+num_1=document.getElementById("num1").value;
+
+num_2=document.getElementById("num2").value;
+if (! type(num_1)){alert("num1 is not number");}
+else if (! type(num_2)){alert("num2 is not number");}
+else
 	if (operator==" + ") { 	
 		document.getElementById("result").value = plus(num_1,num_2);
-	}
-	if (operator==" - ") { 	
+    }
+else	if (operator==" - ") { 	
 		document.getElementById("result").value = minus(num_1,num_2);
 	}
-	if (operator==" * ") { 	
+else	if (operator==" * ") { 	
 		document.getElementById("result").value = umn(num_1,num_2);
 	}
-	if (operator==" / ") { 	
-		document.getElementById("result").value = del(num_1,num_2);
+else	if (operator==" / ") { 	if (num_2==0){ alert("num2 is not 0")}else {
+		document.getElementById("result").value = del(num_1,num_2);}
 	}
 }
+
 
 
 
