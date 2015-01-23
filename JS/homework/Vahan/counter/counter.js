@@ -1,8 +1,9 @@
+var keys = document.querySelectorAll(".buttons span")
+var operators = ["+", "-", "*", "/"]
 function sum(){
-    var x = document.getElementById("leftOp").value;
-    var y = document.getElementById("rightOp").value;
-    var result = x + y;
-    document.getElementById("demo").innerHTML = result;
+    var input = document.querySelector(".screen");
+    var inputVal = input.innerHTML;
+    inputVal += "+";
 }
 
 function equal(){
