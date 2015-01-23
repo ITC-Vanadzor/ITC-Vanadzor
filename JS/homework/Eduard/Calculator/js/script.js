@@ -28,5 +28,5 @@ function clear1() {
 	document.getElementById('input3').value = 0;
 	document.getElementById('input2').value = 0;
 	document.getElementById('input1').value = 0;
-	 z=0;
+	 z='';
 };
