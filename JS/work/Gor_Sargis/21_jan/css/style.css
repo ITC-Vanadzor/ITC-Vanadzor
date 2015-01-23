@@ -1,6 +1,6 @@
 #main {
     box-sizing:border-box;
-    width: 400px;
+    width: 405px;
     height: 330px;
     padding:20px;
     margin: 10% 20% 10% 30%;
@@ -13,12 +13,24 @@
 }
 #age-style {
     position: relative;
-    left: -174px;
+    left: -187px;
 }
 #age-style input {
     width: 40px;
   
 }
+#submit-button {
+    text-align: center;
+    margin: 0 auto;
+    font-size:20px;
+    width: 127px;
+    height:48px;
+}
+#gender {
+    position: relative;
+    left: -43px;
+}
+
 
 #reg div {
    text-align:right;    
