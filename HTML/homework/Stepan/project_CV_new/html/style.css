@@ -3,10 +3,10 @@ width: 45%;
 float:left;
 margin:0px;
 padding:20px;
-border: 1px solid grey;
+border: 1px white;
 border-left:white;
 border-top:white;
-height: 85%;
+height: 80%;
 }
 .picture {
 margin-left: 6%;
@@ -63,8 +63,8 @@ font-size:80%;
 margin-left:3px;
 }
 .phone{
-margin:;
 font-size:75%;
+height:auto;
 }
 .t1 {
 margin-top:5%;
@@ -76,7 +76,7 @@ margin-top:0%;
 margin-bottom:2%;
 }
 .t3{
-margin-top:3%;
+margin-top:2%;
 }
 p.a1{
 text-align:right;
@@ -147,6 +147,64 @@ font-size:85%;
 .degree{
 margin-top:3%;
 margin-left:3%;
-width:35%;
 font-size:85%;
+tab-size:80px;
+}
+#tab {
+size:18;
+}
+
+.edu {
+height:auto;
+}
+
+.split-para      { display:block;margin:20px 20px 0px 20px;}
+.split-para span { display:block;float:right;width:13%;margin-left:10px;}
+
+
+.squaredFour {
+	width: 20px;	
+	margin: 20px auto;
+	position: relative;
+}
+
+.squaredFour label {
+	cursor: pointer;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 0;
+	border-radius: 4px;
+
+	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	background: #fcfff4;
+	
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+ endColorstr='#b3bead',GradientType=0 );
+}
+
+.squaredFour label:after {
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 4px;
+	left: 4px;
+	border: 3px solid #333;
+	border-top: none;
+	border-right: none;
+	
+	transform: rotate(-45deg);
+}
+
+.squaredFour label:hover::after {
+		filter: alpha(opacity=30);
+	opacity: 0.5;
+}
+
+.squaredFour input[type=checkbox]:checked + label:after {
+	filter: alpha(opacity=100);
+	opacity: 1;
 }

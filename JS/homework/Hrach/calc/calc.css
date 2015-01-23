@@ -1,7 +1,12 @@
 #eq{
-    float:left
+	width:200px;
 }
 
 #equal {
-    width:25%
+    width:200px;
+	padding-top:1px
+}
+
+button {
+	width:46px
 }
