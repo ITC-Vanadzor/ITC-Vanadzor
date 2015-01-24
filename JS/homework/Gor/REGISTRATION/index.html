@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Registration</title>
+    <meta name="author" content="Gor Julhakyan" />
+    <meta name="Description" content="Registration Form in JavaScript, CSS & HTML" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto|Oswald:400,700' rel='stylesheet' type='text/css'>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/validator.js"></script>
+</head>	
+
+<body>
+	<div class="container">
+		<div>
+			<h1 class="title">Registration</h1>
+		</div>
+       <form name="form" >
+       		<div class="raw">
+				<div id="namerrorBox"></div>
+				<input type="text" name="Name" id="name" value="" placeholder="First Name *" >
+            </div>
+            <div class="raw">    
+				<div id="lnamerrorBox"></div>
+				<input type="text" name="LastName" id="lastname" value="" placeholder="Last Name *" >
+            </div>
+			<div class="raw">
+       			<div id="emailerrorBox"></div>
+        		<input type="text" name="Email" id="email" value=""  placeholder="E-mail *" >
+     		</div>
+			<div class="raw">
+				<div id="passerrorBox"></div>
+				<input type="password" name="Password" id="password" value=""  placeholder="Password *" >
+			</div>
+           	<a href="javascript:void(0)" onclick="showHide('block_id')" class="hidvis">Hide os Show</a><br><br>
+   			<div id="block_id">
+     
+   
+        		<div class="birthday-title">Birth Date</div>
+				<div style="margin: 5px 19px;">
+        			<select name="birthday_month" >
+         				<option value="" selected >Month</option>
+         				<option value="1">Jan</option>
+						<option value="2">Feb</option>
+          				<option value="3">Mar</option>
+          				<option value="4">Apr</option>
+          				<option value="5">May</option>
+        			</select>
+					<select name="birthday_day" >
+          				<option value="" selected>Day</option>
+          				<option value="1">1</option>
+          				<option value="2">2</option>
+          				<option value="3">3</option>
+          				<option value="4">4</option>
+          				<option value="5">5</option>
+        			</select>
+       				<select name="birthday_year">
+          				<option value="" selected>Year</option>
+          				<option value="2013">2013</option>
+          				<option value="2012">2012</option>
+          				<option value="2011">2011</option>
+          				<option value="2010">2010</option>
+          				<option value="2009">2009</option>
+        			</select>
+      			</div>
+			<div class="raw" style="margin: 10px 30px;">
+				<div id="ageerrorBox"></div>
+                <label class="lab" for="age">Age</label>
+				<input type="number" name="Age" id="age" value=""  placeholder="?" >&nbsp;&nbsp;<span class="lab">Years</span>
+			</div>
+        	<div class="gender-title">Gender</div>
+				<div class="raw" style="margin: 10px 30px;">
+					<input type="radio" name="gender" id="male" value="male"/><span class="lab">&nbsp;Male</span>
+					<input type="radio" name="gender" id="female" value="female"><span class="lab">&nbsp;Female</span>
+            	</div></div>
+                <br>
+       		<div>
+        		<p id="sign_user" onClick="Submit()">Sign Up</p>
+      		</div>
+     	</form>
+	</div>
+</body>
+</html>
