@@ -1,15 +1,15 @@
 describe("Calculator test", function() {
-	it("plus test", function() {
-		expect(plus(0.2,0.1)).toBe(0.3);
+    it("plus test", function() {
+		expect(plus(2,1)).toEqual(3);
 	});
 	it("plus test", function() {
 		expect(plus(-2,3)).toBe(1);
 	});
 	it("plus test", function() {
-		expect(plus(a,5)).toBe(NaN);
+		expect(plus(y,5)).toBe(NaN);
 	});
 	it("plus test", function() {
-		expect(plus(4,b)).toBe(NaN);
+		expect(plus(4,z)).toBe(NaN);
 	});
 	it("minus test", function() {
 		expect(minus(0.3,0.2)).toBe(0.1);
@@ -18,7 +18,7 @@ describe("Calculator test", function() {
 		expect(minus(-4,5)).toBe(-9);
 	});
 	it("minus test", function() {
-		expect(minus(k,5)).toBe(NaN);
+		expect(minus(u,5)).toBe(NaN);
 	});
 	it("minus test", function() {
 		expect(minus(4,v)).toBe(NaN);

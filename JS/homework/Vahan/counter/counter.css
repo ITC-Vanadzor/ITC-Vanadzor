@@ -1,11 +1,15 @@
-.screen {
+.top {
     height: 50px;
     width: 400px;
     margin: auto;
-    border: 1px solid black;
     margin-top: 50px;
 }
 
+.top input {
+    height: 50px;
+    width: 400px;
+    font-size: xx-large;
+}
 .buttons {
    width: 380px;
    height: 400px;
