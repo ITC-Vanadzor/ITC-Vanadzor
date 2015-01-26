@@ -1,7 +1,7 @@
-var m = document.getElementById('month').value;
-var d = document.getElementById('day').value;
-var y = document.getElementById('year').value;
-var now = new Date();
+var m = "na"
+var d = "na"
+var y = 1914
+now = new Date();
 
 function valid() {
 	var name_value=document.getElementById('name').value ;
@@ -44,8 +44,6 @@ function hide() {
 	document.getElementsByClassName("hide")[2].style.display = ( document.getElementsByClassName("hide")[2].style.display == 'none' ) ? 'block' : 'none'
 }
 
-hide()
-
 function changeDate(i) {
 	m = document.getElementById('month').value;
 	var e = document.getElementById('day');
@@ -77,6 +75,7 @@ function changeDate(i) {
 			e.add(s,null);}
 		catch(ex){
 			e.add(s);}}}}
+function addYear() {	
 	y = 2015;
 	while (y-->1915){
 		var s = document.createElement('option');
@@ -86,7 +85,12 @@ function changeDate(i) {
 		try{
 			e.add(s,null);}
 		catch(ex){
-			e.add(s);}}
+			e.add(s);}}}
+
+function onload() {
+	addYear();
+	hide();
+}
 
 function day(){
 	d = document.getElementById('day').value;
