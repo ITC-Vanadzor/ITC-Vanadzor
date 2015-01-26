@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <p id="array">Input elements of an array, separate them by ( , ) </p>
+        <input type="text" id="screen" name="screen">
+        <input type="button" id="increase-order" name="1st" value="increase" onclick="sortUp() ">
+        <input type="button" id="decrease-order" name="2nd" value="Decrease" onclick="sortDown() ">
+        <p id="sorted"></p>
+    <script>
+        function sortUp(){
+            var str = document.getElementById("screen").value;
+            var myArray = str.split(",");
+            myArray.sort(function(a, b){return a-b});
+            document.getElementById("sorted").innerHTML = myArray;
+        }
+        function sortDown(){
+            var str = document.getElementById("screen").value;
+            var myArray = str.split(",");
+            myArray.sort(function(a, b){return b-a});
+            document.getElementById("sorted").innerHTML = myArray;
+        }
+    </script>
+    </body>
+</html>

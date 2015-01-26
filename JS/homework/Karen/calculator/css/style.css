@@ -22,8 +22,11 @@ button{
     color: #ffff00;
     font-weight: bold;
     width: 100%;
+    cursor: pointer;
 }
-
+button:hover{
+    background: red;
+}
 td {
     background: none repeat scroll 0 0 #000000;
     color: #00ff00;

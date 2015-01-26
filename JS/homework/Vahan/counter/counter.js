@@ -1,13 +1,23 @@
-var keys = document.querySelectorAll(".buttons span")
-var operators = ["+", "-", "*", "/"]
-function sum(){
-    var input = document.querySelector(".screen");
-    var inputVal = input.innerHTML;
-    inputVal += "+";
+var input = document.getElementById("screen").value;
+var expr =  document.getElementById("screen").innerHTML;
+
+function sum() {
+    document.getElementById("screen").value += '+';
 }
 
-function equal(){
-    var x = getElementById("leftOp").value;
-    var y = getElementById("rightOp").value;
-    
+function diff() {
+    document.getElementById("screen").value += '-';
+}
+function mult() {
+    document.getElementById("screen").value += '*';
+}
+function div() {
+    document.getElementById("screen").value += '/';
+}
+function equal() {
+    document.getElementById("screen").value = eval(document.getElementById("screen").value);    
+}
+
+function Mclear() {
+    document.getElementById("screen").value = '';
 }

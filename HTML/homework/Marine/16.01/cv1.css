@@ -14,7 +14,9 @@
     border-top: 1px solid blue;
     border-bottom: 1px solid blue;
 }
- 
+.tel {
+background-image: url("images/tel.gif");
+} 
 .info {
     float:left;
     width: 40%;

@@ -4,11 +4,11 @@ function validateName() {
     var patt = /\W/g;
     var resultN = x.match(patt);
     var resultL = y.match(patt);
-    if ( (x == null || x == "") || (resultN != null) ) {
+    if ((x == null || x == "") || (resultN != null)) {
         alert("First name must be filled out correctly!");
         return false;
     }
-    else if ( (y == null || y == "") || (resultL != null) ) {  
+    else if ((y == null || y == "") || (resultL != null)) {  
         alert("Last name must be filled out correctly!");
         return false;
     }
@@ -24,13 +24,24 @@ function validateMail() {
     }
 }
 
-function validatePassword {
-    var x = document.form["myForm"]["pswd"].value;
-    var patt = /\W\d\w/g;
-    var result = x.match(patt)
-    if ((x.length < 6) || (result == null) || (x == null || x == ""))
+function validatePassword() {
+    var x = document.forms["myForm"]["pswd"].value;
+    var patt1 = /\W/g;
+    var patt2 = /\w/g;
+    var result1  = x.match(patt1);
+    var result2  = x.match(patt2);
+    if (x.length < 6) {
         alert("Password is not valid");
         return false;
+    }
+    else if ((result1 == null) || (result2 == null)) {
+        alert("Password must contain at least one symbol");
+        return false;
+    }
+    else if (x == null || x == "") {
+        alert("Password is not valid");
+        return false;
+    }
 }
 
 function isValid() {
