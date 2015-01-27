@@ -133,15 +133,27 @@ a:hover {
 }
 
 ul {
-	padding-left:;
-	position: relative;
-	left: -2em;	
+    padding-left:;
+    position: relative;
+    left: -2em;	
 }
 
 li {
-	list-style-image: url(../images/arrow.png);
-	padding-left: 12px
+    list-style-image: url(../images/arrow.png);
+    padding-left: 12px;
+    margin-left: 28px;
 }
+
+.hidden {
+    color: transparent;
+    /*list-style-image: none;*/
+}
+
+.hidden:hover {
+    color: #000;
+    list-style-image: url(../images/arrow.png);
+}
+
 
 /* Responsive CSS Grid
 ===================================*/
