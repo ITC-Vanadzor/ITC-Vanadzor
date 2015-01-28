@@ -6,9 +6,10 @@
         <script type="text/javascript" src="js/script.js"> </script>
     </head>
     <body>
+        <h4 style="text-align:center; font-size:20px;"> You are allowed to input symbols  either from keyboard or using calculator buttons </h4>
         <div id="main-frame">
            <div >
-               <input type="text" id="screen" name="screen" onkeyup="isValidInput()">
+               <input type="text" id="screen" name="screen" onkeyup="isValidInput(this.value)">
            </div> 
            <div class="key">
                 <input type="button" name="7" value="7" onclick="change_value(7)"></input>

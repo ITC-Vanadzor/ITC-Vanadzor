@@ -40,8 +40,7 @@ function result(str) {
 function reset(){
     document.getElementById("screen").value = '';
 }
-function isValidInput() {
-    var str = document.getElementById("screen").value;
+function isValidInput(str) {
     var sign = str.charAt(str.length-1);
     str = str.slice(0,str.length-1);
     str= str.replace(/[-\/*+]/g, "");
