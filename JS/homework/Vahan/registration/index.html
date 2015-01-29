@@ -1,0 +1,28 @@
+<link rel="stylesheet" type="text/css" href="style.css"></link>
+<div class="sheet">
+    <form name="myForm" onsubmit="isValid(); regMassege(); changeStar()">
+        <div class="field">
+        <p id="warnText"></p>
+           <span class="title">Name:</span> <input  class="inputStyle" name="fname" type="text"></input><span id="name">*</span>
+        </div>
+        <div class="field">
+           <span class="title">LastName:</span> <input class="inputStyle" name="lname" type="text"><span id="lName">*</span>
+        </div>
+        <div class="field">
+           <span class="title">Email:</span> <input  class="inputStyle" name="email" type="text"><span id="eMail">*</span>
+        </div>
+        <div class="field">
+            <span class="title">Password:</span> <input  class="inputStyle" name="pswd" type="password"><span id="pswd">*</span>
+        </div>
+        <div class="field">
+            <span class="title">Birthday:</span> <input  class="inputStyle" type="date">
+        </div>
+        <div class="field">
+            <span class="title">Age:</span> <input  class="inputStyle" type="number"> 
+        </div>
+        <div class="field">
+            <input class="title" onclick="changeStar()"id="butt"type="submit" value="Submit" >
+        </div>
+    </form>
+</div>
+    <script src="reg.js"></script>

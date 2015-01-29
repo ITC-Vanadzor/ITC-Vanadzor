@@ -13,18 +13,19 @@ function getArrayByRandom(){
     }
     return numbers;
 }
-function sortArray(arrayForSorting){
+function sortDesc(arrayForSorting){
     return arrayForSorting.sort(function (a, b) { 
-        if (a > b)
-        return 1;
-        else if (a < b)
-        return -1;
-        else
-        return 0;
+        return b-a;
+    });
+}
+function sortAsc(arrayForSorting){
+    return arrayForSorting.sort(function (a, b) { 
+        return a-b;
     });
 }
 function view(){
     numbers = getArrayByRandom();
     document.getElementById("demoRandom").innerHTML=numbers;
-    document.getElementById("demoSort").innerHTML=sortArray(numbers);
+    document.getElementById("demoSortDesc").innerHTML=sortDesc(numbers);
+    document.getElementById("demoSortAsc").innerHTML=sortAsc(numbers);
 }

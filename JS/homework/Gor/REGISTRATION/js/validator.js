@@ -10,9 +10,9 @@ function Submit(){
 		lname = document.form.LastName.value,
 		email = document.form.Email.value,
 		password = document.form.Password.value,
-		fmonth = document.form.birthday_month.value,
-		fday = document.form.birthday_day.value,
-		fyear = document.form.birthday_year.value;
+		month = document.form.Birthday_month.value,
+		day = document.form.Birthday_day.value,
+		year = document.form.Birthday_year.value;
    
 	if( fname == "" ) {
 		document.form.Name.focus() ;
@@ -57,12 +57,12 @@ function Submit(){
 }
 
 function Visible() {
-	var hidevis = document.getElementById("hidevis").style.visibility;	   
+	var hidevis = document.getElementsByClassName("hidevis").style.visibility;	   
 	
 	if(hidevis == "visible") {
-		document.getElementById("hidevis").style.visibility = "hidden";
+		document.getElementsByClassName("hidevis").style.visibility = "hidden";
 	}else if(hidevis == "hidden") {
-		document.getElementById("hidevis").style.visibility = "visible";
+		document.getElementsByClassName("hidevis").style.visibility = "visible";
 	}
 }
 
@@ -74,4 +74,76 @@ function showHide(element_id) {
 		obj.style.display = "block"; 
 	}else obj.style.display = "none"; 
 	}
+}
+
+function dgi(el) {
+	return document.getElementById(el);
+}
+
+var aYear = 100;
+
+window.onload = function() {
+	var y = dgi('year');
+	var d = new Date();
+	var _y = d.getFullYear();
+	var _o = document.createElement('option');
+	_o.setAttribute('value', 0);
+	_o.innerHTML = 'Year';
+	y.appendChild(_o);
+	for(var i = 0; i < aYear; i++) {
+		var o = document.createElement('option');
+		o.setAttribute('value', _y);
+		o.innerHTML = _y;
+		y.appendChild(o);
+		_y--;
+	}
+}
+
+function loadMonths(obj) {
+	if(obj.value != '0') {
+		dgi('months').style.display = '';
+	} else {
+		dgi('months').style.display = 'none';
+	}
+}
+
+function loadDays(obj) {
+	var days = dgi('days');
+		
+	if(obj.value != '0') {
+		clearDays();
+		var number = 32 - new Date(parseInt(dgi('year').value), parseInt(dgi('months').value)-1, 32).getDate();
+		
+		for(var i = 1; i <= number; i++) {
+			var o = document.createElement('option');
+			o.setAttribute('value', i);
+			o.innerHTML = i;
+			days.appendChild(o);
+		}
+		days.style.display = '';
+	} else {
+		clearDays();
+		hideDays();
+	}
+}
+
+function clearDays() {
+	var days = dgi('days');
+	days.innerHTML = '';                
+}
+
+function hideDays() {
+	var days = dgi('days');
+	days.style.display = 'none';
+}
+
+
+function calculateAge(){
+	var birthdayfull = document.getElementById("months").value + " " + document.getElementById("days").value + "," + document.getElementById("year").value;
+	var birthdate = Date.parse(birthdayfull);
+	var birthday = new Date(birthdate)
+	var agenow = Date.now() - birthday;
+	var agenew = new Date(agenow);
+	var uage=Math.abs(agenew.getUTCFullYear() - 1970);
+	document.getElementById("age").value = uage;
 }

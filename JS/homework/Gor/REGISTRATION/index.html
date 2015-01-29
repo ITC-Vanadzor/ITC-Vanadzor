@@ -32,41 +32,38 @@
 				<div id="passerrorBox"></div>
 				<input type="password" name="Password" id="password" value=""  placeholder="Password *" >
 			</div>
-           	<a href="javascript:void(0)" onclick="showHide('block_id')" class="hidvis">Hide os Show</a><br><br>
+           	<a href="javascript:void(0)" onclick="showHide('block_id')" class="a-btn">
+                <span class="a-btn-slide-text">Hide / Show</span>
+                <span class="a-btn-icon-right"><span></span></span>
+			</a>
+            
+            
    			<div id="block_id">
      
    
         		<div class="birthday-title">Birth Date</div>
-				<div style="margin: 5px 19px;">
-        			<select name="birthday_month" >
-         				<option value="" selected >Month</option>
-         				<option value="1">Jan</option>
-						<option value="2">Feb</option>
-          				<option value="3">Mar</option>
-          				<option value="4">Apr</option>
-          				<option value="5">May</option>
-        			</select>
-					<select name="birthday_day" >
-          				<option value="" selected>Day</option>
-          				<option value="1">1</option>
-          				<option value="2">2</option>
-          				<option value="3">3</option>
-          				<option value="4">4</option>
-          				<option value="5">5</option>
-        			</select>
-       				<select name="birthday_year">
-          				<option value="" selected>Year</option>
-          				<option value="2013">2013</option>
-          				<option value="2012">2012</option>
-          				<option value="2011">2011</option>
-          				<option value="2010">2010</option>
-          				<option value="2009">2009</option>
-        			</select>
+				<div id="date" style="margin: 5px 19px;" onchange="calculateAge()">
+                    <select name="Birthday_year" id="year" onchange="loadMonths(this);"></select>
+        			<select name="Birthday_month" id="months" style="display: none;" onchange="loadDays(this);">
+                        <option value="1">Jenuary</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <select name="Birthday_day" id="days" style="display: none;" ></select>
       			</div>
 			<div class="raw" style="margin: 10px 30px;">
 				<div id="ageerrorBox"></div>
                 <label class="lab" for="age">Age</label>
-				<input type="number" name="Age" id="age" value=""  placeholder="?" >&nbsp;&nbsp;<span class="lab">Years</span>
+				<input type="text" name="Age" id="age" min="12" value=""  placeholder="?" >&nbsp;&nbsp;<span class="lab">Years</span>
 			</div>
         	<div class="gender-title">Gender</div>
 				<div class="raw" style="margin: 10px 30px;">
@@ -75,8 +72,9 @@
             	</div></div>
                 <br>
        		<div>
-        		<p id="sign_user" onClick="Submit()">Sign Up</p>
+        		<p id="sign_user" onclick="Submit()">Sign Up</p>
       		</div>
+<p id="age"></p>
      	</form>
 	</div>
 </body>
