@@ -1,9 +1,9 @@
 x = 0
 
 function shoutY(y) {
-    var y = document.getElementById("field1").value;
-    if ((typeof y === 'number') && (typeof y != null)) {
-            continue;
+    y = document.getElementById("field1").value;
+    console.log(typeof y);
+    if ((typeof y === 'number')) && (typeof y != null)) {
             return y;
         } else { 
             alert ("Please Input Number"); 
@@ -11,9 +11,8 @@ function shoutY(y) {
             }   
 }
 function shoutZ(z) {
-    var z = document.getElementById("field2").value;
+    z = document.getElementById("field2").value;
     if ((typeof z === 'number') && (typeof z != null)) {
-            continue;
             return z;
         } else { 
             alert ("Please Input Number"); 
@@ -21,7 +20,7 @@ function shoutZ(z) {
             }   
 }
 
-function plus() {
+function plus(y,z) {
     shoutY(y);
     shoutZ(z); 
     x=" + ";
@@ -34,14 +33,14 @@ function minus(y,z) {
 	return ((y*10)-(z*10))/10;
 }
 function multi(y,z) {
-    shoutY();
-    shoutZ(); 
+    shoutY(y);
+    shoutZ(z); 
     x=" * ";   
 	return y*z;
 }
 function div(y,z) {
-    shoutY();
-    shoutZ(); 
+    shoutY(y);
+    shoutZ(z); 
 	x=" / "	
     try {
         if (z==0) throw "can't divide a number by zero";
@@ -51,7 +50,7 @@ function div(y,z) {
     }
 }
 
-function eq() {
+function eq(y,z) {
     shoutY(y);
     shoutZ(z); 
   	if (x==" + ") { 	

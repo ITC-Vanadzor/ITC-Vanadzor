@@ -9,101 +9,67 @@ array=("" "" "" "" "" "" "" "" "")
 vandak () {
     clear
     echo -e "\t ${array[0]:-0} | ${array[1]:-1} | ${array[2]:-2} "
-    echo -e "\t__________________________"
+    echo -e "\t___________"
     echo -e "\t ${array[3]:-3} | ${array[4]:-4} | ${array[5]:-5} "
-    echo -e "\t__________________________"
+    echo -e "\t___________"
     echo -e "\t ${array[6]:-6} | ${array[7]:-7} | ${array[8]:-8} "
 }
 
-WINo () {
-    echo "Player 2 you Win"    
+WIN () {
+    echo "Player $1 you Win"    
     break
 }
 
-WINx () { 
-    echo "Player 1 you Win"
-    break 
-}
-
-stugum_x () {
-    if [ "x" == "${array[0]}" ] && [ "x" == "${array[1]}" ] && [ "x" == "${array[2]}" ] ; then
-    WINx
-    elif [ "x" == "${array[3]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[5]}" ] ; then
-    WINx
-    elif [ "x" == "${array[6]}" ] && [ "x" == "${array[7]}" ] && [ "x" == "${array[8]}" ] ; then
-    WINx
-    elif [ "x" == "${array[0]}" ] && [ "x" == "${array[3]}" ] && [ "x" == "${array[6]}" ] ; then
-    WINx
-    elif [ "x" == "${array[1]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[7]}" ] ; then
-    WINx
-    elif [ "x" == "${array[2]}" ] && [ "x" == "${array[5]}" ] && [ "x" == "${array[8]}" ] ; then
-    WINx
-    elif [ "x" == "${array[0]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[8]}" ] ; then
-    WINx
-    elif [ "x" == "${array[2]}" ] && [ "x" == "${array[4]}" ] && [ "x" == "${array[6]}" ] ; then
-    WINx
+stugum () {
+    if [ "$1" == "${array[0]}" ] && [ "$1" == "${array[1]}" ] && [ "$1" == "${array[2]}" ] ; then
+    WIN $2
+    elif [ "$1" == "${array[3]}" ] && [ "$1" == "${array[4]}" ] && [ "$1" == "${array[5]}" ] ; then
+    WIN $2
+    elif [ "$1" == "${array[6]}" ] && [ "$1" == "${array[7]}" ] && [ "$1" == "${array[8]}" ] ; then
+    WIN $2
+    elif [ "$1" == "${array[0]}" ] && [ "$1" == "${array[3]}" ] && [ "$1" == "${array[6]}" ] ; then
+    WIN $2
+    elif [ "$1" == "${array[1]}" ] && [ "$1" == "${array[4]}" ] && [ "$1" == "${array[7]}" ] ; then
+    WIN $2
+    elif [ "$1" == "${array[2]}" ] && [ "$1" == "${array[5]}" ] && [ "$1" == "${array[8]}" ] ; then
+    WIN $2
+    elif [ "$1" == "${array[0]}" ] && [ "$1" == "${array[4]}" ] && [ "$1" == "${array[8]}" ] ; then
+    WIN $2
+    elif [ "$1" == "${array[2]}" ] && [ "$1" == "${array[4]}" ] && [ "$1" == "${array[6]}" ] ; then
+    WIN $2
     fi
 }
 
-stugum_o () {
-    if [ "o" == "${array[0]}" ] && [ "o" == "${array[1]}" ] && [ "o" == "${array[2]}" ] ; then
-    WINo
-    elif [ "o" == "${array[3]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[5]}" ] ; then
-    WINo
-    elif [ "o" == "${array[6]}" ] && [ "o" == "${array[7]}" ] && [ "o" == "${array[8]}" ] ; then
-    WINo
-    elif [ "o" == "${array[0]}" ] && [ "o" == "${array[3]}" ] && [ "o" == "${array[6]}" ] ; then
-    WINo
-    elif [ "o" == "${array[1]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[7]}" ] ; then
-    WINo
-    elif [ "o" == "${array[2]}" ] && [ "o" == "${array[5]}" ] && [ "o" == "${array[8]}" ] ; then
-    WINo
-    elif [ "o" == "${array[0]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[8]}" ] ; then
-    WINo
-    elif [ "o" == "${array[2]}" ] && [ "o" == "${array[4]}" ] && [ "o" == "${array[6]}" ] ; then
-    WINo
-    fi
+grel() {
+	echo "PLAYER$2: number for $1"
+	read i
+	if [ "${array[i]}" == "o" ] || [ "${array[i]}" == "x" ]; 
+	then 
+		echo "Vandaky zbacvac e"
+		grel $1 $2
+	elif [ $i -ge 0 ] && [ $i -le 8 ];
+	then
+		array[i]=$1
+	else
+		echo "input valid number"
+		grel $1 $2
+	fi
 }
 
-
-        krestik() {
-        echo "PLAYER1: number for x"
-        read i
-        if [ "${array[i]}" == "o" ] || [ "${array[i]}" == "x" ]; 
-        then 
-            echo "Vandaky zbacvac e"
-            krestik
-        elif [ $i -ge 0 ] && [ $i -le 8 ];
-        then
-            array[i]=x
-        else
-            echo "input valid number"
-            krestik
-        fi
-        }
-
-        nolik () {
-        echo "PLAYER2: number for o"
-        read i
-        if [ "${array[i]}" == "o" ] || [ "${array[i]}" == "x" ]; 
-        then
-            echo "Vandaky zbaxvac e"
-            nolik
-        elif [ $i -ge 0 ] && [ $i -le 8 ];
-        then
-            array[i]=o
-        else
-            echo "input valid number"
-            nolik
-        fi
-        }
 vandak
+j=0
 while true;
     do
-        krestik
+        grel x 1
         vandak
-        stugum_x
-        nolik
+        stugum x 1
+		j=$(($j+1))
+		if [ $j == 5 ];
+		then
+			echo "tie"
+			break
+		fi
+        grel o 2
         vandak
-        stugum_o
+        stugum o 2
     done
