@@ -3,17 +3,12 @@
 /*JavaScript Document*/
 
 
-function Submit(){
+
 	var emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
 	var wordRegex =  /^[a-zA-Z ]{2,30}$/;
-	var fname = document.form.Name.value,
-		lname = document.form.LastName.value,
-		email = document.form.Email.value,
-		password = document.form.Password.value,
-		month = document.form.Birthday_month.value,
-		day = document.form.Birthday_day.value,
-		year = document.form.Birthday_year.value;
-   
+		
+function Fname(){
+	var fname = document.form.Name.value;  
 	if( fname == "" ) {
 		document.form.Name.focus() ;
 		document.getElementById("namerrorBox").innerHTML = "Enter Your First Name";
@@ -23,7 +18,10 @@ function Submit(){
 		document.getElementById("namerrorBox").innerHTML = "Enter the valid First Name <br>*First Name must be only words & min lenght 2symbols*";
 		return false;
 	} 
-   
+}
+
+function Lname(){ 
+var lname = document.form.LastName.value; 
 	if( lname == "" ) {
 		document.form.LastName.focus() ;
 		document.getElementById("lnamerrorBox").innerHTML = "Enter Your Last Name";
@@ -33,7 +31,10 @@ function Submit(){
 		document.getElementById("lnamerrorBox").innerHTML = "Enter the valid Last Name <br>*Last Name must be only words & min lenght 2symbols*";
 		return false;
 	}
-    
+}
+
+function Email(){
+	var email = document.form.Email.value;
 	if (email == "" ) {
 		document.form.Email.focus();
 		document.getElementById("emailerrorBox").innerHTML = "Enter Your E-mail";
@@ -43,14 +44,23 @@ function Submit(){
 		document.getElementById("emailerrorBox").innerHTML = "Enter the valid E-mail <br> (E-mail must be user@example.com)";
 	return false;
 	}
-     
+}
+
+function Password(){
+	var password = document.form.Password.value;
 	if(password == "") {
 		document.form.Password.focus();
 		document.getElementById("passerrorBox").innerHTML = "Your password must be more that 6 symbols";
 		return false;
 	}
-      
-	if(fname != '' && lname != '' && email != '' && freemail != '' && password != ''){
+}
+
+function Submit(){
+	var f = Fname(),
+		l = Lname(),
+		e = Email(),
+		p = Password();
+	if(f != '' && l != '' && e != '' && p != ''){
    document.getElementById("errorBox").innerHTML = "form submitted successfully";
    }
      
@@ -83,6 +93,9 @@ function dgi(el) {
 var aYear = 100;
 
 window.onload = function() {
+	var month = document.form.Birthday_month.value,
+		day = document.form.Birthday_day.value,
+		year = document.form.Birthday_year.value;
 	var y = dgi('year');
 	var d = new Date();
 	var _y = d.getFullYear();
