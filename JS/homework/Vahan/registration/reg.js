@@ -5,7 +5,6 @@ function validateName() {
     var resultN = x.match(patt);
     var resultL = y.match(patt);
     if ((x == null || x == "") || (resultN != null)) {
-        document.getElementById("name").focus();
         document.getElementById("name").style.color = "red";
         document.getElementById("warnText").innerHTML = "empty name"
        // alert("First name must be filled out correctly!");
@@ -20,7 +19,6 @@ function validateName() {
         return true;
     }
 }
-
 function validateMail() {
     var x = document.forms["myForm"]["email"].value;
     var atpos = x.indexOf("@");
