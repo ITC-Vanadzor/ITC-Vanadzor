@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Create Object from JSON String</h2>
+
+<p id="demo"></p>
+<input type="text" id="screen" >
+<input type="button" id="butt" value="click me" onclick="getValue()">
+<script>
+    var text = '{ "glossary": { "title": "example glossary","GlossDiv": {"title": "S","GlossList": {"GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}';
+    
+    obj = JSON.parse(text);
+    document.getElementById("demo").innerHTML = obj.glossary.GlossDiv.GlossList.GlossEntry.ID; 
+    function getValue() {
+        document.getElementById("demo").innerHTML =eval(" 'obj.'+ document.getElementById("screen").value")
+    }
+</script>
+
+</body>
+</html>
+
