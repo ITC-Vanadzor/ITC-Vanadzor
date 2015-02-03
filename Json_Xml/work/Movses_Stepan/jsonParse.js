@@ -5,7 +5,7 @@ function jsonExample() {
         var res = k.split(".");
         var n = obj[res[0]]; 
         for(i=1; i<res.length; i++ ) { 
-            n += [res[i]];
+            n = n[res[i]];
     }
 alert(n)
 }
