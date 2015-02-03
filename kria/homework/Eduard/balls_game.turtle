@@ -1,9 +1,8 @@
 kturtle-script-v1.0
 #by Eduard Hakobyan
-#grafikan hasaraka jamanaki patcharov, bayc algoritm@ normal ashxatuma arden...pti vor
 
 @(reset) 
-@(message) "Hello! naxoroq asem, vor, ete krveluc nervaynanumeq mek sharunaki,ete voch ushadir exeq, cankacac sxal nermucvac arjeqi depqum xax@ kdadarecvi"
+@(message) "Hello! Sksumenq xax@. Ushadir exeq, vorovhetev cankacac sxal nermucvac arjeqi depqum xax@ kdadarecvi"
 $x=10
 $y=390
 $oxaki_qanak_toxum=15
@@ -18,14 +17,14 @@ $max_jnjel=@(ask) "Nermuceq oxakner@ mek qaylum jnjelu maximal qanak@: 2 - 224"
 }
 
   @(if) ($max_jnjel >= $oxakneri_qanak) @(or) ($max_jnjel < 1) {
-    @(message) "Error: Hmi uzumeq xaxaq te bag enq man gali?"
+    @(message) "Error: Nermucvac arjeq@ chi bavararum xndri paymannerin"
   @(exit)
   }
 }
 errors1
 @(learn) errors2 {
   @(if) ($player<1) @(or) ($player>$max_jnjel) {
-    @(message) "Error: Nermucvac e sxal arjeq...bager ka miqich, bayc dzvoxa"
+    @(message) "Error: Nermucvac e sxal arjeq..."
     @(exit)
   }
 }
@@ -98,7 +97,7 @@ $mnacord_toxum = @(mod) $oxakneri_qanak@(,)15
 
 #katarum enq stugumner @st xndri algoritmi hamadzayn
 @(if) $mnacord == 0 {
-  @(message) "Es sksem vorovhetev xndri pahanj@ tenca bavararvum, ete inch vor harcer kan im skselu het kapvac dimeq cragir@ kazmoxin"
+  @(message) "Ays angam xax@ ksksem es"
   $jnjvox_oxakner=$max_jnjel
   oxakneri_jnjum
   $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
@@ -109,38 +108,35 @@ $mnacord_toxum = @(mod) $oxakneri_qanak@(,)15
   $jnjvox_oxakner=$player
   oxakneri_jnjum
   $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
-  @(message) "Duq OK sxmeq minchev es jnjem"
   $jnjvox_oxakner=$max_1-$player
   oxakneri_jnjum
   $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
   @(if) $oxakneri_qanak==1 {
-      @(message) "DUQ PARTVECIQ: ade shatem ujex xom zorov chi :)))"
+      @(message) "XAXN AVARTVEC. Duq partveciq)"
       @(exit)
     }
   }
 } @(else) {
 
 @(if) $mnacord == 1 {
-  @(message) "Skseq la tenam shateq ujex"
+  @(message) "Ays angam xax@ skseq Duq"
     @(while) $oxakneri_qanak !=0 {
     $player=@(ask) "Dzer hertn e: nermuceq qani oxakeq cankanum jnjel"
-    @(message) "Lurj der huys uneq vor krelueq? Lav de inch asem...sharunakenq..."
     errors2
     $jnjvox_oxakner=$player
     oxakneri_jnjum
     $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner    
-    @(message) "Duq OK sxmeq minchev es jnjem"
     $jnjvox_oxakner=$max_1-$player
     oxakneri_jnjum
     $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
     @(if) $oxakneri_qanak==1 {
-      @(message) "DUQ PARTVECIQ: ade shatem ujex xom zorov chi :)))"
+      @(message) "XAXN AVARTVEC. Duq partveciq)"
       @(exit)
     }
   }
 } 
  @(else) {
-  @(message) "Es sksem vorovhetev xndri pahanj@ tenca bavararvum, ete inch vor harcer kan im skselu het kapvac dimeq cragir@ kazmoxin :)"
+  @(message) "Ays angam xax@ ksksem es"
   $jnjvox_oxakner=$mnacord-1
   oxakneri_jnjum 
   $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
@@ -150,12 +146,11 @@ $mnacord_toxum = @(mod) $oxakneri_qanak@(,)15
     $jnjvox_oxakner=$player
     oxakneri_jnjum
     $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
-    @(message) "Meka kreluem...:)))"
     $jnjvox_oxakner=$max_1-$player
     oxakneri_jnjum
     $oxakneri_qanak=$oxakneri_qanak-$jnjvox_oxakner
     @(if) $oxakneri_qanak==1 {
-      @(message) "DUQ PARTVECIQ: ade shatem ujex xom zorov chi (-_-)"
+      @(message) "XAXN AVARTVEC. Duq partveciq)"
       @(exit)
     }
   } 
