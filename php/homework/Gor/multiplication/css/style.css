@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background-image: url(../images/bg.jpg);
+	background-repeat: no-repeat;
+	background-size: 47%;
+	background-position: center;
+}
+
+.container {
+	margin-top: 100px;	
+}
+
+.inpnum {
+	font-size: 1.5vw;
+	border: 3px solid #00D8FF;
+	height: 1.6em;
+	text-align: center;
+	color: rgb(3, 76, 102);
+	background: rgba(246, 254, 255, 1);		
+}
+
+.submit {
+	font-size: 1.5vw;
+	border: none;
+	height: 1.6em;
+	text-align: center;
+	color: #fff;
+	background: rgba(0, 216, 255, 1);
+	margin: 10px 0;
+	width: 12.4em;
+}
+
+.submit:hover {
+	color: #fff;
+	background: rgba(6,130,209,1.00);
+}
+
+.submit:active {
+	color: #fff;
+	background: rgba(149,81,245,1.00);
+}
+
+.result {
+	border: none;
+	height: 300px;
+}
