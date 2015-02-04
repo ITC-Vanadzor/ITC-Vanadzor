@@ -1,0 +1,27 @@
+.sheet {
+margin:auto;
+width:70%;
+}
+
+.field {
+    margin: 30px;
+}
+.inputStyle {
+    height: 35px;   
+    width: 240px;
+    position: absolute;
+    left: 300px;
+    font-size: larger;
+}
+
+.title {
+    position: relative;
+    top: 9px;
+    left: -15px;
+}
+
+#name, #lName, #eMail, #pswd  {
+    position: absolute;
+    left: 553px;
+    font-size: larger;
+}

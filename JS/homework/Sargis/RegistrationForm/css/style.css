@@ -1,7 +1,7 @@
 #main {
     box-sizing:border-box;
     width: 405px;
-    height: 330px;
+    height: 375px;
     padding:20px;
     margin: 10% 20% 10% 30%;
     background: rgba(140, 139, 125, 0.45);
@@ -37,3 +37,7 @@
    padding:3px 0;
    height:30px;
 }
+input.formInvalid::-webkit-input-placeholder {
+       color: red;
+}
+

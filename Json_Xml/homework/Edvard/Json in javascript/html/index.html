@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <script src="../js/script.js"></script>
+    </head>
+    <body>
+      <h2>Parsing json</h2>
+      <p> This is json file content : {"glossary": {"title": "example glossary","GlossDiv": {"title": "S","GlossList": {"GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}</p>
+      <input type="text" id="input_text"/>
+      <input type="button" value="Click for parse" OnClick="parsing()"/><p>Example: glossary.GlossDiv.title</p>
+      <p id="demo" style="font-size:200%;"></p>
+
+    </body>
+</html>

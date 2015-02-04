@@ -4,66 +4,88 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="js/script.js"> </script>
+        <title> Sign Up </title>
     </head>
     <body>
         <div id="main">
-        <form id="reg">
-            <div ><label> Name <span class="required">*</span> : </label> <input id="name" type="text"  placeholder="Name" > </div>
-            <div ><label> Surname <span class="required">*</span> : </label> <input id="surename" type="text" placeholder="Surename" ></div>
-            <div ><label> Email <span class="required">*</span> : </label> <input type="text" placeholder="Email">  </div>
-            <div ><label>  Password <span class="required">*</span> : </label> <input type="text" placeholder="Password"> </div>
-            <div ><label> Birthday: </label>
-                <select style="padding-left: 7px;"> 
-                    <option>day</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option> 
-                </select> 
-                &nbsp;
-                <select> 
-                    <option>month</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option> 
-                    <option>8</option> 
-                    <option>9</option> 
-                    <option>10</option> 
-                    <option>11</option> 
-                    <option>12</option> 
-                </select> 
-                &nbsp;
-                <select> 
-                    <option>year</option>
-                    <option>1985</option>
-                    <option>2000</option>
-                    <option>2003</option>
-                    <option>2004</option>
-                    <option>2005</option>
-                    <option>2006</option>
-                    <option>2007</option> 
-                    <option>2008</option> 
-                    <option>2009</option> 
-                    <option>2010</option> 
-                    <option>2011</option> 
-                    <option>2012</option> 
-                </select>      
+        <form id="reg" name="reg">
+            <div ><label> Name <span id="required1">*</span> : </label> <input id="name" type="text" name="name" placeholder="Name" > </div>
+            <div ><label> Surname <span id="required2">*</span> : </label> <input id="surename" type="text" name="surename" placeholder="Surename" ></div>
+            <div ><label> Email <span id="required3">*</span> : </label> <input id="email" type="text" name="email"  placeholder="Email">  </div>
+            <div ><label>  Password <span id="required4">*</span> : </label> <input type="password" id="pswd"  name="pasword" placeholder="Password"> </div>
+            <div style="text-align: center">
+                <input type="checkbox"  onclick="showBlock('notrequired')"><span style="font-size: 16px;">Hide not required fields</span>
             </div>
-            <div id="age-style"> <label> Age : </label> <input type="number"step="1">  </div>
-            <div id="gender">
-                <label> Genger : </label> 
-                <input type="radio" name="gender" id="male">&nbsp  Male 
-                <input type="radio" name="gender" id="female">&nbsp Female
+            <div id="notrequired" style="display: block;">
+                <div ><label> Birthday: </label>
+                    <select style="padding-left: 7px;"> 
+                        <option>day</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option> 
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                    </select> 
+                    &nbsp;
+                    <select> 
+                        <option>month</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option> 
+                        <option>8</option> 
+                        <option>9</option> 
+                        <option>10</option> 
+                        <option>11</option> 
+                        <option>12</option> 
+                    </select> 
+                    &nbsp;
+                    <select id="year"> 
+                        <option>year</option>
+                        <option>1985</option>
+                        <option>1990</option>
+                        <option>1991</option>
+                        <option>1992</option>
+                        <option>2000</option>
+                        <option>2003</option>
+                        <option>2004</option>
+                        <option>2005</option>
+                        <option>2006</option>
+                        <option>2007</option> 
+                        <option>2008</option> 
+                        <option>2009</option> 
+                        <option>2010</option> 
+                        <option>2011</option> 
+                        <option>2012</option> 
+                    </select>      
+                </div>
+                <div id="age-style"> <label> Age : </label> <input id="age" type="number"step="1">  </div>
+                <div id="gender">
+                    <label> Genger : </label> 
+                    <input type="radio" name="gender" id="male">&nbsp  Male 
+                    <input type="radio" name="gender" id="female">&nbsp Female
+                </div>
             </div>
-            <div style="text-align: center;" >
-                <input id="submit-button" type="submit" value="Submit">
+            <div style="text-align: center; position: relative; bottom: -81px;" >
+                 <input id="submit-button" type="button" value="Submit" onclick="validate()">
             </div>
         </form>
         </div>    

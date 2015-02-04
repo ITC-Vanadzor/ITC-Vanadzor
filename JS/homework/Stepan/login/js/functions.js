@@ -38,13 +38,13 @@ function validateForm() {
 }
 
 function hide(){
-document.getElementById("hide").style.visibility = "hidden";
-document.getElementById("hid").style.visibility = "hidden";
+    var div = document.getElementById("hi")
+    var btn = document.getElementById("so")
+    if (btn.value=="show") {
+            div.style.display = "block"
+            btn.value = "hide"
+    } else {
+            div.style.display = "none"
+            btn.value = "show"
+    }
 }
-
-function show(){
-document.getElementById("hide").style.visibility = "visible";
-document.getElementById("hid").style.visibility = "visible";
-}
-
-

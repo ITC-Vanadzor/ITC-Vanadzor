@@ -1,0 +1,29 @@
+#form {
+margin-right:2%;
+width:39%;
+margin-top:13%;
+margin-left:50%;
+text-align:right;
+padding:27px;
+border:4px groove;
+border-radius:10px;
+box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+#gender {
+width:100%;;
+margin-left:12%;
+text-align:left;
+}
+#hide {
+display:none;
+}
+input[type=text] {
+box-shadow: 0 0 20px rgba(0,0,0,0.5);
+border:4px groove;
+border-radius:10px;
+}
+input[type=password] {
+box-shadow: 0 0 20px rgba(0,0,0,0.5);
+border:4px groove;
+border-radius:10px;
+}
