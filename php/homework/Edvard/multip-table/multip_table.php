@@ -5,6 +5,7 @@
 		</title>
 	</head>
 	<body>	
+
 	<style>
 	body {
 	font-size:50px;
@@ -12,7 +13,7 @@
 	}
 	</style>
 		<?php
-		$a = 5;
+		$a = $_POST["number"];
 		for ($i = 1; $i <= 10; $i++) {
 			echo $a." x ".$i." = ".$a*$i."<br>" ;
 		}
