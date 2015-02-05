@@ -8,8 +8,8 @@
 				$sum=1;
 				for ($n=1;$n<10;$n++){
 					$sum=$num*$n;
-					echo "$num",'*',"$n=","$sum","\n";  
-			}
+					echo "$num",'*',"$n=","$sum","\n","<br>";  
+			}}
 			multiplication(8);
 		?>
 	<body>
