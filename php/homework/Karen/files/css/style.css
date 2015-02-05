@@ -1,0 +1,52 @@
+/* 
+    Created on : Feb 5, 2015, 11:28:39 AM
+    Author     : Karen
+*/
+body{
+    font-family: arial;
+    font-size: 15px;
+}
+a{
+    text-decoration: none;
+    color: blue;
+}
+a:hover{
+    color: green;
+    text-decoration: underline;
+}
+.wrapper{
+    margin: 50px auto;
+    width: 1000px;
+}
+table,td{
+    border: 1px solid green;
+    border-collapse:collapse;
+    text-align: center
+}
+table{
+    width: 100%;
+}
+td {
+    padding: 10px;
+}
+tr:nth-child(2n) td{
+    background: #ccc;
+}
+tr:first-child td,tr:nth-child(2) td {
+    background: none repeat scroll 0 0 #eee;
+    color: #4f2085;
+    font-size: 18px;
+    font-weight: bold;
+}
+.pictureLink {
+    background: none repeat scroll 0 0 #4f2085;
+    border-radius: 3px;
+    color: #d2edff;
+    margin: 0 10px;
+    opacity: 0.8;
+    padding: 5px 10px;
+}
+.pictureLink:hover {
+    opacity: 1;
+    text-decoration: none;
+}
