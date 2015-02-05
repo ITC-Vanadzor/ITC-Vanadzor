@@ -1,3 +1,7 @@
+<?php
+	$num=$_POST["num"]
+?>
+
 <html>
 	<head>
 		<title>MULTIPLICATION</title>
@@ -10,7 +14,7 @@
 					$sum=$num*$n;
 					echo "$num",'*',"$n=","$sum","\n","<br>";  
 			}}
-			multiplication(8);
+			multiplication($num);
 		?>
 	<body>
 
