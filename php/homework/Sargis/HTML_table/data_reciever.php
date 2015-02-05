@@ -1,8 +1,8 @@
 <html>
 <body>
 
-ITC students' table is:  <?php echo $_POST["my_table"]; ?><br>
-
-
+ITC students are:  <?php echo $_POST["person_1"]; ?><br>
+		   <?php echo $_POST["person_2"]; ?><br>
+                   <?php echo $_POST["person_3"]; ?><br> 
 </body>
 </html>
