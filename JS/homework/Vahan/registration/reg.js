@@ -1,18 +1,23 @@
 function validateName() {
     var x = document.forms["myForm"]["fname"].value;
-    var y = document.forms["myForm"]["lname"].value;
     var patt = /\W/g;
     var resultN = x.match(patt);
-    var resultL = y.match(patt);
     if ((x == null || x == "") || (resultN != null)) {
-        document.getElementById("name").style.color = "red";
-        document.getElementById("warnText").innerHTML = "empty name"
-       // alert("First name must be filled out correctly!");
+        document.getElementById("fName").style.color = "red";
+        document.getElementById("w1").innerHTML = "Invalid input";
         return false;
     }
-    else if ((y == null || y == "") || (resultL != null)) {  
+    else {
+        return true;
+    }
+}
+function validateSname() {
+    var x = document.forms["myForm"]["lname"].value;
+    var patt = /\W/g;
+    var resultN = x.match(patt);
+    if ((x == null || x == "") || (resultN != null)) {
         document.getElementById("lName").style.color = "red";
-       // alert("Last name must be filled out correctly!");
+        document.getElementById("w2").innerHTML = "Invalid input";
         return false;
     }
     else {
@@ -25,6 +30,7 @@ function validateMail() {
     var dotpos = x.lastIndexOf(".");
     if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
         document.getElementById("eMail").style.color = "red";
+        document.getElementById("w3").innerHTML = "Invalid input"
        // alert("Not a valid e-mail address");
         return false;
     }
@@ -41,6 +47,7 @@ function validatePassword() {
     var result2  = x.match(patt2);
     if (x.length < 6) {
         document.getElementById("pswd").style.color = "red";
+        document.getElementById("w4").innerHTML = "Invalid input"
        // alert("Password is not valid");
         return false;
     }
@@ -61,6 +68,7 @@ function validatePassword() {
 
 function isValid() {
     validateName();
+    validateSname();
     validateMail();
     validatePassword();
 }
@@ -69,17 +77,19 @@ function regMassege() {
     if ( validateName() && validateMail() && validatePassword() ) {
          document.forms["myForm"].action = "regSuccess.html";
     }
-    else {return document.getElementById("name").style.color = "red";}
 }
 
-function changeStar(){
-document.getElementById("name").style.color = "red";
+function hideFields() {
+    var isChecked = document.getElementById("myCheck").checked;
+    if (isChecked){
+        document.getElementById("field5").style.visibility = "hidden";
+        document.getElementById("field6").style.visibility = "hidden";
+        document.getElementById("vbox").innerHTML = "Show";
+    }
+    else {
+        document.getElementById("field5").style.visibility = "inherit";
+        document.getElementById("field6").style.visibility = "inherit";
+        document.getElementById("vbox").innerHTML = "Hide";
+    }
 }
-/*document.getElementById("butt").onclick = function() {myFunction()};
-
-function myFunction() {
-    if ()
-        document.getElementById("name").style.color = "red";
-}
-*/
 
