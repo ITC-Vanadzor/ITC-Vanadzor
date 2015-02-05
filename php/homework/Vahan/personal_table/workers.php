@@ -11,7 +11,7 @@
     </head>
     <body>
     <?php
-    $full_name1 = "Vahan Levonyan";
+    $full_name1 = $_POST["fname"] . " " . $_POST["lname"];
     $full_name2 = "Movses Khachatryan";
     $image_path1 = "images/Vahan.jpg";
     $image_path2 = "images/Movses.jpg";
