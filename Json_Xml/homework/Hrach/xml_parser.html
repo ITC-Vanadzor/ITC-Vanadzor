@@ -1,0 +1,74 @@
+<html>
+    <body>
+        <script>
+			xmlhttp=new XMLHttpRequest();
+			xmlhttp.open("GET","xml.xml",false);
+			xmlhttp.send();
+			xmlDoc=xmlhttp.responseXML;
+			
+			function parse() {
+				var a = document.getElementById('input').value;
+				var res = a.split(".");
+				var res1 = res[res.length-1].split(":");
+
+				if (res1.length==1) {
+					var b = xmlDoc.getElementsByTagName(res[0])[0];
+					if (b==undefined) {
+						alert(res[0]+" not valid");
+						return;
+					}
+					for (i=1; i<res.length; i++){
+						b=b.getElementsByTagName(res[i])[0];
+						if (b==undefined) {
+                        	alert(res[i]+" not valid");
+                        	return;
+                    	}
+					
+					}
+					if (b.childNodes[0]==undefined) {
+						alert(res[res.length-1]+" is empty");
+					} else if (b.childNodes[0].nodeValue==null) {
+						alert(res[res.length-1]+" is object");
+					} else {
+						alert(b.childNodes[0].nodeValue);
+					}
+
+				} else if (res1.length==2) {
+					if (res.length==1){
+						var c=xmlDoc.getElementsByTagName(res1[0])[0];
+						if (c==undefined) {
+							alert(res1[0]+" not valid");
+							return;
+						}
+					} else {
+						var c=xmlDoc.getElementsByTagName(res[0])[0];
+						if (c==undefined) {
+							alert(res[0]+" not valid");
+							return;
+						}
+					}
+					for (i=1; i<res.length-1; i++) {
+						 c=c.getElementsByTagName(res[i])[0];
+                         if (c==undefined) {
+                         	alert(res[i]+" not valid");
+                         	return;
+                        }
+					}
+					if (res.length!=1) {
+						c=c.getElementsByTagName(res1[0])[0];
+						if (c==undefined) {
+                        	alert(res1[0]+" not valid");
+                        	return;
+                        }
+					}
+					alert(c.getAttribute(res1[1]));
+
+				} else {
+					alert("not valid format");
+				}
+			}
+		</script>
+        <input id="input"></input>
+        <button onclick="parse()">parse</button>
+	</body>
+</html>
