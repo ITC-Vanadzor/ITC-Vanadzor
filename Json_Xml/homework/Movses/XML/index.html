@@ -1,51 +1,19 @@
 <html>
     <head>
         <script>
-        function xmlParse() {
-            //xmlhttp=new XMLHttpRequest();
-            //xmlhttp.open("GET","catalog.xml",false);
-            //xmlhttp.send();
-            //xmlDoc=xmlhttp.responseXML;
-                txt="<glossary>";
-                txt=txt+"<title>example glossary</title>";
-                txt=txt+"<></>";
-                txt=txt+"<heading>Reminder</heading>";
-                txt=txt+"<body>Don't forget me this weekend!</body>";
-                txt=txt+"</note>";
-
-
-                txt="<glossary>";
-                txt=txt+"<title>example glossary</title>";
-                txt=txt+"<GlossDiv>";
-                txt=txt+"<title>S</title>";
-                txt=txt+"<GlossList>";
-                txt=txt+"<GlossEntry>";
-                txt=txt+"<GlossTerm>Standard Generalized Markup Language</GlossTerm>";
-                txt=txt+"<Acronym>SGML</Acronym>";
-                txt=txt+"<Abbrev>ISO 8879:1986</Abbrev>";
-                txt=txt+"<GlossDef>"
-                txt=txt+"<para>A meta-markup language, used to create markup languages such as DocBook.</para>";
-                txt=txt+"</GlossDef>";
-                txt=txt+"</GlossEntry>";
-                txt=txt+"</GlossList>";
-                txt=txt+"</GlossDiv>";
-                txt=txt+"</glossary>";
-
-
-            if (window.DOMParser) {
-                parser=new DOMParser();
-                xmlDoc=parser.parseFromString(txt,"text/xml");
-
+            xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("GET","catalog.xml",false);
+            xmlhttp.send();
+            xmlDoc=xmlhttp.responseXML;
+            
+            function xmlParse() {
+                var k = document.getElementById("field").value; 
+                var res = k.split(".");
+                alert(res.length); 
+                for (i=1; i<res.length; i++) {
+                    document.write(res.getElementsByTagName(res[i])[0].childNodes[0].nodeValue);
+                }
             }
-        }
-
-        k = document.getElementById("field").value; 
-        var res = k.split(".");
-        var n = txt[res[0]];
-        for (i=1; i<res.length; i++) {
-            n = n[res[i]];
-        }
-        alert(n);
         </script>
     </head>
     <body>
