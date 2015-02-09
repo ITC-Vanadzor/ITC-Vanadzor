@@ -1,0 +1,31 @@
+body {
+    font-family: arial;
+    font-size: 14px;
+}
+div{
+    margin-left: 20px;
+}
+span{
+    color: green;
+}
+.left-side{
+	float: left;
+	width: 30%;
+	margin: 0;
+}
+
+.right-side{
+	float: right;
+	width: 70%;
+	margin: 0;
+}
+#error{
+	font-style: italic;
+	color: red;
+}
+#error span{
+	font-style: normal;
+}
+#error i{
+	color: black;
+}
