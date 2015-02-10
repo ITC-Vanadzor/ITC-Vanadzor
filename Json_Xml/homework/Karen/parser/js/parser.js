@@ -59,7 +59,6 @@ function showXmlFile(filePath) {
     outText = outText.replace(tagEnd, " ></span>");
     tagBegin = RegExp("< ", 'g');
     outText = outText.replace(tagBegin, "<span>< ");
-
     document.getElementById("xmlcode").innerHTML = outText;
 }
 //clear errors
@@ -187,4 +186,3 @@ function mainXml() {
     var elem = getElementXml(xmlObject);
     viewResult(elem);
 }
-
