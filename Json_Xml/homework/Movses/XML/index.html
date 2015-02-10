@@ -1,22 +1,6 @@
 <html>
-    <head>
-        <script>
-            xmlhttp=new XMLHttpRequest();
-            xmlhttp.open("GET","catalog.xml",false);
-            xmlhttp.send();
-            xmlDoc=xmlhttp.responseXML;
-            
-            function xmlParse() {
-                var k = document.getElementById("field").value; 
-                var res = k.split(".");
-                alert(res.length); 
-                for (i=1; i<res.length; i++) {
-                    document.write(res.getElementsByTagName(res[i])[0].childNodes[0].nodeValue);
-                }
-            }
-        </script>
-    </head>
     <body>
+        <script src="xml_parse.js"></script>
         <input type="text" name="field" id="field"> </input>
         <button type="button" onclick="xmlParse()">PARSE</button>
     </body>
