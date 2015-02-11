@@ -1,30 +1,10 @@
-describe('JavaScript addition operator', function () {
-/*
-    it('adds one true order', function () {
-        expect(jsonParser("data/json.json")).toEqual("");
-    });
-/*	//isInt
-    it('adds one integer', function () {
-        expect(isInt(4)).toBeTruthy();
-    });  
-    it('adds one string', function () {
-        expect(isInt("string")).toBeFalsy();
-    });
-    it('empty paraps', function () {
-        expect(isInt()).toBeFalsy();
-    });
+describe('Json and xml parser test', function () {
 
-    //keyboardParser
-	it('adds one true order', function () {
-        expect(keyboardParser(96)).toEqual(0);
-    });    
-    it('adds one false order', function () {
-        expect(keyboardParser(555)).toBeFalsy();
-    });     it('adds one false order', function () {
-        expect(keyboardParser(555)).toBeFalsy();
-    });  
-    it('adds C', function () {
-        expect(keyboardParser(46)).toEqual("C");
+    it('Test for Json', function () {
+        jsonObject = jsonParser("data/json.json");
+        text = "glossary.title";
+        elem = getElementJson(jsonObject,text);        
+        expect(elem).toEqual("example glossary");
     });
-    */
+    
 });

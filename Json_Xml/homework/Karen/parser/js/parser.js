@@ -84,9 +84,7 @@ function attrError(obj, attr) {
 /*json only
  * set json object, function return value or object by input text
  * */
-function getElementJson(jsonObject) {
-    resetErrors();
-    text = document.getElementById("text").value;
+function getElementJson(jsonObject,text) {
     var inputArray = text.split(".");
     var element = jsonObject[inputArray[0]];
     if (element == undefined) {
@@ -115,10 +113,6 @@ function getElementJson(jsonObject) {
         } else {
             viewError(tree, inputArray[i]);
         }
-    }
-    if (element == "[object Object]") {
-        var message = tree + " <span>Is an object.</span>";
-        viewResult(message);
     }
     return element;
 }
@@ -174,10 +168,15 @@ function viewResult(elem) {
     if ((elem != "[object Object]") && (elem != undefined)) {
         document.getElementById("demo").innerHTML = view;
     }
+    if (elem == "[object Object]") {
+        document.getElementById("demo").innerHTML = "<span>Its an object.</span>";
+    }
 }
 function mainJson() {
+    resetErrors();
     jsonObject = jsonParser("data/json.json");
-    elem = getElementJson(jsonObject);
+    text = document.getElementById("text").value;
+    elem = getElementJson(jsonObject,text);
     viewResult(elem);
 
 }
