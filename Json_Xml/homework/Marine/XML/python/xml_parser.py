@@ -20,11 +20,6 @@ class Parser:
 		c=xml_tag_arr[length-1]
 		k=c.split(":")
 		xml_tag_arr[length-1]=k[0]
-	#	for elem in xml_tag_arr:
-	#		for el in self.root.iter(elem):
-	#			if el.tag is not None:
-			#		l=self.root.tag[el.tag]
-			#	print l.text
 		cc=""
 		jj=0
 		for elem in xml_tag_arr: 
@@ -35,10 +30,8 @@ class Parser:
 						print el.text
 						continue
 				jj=jj+1
-			#	else:
-			#		print "dfgsdfbhsfgh"	,cc			
+					
 if __name__ == "__main__":
 	tag_name=raw_input("Input what you need: ")
 	obj_parser = Parser(tag_name)
-	#obj_parser.Xml_Parser()
 	obj_parser.aa()
