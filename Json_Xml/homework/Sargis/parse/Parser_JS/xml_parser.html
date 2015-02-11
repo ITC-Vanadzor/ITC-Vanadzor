@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <script src="xml_parser.js"></script>
     </head>
     <body >
-    <span id="content"></p>
-    <button onclick="print_content()">Show content</button>
+    <pre id="content"></pre>
+    <button onclick='print_content("work1.xml")'>Show content</button>
+    <div>
+        <p>Path should consist of element names: like this: element1.element2.element3:attribute </p>
+        <input type="text"  id="path">Input path</input> 
+    </div>
+    <pre id="answer"></pre>
+    <button onclick="get_element(document.getElementById('path').value)">Get Value</button>
     </body>
 </html>
