@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <body>
 
 <h2>Here is some JSON text:</h2>
-</p>{ "glossary": { "title": "example glossary","GlossDiv": {"title": "S","GlossList": {"GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}';
-</p>
+<pre>{
+    "glossary": {
+        "title": "example glossary",
+        "GlossDiv": {
+            "title": "S",
+            "GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+                    "SortAs": "SGML",
+                    "GlossTerm": "Standard Generalized Markup Language",
+                    "Acronym": "SGML",
+                    "Abbrev": "ISO 8879:1986",
+                    "GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                        "GlossSeeAlso": ["GML", "XML"]},
+                        "GlossSee": "markup"
+                             }
+                        }
+                    }
+                 }
+      };
+</pre>
 <p>You can get the value by typing: name1.name2.name3:index</p>
-<input type="text" id="screen" style="height: 30px; width: 400px;font-size: larger">
-<input type="button" id="butt" value="click me" onclick="getValue()" style="height: 30px; margin-left: 15px">
+<input type="text" id="screen">
+<input type="button" id="butt" value="click me" onclick="getValue(document.getElementById('screen').value)">
 <p id="demo"></p>
-<script>
-    var text = '{ "glossary": { "title": "example glossary","GlossDiv": {"title": "S","GlossList": {"GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}';
-    
-    obj = JSON.parse(text);
-    function getValue() {
-        var inputVal = document.getElementById("screen").value;
-        var inputTest = /:/.test(inputVal);
-        var expr = "";
-        if (inputTest) {
-            var changeVal = inputVal.replace(/\:/, "[") + "]";
-            expr = "obj." + changeVal;
-        }
-        else {
-            expr = "obj." + inputVal;
-        }
-        document.getElementById("demo").innerHTML = eval(expr);
-
-    }
-</script>
+<script src = "json_parse.js" type="text/javascript"></script>
 
 </body>
 </html>
