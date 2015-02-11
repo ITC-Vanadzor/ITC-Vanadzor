@@ -10,7 +10,7 @@
       <GlossSeeAlso OtherTerm="GML">
       <GlossSeeAlso OtherTerm="XML">
      </GlossDef>
-     <GlossSee OtherTerm="markup">
+     <GlossSee OtherTerm="markup"></GLossSee>
     </GlossEntry>
    </GlossList>
   </GlossDiv>
