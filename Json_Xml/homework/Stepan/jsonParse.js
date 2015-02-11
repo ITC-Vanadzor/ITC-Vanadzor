@@ -1,0 +1,4 @@
+function jsonExample() {
+    
+alert("barev")
+}
