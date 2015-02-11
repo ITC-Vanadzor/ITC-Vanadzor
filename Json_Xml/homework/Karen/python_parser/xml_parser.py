@@ -1,3 +1,9 @@
+"""
+This code for parsing xml files.You can set hierarchical tree and result 
+you see exist this object(element) or not,if exist,then result print in 
+display.
+"""
+
 import argparse
 import xml.etree.ElementTree as ET
 
@@ -7,10 +13,12 @@ class xmlParser:
 		self.tree = ET.parse('data/data.xml')
 		self.root = self.tree.getroot()
 
+	#Return array created by hierarchical tree
 	def getArrayTree(self):
 		arrayTree = self.element_tree.split('.')
 		return arrayTree
 
+	#Get arratTree. Find element in xml document ,and return result
 	def findElement(self,arrayTree):
 		if arrayTree[0] == self.root.tag:
 			treeStr = arrayTree[0]
@@ -36,7 +44,12 @@ class xmlParser:
 			return [flag,treeStr,child,attr]		
 		else:
 			return [True,arrayTree[0],self.root,False]
+		
+	#Print Errors			
+	def errorNotExist(self,obj,element):
+		print "Error:In object '" + obj + "' '" + str(element) + "' is not exist!"
 
+	#Get findElement function result and print in display
 	def printResult(self,result):
 		flag			 = result[0]
 		inputedKey	 	 = result[1]
@@ -58,10 +71,6 @@ class xmlParser:
 			print "You input '" + inputedKey + "'. See result below:"
 			ET.dump(expectedValue)
 			return True
-		
-				
-	def errorNotExist(self,obj,element):
-		print "Error:In object '" + obj + "' '" + str(element) + "' is not exist!"
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description = "Parse xml,json file")

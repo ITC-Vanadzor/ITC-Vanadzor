@@ -1,3 +1,8 @@
+"""
+This code for parsing json files.You can set hierarchical tree and result 
+you see exist this object(element) or not,if exist,then result print in 
+display.
+"""
 import argparse
 import json
 
@@ -6,9 +11,11 @@ class jsonParser:
 		self.element_tree = element_tree
 		self.data = json.loads(open("data/data.json").read())
 
+	#Return array created by hierarchical tree
 	def getArrayTree(self):
 		return self.element_tree.split('.')
 
+	#Get arratTree. Find element in json document ,and return result
 	def findElement(self,arrayTree):
 		treeStr = ""
 		key = False
@@ -28,9 +35,11 @@ class jsonParser:
 				return [False,treeStr[1:],element,key]
 		return [True,treeStr[1:],value,key]
 
+	#Print Error
 	def errorNotExist(self,obj,element):
 		print "Error:In object '" + obj +"' '"+ str(element) + "' is not exist!"
 
+	#Get findElement function result and print in display
 	def printResult(self,result):
 		flag			 = result[0]
 		inputedKey	 	 = result[1]
@@ -52,8 +61,10 @@ class jsonParser:
 				return True						
 			else:
 				self.errorNotExist(inputedKey,inputedKey)
+				return False
 		except IndexError:
 			self.errorNotExist(inputedKey,arrayKey)
+			return False
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description = "Parse json file")
