@@ -1,6 +1,23 @@
 #!/usr/bin/python
 
 import json
-import argparse
+from pprint import pprint
+json_data=open('json.json')
 
-json.dumps({"glossary": {"title": "example glossary","GlossDiv": {"title": "S","GlossList": { "GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML", "Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" }}}}} sort_keys=True, indent=4, separators=(',',': '))
+data = json.load(json_data)
+json_data.close()
+
+value = raw_input("Please enter your request: ")
+part = value.replace(":",".")
+res = part.split(".");
+n = data[res[0]]
+for i in xrange(1,len(res)):
+    n = n[res[i]] 
+
+print n
+
+def main():
+    pass
+
+if "__main__"==__name__:
+    main()
