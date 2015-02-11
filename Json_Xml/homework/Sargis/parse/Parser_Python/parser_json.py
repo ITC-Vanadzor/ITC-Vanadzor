@@ -33,7 +33,12 @@ def is_valid(dict_key, key_part): # checks if inputed path part is valid in give
         #json.dumps(test)
         return True
     except KeyError:
-        print "In your input "+path+"\n "+key_part+" element  doesn't exist, but the elements before it are valid "#here if the 
+        if  path_parts[0] == key_part:
+            print key_part+"  is not valid element name"
+        else:
+            temp = path_parts.index(key_part)
+            temp_list = path_parts[:temp]
+            print "In your input "+path+"\n "+key_part+" element  doesn't exist, but the elements:",temp_list," are valid "#here if the 
                                                                     #first element isn't valid, error message wouldn't be logical :)
         return False
     except IndexError:
