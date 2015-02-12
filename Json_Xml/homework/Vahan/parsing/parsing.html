@@ -1,37 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
 <h2>Here is some JSON text:</h2>
-<pre>{
-    "glossary": {
-        "title": "example glossary",
-        "GlossDiv": {
-            "title": "S",
-            "GlossList": {
-                "GlossEntry": {
-                    "ID": "SGML",
-                    "SortAs": "SGML",
-                    "GlossTerm": "Standard Generalized Markup Language",
-                    "Acronym": "SGML",
-                    "Abbrev": "ISO 8879:1986",
-                    "GlossDef": {
-                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
-                        "GlossSeeAlso": ["GML", "XML"]},
-                        "GlossSee": "markup"
-                             }
-                        }
-                    }
-                 }
-      };
+<button onclick= "printContent('json_file.json')">SHOW CONTENT</button>
+<pre id = 'content' >
+
 </pre>
 <p>You can get the value by typing: name1.name2.name3:index</p>
 <input type="text" id="screen">
 <input type="button" id="butt" value="click me" onclick="getValue(document.getElementById('screen').value)">
-<p id="demo"></p>
+<pre id="demo"></pre>
 <script src = "json_parse.js" type="text/javascript"></script>
 
 </body>

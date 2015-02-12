@@ -1,28 +1,62 @@
-var text = '{ "glossary": { "title": "example glossary","GlossDiv": {"title": "S","GlossList": {"GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}';
-obj = JSON.parse(text);//coverts the JSON text into JS object
+function getObject(filename) {
+    var request = new XMLHttpRequest();
+    request.open("GET", filename, false);
+    request.send();
+    return JSON.parse(request.responseText);
+}
+
+function printContent(filename) {
+    jsonObject = getObject(filename);
+    var js_string = JSON.stringify(jsonObject, null, 2);
+    document.getElementById('content').innerHTML = js_string;
+}
+function printTag (tag) {
+    var tag_string = JSON.stringify(tag, null, 2)
+    document.getElementById('demo').innerHTML = tag_string; 
+}
+function isValid(path, path_end){
+    var json_obj = getObject('json_file.json');
+    var message = document.getElementById("demo");
+    var value = "json_obj"+path;
+    value = eval(value);
+    console.log(value);
+    if(value == undefined) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 function getValue(inputVal) {
-   // var inputVal = document.getElementById("screen").value;
-    inputVal = inputVal.replace(/\:/, ".");
-    var inputSplit = inputVal.split(".")
     var demo = document.getElementById("demo");
-    var expr = "obj";
+    if (inputVal == null || inputVal == ''){
+        demo.innerHTML = "Empty space!!!";    
+        return;
+    }
+    inputVal = inputVal.replace(/\:/, ".");
+    var inputSplit = inputVal.split(".");
+    var expr = '';
+    var json_obj = getObject('json_file.json');
     for (var i in inputSplit) {
         if ( isNaN(inputSplit) ) {
-            expr += "[" + '"' +inputSplit[i] + '"'+ "]";
+            expr += '["' +inputSplit[i] + '"]';
         }
         else {
             expr += "[" + inputSplit[i] + "]";
         }
+        if( !isValid(expr, inputSplit[i]) ) {
+            if (inputSplit[i] == inputSplit[0]){
+                demo.innerHTML = inputSplit[i] + " is not valid amigo!!";
+            }
+            else {
+                var msg_array = inputSplit.slice(0, i);
+                demo.innerHTML = inputSplit[i] + " is element from another document maybe! BUT " + msg_array + " are valid";
+            }
+            return;
+        }
     }
-    console.log(eval(expr));
-    var value = eval(expr);
-    var value_string = JSON.stringify(value)
-    demo.innerHTML = value_string;
-//    try {
-//        if (eval(expr) === undefined) throw "Wrong path!";
-//        else throw eval(expr);
-//    }
-//    catch(err) {
-//       demo.innerHTML = err; 
-//    }
+    var value = "json_obj"+expr;
+    value = eval(value);
+   // var value_string = JSON.stringify(value)
+   printTag(value);
 }
