@@ -46,7 +46,7 @@ function getValue(inputVal) {
         }
         if( !isValid(expr, inputSplit[i]) ) {
             if (inputSplit[i] == inputSplit[0]){
-                demo.innerHTML = inputSplit[i] + " is not valid amigo!!";
+                demo.innerHTML = inputSplit[i] + " is not valid path name!!";
             }
             else {
                 var msg_array = inputSplit.slice(0, i);

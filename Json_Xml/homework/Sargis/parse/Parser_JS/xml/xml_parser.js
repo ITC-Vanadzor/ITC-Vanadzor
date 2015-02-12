@@ -56,7 +56,7 @@ function check_path(path_array){
             for(i=0; i<path_array.length-1; i++){
                 try{
                     if (!is_child(xmlDoc.getElementsByTagName(path_array[i])[0],xmlDoc.getElementsByTagName(path_array[i+1])[0])) {
-                        throw path_array[i+1]+"isn't"+path_array[i]+"'s child";
+                        throw path_array[i+1]+" isn't "+path_array[i]+" 's child";
                         return false;
                     }                                         
                 }
@@ -68,7 +68,7 @@ function check_path(path_array){
         }
     }
     else{
-        message.innerHTML = path_array[0]+"empty or isn't valid";
+        message.innerHTML = path_array[0]+"  empty, or isn't valid input";
         return false;
     }   
 }

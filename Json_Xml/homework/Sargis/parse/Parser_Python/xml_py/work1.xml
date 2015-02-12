@@ -1,5 +1,4 @@
-<!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook V3.1//EN">
- <glossary><title>example glossary</title>
+<glossary><title>example glossary</title>
   <GlossDiv><title>S</title>
    <GlossList>
     <GlossEntry ID="SGML" SortAs="SGML">
