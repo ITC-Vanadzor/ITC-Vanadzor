@@ -1,58 +1,34 @@
-#!/bin/bash
-#Parameters
-#TODO -> there should be the other suites too (e.g. spades)
-#TODO -> therefore, it would be better to have a function which generates the cards, not to hand type them ;)
-#TODO -> the game doesnt let the user to get many cards in a column (the bottom cards werent shown properly)
-#TODO -> there are no error messages in case user enters invalid params (e.g. row number == 100)
-#TODO -> not clear when the game should be over; there is a check on game_over var which is never initialized
-
 Set_arguments(){
 	echo "Set column(Number in top)"; read from 
 	echo "Set index card(Number in left)"; read count
 	echo "Set new column(Numner in top)"; read to
 }
-Print_cards(){
-	echo "_______________________________________________________________________________________";
-	echo $'\t'"#0"$'\t'"#1"$'\t'"#2"$'\t'"#3"$'\t'"#4"$'\t'"#5"$'\t'"#6"$'\t'"#7"$'\t'"#8"$'\t'"#9"$'\t';
-	number=0
-	for i in `seq 0 $max_cards_in_row`
-	do
-		for j in {0..9}
-		do
-			if [ $j -eq 0 ];then
-				echo "_______________________________________________________________________________________";
-				echo -n "#$number  |"$'\t';
-				let number++
-			fi
-			echo -n ${h_c[$j,$i]}$'\t';
-		done
-		echo "";
-	done
-}
 Is_structure(){
 	local rm_spaces
 	rm_spaces=""
-	for i in `seq $count $max_cards_in_row`
+	for i in `seq $count $max_cards_in_column`
 	do
-		if [ -n ${h_c[$from,$i]} ];then
-			rm_spaces=$rm_spaces""${h_c[$from,$i]}
+		if [ -n ${playing_cards[$from,$i]} ];then
+			rm_spaces=$rm_spaces""${playing_cards[$from,$i]}
 		fi
 	done
+	rm_spaces=$(echo $rm_spaces | sed -e 's/[HSDC]//g')
 	echo "$structure" | grep -o "$rm_spaces";
 }
 Is_next_card(){
 	mved_cards=$(Mved_cards)
 	mved_cards=($mved_cards)
 	let prev_index=$(Get_empty_index $to)-1
-	is_next=${h_c[$to,$prev_index]}${mved_cards[0]}
+	is_next=${playing_cards[$to,$prev_index]}${mved_cards[0]}
+	is_next=$(echo $is_next | sed -e 's/[HSDC]//g')
 	echo "$structure" | grep -o "$is_next";
 }
 Mved_cards(){
 	local mved_cards=""
-	for i in `seq $count $max_cards_in_row`
+	for i in `seq $count $max_cards_in_column`
 	do
-		if [ -n ${h_c[$from,$i]} ];then
-			mved_cards=$mved_cards" "${h_c[$from,$i]}
+		if [ -n ${playing_cards[$from,$i]} ];then
+			mved_cards=$mved_cards" "${playing_cards[$from,$i]}
 		fi
 	done
 	echo $mved_cards;
@@ -63,56 +39,81 @@ Move_cards(){
 	index_to=$(Get_empty_index $to)
 	for i in `seq 0 ${#mved_cards[@]-1}`
 	do
-		let j=$i+$index_to
-		echo ${mved_cards[$i]}"--loop--$j";
-		h_c[$to,$j]=${mved_cards[$i]}	
+		let n=$i+$index_to
+		echo ${mved_cards[$i]};
+		playing_cards[$to,$n]=${mved_cards[$i]}
 	done
 }
 Rm_cards(){
-	for i in `seq $count $max_cards_in_row`
+	for i in `seq $count $max_cards_in_column`
 	do
-		if [ -n ${h_c[$from,$i]} ];then
-			unset h_c[$from,$i]
+		if [ -n ${playing_cards[$from,$i]} ];then
+			unset playing_cards[$from,$i]; 
 		fi
 	done
+	if [ -z ${playing_cards[$from,0]} ];then
+		local to_arr
+		to_arr=(${hidden_cards_one[$from]})
+		local count=${#to_arr[@]}
+		let count--
+		playing_cards[$from,0]=${to_arr[$count]}
+		unset hidden_cards[$from,$count]
+	fi
 }
 Get_empty_index(){
-	local empty_index=$max_cards_in_row
-	for j in `seq 0 $max_cards_in_row`
+	local empty_index=$max_cards_in_column
+	for j in `seq 0 $max_cards_in_column`
 	do 
-		if [ -z ${h_c[$1,$j]} ];then
+		if [ -z ${playing_cards[$1,$j]} ];then
 			empty_index=$j
 			break
 		fi
 	done
 	echo $empty_index
 }
+Print_cards(){
+	number=0
+	playing_cards_one=()
+	#------------------------------
+	Hidden_cards_to_one
+	
+	echo "_______________________________________________________________________________________";
+	echo -n "hidden"$'\t';
+	local to_arr
+	for i in {0..9}
+		do
+			to_arr=(${hidden_cards_one[$i]})
+			echo -n ${#to_arr[@]}$'\t'
+		done
+		echo "";
+	#------------------------------
+	echo "_______________________________________________________________________________________";
+	echo $'\t'"#0"$'\t'"#1"$'\t'"#2"$'\t'"#3"$'\t'"#4"$'\t'"#5"$'\t'"#6"$'\t'"#7"$'\t'"#8"$'\t'"#9"$'\t';
+	for i in `seq 0 $max_cards_in_column`
+	do
+		for j in {0..9}
+		do
+			if [ $j -eq 0 ];then
+				echo "_______________________________________________________________________________________";
+				echo -n "#$number  |"$'\t';
+				let number++
+			fi
+			echo -n ${playing_cards[$j,$i]}$'\t';
+		done
+		echo "";
+	done
+}
 Change_cards(){
 	while [ -z $game_over ]
 	do
 		Set_arguments 
-		h_c_str=()
 		is_true_structue=$(Is_structure)
 		is_next_card=$(Is_next_card)
 		if [ -z "$is_true_structue" ] || [ -z $is_next_card ];then
-			clear
-			Print_cards
 			continue
 		fi
 		Move_cards
-		Rm_cards
-		
-		for i in {0..9}
-		do
-			for j in `seq 0 $max_cards_in_row`
-			do 
-				h_c_str[$i]=${h_c_str[$i]}" "${h_c[$i,$j]}
-			done
-		done		
-		mv_card=(${h_c_str[$to]})
-		if [ ${#mv_card[@]-1} -gt $max_cards_in_row ];then
-			max_cards_in_row=${#mv_card[@]-1}
-		fi
+		Rm_cards		
 		clear
 		Print_cards
 	done
@@ -125,7 +126,6 @@ Card_generation(){
 	local i=103
 	local tmp
 	let tmp=26*$suit_changer
-	echo $tmp
 	while [ $i -gt -1 ]
 	do
 		let chamge=($i+1)%$tmp 
@@ -162,37 +162,66 @@ Options(){
 	if [ $suits_count -eq 4 ];then
 		suit_changer=1
 	fi
-	echo $suit_changer
 }
-#*************MAIN************
-declare -A showed_cards
-declare -A hidden_cards
-
-Options
-Card_generation
-cards_structure=($new_cards_str)
-max_cards_in_row=5
-structure=${cards_structure[@]}
-#All cards make random
-all_cards=($(shuf -e ${cards_structure[@]}))
-structure=$(echo $structure | sed 's/ //g';)
-#main code
-	declare -A h_c
-	i=0
-	j=0
+Get_hidden_cards(){
+	local i=0
+	local j=0
 	for n in {0..43}
 	do
-		h_c[$i,$j]=${all_cards[$n]}
+		hidden_cards[$i,$j]=${all_cards[$n]}
 		let i++
 		if [ $i -gt 9 ];then
 			i=0
 			let j++
 		fi
 	done 
+	all_cards=(${all_cards[@]:44})
+}
+Hidden_cards_to_one(){
+	hidden_cards_one=()
+	for i in {0..5}
+	do	
+		for j in {0..9}
+			do
+				hidden_cards_one[$j]+=" "${hidden_cards[$j,$i]}		
+			done
+	done
+}
+Playing_cards_to_one(){
+	for i in `seq 0 $max_cards_in_column`
+	do	
+		for j in {0..9}
+			do
+				playing_cards_one[$i]+=${playing_cards[$i,$j]}		
+			done
+	done
+}
+Get_new_cards(){
+	for n in {0..9}
+	do
+		playing_cards[$n,0]=${all_cards[$n]}
+	done 
+	all_cards=(${all_cards[@]:10})
+}
+#*************MAIN************
+declare -A showed_cards
+declare -A playing_cards
+declare -A hidden_cards
+
+Options
+Card_generation
+cards_structure=($new_cards_str)
+max_cards_in_column=5
+structure=${cards_structure[@]}
+#All cards make random
+all_cards=($(shuf -e ${cards_structure[@]}))
+structure=$(echo $structure | sed 's/ //g';)
+#main code
+Get_hidden_cards
+#-----------------
+Get_new_cards
 #-----------------
 reset 
 Print_cards
-#echo ${cards_structure[@]}
-#echo $structure
-
+structure=$(echo $structure | sed -e 's/[HSDC]//g')
 Change_cards
