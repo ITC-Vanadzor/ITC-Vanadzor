@@ -12,7 +12,7 @@ $names = "NAME & SURNAME";
 $status = "STATUS";
 $employee = "Employee";
 $student = "Student";
-$movie = "MOVIE";
+$movie = "FAVORITE FILM";
 
 // -- NAMES --//
 
