@@ -1,45 +1,24 @@
 describe("Calculator test", function() {
-    it("plus test", function() {
+    it("plus test true sum", function() {
 		expect(plus(2,1)).toEqual(3);
 	});
 	it("plus test", function() {
-		expect(plus(-2,3)).toBe(1);
-	});
-	it("plus test", function() {
-		expect(plus(y,5)).toBe(NaN);
-	});
-	it("plus test", function() {
-		expect(plus(4,z)).toBe(NaN);
+		expect(plus("y",5)).toEqual(NaN);
 	});
 	it("minus test", function() {
-		expect(minus(0.3,0.2)).toBe(0.1);
+		expect(minus(0.3,0.2)).toEqual(0.1);
 	});
 	it("minus test", function() {
 		expect(minus(-4,5)).toBe(-9);
 	});
 	it("minus test", function() {
-		expect(minus(u,5)).toBe(NaN);
+		expect(minus(4,"v")).toEqual(NaN);
 	});
-	it("minus test", function() {
-		expect(minus(4,v)).toBe(NaN);
+	it("multi test", function() {
+		expect(multi(4,-5)).toBe(-20);
 	});
-	it("times test", function() {
-		expect(times(5,1)).toBe(5);
-	});
-	it("times test", function() {
-		expect(times(4,-5)).toBe(-20);
-	});
-	it("times test", function() {
-		expect(times(-5,1)).toBe(-5);
-	});
-	it("times test", function() {
-		expect(times(-5,-1)).toBe(5);
-	});
-	it("times test", function() {
-		expect(times(-5,m)).toBe(NaN);
-	});
-	it("times test", function() {
-		expect(times(v,-1)).toBe(NaN);
+	it("multi test", function() {
+		expect(multi(-5,"m")).toEqual(NaN);
 	});
 	it("div test", function() {
 		expect(div(20,5)).toBe(4);
@@ -51,9 +30,6 @@ describe("Calculator test", function() {
 		expect(div(-5,0)).toBeDefined();
 	});
 	it("div test", function() {
-		expect(div(-5,m)).toBe(NaN);
-	});
-	it("div test", function() {
-		expect(div(j,1)).toBe(NaN);
+		expect(div(-5,"m")).toEqual(NaN);
 	});
 });
