@@ -5,13 +5,6 @@
 #TODO -> the game doesnt let the user to get many cards in a column (the bottom cards werent shown properly)
 #TODO -> there are no error messages in case user enters invalid params (e.g. row number == 100)
 #TODO -> not clear when the game should be over; there is a check on game_over var which is never initialized
-cards_structure=(HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA HK HQ HJ H10 H9 H8 H7 H6 H5 H4 H3 H2 HA  )
-declare -A showed_cards
-declare -A hidden_cards
-max_cards_in_row=5
-structure=${cards_structure[@]}
-#All cards make random
-all_cards=($(shuf -e ${cards_structure[@]}))
 
 Set_arguments(){
 	echo "Set column(Number in top)"; read from 
@@ -115,8 +108,7 @@ Change_cards(){
 			do 
 				h_c_str[$i]=${h_c_str[$i]}" "${h_c[$i,$j]}
 			done
-		done
-		
+		done		
 		mv_card=(${h_c_str[$to]})
 		if [ ${#mv_card[@]-1} -gt $max_cards_in_row ];then
 			max_cards_in_row=${#mv_card[@]-1}
@@ -125,8 +117,65 @@ Change_cards(){
 		Print_cards
 	done
 }
+Card_generation(){
+	local card=""
+	local suits=("H" "S" "D" "C")
+	local n=0
+	local suit=${suits[$n]}
+	local i=103
+	local tmp
+	let tmp=26*$suit_changer
+	echo $tmp
+	while [ $i -gt -1 ]
+	do
+		let chamge=($i+1)%$tmp 
+		if [ $chamge -eq 0 ];then
+			suit=${suits[$n]}
+			let n=$n+1
+		fi
+		let card=$i%13+1
+		case "$card" in
+			1)  card="A"
+			    ;;
+			11)  card="J"
+				;;
+			12)  card="Q"
+				;;
+			13)  card="K"
+				;;
+		esac
+		new_cards_str+="$suit$card "; 
+		let i=$i-1
+	done
+}
+Options(){
+	reset	
+	suits_count="0"
+	while [ $suits_count -ne 1 ] && [ $suits_count -ne 2 ] && [ $suits_count -ne 4 ]
+		do
+			echo "Set Suit cards(1,2 or 4)"; read suits_count
+		done
+	suit_changer=$suits_count 
+	if [ $suits_count -eq 1 ];then
+		suit_changer=4
+	fi
+	if [ $suits_count -eq 4 ];then
+		suit_changer=1
+	fi
+	echo $suit_changer
+}
+#*************MAIN************
+declare -A showed_cards
+declare -A hidden_cards
+
+Options
+Card_generation
+cards_structure=($new_cards_str)
+max_cards_in_row=5
+structure=${cards_structure[@]}
+#All cards make random
+all_cards=($(shuf -e ${cards_structure[@]}))
 structure=$(echo $structure | sed 's/ //g';)
-#echo $structure
 #main code
 	declare -A h_c
 	i=0
@@ -141,6 +190,9 @@ structure=$(echo $structure | sed 's/ //g';)
 		fi
 	done 
 #-----------------
-reset
+reset 
 Print_cards
+#echo ${cards_structure[@]}
+#echo $structure
+
 Change_cards
