@@ -14,13 +14,12 @@
     border-top: 1px solid blue;
     border-bottom: 1px solid blue;
 }
-.tel {
-background-image: url("images/tel.gif");
-} 
+.tel{
+line-height: 5%;}
 .info {
     float:left;
     width: 40%;
-    height:20%;
+    height:80%;
     margin-left: 3%;
     margin-top: 3%;
     border: 1px solid blue;
@@ -31,9 +30,15 @@ background-image: url("images/tel.gif");
     float:left;
 }
 #ppp{
-font-size:70%;
+font-size:100%;
 color: red;
 }
+#name {
+float:left;
+margin-top:3%;
+}
+
+
 .pp{margin-left:2%;}
 .text {
     float: left;
@@ -48,12 +53,20 @@ color: red;
     margin: 1%;
     border-bottom: 1px solid blue; 
 }
+#contact {
+font-size:150%;
+margin:2%;
+margin-top:5%;
+margin-bottom:5%;
+}
 .col {
     
     margin: 2%;
     width: 95%;
     word-wrap: break-word;
 }
+span {
+font_size:5%;}
 table {
     width:96%;
     margin:2%;
