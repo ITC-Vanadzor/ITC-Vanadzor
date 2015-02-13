@@ -125,7 +125,7 @@
         	<div class="tab1">
             	<div class="row">
                     <div class="tab4"><h3><?php echo $khm; ?></h3></div>
-                    <div class="tab5"><img src="images/movses.jpg" style="width: 40%;"></div>
+                    <div class="tab5"><img src="images/Movses.jpg" style="width: 40%;"></div>
                     <div class="tab5"><a href="#openModal5" class="zoom"><img src="images/1423250611_zoom_in.png" alt="ZOOM"></a></div>
                     <div id="openModal5" class="modalDialog">
 						<div>
