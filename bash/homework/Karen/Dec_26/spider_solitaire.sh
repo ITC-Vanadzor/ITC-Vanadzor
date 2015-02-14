@@ -1,7 +1,83 @@
+Options(){
+	reset	
+	suits_count="0"
+	while [ "$suits_count" != "1" ] && [ "$suits_count" != "2" ] && [ "$suits_count" != "4" ]
+		do
+			echo "Set Suits cards(1,2 or 4)"; read suits_count
+			clear
+		done
+	suit_changer=$suits_count 
+	if [ "$suits_count" == "1" ];then
+		suit_changer=4
+	fi
+	if [ "$suits_count" == "4" ];then
+		suit_changer=1
+	fi
+}
 Set_arguments(){
-	echo "Set column(Number in top)"; read from 
+	echo "Set column(Number in top)"; read from
 	echo "Set index card(Number in left)"; read count
-	echo "Set new column(Numner in top)"; read to
+	echo "Set new column(Numner in top)"; read to	
+	Validation_all_arguments	
+}
+Validation_all_arguments(){
+	if [[ $from =~ ^-?[0-9]+$ ]] && [[ $count =~ ^-?[0-9]+$ ]] && [[ $to =~ ^-?[0-9]+$ ]];then
+		echo -n ""
+	else
+		String_validate		 
+	fi
+}
+String_validate(){
+	if [ "$from" == "new" ] || [ "$count" == "new" ] || [ "$to" == "new" ];then
+		Get_new_cards
+		reset
+		Print_cards;
+	else
+		clear
+		Print_cards 		
+		echo "INVALID ARGUMENTS"
+		from=""
+		to=""
+		count=""
+		Set_arguments;
+	fi
+}
+Get_new_cards(){
+	for n in {0..9}
+	do
+		Playing_cards_to_list
+		index=${count_cards_in_column[$n]}
+		playing_cards[$n,$index]=${all_cards[$n]}
+	done 
+	Get_max_cards_in_column
+	all_cards=(${all_cards[@]:10})
+}
+Playing_cards_to_list(){
+	for i in `seq 0 104`
+	do	
+		for j in {0..9}
+		do
+			if [ -z ${playing_cards[$j,$i]} ];then
+				echo -n "";
+			else
+				playing_cards_list[$j]+=${playing_cards[$j,$i]}" "
+			fi
+		done
+	done
+}
+Get_max_cards_in_column(){
+	Playing_cards_to_list
+	max_cards_in_column=0
+	count_cards_in_column=()
+	local to_arr
+	for i in {0..9}
+	do
+		to_arr=(${playing_cards_list[$i]})
+		count_cards_in_column[$i]=${#to_arr[@]}
+		if [ ${count_cards_in_column[$i]} -gt $max_cards_in_column ];then
+			max_cards_in_column=${count_cards_in_column[$i]}
+		fi
+	done
 }
 Is_structure(){
 	local rm_spaces
@@ -53,7 +129,7 @@ Rm_cards(){
 	done
 	if [ -z ${playing_cards[$from,0]} ];then
 		local to_arr
-		to_arr=(${hidden_cards_one[$from]})
+		to_arr=(${hidden_cards_list[$from]})
 		local count=${#to_arr[@]}
 		let count--
 		playing_cards[$from,0]=${to_arr[$count]}
@@ -72,23 +148,25 @@ Get_empty_index(){
 	echo $empty_index
 }
 Print_cards(){
+	Win_game
 	number=0
-	playing_cards_one=()
+	playing_cards_list=()
 	#------------------------------
-	Hidden_cards_to_one
+	Hidden_cards_to_list
 	
 	echo "_______________________________________________________________________________________";
 	echo -n "hidden"$'\t';
 	local to_arr
 	for i in {0..9}
 		do
-			to_arr=(${hidden_cards_one[$i]})
+			to_arr=(${hidden_cards_list[$i]})
 			echo -n ${#to_arr[@]}$'\t'
 		done
 		echo "";
 	#------------------------------
 	echo "_______________________________________________________________________________________";
 	echo $'\t'"#0"$'\t'"#1"$'\t'"#2"$'\t'"#3"$'\t'"#4"$'\t'"#5"$'\t'"#6"$'\t'"#7"$'\t'"#8"$'\t'"#9"$'\t';
+	Get_max_cards_in_column
 	for i in `seq 0 $max_cards_in_column`
 	do
 		for j in {0..9}
@@ -102,9 +180,11 @@ Print_cards(){
 		done
 		echo "";
 	done
+	echo "New cards - "${#all_cards[@]}
+	echo "Ended block - "$winGame
 }
 Change_cards(){
-	while [ -z $game_over ]
+	while [ 2 -gt $winGame ]
 	do
 		Set_arguments 
 		is_true_structue=$(Is_structure)
@@ -117,6 +197,10 @@ Change_cards(){
 		clear
 		Print_cards
 	done
+	echo "****************************************************************"
+	echo "****************************You win*****************************"
+	echo "****************************************************************"
+	sleep 5
 }
 Card_generation(){
 	local card=""
@@ -148,21 +232,6 @@ Card_generation(){
 		let i=$i-1
 	done
 }
-Options(){
-	reset	
-	suits_count="0"
-	while [ $suits_count -ne 1 ] && [ $suits_count -ne 2 ] && [ $suits_count -ne 4 ]
-		do
-			echo "Set Suit cards(1,2 or 4)"; read suits_count
-		done
-	suit_changer=$suits_count 
-	if [ $suits_count -eq 1 ];then
-		suit_changer=4
-	fi
-	if [ $suits_count -eq 4 ];then
-		suit_changer=1
-	fi
-}
 Get_hidden_cards(){
 	local i=0
 	local j=0
@@ -177,51 +246,67 @@ Get_hidden_cards(){
 	done 
 	all_cards=(${all_cards[@]:44})
 }
-Hidden_cards_to_one(){
-	hidden_cards_one=()
+Hidden_cards_to_list(){
+	hidden_cards_list=()
 	for i in {0..5}
 	do	
 		for j in {0..9}
 			do
-				hidden_cards_one[$j]+=" "${hidden_cards[$j,$i]}		
+				hidden_cards_list[$j]+=" "${hidden_cards[$j,$i]}		
 			done
 	done
 }
-Playing_cards_to_one(){
-	for i in `seq 0 $max_cards_in_column`
-	do	
-		for j in {0..9}
-			do
-				playing_cards_one[$i]+=${playing_cards[$i,$j]}		
-			done
-	done
-}
-Get_new_cards(){
-	for n in {0..9}
+Win_game(){
+	Playing_cards_to_list
+	local to_arr
+	local last_char
+	for i in {0..9}
 	do
-		playing_cards[$n,0]=${all_cards[$n]}
-	done 
-	all_cards=(${all_cards[@]:10})
+		to_arr=(${playing_cards_list[$i]})
+		let rang=${#to_arr[@]}-1
+		if [ $rang -gt 0 ];then
+			let j_from=$rang-1
+			last_char=$(echo "${to_arr[$rang]}" | grep -o "A");
+			if [ "$last_char" == "A" ];then
+				local is_struct=""
+				for j in `seq $j_from $rang`
+				do
+					is_struct+=${to_arr[$j]}
+				done 
+				is_struct=$(echo "$structure_strong" | grep -o "$is_struct")
+				if [ -z $is_struct ];then
+					echo -n "";
+				else
+					let j_from=$rang-3
+					for n in `seq $j_from $rang`
+					do
+						unset playing_cards[$i,$n]
+						let winGame++
+					done
+				fi
+			fi
+		fi
+	done
 }
 #*************MAIN************
 declare -A showed_cards
 declare -A playing_cards
 declare -A hidden_cards
+winGame=0
 
 Options
 Card_generation
 cards_structure=($new_cards_str)
-max_cards_in_column=5
-structure=${cards_structure[@]}
+structure_strong=${cards_structure[@]}
 #All cards make random
 all_cards=($(shuf -e ${cards_structure[@]}))
-structure=$(echo $structure | sed 's/ //g';)
+structure_strong=$(echo $structure_strong | sed 's/ //g';)
 #main code
 Get_hidden_cards
 #-----------------
+count_cards_in_column=(0 0 0 0 0 0 0 0 0 0)
 Get_new_cards
-#-----------------
-reset 
+#reset 
 Print_cards
-structure=$(echo $structure | sed -e 's/[HSDC]//g')
+structure=$(echo $structure_strong | sed -e 's/[HSDC]//g')
 Change_cards
