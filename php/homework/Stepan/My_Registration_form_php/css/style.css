@@ -1,0 +1,32 @@
+body {
+background-color:CadetBlue;
+}
+
+#reg {
+background-color:DarkCyan ;
+width:380px;
+border-radius: 20px;
+}
+
+.input {
+background-color:LightCyan;
+position: relative;
+}
+
+#submit{
+background-color:indianred;
+border-radius: 10px;
+width:170px;
+height:20px;
+}
+
+#log{
+font-size:20px;
+color:red;
+}
+
+a:visited {
+    color: MidnightBlue :
+}
+
+.error {color: crimson;}
