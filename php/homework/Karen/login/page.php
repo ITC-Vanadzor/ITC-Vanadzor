@@ -1,8 +1,7 @@
 <?php
 include 'function.php';
-include 'header.php';
 
-$login = $_REQUEST['login'];
+$login = $_COOKIE['login'];
 $pageArray=findLogin($login,$file);
 //var_dump($pageArray);
 
@@ -21,5 +20,5 @@ if ($pageArray->sex){
 if (($pageArray->day)&&($pageArray->month)&&($pageArray->year)){
     echo "<b>Birtday : </b>".$pageArray->day."-".$pageArray->month."-".$pageArray->year."<br/>";
 }
-
-include 'footer.php';
+?>
+<a href="" onclick="deleteCookie('login');">Sign out</a>

@@ -14,12 +14,10 @@ if ($fileCont) {
 
 if(!findLogin($_POST['login'],$file)) {
     file_put_contents($file, $fileCont);
-echo "<a href='index.php'>Sign in</a>";
+    setcookie('login',$_POST['login']);
+    header("Location: index.php");
 }else{
-    echo "This login is exist";
-echo "<a herf='register.php'>Registration</a>";
+    header("Location: register.php?err=2");
 }
-//Print Logins
-//printLogins($file);
-include 'footer.php';
 
+?>
