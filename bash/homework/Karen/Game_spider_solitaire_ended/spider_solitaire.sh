@@ -237,7 +237,7 @@ Print_cards(){
 }
 #Play game when game not ended 
 Play(){
-	while [ 1 -gt $win_game ]
+	while [ 8 -gt $win_game ]
 	do
 		Set_arguments 
 		is_true_structue=$(Is_structure)
