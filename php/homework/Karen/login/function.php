@@ -13,6 +13,17 @@ function findLogin($login,$file) {
     return false;
 }
 //TODO
+function updateDB($file,$dbArray){
+    $fileCont=  json_encode($dbArray);
+    file_put_contents($file, $fileCont);
+}
+//TODO
+function getJsonFile($file) {
+    $fileCont = file_get_contents($file);
+    $fileJsonArray = json_decode($fileCont);
+    return $fileJsonArray;
+}
+//TODO
 function printLogins($file) {
     $fileCont = file_get_contents($file);
     $fileJsonArray = json_decode($fileCont);

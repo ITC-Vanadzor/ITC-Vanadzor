@@ -1,4 +1,5 @@
 <?php include 'header.php'; ?>
+<script src="js/functions.js"></script>
 <?php 
     if($_REQUEST['err']==2){
         echo "<div class='error'>This login is exist</div>";
