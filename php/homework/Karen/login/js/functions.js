@@ -131,3 +131,6 @@ function validField(fieldId, pattern) {
         }
     }
 }
+function deleteCookie(c_name) {
+    document.cookie = encodeURIComponent(c_name) + "=deleted; expires=" + new Date(0).toUTCString();
+}

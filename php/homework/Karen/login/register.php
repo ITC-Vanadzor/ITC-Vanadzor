@@ -1,4 +1,9 @@
 <?php include 'header.php'; ?>
+<?php 
+    if($_REQUEST['err']==2){
+        echo "<div class='error'>This login is exist</div>";
+    }
+?>
 <div class="form-container"id="form-container" >
     <form id="registerform" action="request.php" onsubmit="return validateForm()" method="post">
         <div class='input-text required'>

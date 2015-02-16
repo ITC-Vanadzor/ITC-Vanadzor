@@ -67,4 +67,6 @@ form{
 	display: inline-block;
   width: 48%;
 }
-
+.checkbox input{
+    width: auto;
+}
