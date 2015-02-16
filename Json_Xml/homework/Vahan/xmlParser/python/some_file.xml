@@ -1,3 +1,4 @@
+
 <glossary><title>example glossary</title>
   <GlossDiv><title>S</title>
    <GlossList>
@@ -8,10 +9,10 @@
      <GlossDef>
       <para>A meta-markup language, used to create markup
 languages such as DocBook.</para>
-      <GlossSeeAlso OtherTerm="GML">
-      <GlossSeeAlso OtherTerm="XML">
+      <GlossSeeAlso OtherTerm="GML"></GlossSeeAlso>
+      <GlossSeeAlso OtherTerm="XML"></GlossSeeAlso>
      </GlossDef>
-     <GlossSee OtherTerm="markup">
+     <GlossSee OtherTerm="markup"></GlossSee>
     </GlossEntry>
    </GlossList>
   </GlossDiv>

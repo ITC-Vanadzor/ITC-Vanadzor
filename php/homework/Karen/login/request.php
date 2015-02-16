@@ -1,8 +1,14 @@
 <?php
 include 'function.php';
+$tmpArray = $_POST;
+if($tmpArray['sex']=="famale"){
+    $tmpArray['pictures']='uploads/famale.jpg';
+}else{
+    $tmpArray['pictures']='uploads/male.jpg';
+}
+$postArray = array(strtolower($_POST['login']) => $tmpArray);
 
-$postArray = array(strtolower($_POST['login']) => $_POST);
-//var_dump($postArray);
+var_dump($postArray);
 
 $json = json_encode($postArray);
 $fileCont = file_get_contents($file);

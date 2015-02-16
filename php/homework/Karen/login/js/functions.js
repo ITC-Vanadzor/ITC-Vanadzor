@@ -118,6 +118,10 @@ function validateForm() {
         return false;
     }
 }
+function updateSettings() {
+    alert("gugo");
+    return false;
+}
 //Validation Field
 function validField(fieldId, pattern) {
     var element = document.getElementById(fieldId);
