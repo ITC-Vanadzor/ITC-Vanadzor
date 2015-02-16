@@ -1,3 +1,6 @@
+<?php
+	$num=$_POST['num'];
+?>
 <html>
 	<head>
 		<title>MULTIPLICATION</title>
