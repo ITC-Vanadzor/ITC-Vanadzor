@@ -1,26 +1,58 @@
-<? php 
+<?php 
 
-$host = '127.0.0.1';
-$port = '5432';
-$datebase = 'itcusers';
+
+class Database {
+
+    private $db_name;
+    private $host;
+    private $user;
+    private $password;
+
+    function __construct($db_name, $host, $user, $password) {
+        this-> $db_name = $db_name;
+        this->$host = $host;
+        this->$user = $user;
+        this->$password = $password;
+
+        this->connect();
+    }
+
+    private function connect() {
+        $connection = pg_connect('host =' .host, 'port =' .port, 'datebase =' .datebase, 'user =' .user, 'pasword =' .password);
+    }
+
+    function addUser () {
+
+    }
+
+    function deleteUser () {
+
+    }
+
+    function updateUser () {
+
+    }
+
+    function checkUser () {
+
+    }
+
+    function getAllUsersData () {
+
+    }
+}
+
+
+$database = 'itcusers';
+$host = '5432';
 $user = 'pstgres';
 $password = 'student2014';
 
-$connection = pg_connect('host =' .host, 'port =' .port, 'datebase =' .datebase, 'user =' .user, 'pasword =' .password);
+$db_obj = new DATEBASE($db_name, $host, $user, $password)
 
-//  INSERT TO THE DATEBASE //
-
-$insert = $connection(INSERT INTO user_personal(NAME, SURNAME, EMAIL, PASSWORD) ) VALUES ('ANUN', 'AZGANUN', 'EMAIL', 'PASSWORD') )
-
-    //  CHEK USER //
-
-$query = "SELECT * FROM user_personal"
-
-// Delete //
-
-
-
-
+    if (!db_obj) {
+       echo  ERROR: 1
+    }
 
 
 
