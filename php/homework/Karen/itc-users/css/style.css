@@ -55,7 +55,7 @@ li div {
 .tablePage li:first-child div {
     border: medium none;
 }
-.tablePage ul li:nth-child(9), .tablePage ul li:nth-child(8) {
+.tablePage ul li:nth-child(7), .tablePage ul li:nth-child(8) {
     width: 11%;
 }
 .action i {
