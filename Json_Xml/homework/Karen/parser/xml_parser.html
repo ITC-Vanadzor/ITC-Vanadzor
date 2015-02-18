@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href='css/style.css'/>
+        <script src="js/parser.js"></script>
+    </head>
+    <body onload='showXmlFile("data/xml.xml");'>
+        <div class="left-side">    
+            <h2>XML parser</h2>
+            <form >
+                <input type='text' id="text"/>
+                <input type="button" onclick="mainXml()" value="Parse"/>
+            </form>
+            <p id="demo"></p>
+            <p id="error"></p>
+        </div>
+        <div class="right-side">    
+            <div id="xmlcode"></div>
+        </div>
+    </body>
+</html>

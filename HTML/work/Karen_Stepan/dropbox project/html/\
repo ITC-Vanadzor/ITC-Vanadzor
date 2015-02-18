@@ -1,0 +1,23 @@
+<html>
+<head>
+<body>
+<style>
+div{
+    background color:blue;
+    }
+</style>
+
+
+<div >
+<div>
+
+<img src="../recource/index.png" style="width:100px;height:120px">
+
+
+</div>
+</div>
+
+<body>
+
+</head>
+</html>

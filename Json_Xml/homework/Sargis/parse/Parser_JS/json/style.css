@@ -1,0 +1,10 @@
+#screen {
+    height: 30px;
+    width: 400px;
+    font-size: larger;
+}
+
+#butt {
+    height: 30px;
+    margin-left: 15px;
+}

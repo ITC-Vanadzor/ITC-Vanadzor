@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    	<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/src.js" ></script>
+		<meta charset='utf-8'>
+    </head>
+    <body onload="selectYear()">
+	    <div>
+        	<form action="">
+            	<div>
+					<label>Name:</label>
+            		<input type="text" name="name" id="name" class="textbox"></input>
+					<span id="p1">*</span>
+            		<br><br>
+				</div>
+				<div>
+            		<label>Lastname:</label>
+            		<input type="text" name="lastname" id="lastname" class="textbox"></input>		
+					<span id="p2">*</span>
+            		<br><br>
+				</div>
+				<div>
+  					<label>  E-mail:</label>
+            		<input type="email" name="email" id="email" class="textbox"></input>
+					<span id="p3">*</span>
+            		<br><br>
+				</div>
+				<div>
+            		<label>Password:</label>
+            		<input type="password" name="psw" id="pass" class="textbox"></input>	
+					<span id ="p4">*</span>
+            		<br><br>
+				</div>
+				<div id="date">     
+     				<label>Birthday:</label>
+					<select id ="day" name = "day" onchange="age()">
+						<option> - Day - </option></select>
+               		<select name="DOBMonth" id="month" onchange="days()">
+						<option> - Month - </option>
+						<option value="January">January</option>
+						<option value="Febuary">Febuary</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option> </select>
+					<select id ="year" name = "year" onchange="age()" >
+						<option> - Year - </option></select>      
+            		<br><br>
+				</div>
+				<div id="age1">
+            		<label>Age:</label>
+            		<input type="text" name="age" class="textbox" id="age">
+            		<br><br>
+				</div>
+				<div id="gender">
+					<label>Female:</label>
+					<input type="radio" name="fm" value="female"/>      
+	                <label>Male:</label>
+					<input type="radio" name="fm" value="male"/>
+					<br><br>
+				</div>
+				<div>
+					<button type="button" onclick=hideField()>hide</button>
+					<br><br>
+				</div>    
+				<div>
+        			<input type="button" onclick="validation()" class="myButton" value="SUBMIT"> 
+				</div>  
+		  	</form>
+        </div>
+    </body>
+<html>

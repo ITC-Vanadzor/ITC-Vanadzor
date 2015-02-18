@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* Copyright Gor Julhakyan  -- 2015 -- */
+/* CSS Document */
+
+
+@import url(http://fonts.googleapis.com/css?family=Lobster|Droid+Serif|Roboto+Condensed:400,700);
+
+center {
+	margin-top: 10%;
+}
+
+#input {
+	width: 30%;
+	height: 30px;
+	border: 5px double #00B2FF;
+	border-radius: 7px;
+	text-indent: 0.4em;
+	font-size: 1.3vw;
+	color: #776657;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#attr {
+	height: 42px;
+	border: 5px double #00B2FF;
+	border-radius: 7px;
+	font-size: 1.3vw;
+	text-align: center;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#sort {
+	margin: 13px;
+	width: 15%;
+	border: none;
+	border-radius: 7px;
+	background: #FF9100;
+	font-family: 'Droid Serif', serif;
+	font-size: 2vw;
+	color: #562A0A;	
+}
+
+#sort:hover {
+	background: #FFB600;
+	color: #F84D00;	
+}
+
+#sort:active {
+	background: #FD2700;
+	color: #FFFFFF;	
+}
+
+hr {
+	width: 50%	
+}
+
+h2 {
+	font-family: 'Lobster', cursive;
+	font-size: 2vw;
+	color: #91B004;	
+}
+
+#res {
+	width: 45%;
+	font-family: 'Droid Serif', serif;
+	font-size: 2vw;
+	color: #00A8FF;
+	border: 1px dashed #CDCDCD;
+	max-width: 45%;
+}

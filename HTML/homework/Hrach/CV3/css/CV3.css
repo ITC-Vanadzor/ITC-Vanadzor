@@ -1,45 +1,93 @@
 body {
-    margin-left:15%
+    margin-left:10em
+}
+
+#header {
+	width:39em;
+	height:auto;
+	float:left
 }
 
 .header1 {
-	width:40%;
+	width:20em;
 	height:auto;
 	float:left
 }
 
 .header2 {
 	float:left;
-	width:30%;
+	width:7em;
 }
 
 .header3 {
-	width:65%;
+	width:30em;
 	height:auto;
-	margin-left:38%;
+	margin-left:7em;
 }
 
 .header4 {
-	width:30%;
+	width:16em;
 	height:auto;
 	float:left
 }
 
 .header5 {
-    width:70%;
+    width:39em;
     float:left;
-	height:auto
+	height:auto;
+	border-style:solid;
+	border-width:2px;
+	border-color:#B2D1FF
 }
 
 .header6 {
-    width:70%;
+    width:39em;
     float:left;
-    height:auto
+    height:auto;
+	border-style:solid;
+	border-width:2px;
+	border-color:#B2D1FF;
+	margin-top:0.5em
+}
+
+#header7 {
+    width:18em;
+    float:left;
+    height:2em;
+}
+
+#header8 {
+	margin-left:1em;
+	float:left;
+	height:8em;
+	width:18em;
+	border-style:solid;
+	border-width:2px;
+	border-color:#B2D1FF
+}
+
+#header9 {
+	float:left;
+	width:10em;
+	height:6em;
+}
+
+#header10 {
+	float:left;
+	width:6em;
+	height:6em;
+}
+
+#header11 {
+	float:left;
+	width:2em;
+	height:6em;
 }
 
 #face {
 	height:6em;
-	margin-left:5%
+	margin-left:0.5em;
+	width:6em
 }
 
 
@@ -49,22 +97,15 @@ h5 {
 }
 
 h2 {
-	padding-top:2%;
+	padding-top:0.4em;
 	padding-bottom:0%;
 	margin: 0%
 }
 
 hr {
-	margin-top:1%
+	margin-top:0.2em
 }
 
-.p1 {
-	margin-left:3%;
-	border-style:solid;
-	border-width:2px;
-	border-color:#B2D1FF;
-	height:auto
-}
 
 .span1 {
 	float:left;
@@ -72,21 +113,17 @@ hr {
 	border-bottom-style: solid;
 	border-bottom-color: blue;
 	background-color:#B2D1FF;
-	margin:1%;
-	padding-right:71%;
+	margin:0.2em;
+	padding-right:13.5em;
 	font-size:auto
 }
 
 .span2 {
-	float:left;
-	font-size:80%
+	font-size:0.8em
 }
 
 .span3 {
-	display:flex;
-	flex-basis:auto;
-	margin-left:75%;
-	font-size:80%
+	font-size:1em
 }
 
 .span4 {
@@ -96,23 +133,22 @@ hr {
     border-bottom-color: blue;
     background-color:#B2D1FF;
     margin:1%;
-	width:98%;
+	width:38.2em;
     font-size:auto
 }
 
 .td1 {
-	width:18%
+	width:5em
 }
 
 .td2 {
-	width:60%
+	width:20em
 }
 
 .logo {
-	height:20%;
+	height:1.5em;
+	padding:0.2em
 }
-
-
 
 ul.dropdown li { position: relative; }
 ul.dropdown,
@@ -142,10 +178,13 @@ left: 0;
 ul.dropdown .dropdown-inside { background: #fff; }
 ul.dropdown .dropdown-inside a:hover { background: #efefef; }
 
+input[type=checkbox] {
+visibility: hidden;
+}
 
-.slideOne {
-	width: 50px;
-	height: 10px;
+.slideTwo {
+	width: 80px;
+	height: 30px;
 	background: #333;
 	margin: 20px auto;
 
@@ -159,10 +198,28 @@ ul.dropdown .dropdown-inside a:hover { background: #efefef; }
 	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
 }
 
-.slideOne label {
+.slideTwo:after {
+	content: '';
+	position: absolute;
+	top: 14px;
+	left: 14px;
+	height: 2px;
+	width: 52px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	background: #111;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+}
+
+.slideTwo label {
 	display: block;
-	width: 16px;
-	height: 16px;
+	width: 22px;
+	height: 22px;
 
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
@@ -175,8 +232,9 @@ ul.dropdown .dropdown-inside a:hover { background: #efefef; }
 	transition: all .4s ease;
 	cursor: pointer;
 	position: absolute;
-	top: -3px;
-	left: -3px;
+	top: 4px;
+	z-index: 1;
+	left: 4px;
 
 	-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
 	-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
@@ -191,7 +249,43 @@ ul.dropdown .dropdown-inside a:hover { background: #efefef; }
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
 }
 
+.slideTwo label:after {
+	content: '';
+	position: absolute;
+	width: 10px;
+	height: 10px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	background: #333;
+	left: 6px;
+	top: 6px;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,1), 0px 1px 0px rgba(255,255,255,0.9);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,1), 0px 1px 0px rgba(255,255,255,0.9);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,1), 0px 1px 0px rgba(255,255,255,0.9);
+}
+
+.slideTwo input[type=checkbox]:checked + label {
+	left: 54px;
+}
+
+.slideTwo input[type=checkbox]:checked + label:after {
+	background: #00bf00;
+}
+
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	background: #fcfff4;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+}
+
 .slideOne input[type=checkbox]:checked + label {
 	left: 37px;
 }
-

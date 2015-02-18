@@ -16,23 +16,30 @@ li {
     margin-top:5%
 }
 
+#div {
+   width:58em;
+   height:25em;
+   float:left;
+   background-color:#B0E7E3
+}
+
 #div1 {
-    width:50%;
+    width:35em;
     float:left;
-    background-color:#B0E7E3
+    font-size:0.8em
 }
 
 #div2 {
-    width:50%;
-    float:left
+    width:20em;
+    float:left;
+    height:60em
 }
 
 
 #table {
 	background-color:#B0E7E3;
-	width:100%;
+	width:58em;
 	text-align:center;
-    margin-top:5%;
     float:left
 }
 

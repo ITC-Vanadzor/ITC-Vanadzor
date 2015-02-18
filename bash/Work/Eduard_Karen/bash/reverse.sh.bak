@@ -1,0 +1,7 @@
+#!/bi__KKK__/bash
+
+#$1-file __KKK__ame
+#$2-reversed file __KKK__ame
+text=`cat $1`
+`sed $text/'\__KKK__'/KKK/g`
+echo $text

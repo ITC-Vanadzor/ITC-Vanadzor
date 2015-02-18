@@ -1,0 +1,116 @@
+<html>
+    <body>
+        <script>
+			xmlhttp=new XMLHttpRequest();
+			xmlhttp.open("GET","xml.xml",false);
+			xmlhttp.send();
+			xmlDoc=xmlhttp.responseXML;
+			function indexation() {
+				for (i=0; i<res.length-1; i++) {
+					var fres
+					var fresn
+					fres = res[i].split("[");
+					if (fres.length==1) {
+						index.push(0);
+					} else if (fres.length==2) {
+						res[i] = fres[0];
+						fresn = fres[1].split("]");
+						if (fresn.length==2 && fresn[1]=="") {
+							index.push(fresn[0]);
+						} else {
+							alert("[" + fres[1] + " not valid format");
+							return;
+						}
+					} else {
+						alert("incorrect number of \"[\" in " + i + " argument")
+						}
+				}
+				fres = res1[0].split("[");
+				if (fres.length==1) {
+					index.push(0);
+				} else if (fres.length==2) {
+					if (res1.length==1) {
+						res[res.length-1] = fres[0];
+					} else {
+						res1[0] = fres[0];
+					}
+					fresn = fres[1].split("]");
+					if (fresn.length==2 && fresn[1]=="") {
+						index.push(fresn[0]);
+					} else {
+						alert("[" + fres[1] + " not valid format");
+						return;
+					}
+				} else {
+					alert("incorrect number of \"[\" in " + str(len(st)) + " argument");
+					return;
+				}
+			}
+			
+			function parse() {
+				a = document.getElementById('input').value;
+				res = a.split(".");
+				res1 = res[res.length-1].split(":");
+				index = [];
+				indexation();
+				if (res1.length==1) {
+					var b = xmlDoc.getElementsByTagName(res[0])[index[0]];
+					if (b==undefined) {
+						alert(res[0]+" not valid");
+						return;
+					}
+					for (i=1; i<res.length; i++){
+						b=b.getElementsByTagName(res[i])[index[i]];
+						if (b==undefined) {
+                        	alert(res[i]+" not valid");
+                        	return;
+                    	}
+					
+					}
+					if (b.childNodes[0]==undefined) {
+						alert(res[res.length-1]+" is empty");
+					} else if (b.childNodes[0].nodeValue==null) {
+						alert(res[res.length-1]+" is object");
+					} else {
+						alert(b.childNodes[0].nodeValue);
+					}
+
+				} else if (res1.length==2) {
+					if (res.length==1){
+						var c=xmlDoc.getElementsByTagName(res1[0])[index[0]];
+						if (c==undefined) {
+							alert(res1[0]+" not valid");
+							return;
+						}
+					} else {
+						var c=xmlDoc.getElementsByTagName(res[0])[index[0]];
+						if (c==undefined) {
+							alert(res[0]+" not valid");
+							return;
+						}
+					}
+					for (i=1; i<res.length-1; i++) {
+						 c=c.getElementsByTagName(res[i])[index[i]];
+                         if (c==undefined) {
+                         	alert(res[i]+" not valid");
+                         	return;
+                        }
+					}
+					if (res.length!=1) {
+						c=c.getElementsByTagName(res1[0])[index[res.length-2]];
+						if (c==undefined) {
+                        	alert(res1[0]+" not valid");
+                        	return;
+                        }
+					}
+					alert(c.getAttribute(res1[1]));
+
+				} else {
+					alert("not valid format");
+				}
+			}
+		</script>
+        <input id="input"></input>
+        <button onclick="parse()">parse</button>
+	</body>
+</html>

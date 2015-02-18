@@ -149,11 +149,9 @@ a:hover { color: #FFD700; }
 	background: -o-linear-gradient(top, #fcfff4 0%, #B0C4DE 40%, #B0C4DE 100%);
 	background: -ms-linear-gradient(top, #fcfff4 0%, #B0C4DE 40%, #b3bead 100%);
 	background: linear-gradient(top, #fcfff4 0%, #B0C4DE 40%, #b3bead 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
-}
+	}
 
 .squaredFour label:after {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	filter: alpha(opacity=0);
 	opacity: 0;
 	content: '';
