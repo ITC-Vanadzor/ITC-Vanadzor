@@ -16,8 +16,8 @@ function login_valid (a,b) {
 	}
 }
 
-function overlay() {
+function overlay(a) {
 	el = document.getElementById("overlay");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+	document.getElementById('sign').innerHTML=a;
 }
-

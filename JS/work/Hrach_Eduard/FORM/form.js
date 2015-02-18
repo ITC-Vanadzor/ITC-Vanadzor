@@ -24,7 +24,7 @@ function valid() {
 	document.getElementById('mail_val').innerHTML="* doesn't right"
 	}
 	var pass_value=document.getElementById('pass').value ;
-	var pregexp= new RegExp ('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$');	
+	var pregexp= new RegExp ('^[a-zA-Z0-9!@#$%^&*]{6,16}$');
 	if (pregexp.test(pass_value)) {
 	document.getElementById('pass_val').style.color= "black";
 	document.getElementById('pass_val').innerHTML="*"} else {
