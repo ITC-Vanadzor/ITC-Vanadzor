@@ -1,13 +1,15 @@
 tableTitlesJson = {"checkboxName": "selectAll", "name": "Name", "lastname": "Lastname", "email": "Email", "sex": "Sex", "age": "Age", "action": "Action"}
 objUsers = {"users": [{"userId": "1", "name": "Poghos", "lastname": "Poghosyan", "email": "poghan@gmail.com", "sex": "male", "age": "54"},
         {"userId": "2", "name": "Petros", "lastname": "Posyan", "email": "poan@gmail.com", "sex": "male", "age": "24"},
-        {"userId": "3", "name": "Mari", "lastname": "Grghyan", "email": "pogho@gmail.com", "sex": "female", "age": "38"}]};
-tableId="tablePage";
-modalId="#modal-dialog";
+        {"userId": "3", "name": "Mari", "lastname": "Grghyan", "email": "pogho@gmail.com", "sex": "female", "age": "38"}
+    ]};
+tableId = "tablePage";
+modalId = "modal-dialog";
+tmpId = 50;
 $(document).ready(function () {
     myMain(tableTitlesJson, objUsers, tableId);
 });
-function myMain(tableTitlesJson, objUsers, tableId){
+function myMain(tableTitlesJson, objUsers, tableId) {
     printTitles(tableTitlesJson, tableId);
     printUsers(objUsers, tableId);
     sellectAllOrNull();
@@ -74,42 +76,48 @@ function actionColumn(ul, classVal, value) {
     var li = createElement(ul, "li", {"class": classVal});
     var div = createElement(li, "div", {"class": "action"});
     var iTag = createElement(div, "i", {});
-    var a = createElement(div, "a", {"href": modalId});
+    var a = createElement(div, "a", {"href": "#" + modalId, "rel": objUsers.users[i].userId, "onclick": classVal + "User(this.getAttribute('rel'))"});
     a.textContent = value;
+}
+function  editUser(userId) {
+    userJson = objUsers.users[getUsersArrayIndex(objUsers, userId)];
+    editedUserJson = getEditedUserJson(userJson);
+    objUsers.users[getUsersArrayIndex(objUsers, userId)] = editedUserJson;
+    document.getElementById(tableId).innerHTML = "";
+    myMain(tableTitlesJson, objUsers, tableId);
+}
+function  deleteUser(userId) {
+    var index = getUsersArrayIndex(objUsers, userId);
+    objUsers.users.splice(index, 1);
+    document.getElementById(tableId).innerHTML = "";
+    myMain(tableTitlesJson, objUsers, tableId);
+}
+function addUser() {
+    addedUserJson = getAddedUserJson();
+    objUsers.users[objUsers.users.length] = addedUserJson;
+    document.getElementById(tableId).innerHTML = "";
+    myMain(tableTitlesJson, objUsers, tableId);
+}
+function  getEditedUserJson(userJson) {
+    return {"userId": "15", "name": "Edited Name", "lastname": "Edited last n", "email": "edited email", "sex": "Edited sex", "age": "Edited age"};
+}
+function  getAddedUserJson() {
+    return {"userId": tmpId++, "name": "Added Name", "lastname": "Added last n", "email": "Added email", "sex": "Added sex", "age": "Added age"};
 }
 //checked first checkbox: all select box in begin line make selected,
 //and remove checked in first checkbox: all make no selected 
 function sellectAllOrNull() {
-    $('#'+tableId+' .title li input[name="' + tableTitlesJson.checkboxName + '"]').click(function () {
+    $('#' + tableId + ' .title li input[name="' + tableTitlesJson.checkboxName + '"]').click(function () {
         if (this.checked) {
-            $('#'+tableId+' ul li .checkUser').each(function () {
+            $('#' + tableId + ' ul li .checkUser').each(function () {
                 this.checked = true;
             });
         } else {
-            $('#'+tableId+' ul li .checkUser').each(function () {
+            $('#' + tableId + ' ul li .checkUser').each(function () {
                 this.checked = false;
             });
         }
     });
-}
-function getEditUser() {
-    var value;
-    var user_id;
-    var rel;
-    $('.action a').click(function () {
-        $('.modal-content').html('<ul class="editUser"></ul>');
-        user_id = $(this).parents('.user').find('input[type="checkbox"]').val();
-        $('.editUser').append('<li style="display:none;"><input name="user_id" type="text" class="text" value="' + user_id + '" /></li>');
-        $(this).parents('.user').find('div.text').each(function () {
-            rel = $(this).parent().attr('class');
-            value = $(this).text();
-            $('.editUser').append('<li><input type="text" class="text" value="' + value + '" name="' + rel + '"/></li>');
-        });
-        $('.modal-content').append('<button id="updateUser" onclick="getJson()">Update</button>');
-    });
-}
-function updateUser(json) {
-    //TODO
 }
 function getJson() {
     var modalHtml = document.getElementById("modal-content");
@@ -129,20 +137,15 @@ function getJson() {
 function updateTable(json) {
     var userId = json['user_id'];
     document.getElementById(tableId).innerHTML = "";
-    var key = getUsersArrayKey(objUsers, userId);
-    objUsers.users[key] = json;
+    objUsers.users[getUsersArrayIndex(objUsers, userId)] = json;
     myMain(tableTitlesJson, objUsers, tableId);
-    
+
 }
-function getUsersArrayKey(objUsers, userId) {
+function getUsersArrayIndex(objUsers, userId) {
     for (i = 0; i < objUsers.users.length; i++) {
         if (objUsers.users[i].userId == userId) {
             return i;
         }
     }
     return false;
-}
-function addUser(){
-    printUsers(objUsers, "modal-content");
-    //alert("ok");
 }

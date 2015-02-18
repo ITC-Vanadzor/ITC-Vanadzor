@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css"></link>
+        <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="../js/functions.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="tablePage" id="tablePage">
+                <ul class="title">
+                    <li><div><input type="checkbox" name="selectAll" /></div></li>
+                    <li><div>Name</div></li>
+                    <li><div>Last name</div></li>
+                    <li><div>Email</div></li>
+                    <li><div>Sex</div></li>
+                    <li><div>Age</div></li>
+                    <li><div>Action</div></li>
+                </ul>
+                <!--<ul class="user" id="us1">
+                    <li><div><input type="checkbox" name="user1" value="1" class="checkUser"/></div></li>
+                    <li class="name"><div class="text">Poghos</div></li>
+                    <li class="lastname"><div class="text">Poghosyan</div></li>
+                    <li class="email"><div class="text">poghos@gmail.com</div></li>
+                    <li class="sex"><div class="text">male</div></li>
+                    <li class="age"><div class="text">25</div></li>
+                    <li class="edit" ><div class="action"><i></i><a href="#edit-user">edit</a></div></li>
+                    <li class="delete"><div class="action" onclick="removeLi('us1')"><i></i><span>delete</span></div></li>
+                </ul>
+                <ul class="user" id="us2">
+                    <li><div><input type="checkbox" name="user2"  value="2" class="checkUser"/></div></li>
+                    <li class="name"><div class="text">Poghos</div></li>
+                    <li class="lastname"><div class="text">Poghosyan</div></li>
+                    <li class="email"><div class="text">poghos@gmail.com</div></li>
+                    <li class="sex"><div class="text">male</div></li>
+                    <li class="age"><div class="text">25</div></li>
+                    <li class="edit" ><div class="action"><i></i><a href="#edit-user">edit</a></div></li>
+                    <li class="delete"><div class="action" onclick="removeLi('us2')"><i></i><span>delete</span></div></li>
+                </ul>
+                <ul class="user" id="us3">
+                    <li><div><input type="checkbox" name="user3"  value="3" class="checkUser"/></div></li>
+                    <li class="name"><div class="text">Poghos</div></li>
+                    <li class="lastname"><div class="text">Poghosyan</div></li>
+                    <li class="email"><div class="text">poghos@gmail.com</div></li>
+                    <li class="sex"><div class="text">male</div></li>
+                    <li class="age"><div class="text">25</div></li>
+                    <li class="edit" ><div class="action"><i></i><a href="#edit-user">edit</a></div></li>
+                    <li class="delete"><div class="action" onclick="removeLi('us3')"><i></i><span>delete</span></div></li>
+                </ul>-->
+            </div> 
+            <div class="addUser">
+                <a href="#edit-user" class="addUserLink">Add user</a>
+            </div>
+            <div class="hidden form-container">
+                <form action="">
+                    <input type="text" name="update_data" value="" />
+                    <input type="submit" value="update"/>
+                </form>
+            </div>
+        </div>
+        <!--Modal dialog-->
+        <div class='modal-dialog' id='edit-user'>
+            <div class="modal-fon"></div>
+            <div class="modal-wrapper clearfix">
+                <div class="modal-title clearfix">
+                    <h2>Choose a language</h2>
+                    <a href="#" title="Close" class="close-btn"></a>
+                </div>
+                <div class="addUser">
+                    <a href="#" class="addUserLink" onclick="printUsers()">Add user</a>
+                </div>
+                <div class="modal-content" id="modal-content">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

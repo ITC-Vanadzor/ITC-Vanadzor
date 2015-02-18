@@ -8,48 +8,52 @@ function sumbit() {
 }
 
 function valid() {
-	err=0
+	err=0;
 	var name_value=document.getElementById('name').value ;
 	var nregexp= new RegExp ('^[a-zA-Z]{2,15}$');	
 	if (nregexp.test(name_value)) {
-	document.getElementById('name_val').style.color= "black";
-	document.getElementById('name_val').innerHTML="*"} else {
+	document.getElementById('name_val').style.color= "#00FF00";
+	document.getElementById('name_val').innerHTML="NAME : "} else {
 	err+=1;
 	document.getElementById('name_val').style.color= "red";
-	document.getElementById('name_val').innerHTML="* doesn't right"
+	document.getElementById('name_val').innerHTML="* This field is empty or invalid name. Use only letters"
 	}
 	var lname_value=document.getElementById('lname').value ;
 	var lregexp= new RegExp ('^[a-zA-Z]{2,15}$');
 	if (lregexp.test(lname_value)) {
-	document.getElementById('lname_val').style.color= "black";
-	document.getElementById('lname_val').innerHTML="*"} else {
+	document.getElementById('lname_val').style.color= "#00FF00";
+	document.getElementById('lname_val').innerHTML="LAST NAME : "} else {
 	err+=1;
 	document.getElementById('lname_val').style.color= "red";
-	document.getElementById('lname_val').innerHTML="* doesn't right"
+	document.getElementById('lname_val').innerHTML="* This field is empty or invalid name. Use only letters"
 	}
 	var mail_value=document.getElementById('mail').value ;
 	var eregexp= new RegExp ('^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$');	
 	if (eregexp.test(mail_value)) {
-	document.getElementById('mail_val').style.color= "black";
-	document.getElementById('mail_val').innerHTML="*"} else {
+	document.getElementById('mail_val').style.color= "#00FF00";
+	document.getElementById('mail_val').innerHTML="EMAIL : "} else {
 	err+=1;
 	document.getElementById('mail_val').style.color= "red";
-	document.getElementById('mail_val').innerHTML="* doesn't right"
+	document.getElementById('mail_val').innerHTML="*  This field is empty or invalid Email. Example: example@example.example"
 	}
 	var pass_value=document.getElementById('pass').value ;
 	var pregexp= new RegExp ('^.{4,8}$');	
 	if (pregexp.test(pass_value)) {
-	document.getElementById('pass_val').style.color= "black";
-	document.getElementById('pass_val').innerHTML="*"} else {
+	document.getElementById('pass_val').style.color= "#00FF00";
+	document.getElementById('pass_val').innerHTML="PASSWORD : "} else {
 	err+=1;
 	document.getElementById('pass_val').style.color= "red";
-	document.getElementById('pass_val').innerHTML="* doesn't right"
+	document.getElementById('pass_val').innerHTML="* This field is empty or invalid password"
+	}
+	if (err==0) {
+		alert("You are successfully registered !")
 	}
 
 	if (err!=0) {
 		
 		return false;		
-	}	
+	} 
+	
 }
 
 
@@ -107,17 +111,18 @@ function onload() {
 	hide();
 }
 
-function day(){
+function day_birdth () {
 	d = document.getElementById('day').value;
 	age();
+
 }
 
-function year(){
+function year_birdth() {
 	y = document.getElementById('year').value;
 	age();
 }
 
-function age(){
+function age() {
 	if (d != "na" && m != "na" && y != 1914) {
 		if ( m > now.getMonth() + 1 ) {
 			document.getElementById('age').value = now.getFullYear() - y - 1

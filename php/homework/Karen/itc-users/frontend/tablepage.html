@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css"></link>
+        <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="../js/functions.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="tablePage" id="tablePage">
+                
+            </div>
+            <div class="addUser">
+                <a href="#modal-dialog" onclick="addUser();" class="addUserLink">Add user</a>
+            </div>
+            <div class="hidden form-container">
+                <form action="">
+                    <input type="text" name="update_data" value="" />
+                    <input type="submit" value="update"/>
+                </form>
+            </div>
+        </div>
+        <!--Modal dialog-->
+        <div class='modal-dialog' id='modal-dialog'>
+            <div class="modal-fon"></div>
+            <div class="modal-wrapper clearfix">
+                <div class="modal-title clearfix">
+                    <h2>Choose a language</h2>
+                    <a href="#" title="Close" class="close-btn"></a>
+                </div>
+                <div class="modal-content tablePage" id="modal-content">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
