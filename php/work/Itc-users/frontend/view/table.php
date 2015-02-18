@@ -1,6 +1,6 @@
 <?php
 	$mail=$_POST['mail'];
-	if ($mail ==""){  header('Location: login.php');  }	
+	if ($mail ==""){  header('Location: login.html');  }	
 ?>
 
 <html>
