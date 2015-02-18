@@ -8,7 +8,7 @@ function sumbit() {
 }
 
 function valid() {
-	err=0
+	err=0;
 	var name_value=document.getElementById('name').value ;
 	var nregexp= new RegExp ('^[a-zA-Z]{2,15}$');	
 	if (nregexp.test(name_value)) {
@@ -111,17 +111,18 @@ function onload() {
 	hide();
 }
 
-function day(){
+function day_birdth () {
 	d = document.getElementById('day').value;
 	age();
+
 }
 
-function year(){
+function year_birdth() {
 	y = document.getElementById('year').value;
 	age();
 }
 
-function age(){
+function age() {
 	if (d != "na" && m != "na" && y != 1914) {
 		if ( m > now.getMonth() + 1 ) {
 			document.getElementById('age').value = now.getFullYear() - y - 1
