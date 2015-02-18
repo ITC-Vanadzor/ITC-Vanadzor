@@ -1,0 +1,72 @@
+<html>
+<head>
+<link rel="stylesheet" href="../css/style.css"></link>
+<script src="../js/select.js"></script>
+</head>
+<body>
+<div class="wrapper">
+  <div class="tablePage">
+    <ul class="title">
+      <li><div><input type="checkbox" name="chk" onclick='checkedAll(frm1);'/></div></li>
+      <li><div>Name</div></li>
+      <li><div>Last name</div></li>
+      <li><div>Email</div></li>
+      <li><div>Sex</div></li>
+      <li><div>Age</div></li>
+      <li><div>Action</div></li>
+    </ul>
+    <form id="frm1">
+    <ul class="user" id="ul1">
+      <li><div><input type="checkbox" name="chk" /></div></li>
+      <li rel="user_id" style="display:none;"><div>1</div></li>
+      <li><div>Poghos</div></li>
+      <li><div>Poghosyan</div></li>
+      <li><div>poghos@gmail.com</div></li>
+      <li><div>male</div></li>
+      <li><div>25</div></li>
+      <li><div class="action"><i class="edit"></i><a href="#edit-user">edit</a></div></li>
+      <li><div class="action" onclick="removeLi('ul1')"><i class="delete"></i><span >delete</span></div></li>
+    </ul>
+    <ul class="user" id="ul2">
+      <li><div><input type="checkbox" name="chk" /></div></li>
+      <li rel="user_id" style="display:none;"><div>1</div></li>
+      <li><div>Poghos</div></li>
+      <li><div>Poghosyan</div></li>
+      <li><div>poghos@gmail.com</div></li>
+      <li><div>male</div></li>
+      <li><div>25</div></li>
+      <li><div class="action"><i class="edit"></i><a href="#edit-user">edit</a></div></li>
+      <li><div class="action" onclick="removeLi('ul2')"><i class="delete"></i><span>delete</span></div></li>
+    </ul>
+    <ul class="user" id="ul3">
+      <li><div><input type="checkbox" name="chk" /></div></li>
+      <li rel="user_id" style="display:none;"><div>1</div></li>
+      <li><div>Poghos</div></li>
+      <li><div>Poghosyan</div></li>
+      <li><div>poghos@gmail.com</div></li>
+      <li><div>male</div></li>
+      <li><div>25</div></li>
+      <li><div class="action"><i class="edit"></i><a href="#edit-user">edit</a></div></li>
+      <li><div class="action" onclick="removeLi('ul3')"><i class="delete"></i><span>delete</span></div></li>
+    </ul>
+  </div></form>
+  <div class="addUser">
+    <a href="#edit-user" class="addUserLink">Add user</a>
+  </div>
+</div>
+<!--Modal dialog-->
+<div class='modal-dialog' id='edit-user'>
+  <div class="modal-fon"></div>
+  <div class="modal-cont">
+    <div class="modal-title clearfix">
+      <h2>Add user</h2>
+      <a href="#" title="Close" class="close-btn"></a>
+      Mane:Hambardzumyan:hambardzumyan.mane@gmail.com:female:24
+      <div class="addUser">
+    <a href="#" class="addUserLink" onclick="addUser()">Add user</a>
+  </div>
+    </div>
+  </div>
+</div>
+</body>
+<html>
