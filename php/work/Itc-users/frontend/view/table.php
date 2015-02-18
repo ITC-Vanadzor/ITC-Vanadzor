@@ -8,8 +8,10 @@
 		<meta charset="UTF-8">
 		<link href="../css/form.css" rel="stylesheet">
 		<script src="../js/login.js"></script>
-		<script src="../js/form.js"></script>
-		</head>
+                <script src="../js/form.js"></script> <link rel="stylesheet" href="../css/style.css"/>
+                <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+                <script type="text/javascript" src="../js/functions.js"></script>
+        </head>
 	<body>
 		<div id="overlay">		
 		<div id="form">
@@ -56,8 +58,14 @@
 		<div id="panel">
 		<button class="signup" onclick="hide(); overlay('Sign Up'); addYear()">Add</button>
 		</div>
-		<div id="table"> 
-		</div>
+                <div class="tableWrapper">
+                    <div class="tablePage" id="tablePage">
+
+                    </div>
+                    <div class="addUser">
+                        <a href="#modal-dialog" onclick="addUser();" class="addUserLink">Add user</a>
+                    </div>           
+                </div>
 		</div>
 	</body>
 </html>
