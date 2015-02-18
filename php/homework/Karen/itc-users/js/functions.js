@@ -1,16 +1,41 @@
+tableTitlesJson = {"checkboxName": "selectAll", "name": "Name", "lastname": "Lastname", "email": "Email", "sex": "Sex", "age": "Age", "action": "Action"}
 objUsers = {"users": [{"userId": "1", "name": "Poghos", "lastname": "Poghosyan", "email": "poghan@gmail.com", "sex": "male", "age": "54"},
-            {"userId": "2", "name": "Petros", "lastname": "Posyan", "email": "poan@gmail.com", "sex": "male", "age": "24"},
-            {"userId": "3", "name": "Mari", "lastname": "Grghyan", "email": "pogho@gmail.com", "sex": "female", "age": "38"}]};
-    
+        {"userId": "2", "name": "Petros", "lastname": "Posyan", "email": "poan@gmail.com", "sex": "male", "age": "24"},
+        {"userId": "3", "name": "Mari", "lastname": "Grghyan", "email": "pogho@gmail.com", "sex": "female", "age": "38"}]};
+tableId="tablePage";
+modalId="#modal-dialog";
 $(document).ready(function () {
-    printUsers(objUsers);
+    myMain(tableTitlesJson, objUsers, tableId);
+});
+function myMain(tableTitlesJson, objUsers, tableId){
+    printTitles(tableTitlesJson, tableId);
+    printUsers(objUsers, tableId);
     sellectAllOrNull();
     getEditUser();
-});
-function printUsers(objUsers) {
+}
+function printTitles(tableTitlesJson, tableId) {
+    var parentObj = document.getElementById(tableId);
+    ul = createElement(parentObj, "ul", {"class": "title"});
+    //checkout column
+    creatLiDiv();
+    var input = createElement(div, "input", {"type": "checkbox", "name": tableTitlesJson.checkboxName});
+    creatLiDiv();
+    div.textContent = tableTitlesJson.name;
+    creatLiDiv();
+    div.textContent = tableTitlesJson.lastname;
+    creatLiDiv();
+    div.textContent = tableTitlesJson.email;
+    creatLiDiv();
+    div.textContent = tableTitlesJson.sex;
+    creatLiDiv();
+    div.textContent = tableTitlesJson.age;
+    creatLiDiv();
+    div.textContent = tableTitlesJson.action;
+}
+function printUsers(objUsers, tableId) {
     //alert(objUsers.users.length);
     for (i = 0; i < objUsers.users.length; i++) {
-        var parentObj = document.getElementById("tablePage");
+        var parentObj = document.getElementById(tableId);
         ul = createElement(parentObj, "ul", {"class": "user"});
         //checkout column
         idColumn(ul, objUsers.users[i].userId);
@@ -19,8 +44,8 @@ function printUsers(objUsers) {
         userInfoColumn(ul, "email", objUsers.users[i].email);
         userInfoColumn(ul, "sex", objUsers.users[i].sex);
         userInfoColumn(ul, "age", objUsers.users[i].age);
-        actionColumn(ul, "edit" ,"edit");
-        actionColumn(ul, "delete" ,"delete");
+        actionColumn(ul, "edit", "edit");
+        actionColumn(ul, "delete", "delete");
     }
 }
 function createElement(parentObj, tagName, attributes) {
@@ -30,6 +55,10 @@ function createElement(parentObj, tagName, attributes) {
     }
     parentObj.appendChild(tag);
     return tag;
+}
+function creatLiDiv() {
+    li = createElement(ul, "li", {});
+    div = createElement(li, "div", {});
 }
 function idColumn(ul, id) {
     var li = createElement(ul, "li", {});
@@ -41,29 +70,28 @@ function userInfoColumn(ul, classVal, value) {
     var div = createElement(li, "div", {"class": "text"});
     div.textContent = value;
 }
-function actionColumn(ul, classVal ,value) {
+function actionColumn(ul, classVal, value) {
     var li = createElement(ul, "li", {"class": classVal});
-    var div = createElement(li, "div", {"class":"action"});
+    var div = createElement(li, "div", {"class": "action"});
     var iTag = createElement(div, "i", {});
-    var a = createElement(div, "a", {"href":"#edit-user"});
+    var a = createElement(div, "a", {"href": modalId});
     a.textContent = value;
 }
 //checked first checkbox: all select box in begin line make selected,
 //and remove checked in first checkbox: all make no selected 
 function sellectAllOrNull() {
-    $('.tablePage .title li input[name="selectAll"]').click(function () {
+    $('#'+tableId+' .title li input[name="' + tableTitlesJson.checkboxName + '"]').click(function () {
         if (this.checked) {
-            $('.tablePage ul li .checkUser').each(function () {
+            $('#'+tableId+' ul li .checkUser').each(function () {
                 this.checked = true;
             });
         } else {
-            $('.tablePage ul li .checkUser').each(function () {
+            $('#'+tableId+' ul li .checkUser').each(function () {
                 this.checked = false;
             });
         }
     });
 }
-
 function getEditUser() {
     var value;
     var user_id;
@@ -78,7 +106,6 @@ function getEditUser() {
             $('.editUser').append('<li><input type="text" class="text" value="' + value + '" name="' + rel + '"/></li>');
         });
         $('.modal-content').append('<button id="updateUser" onclick="getJson()">Update</button>');
-        //      updateUser();
     });
 }
 function updateUser(json) {
@@ -99,9 +126,23 @@ function getJson() {
     updateTable(json);
     return json;
 }
-
 function updateTable(json) {
     var userId = json['user_id'];
-    var table = document.getElementById("tablePage");
-    var list = table.getElementsByTagName("li");
+    document.getElementById(tableId).innerHTML = "";
+    var key = getUsersArrayKey(objUsers, userId);
+    objUsers.users[key] = json;
+    myMain(tableTitlesJson, objUsers, tableId);
+    
+}
+function getUsersArrayKey(objUsers, userId) {
+    for (i = 0; i < objUsers.users.length; i++) {
+        if (objUsers.users[i].userId == userId) {
+            return i;
+        }
+    }
+    return false;
+}
+function addUser(){
+    printUsers(objUsers, "modal-content");
+    //alert("ok");
 }
