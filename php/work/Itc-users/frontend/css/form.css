@@ -118,7 +118,15 @@ img {
     padding:15px;
     text-align:center;
 }
-
+//********************
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
 
 
 
