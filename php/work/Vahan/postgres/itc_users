@@ -1,0 +1,137 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: gender; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE gender AS ENUM (
+    'male',
+    'female'
+);
+
+
+ALTER TYPE public.gender OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: films; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE films (
+    code character(5) NOT NULL,
+    title character varying(40) NOT NULL,
+    did integer NOT NULL,
+    date_prod date,
+    kind character varying(10),
+    len interval hour to minute
+);
+
+
+ALTER TABLE public.films OWNER TO postgres;
+
+--
+-- Name: info; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE info (
+    "Id" character(5) NOT NULL,
+    age integer NOT NULL,
+    sex character varying(6),
+    birthday date
+);
+
+
+ALTER TABLE public.info OWNER TO postgres;
+
+--
+-- Name: music; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE music (
+);
+
+
+ALTER TABLE public.music OWNER TO postgres;
+
+--
+-- Data for Name: films; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY films (code, title, did, date_prod, kind, len) FROM stdin;
+\.
+
+
+--
+-- Data for Name: info; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY info ("Id", age, sex, birthday) FROM stdin;
+\.
+
+
+--
+-- Data for Name: music; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY music  FROM stdin;
+\.
+
+
+--
+-- Name: firstkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY films
+    ADD CONSTRAINT firstkey PRIMARY KEY (code);
+
+
+--
+-- Name: key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY info
+    ADD CONSTRAINT key PRIMARY KEY ("Id");
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

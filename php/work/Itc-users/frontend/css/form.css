@@ -1,119 +1,122 @@
-#form {
-color:black;
-background-color: #D3D3D3;
-margin-right:2%;
-width:39%;
+#loginFormId {
+    color:black;
+    background-color: #D3D3D3;
+    margin-right:2%;
+    width:39%;
 
-margin-left:30%;
-text-align:right;
-padding:27px;
-border:4px groove #DAA520;
-border-radius:10px;
+    margin-left:30%;
+    text-align:right;
+    padding:27px;
+    border:4px groove #DAA520;
+    border-radius:10px;
 
+}
+#loginFormId form>div{
+    margin-bottom: 15px;
 }
 .blok {
-margin-top:13%;
+    margin-top:13%;
 }
 .signup {
-background-color:#4169E1 	;
-color:#F0E68C 	;
-border:2px groove #DAA520;
-border-radius:5px;
-padding:5px;
+    background-color:#4169E1 	;
+    color:#F0E68C 	;
+    border:2px groove #DAA520;
+    border-radius:5px;
+    padding:5px;
 }
 input[type=text] {
-box-shadow: 0 0 10px rgba(0,0,0,0.5);
-border:4px groove;
-border-radius:10px;
-padding:5px;
-background-color:#EEE8AA;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border:4px groove;
+    border-radius:10px;
+    padding:5px;
+    background-color:#EEE8AA;
 }
 input[type=password] {
-box-shadow: 0 0 10px rgba(0,0,0,0.5);
-border:4px groove;
-border-radius:10px;
-padding:5px;
-background-color:#EEE8AA;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border:4px groove;
+    border-radius:10px;
+    padding:5px;
+    background-color:#EEE8AA;
 }
 
 #sign {
-background-color: #4169E1 	;
-color:#F0E68C ;
-border:2px groove #DAA520;
-border-radius:5px;
-padding:5px;
+    background-color: #4169E1 	;
+    color:#F0E68C ;
+    border:2px groove #DAA520;
+    border-radius:5px;
+    padding:5px;
 }
 #age {
-background-color:#E9967A;
+    background-color:#E9967A;
 }
 
 input[value="Hide"]  {
-background-color:#DAA520	;
-border-radius:15px;
-border:2px groove #DAA520;
-padding:5px;
+    background-color:#DAA520	;
+    border-radius:15px;
+    border:2px groove #DAA520;
+    padding:5px;
 }
 
 .myage {
-background-color:#DAA520;
-border-radius:5px;
-border:2px groove #DAA520;
+    background-color:#DAA520;
+    border-radius:5px;
+    border:2px groove #DAA520;
 }
 
 #login {
-background-color:#DAA520;
-border-radius:15px;
-border:2px groove #DAA520;
-padding:5px;
+    background-color:#DAA520;
+    border-radius:15px;
+    border:2px groove #DAA520;
+    padding:5px;
 }
 
 
 a {
-text-decoration:none;
+    text-decoration:none;
 }
 img {
-margin-left: 35%;
+    margin-left: 35%;
 }
 
 #header {
-float:left;
-height:5%;
-width:100%;
-text-align:right;
-padding-top:3%;
+    float:left;
+    height:5%;
+    width:100%;
+    text-align:right;
+    padding-top:3%;
 
 }
 #table {
-width:100%;
-height:85%;
-float:left;
+    width:100%;
+    height:85%;
+    float:left;
 }
 #panel {
-height:5%;
-width:100%;
-float:left;
+    height:5%;
+    width:100%;
+    float:left;
 }
 
 
 
 #overlay {
-     visibility: hidden;
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     width:100%;
-     height:100%;
-     text-align:center;
-     z-index: 1000;
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width:100%;
+    height:100%;
+    text-align:center;
+    z-index: 1000;
 }
 
 #overlay div {
-     width:300px;
-     margin: 100px auto;
-     background-color: #fff;
-     border:1px solid #000;
-     padding:15px;
-     text-align:center;
+    width:300px;
+    margin: 100px auto;
+    background-color: #fff;
+    border:1px solid #000;
+    padding:15px;
+    text-align:center;
 }
 //********************
 .clearfix:after {
