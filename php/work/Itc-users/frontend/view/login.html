@@ -1,20 +1,33 @@
 <html>
-	<head>
-	<meta charset="UTF-8">
-	<link href="../css/form.css" rel="stylesheet">
-	<script src="../js/login.js"></script>
-	</head>
-	<body>
-	<img src="../images/login.jpg"/>
-	<div id="form">
-	<form action="table.php" method="post">
-		<p>Email: <input name="mail" type="text" id="mail" placeholder=" YOUR EMAIL"></input></p>
-		<p>Password: <input name="pass" type="password" id="pass" placeholder=" YOUR PASSWORD"></input></p>
-		<input type="checkbox" id="box" name="box" >Remember me</input> 		
-		<input type="submit" id="login" value="Log In"  onclick="return login_valid('itc@mail.ru','student2014');"/> 
-</form>
-		<a href="sign_up.html"><input type="button" class="signup" value="Sign Up" /></a>
-		</div>
-		</body>
+    <head>
+        <meta charset="UTF-8">
+        <link href="../css/form.css" rel="stylesheet">
+        <script src="../js/login.js"></script>
+    </head>
+    <body>
+        <img src="../images/login.jpg"/>
+        <div id="loginFormId">
+            <form action="table.php" method="post">
+                <div>
+                    <label>Email:</label>
+                    <input name="mail" type="text" id="mail" placeholder=" YOUR EMAIL" />
+                </div>
+                <div>
+                    <label>Password: </label>
+                    <input name="pass" type="password" id="pass" placeholder=" YOUR PASSWORD" />
+                </div>
+                <div>
+                    <label for="remeberme">Remember me</label>
+                    <input type="checkbox" id="remeberme" name="remeberme" value="Remember me" /> 		
+                </div>
+                <div>
+                    <input type="submit" id="login" value="Log In"  onclick="login_valid('itc@mail.ru','student2014');"/> 
+                </div>
+            </form>
+            <div>
+                <a class="signup" href="sign_up.html">Sign Up</a>
+            </div>
+        </div>
+    </body>
 
 </html>

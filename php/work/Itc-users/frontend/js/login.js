@@ -1,8 +1,13 @@
+function onLoginClick() {
+    var valuer = 'itc@mail.ru';
+    var valpass = 'student2014');
+
+}
 function login_valid (a,b) {
 
 	var mail_value=document.getElementById('mail').value ;
 	var pass_value=document.getElementById('pass').value ;
-	var x = document.getElementById("box").checked;
+	var x = document.getElementById("remeberme").checked;
 	if (mail_value==a && pass_value==b) {	
 	if(x) {
 		alert("Checked");
