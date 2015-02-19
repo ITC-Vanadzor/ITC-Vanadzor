@@ -15,7 +15,7 @@
 	<body>
 		<div id="overlay">		
 		<div id="form">
-	<form action="login.html" method="post">
+	<form method="post">
 		<p><label id="name_val" name="name" for="name">NAME* : </label><input type="text" id="name" placeholder=" NAME"></input></p>
 		<p><label id="lname_val" name="lname" for="lname">LAST NAME* : </label><input type="text" id="lname" placeholder=" LAST NAME"></input></p>
 		<p><label id="mail_val"name="mail" for="mail">EMAIL* : </label><input type="text" name="mail" id="mail" placeholder=" EMAIL"></input></p>
@@ -56,7 +56,7 @@
 		<a href="login.html"><button>Log Out</button></a>
 		</div>		
 		<div id="panel">
-		<button class="signup" onclick="hide(); overlay('Sign Up'); addYear()">Add</button>
+		<button class="signup" onclick="hide(); overlay('Add'); addYear()">Add</button>
 		</div>
                 <div class="tableWrapper">
                     <div class="tablePage" id="tablePage">
