@@ -21,7 +21,7 @@
 		<p><label id="mail_val"name="mail" for="mail">EMAIL* : </label><input type="text" name="mail" id="mail" placeholder=" EMAIL"></input></p>
 		<p><label id="pass_val" name="pass" for="pass">PASSWORD* : </label><input type="password" id="pass" placeholder=" PASSWORD"></input></p>
 <p class="hide" hidden>Date Of Birth:
-		<select name="month" class="age" id="month" onChange="changeDate(this.options[selectedIndex].value);">
+		<select name="month" class="myage" id="month" onChange="changeDate(this.options[selectedIndex].value);">
 			<option value="na">Month</option>
 			<option value="1">January</option>
 			<option value="2">February</option>
@@ -36,10 +36,10 @@
 			<option value="11">November</option>
 			<option value="12">December</option>
 		</select>
-		<select name="day" class="age" id="day" onChange="day_birdth()">
+		<select name="day" class="myage" id="day" onChange="day_birdth()">
 			<option value="na">Day</option>
 		</select>
-		<select name="year" class="age" id="year" onChange="year_birdth()">
+		<select name="year" class="myage" id="year" onChange="year_birdth()">
 			<option value="na">Year</option>
 		</select>
 		</p>
