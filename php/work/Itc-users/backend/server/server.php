@@ -5,8 +5,28 @@ switch($_SERVER['REQUEST_METHOD'])
     case 'POST': postMethod(); break;
     case 'DELETE': deleteMethod(); break;
     case 'PUT': putMethod(); break;
+    case 'GET': getMethod(); break;
 default: 
 }
+
+function getMethod() {
+    if (preg_match('/table_data/i',$_SERVER['REQUEST_URI'])) { 
+        $name = "Anun";
+        $lname = "Azganun";
+        $email = "Email";
+        $tableData = array($name => "Poghos",
+            $lname => "Poghosyan",
+            $email => "poghos1945@petr.os");
+        $jsonData = json_encode($tableData);
+        echo $jsonData."\n";
+        HttpResponse::setCache(true);
+        HttpResponse::setContentType('application/json');
+        HttpResponse::setContentDisposition("$jsonData", true);
+        HttpResponse::setFile('path/fileName');
+        HttpResponse::send();
+    }
+} 
+
 function putMethod() {
     #$extra = 'add_user';
     #$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
