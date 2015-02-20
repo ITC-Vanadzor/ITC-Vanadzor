@@ -1,68 +1,66 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Sign up</title>
-        <meta charset="UTF-8">
-        <link href="../css/form.css" rel="stylesheet">
-        <script src="../js/form.js"></script>
-    </head>
-    <body onload="onload()">
-        <div class="blok">
-            <div id="form">
-                <form action="login.html" method="post">
-                    <p>
-                        <label id="name_val" for="name">NAME* : </label>
-                        <input name="name" type="text" id="name" placeholder=" NAME" />
-                    </p>
-                    <p>
-                        <label id="lname_val" for="lname">LAST NAME* : </label>
-                        <input name="lname" type="text" id="lname" placeholder=" LAST NAME" />
-                    </p>
-                    <p>
-                        <label id="mail_val" for="mail">EMAIL* : </label>
-                        <input type="text" name="mail" id="mail" placeholder=" EMAIL" />
-                    </p>
-                    <p>
-                        <label id="pass_val" for="pass">PASSWORD* : </label>
-                        <input name="pass" type="password" id="pass" placeholder=" PASSWORD" />
-                    </p>
-                    <p class="hide" hidden>Date Of Birth:
-                    <select name="month" class="myage" id="month" onChange="changeDate(this.options[selectedIndex].value);">
-                        <option value="na">Month</option>
-                        <option value="1">January</option>
-                        <option value="2">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>
-                        <select name="day" class="myage" id="day" onChange="day_birdth()">
-                            <option value="na">Day</option>
-                        </select>
-                        <select name="year" class="myage" id="year" onChange="year_birdth()">
-                            <option value="na">Year</option>
-                        </select>
-                    </p>
-                    <p class="hide" hidden>
-                        <label>Age : </label>
-                        <input type="text" id="age" placeholder=" AGE" readonly />
-                    </p>
-                    <p class="hide" hidden>
-                        <label>Male</label>
-                        <input type="radio" name="group" value="Male" />
-                        <label>Female</label>
-                        <input type="radio" name="group" value="Female" />
-                    </p>
-                    <input type="button" OnClick='hide()' value="Hide" />
-                    <button type="submit" OnClick="return valid();" id="sign">Sign Up</button>
-                </form>
+<div id="signUpFormContainerId">
+    <form action="login.html" method="post">
+        <div class="inputTextContainerClass">
+            <label>Name* :</label>
+            <input name="name" type="text" id="nameId" placeholder="Name" />
+        </div>
+        <div class="inputTextContainerClass">
+            <label>Last name* : </label>
+            <input name="lastname" type="text" id="lastNameId" placeholder="Last Name" />
+        </div>
+        <div class="inputTextContainerClass">
+            <label>Email* : </label>
+            <input type="text" name="email" id="emailId" placeholder="Email" />
+        </div>
+        <div class="inputTextContainerClass">
+            <label>Password* : </label>
+            <input name="password" type="password" id="passwordId" placeholder="Password" />
+        </div>
+        <div class="hideClass selectContainerClass">
+            <label>Date Of Birth:</label>
+            <select name="day" id="dayId" onChange="day_birdth()">
+                <option value="na">Day</option>
+            </select>
+            <select name="month" id="monthId" onChange="changeDate(this.options[selectedIndex].value);">
+                <option value="na">Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <select name="year" id="yearId" onChange="year_birdth()">
+                <option value="na">Year</option>
+            </select>
+        </div>
+        <div class="hideClass inputTextContainerClass" >
+            <label>Age : </label>
+            <input type="text" id="ageId" placeholder="Age" readonly />
+        </div>
+        <div class="fullWidthClass">
+            <div class="hideClass inputRadioContainerClass">
+                <label>Male</label>
+                <input type="radio" name="sex" value="Male" />
+            </div>
+            <div class="hideClass inputRadioContainerClass">
+                <label>Female</label>
+                <input type="radio" name="sex" value="Female" />
             </div>
         </div>
-    </body>
-</html>
+        <div class="fullWidthClass">
+            <div class="inputButtonContainerClass">
+                <input type="button" OnClick='hide()' value="Hide" />
+            </div>
+            <div class="inputSubmitContainerClass">
+                <input type="submit" OnClick="valid();" value="Sign Up" />
+            </div>
+        </div>
+    </form>
+</div>
