@@ -17,8 +17,7 @@ class Cookies{
     if ($check_value){
       setcookie($cookie_name,$cookie_value,time+());
     }else {
-
+      setcookie($cookie_name,$cookie_value,time+()+1200);
+	}
   }
-
-
 }

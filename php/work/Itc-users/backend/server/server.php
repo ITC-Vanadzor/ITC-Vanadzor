@@ -1,5 +1,7 @@
 <?php
 
+require "../api/db_connect.php";
+
 switch($_SERVER['REQUEST_METHOD'])
 { 
     case 'POST': postMethod(); break;
@@ -11,19 +13,20 @@ default:
 
 function getMethod() {
     if (preg_match('/table_data/i',$_SERVER['REQUEST_URI'])) { 
-        $name = "Anun";
-        $lname = "Azganun";
-        $email = "Email";
-        $tableData = array($name => "Poghos",
-            $lname => "Poghosyan",
-            $email => "poghos1945@petr.os");
-        $jsonData = json_encode($tableData);
-        echo $jsonData."\n";
-        HttpResponse::setCache(true);
-        HttpResponse::setContentType('application/json');
-        HttpResponse::setContentDisposition("$jsonData", true);
-        HttpResponse::setFile('path/fileName');
-        HttpResponse::send();
+        echo 'test';
+       #$name = "Anun";
+       #$lname = "Azganun";
+       #$email = "Email";
+       #$tableData = array($name => "Poghos",
+       #    $lname => "Poghosyan",
+       #    $email => "poghos1945@petr.os");
+       #$jsonData = json_encode($tableData);
+       #echo $jsonData."\n";
+       #HttpResponse::setCache(true);
+       #HttpResponse::setContentType('application/json');
+       #HttpResponse::setContentDisposition("$jsonData", true);
+       #HttpResponse::setFile('path/fileName');
+       #HttpResponse::send();
     }
 } 
 
@@ -42,6 +45,12 @@ function deleteMethod() {
 }
 
 function postMethod() {
+    if ($_POST['miban'] == 'get_allusers'){
+        $db = new DATABASE('itc-users', 'localhost', 5432, 'postgres', '123456');
+        $data = $db->getAllUsersData();
+        echo json_encode($data);
+    }
+
     if (preg_match('/login/i',$_SERVER['REQUEST_URI'])) {
         login();
     } elseif (preg_match('/logout/i',$_SERVER['REQUEST_URI'])) {

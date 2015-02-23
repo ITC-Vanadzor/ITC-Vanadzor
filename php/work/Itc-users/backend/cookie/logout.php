@@ -1,12 +1,14 @@
 <?php
-$cookie_name="user";
+/*$cookie_name="user";dd
 $cookie_value="user pass";
 if (!$_POST['checkbox']){
   setcookie($cookie_name,$cookie_value,time()+12);echo "false";
 }
 else {
 setcookie($cookie_name,$cookie_value);echo "true";
-}
+}*/
+include 'adddel.php';
+add();
 ?>
 <html>
   <head>
@@ -15,15 +17,15 @@ setcookie($cookie_name,$cookie_value);echo "true";
    <body>
    <div id="del">
 <?php
-function removeCookie(){
+/*function removeCookie(){
 $cookie_name;
 $cookie_value;
 setcookie($cookie_name,$cookie_value,time()-1200);
 echo isset($_COOKIE[$cookie_name]);
 }
-?>
+*/?>
 <div>
 <form action="cookie.php" method="post">
-<button name="logout" value="logout" onclick="<?php removeCookie()?>">LogOut</button>
+<button name="logout" value="logout" onclick="<?php del()?>">LogOut</button>
   </body>
 </html>

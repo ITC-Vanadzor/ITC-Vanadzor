@@ -21,7 +21,9 @@ class DATABASE {
 
     // DATABASE Class Function for Connecting to PostgreSQL DataBase 
     private function connect() {
-        $this->db_connection = pg_connect('host =' .$this->db_host, 'port =' .$this->db_port, 'database =' .$this->db_name, 'user =' .$this->db_user, 'password =' .$this->db_password); 
+            // added string $conn to pass as an argument(Sargis)
+            $conn = 'host='.$this->db_host.' port='.$this->db_port.' dbname='.$this->db_name.' user='.$this->db_user.' password='.$this->db_password; 
+            $this->db_connection = pg_connect($conn);
     }
 
     // DATABASE Class Function for Disconecting of PostgreSQL DataBase 
@@ -49,27 +51,28 @@ class DATABASE {
     
 // DATABASE Class Function for Delete Data from DataBase Tables     //
     
-    function deleteUser ($userId) {
+    public function deleteUser ($userId) {
         $delete = "DELETE FROM persons WHERE id = '$userId'";
         $delete_data = pg_delete($this->db_connection, $delete);
     }
 
 // DATABASE Class Function for Apdating Data into DataBase Tables   //   
-    
-    function updateUser ($email, $user_data) {
-        if ($name !=''){
-            $update = "UPDATE persons SET name ='$name' WHERE email = '$email'";
+
+    //author: Sargis. Here are syntax errors. that's why I've commented. Need to execute this file.
+   public  function updateUser ($email, $user_data) { 
+        #if ($name !=''){
+        #    $update = "UPDATE persons SET name ='$name' WHERE email = '$email'";
        /* } elseif($username !='') {
             $update = "UPDATE persons SET username =$username WHERE email = $email";
         } elseif ($password !='') {
             $update = "UPDATE persons SET password=$password WHERE email = $email";
-       */ }
-        $update_data = pg_query($this->db_connection, $update);
+       */
+        #$update_data = pg_query($this->db_connection, $update);
     }
 
 // DATABASE Class Function for Check User information into DataBase Tables    //
     
-    function checkUser($username, $password) {
+    public function checkUser($username, $password) {
         $check = "SELECT * FROM persons WHERE username='$username' AND password='$password'";
         $checkuser = pg_query($this->db_connection, $check);
         if($result->num_rows() === 1){
@@ -81,9 +84,12 @@ class DATABASE {
 
 // DATABASE Class Function for Check User information into DataBase Tables    //
 
-    function getAllUsersData () {
-        $alldata = "SELECT * FROM persons";
+    //author:Sargis. corrected some errors. Need this function to execute in server API.
+    public function getAllUsersData () {
+        $alldata = "SELECT * FROM users;";//here instead of 'users' should be table name,where are all data, that we need.
         $get_alldata = pg_query($this->db_connection, $alldata);
+        $ret = pg_fetch_all($get_alldata);
+        return $ret;
     }
 }
   
@@ -93,17 +99,17 @@ class DATABASE {
 --------            TESTING CODE             --------                      
 ---------------------------------------------------*/
 
-$db_name = 'itc_users';
-$db_port = '5432';
-$db_host = '127.0.0.1';
-$db_user = 'postgres';
-$db_password = 'postgres';
+   #$db_name = 'itc_users';
+   #$db_port = '5432';
+   #$db_host = '127.0.0.1';
+   #$db_user = 'postgres';
+   #$db_password = 'postgres';
 
-$db_obj = new DATABASE($db_name, $db_host, $db_port, $db_user, $db_password);
-   
+   #$db_obj = new DATABASE($db_name, $db_host, $db_port, $db_user, $db_password);
+   #   
 
-$user_data = '{"name": "anun1", "username": "username2", "email": "email2", "password": "pass2"}';   
-$db_obj->addUser($user_data);
-$db_obj->updateUser($user_data, $email);
+   #$user_data = '{"name": "anun1", "username": "username2", "email": "email2", "password": "pass2"}';   
+   #$db_obj->addUser($user_data);
+   #$db_obj->updateUser($user_data, $email);
 
 ?>
