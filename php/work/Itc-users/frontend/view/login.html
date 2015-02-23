@@ -1,63 +1,47 @@
-<!DOCTYPE HTML>
+<!Doctype html>
 <html>
     <head>
-<<<<<<< HEAD
-        <title>ITC users</title>
-=======
->>>>>>> 1f1c1ba467390e9975bbac7d74c0e91bce5fda02
         <meta charset="UTF-8">
         <link href="../css/form.css" rel="stylesheet">
         <script src="../js/login.js"></script>
+        <script src="../js/form.js"></script> <link rel="stylesheet" href="../css/style.css"/>
+        <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="../js/functions.js"></script>
     </head>
     <body>
-<<<<<<< HEAD
-        <img src="../images/login.jpg" alt="login"/>
-        <div id="form">
-            <form action="table.php" method="post">
-                <p>
-                    Email: 
-                    <input name="mail" type="text" id="mail" placeholder=" YOUR EMAIL" />
-                </p>
-                <p>
-                    Password: 
-                    <input name="pass" type="password" id="pass" placeholder=" YOUR PASSWORD" />
-                </p>
-                <label>Remember me</label>
-                <input type="checkbox" id="box" name="rememberme" value="Remember me" />
-                <input type="submit" id="login" value="Log In"  onclick="return login_valid('itc@mail.ru', 'student2014');" /> 
-            </form>
-            <p>
-                <a href="sign_up.html" class="signup" >
-                    Sign Up
-                </a>
-            </p>
-        </div>
-    </body>
-=======
-        <img src="../images/login.jpg"/>
-        <div id="loginFormId">
-            <form action="table.php" method="post">
-                <div>
-                    <label>Email:</label>
-                    <input name="mail" type="text" id="mail" placeholder=" YOUR EMAIL" />
+        <div class="wrapperClass">
+            <div class="fullWidthClass loginImgContainerClass">
+                <img src="../images/login.jpg"/>
+            </div>
+            <div id="logInFormContainerId">
+                <form action="table.php" method="post">
+                    <div class="inputTextContainerClass">
+                        <label>Email:</label>
+                        <input name="email" type="text" id="emailId" placeholder=" Email" />
+                    </div>
+                    <div class="inputTextContainerClass">
+                        <label>Password: </label>
+                        <input name="password" type="password" id="passwordId" placeholder=" Password" />
+                    </div>
+                    <div class="fullWidthClass">
+                        <div class="inputCheckboxContainerClass">
+                            <label for="remeberMeId">Remember me</label>
+                            <input type="checkbox" id="remeberMeId" name="remeberme" value="Remember Me" />
+                        </div>
+                        <div class="inputSubmitContainerClass">
+                            <input type="submit" id="logInId" value="Log In" />
+                        </div>
+                    </div>
+                </form>
+                <div class="inputSubmitContainerClass floatRightClass">
+                    <input type="button" value="Sign Up" />
                 </div>
-                <div>
-                    <label>Password: </label>
-                    <input name="pass" type="password" id="pass" placeholder=" YOUR PASSWORD" />
-                </div>
-                <div>
-                    <label for="remeberme">Remember me</label>
-                    <input type="checkbox" id="remeberme" name="remeberme" value="Remember me" /> 		
-                </div>
-                <div>
-                    <input type="submit" id="login" value="Log In"  onclick="login_valid('itc@mail.ru','student2014');"/> 
-                </div>
-            </form>
-            <div>
-                <a class="signup" href="sign_up.html">Sign Up</a>
+                <script>
+                    document.getElementById("logInId").onclick = function () {
+                        return validateLogInForm();
+                    };
+                </script>
             </div>
         </div>
     </body>
-
->>>>>>> 1f1c1ba467390e9975bbac7d74c0e91bce5fda02
 </html>
