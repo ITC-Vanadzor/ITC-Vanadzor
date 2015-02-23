@@ -29,7 +29,11 @@ function valid() {
 	document.getElementById('mail_val').innerHTML="* doesn't right"
 	}
 	var pass_value=document.getElementById('pass').value ;
+<<<<<<< HEAD
 	var pregexp= new RegExp ('^^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,14}$');	
+=======
+	var pregexp= new RegExp ('^[a-zA-Z0-9!@#$%^&*]{6,16}$');
+>>>>>>> 78d6b05bec9f96fee090c7082875a047df25fe47
 	if (pregexp.test(pass_value)) {
 	document.getElementById('pass_val').style.color= "black";
 	document.getElementById('pass_val').innerHTML="*"} else {

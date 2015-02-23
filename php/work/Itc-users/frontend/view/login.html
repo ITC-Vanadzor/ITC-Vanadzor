@@ -1,0 +1,46 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="../css/form.css" rel="stylesheet">
+        <script src="../js/login.js"></script>
+         <script src="../js/form.js"></script> <link rel="stylesheet" href="../css/style.css"/>
+                 <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+                         <script type="text/javascript" src="../js/functions.js"></script>
+
+    </head>
+    <body>
+        <div class="wrapperClass">
+            <div class="fullWidthClass loginImgContainerClass">
+                <img src="../images/login.jpg"/>
+            </div>
+            <div id="logInFormContainerId">
+                <form action="table.php" method="post">
+                    <div class="inputTextContainerClass">
+                        <label>Email:</label>
+                        <input name="email" type="text" id="emailId" placeholder=" Email" />
+                    </div>
+                    <div class="inputTextContainerClass">
+                        <label>Password: </label>
+                        <input name="password" type="password" id="passwordId" placeholder=" Password" />
+                    </div>
+                    <div class="fullWidthClass">
+                        <div class="inputCheckboxContainerClass">
+                            <label for="remeberMeId">Remember me</label>
+                            <input type="checkbox" id="remeberMeId" name="remeberme" value="Remember Me" /> 		
+                        </div>
+                        <div class="inputSubmitContainerClass">
+                            <input type="submit" id="logInId" value="Log In"  /> 
+                        </div>
+                    </div>
+                </form>
+                <div class="inputSubmitContainerClass floatRightClass">
+                    <input type="button"  value="Sign Up" />
+                </div>
+                <script>
+                    document.getElementById("logInId").onclick = function() { return validateLogInForm(); };
+                </script>
+            </div>
+        </div>
+    </body>
+</html>
