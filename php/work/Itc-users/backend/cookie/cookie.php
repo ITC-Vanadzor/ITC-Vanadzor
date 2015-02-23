@@ -1,5 +1,6 @@
 <html>
     <head>
+  <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
         <script src="login.js"></script>
     </head>
     <body>
