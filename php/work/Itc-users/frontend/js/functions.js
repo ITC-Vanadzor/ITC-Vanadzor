@@ -1,7 +1,7 @@
-tableTitlesJson = {"checkboxName": "selectAll", "name": "Name", "lastname": "Lastname", "email": "Email", "sex": "Sex", "age": "Age", "action": "Action"}
-objUsers = {"users": [{"userId": "1", "name": "Poghos", "lastname": "Poghosyan", "email": "poghan@gmail.com", "sex": "male", "age": "54"},
-        {"userId": "2", "name": "Petros", "lastname": "Posyan", "email": "poan@gmail.com", "sex": "male", "age": "24"},
-        {"userId": "3", "name": "Mari", "lastname": "Grghyan", "email": "pogho@gmail.com", "sex": "female", "age": "38"}
+tableTitlesJson = {"checkboxName": "selectAll", "name": "Name", "lastname": "Lastname", "email": "Email", "sex": "Sex", "%ge": "Age", "action": "Action"}
+objUsers = {"users": [{"userId": "1", "name": "Poghos", "lastname": "Poghosyan", "email": "poghan@gmail.com", "sex": "male", "birthday": "54"},
+        {"userId": "2", "name": "Petros", "lastname": "Posyan", "email": "poan@gmail.com", "sex": "male", "birthday": "24"},
+        {"userId": "3", "name": "Mari", "lastname": "Grghyan", "email": "pogho@gmail.com", "sex": "female", "birthday": "38"}
     ]};
 tableId = "tablePage";
 modalId = "modal-dialog";
@@ -30,7 +30,7 @@ function printTitles(tableTitlesJson, tableId) {
     creatLiDiv();
     div.textContent = tableTitlesJson.sex;
     creatLiDiv();
-    div.textContent = tableTitlesJson.age;
+    div.textContent = tableTitlesJson.birthday;
     creatLiDiv();
     div.textContent = tableTitlesJson.action;
 }
@@ -45,7 +45,7 @@ function printUsers(objUsers, tableId) {
         userInfoColumn(ul, "lastname", objUsers.users[i].lastname);
         userInfoColumn(ul, "email", objUsers.users[i].email);
         userInfoColumn(ul, "sex", objUsers.users[i].sex);
-        userInfoColumn(ul, "age", objUsers.users[i].age);
+        userInfoColumn(ul, "birthday", objUsers.users[i].birthday);
         actionColumn(ul, "edit", "edit");
         actionColumn(ul, "delete", "delete");
     }
@@ -99,10 +99,10 @@ function addUser() {
     myMain(tableTitlesJson, objUsers, tableId);
 }
 function  getEditedUserJson(userJson) {
-    return {"userId": "15", "name": "Edited Name", "lastname": "Edited last n", "email": "edited email", "sex": "Edited sex", "age": "Edited age"};
+    return {"userId": "15", "name": "Edited Name", "lastname": "Edited last n", "email": "edited email", "sex": "Edited sex", "birthday": "Edited birthday"};
 }
 function  getAddedUserJson() {
-    return {"userId": tmpId++, "name": "Added Name", "lastname": "Added last n", "email": "Added email", "sex": "Added sex", "age": "Added age"};
+    return {"userId": tmpId++, "name": "Added Name", "lastname": "Added last n", "email": "Added email", "sex": "Added sex", "birthday": "Added birthday"};
 }
 //checked first checkbox: all select box in begin line make selected,
 //and remove checked in first checkbox: all make no selected 
