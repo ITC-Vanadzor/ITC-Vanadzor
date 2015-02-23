@@ -4,20 +4,21 @@ class Cookies{
   var $cookie_value;
   var $check_value;
 
-  function __construct($cookie_name,$cookie_value,$check_value) {
+  function __construct($cookie_name,$cookie_value) {
     $this->cookie_name=$cookie_name;
     $this->cookie_value=$cookie_value;
-    $this->check_value=$check_value;
+   // $this->check_value=$check_value;
   }
-  function  deleteCookie(){
+  public function  deleteCookie(){
     setcookie($cookie_name,$cookie_value,time()-1200);
     echo isset($_COOKIE[$cookie_name]);
   }
-  function addCookie(){
+  public function addCookie($check_value){
+    $this->check_value=$check_value;
     if ($check_value){
-      setcookie($cookie_name,$cookie_value,time+());
+      setcookie($cookie_name,$cookie_value,time());echo "yes";
     }else {
-      setcookie($cookie_name,$cookie_value,time+()+1200);
+      setcookie($cookie_name,$cookie_value,time()+12);echo "no";
 	}
   }
 }
