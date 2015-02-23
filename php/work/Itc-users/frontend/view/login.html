@@ -2,9 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="../css/form.css" rel="stylesheet">
-        <script src="../js/login.js"></script>
-        <script src="../js/form.js"></script> <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" href="../css/style.css"/>
         <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="../js/functions.js"></script>
     </head>
@@ -14,7 +12,7 @@
                 <img src="../images/login.jpg"/>
             </div>
             <div id="logInFormContainerId">
-                <form action="table.php" method="post">
+                <form action="table.html" method="post">
                     <div class="inputTextContainerClass">
                         <label>Email:</label>
                         <input name="email" type="text" id="emailId" placeholder=" Email" />
@@ -29,18 +27,13 @@
                             <input type="checkbox" id="remeberMeId" name="remeberme" value="Remember Me" />
                         </div>
                         <div class="inputSubmitContainerClass">
-                            <input type="submit" id="logInId" value="Log In" />
+                            <input type="submit" id="logInId" value="Log In" onclick="return validateLogInForm();"/>
                         </div>
                     </div>
                 </form>
                 <div class="inputSubmitContainerClass floatRightClass">
                     <input type="button" value="Sign Up" />
                 </div>
-                <script>
-                    document.getElementById("logInId").onclick = function () {
-                        return validateLogInForm();
-                    };
-                </script>
             </div>
         </div>
     </body>

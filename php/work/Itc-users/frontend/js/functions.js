@@ -3,28 +3,29 @@ objUsers = {"users": [{"userId": "1", "name": "Poghos", "lastname": "Poghosyan",
     {"userId": "2", "name": "Petros", "lastname": "Posyan", "email": "poan@gmail.com", "sex": "male", "birthday": "24"},
     {"userId": "3", "name": "Mari", "lastname": "Grghyan", "email": "pogho@gmail.com", "sex": "female", "birthday": "38"}
     ]};
-tableId = "tablePage";
-modalId = "modal-dialog";
+tableId = "tablePageID";
+modalId = "modalId";
 tmpId = 50;
 $(document).ready(function () {
-    myMain(tableTitlesJson, objUsers, tableId);
+    //myMain(tableTitlesJson, objUsers, tableId);
 });
 function getAllData(){
+    /*
     var xmlhttp = new XMLHttpRequest();
     var url = "http://192.168.33.76:8888/get_allusers";
-    /*
        xmlhttp.onreadystatechange = function() {
        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
        var myArr = JSON.parse(xmlhttp.responseText);
        alert(myArr);
        }
        }
-       */
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
     alert("OK");
     alert(xmlhttp.responseText);
-
+    */
+    document.getElementById(tableId).innerHTML="";
+    myMain(tableTitlesJson, objUsers, tableId);
 }
 function myMain(tableTitlesJson, objUsers, tableId) {
     printTitles(tableTitlesJson, tableId);
@@ -93,7 +94,7 @@ function actionColumn(ul, classVal, value) {
     var li = createElement(ul, "li", {"class": classVal});
     var div = createElement(li, "div", {"class": "action"});
     var iTag = createElement(div, "i", {});
-    var a = createElement(div, "a", {"href": "#" + modalId, "rel": objUsers.users[i].userId, "onclick": classVal + "User(this.getAttribute('rel'))"});
+    var a = createElement(div, "a", {"href": "#", "rel": objUsers.users[i].userId, "onclick": classVal + "User(this.getAttribute('rel'))"});
     a.textContent = value;
 }
 function  editUser(userId) {
@@ -201,6 +202,7 @@ function validField(fieldId, pattern) {
             createElement(div, "p", {"class":"error"});
         }
         div.lastChild.innerHTML=getErrorsMesages(fieldId);
+        return false;
     }
 }
 function getErrorsMesages(elementId) {
@@ -219,5 +221,21 @@ function getErrorsMesages(elementId) {
             break;
     }
 }
-/**onclicks LOGIN***/
-//document.getElementById('logInId').onclick == validateLogInForm()
+function hideRequiredFields() {
+    allForm = document.getElementById("signUpFormContainerId");
+    noRequired = allForm.getElementsByClassName("NoRequiredClass");
+    for (i = 0; i < noRequired.length; i++) {
+        noRequired[i].classList.add("hiddenClass");
+    }
+    document.getElementById("hideShowId").setAttribute("onclick", "showRequiredFields()");
+    document.getElementById("hideShowId").value = "Show";
+}
+function showRequiredFields() {
+    allForm = document.getElementById("signUpFormContainerId");
+    noRequired = allForm.getElementsByClassName("NoRequiredClass");
+    for (i = 0; i < noRequired.length; i++) {
+        noRequired[i].classList.remove("hiddenClass");
+    }
+    document.getElementById("hideShowId").setAttribute("onclick", "hideRequiredFields()");
+    document.getElementById("hideShowId").value = "Hide";
+}
