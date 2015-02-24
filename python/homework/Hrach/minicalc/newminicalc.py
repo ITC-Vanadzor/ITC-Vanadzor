@@ -8,21 +8,8 @@ def args():
 	parser.add_argument('n2', nargs='?',type=float, help='Third argument, please enter number')
 	return parser.parse_args()
 
-class math():
-	@classmethod
-	def gum(self, n1, n2):
-		return n1+n2
-	@classmethod
-	def tarb(self, n1, n2):
-		return n1-n2
-	@classmethod
-	def art(self, n1, n2):
-		return n1*n2
-	@classmethod
-	def hayt(self, n1, n2):
-		return n1/n2
-
 if "__main__" == __name__:
+	from mymath import math
 	args()
 	arguments = args()
 	x=arguments.n1

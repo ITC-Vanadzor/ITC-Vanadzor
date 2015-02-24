@@ -14,7 +14,7 @@
 		<div>
 			<h1 class="title">Registration</h1>
 		</div>
-       <form name="form" >
+       <form action="php/conect.php" method="POST" name="form" >
        		<div class="raw">
 				<div id="namerrorBox"></div>
 				<input type="text" name="Name" id="name" value="" placeholder="First Name *" >
@@ -71,6 +71,7 @@
             	</div></div>
                 <br>
        		<div>
+				<input type="submit" name="submit" >
         		<p id="sign_user" onclick="Submit()">Sign Up</p>
       		</div>
 <p id="age"></p>

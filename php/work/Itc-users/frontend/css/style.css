@@ -1,6 +1,9 @@
 body {
     font-family: arial;
 }
+a {
+    text-decoration:none;
+}
 .clearfix:after {
     clear: both;
     content: ".";
@@ -9,42 +12,69 @@ body {
     line-height: 0;
     visibility: hidden;
 }
-.hidden{
+.floatRightClass{
+    float:right;
+}
+.floatLeftClass{
+    float:left;
+}
+.wrapperClass{
+    width: 1200px;
+    margin: 0 auto;
+}
+.fullWidthClass{
+    width:100%;
+    float:left;
+}
+.fullWidthClass>div{
+    float:left;
+}
+.loginImgContainerClass{
+    text-align:center;
+}
+.error{
+    color:red;
+    float:left;
+    width:100%;
+    font-size: 12px;
+    margin: 5px 0;
+}
+.hiddenClass{
     display: none !important;
 }
-.tableWrapper {
+.tableWrapperClass {
     margin: 50px auto;
     width: 1000px;
 }
-.tablePage {
+.tablePageClass {
     border: 1px solid #888;
     float: left;
     width: 100%;
 }
-.tablePage ul {
+.tablePageClass ul {
     list-style: outside none none;
     margin: 0;
     padding: 0;
 }
-.tablePage ul.title {
+.tablePageClass ul.title {
     background: none repeat scroll 0 0 #ccc;
     float: left;
 }
-.tablePage ul {
+.tablePageClass ul {
     border-bottom: 1px solid #888;
     float: left;
     width: 100%;
 }
-.tablePage ul li {
+.tablePageClass ul li {
     float: left;
     text-align: center;
     width: 15%;
     overflow: hidden;
 }
-.tablePage ul li:first-child {
+.tablePageClass ul li:first-child {
     width: 3%;
 }
-.tablePage ul.title li:last-child {
+.tablePageClass ul.title li:last-child {
     text-align: center;
     width: 22%;
 }
@@ -52,10 +82,10 @@ li div {
     border-left: 1px solid #888;
     padding: 7px 0;
 }
-.tablePage li:first-child div {
+.tablePageClass li:first-child div {
     border: medium none;
 }
-.tablePage ul li:nth-child(7), .tablePage ul li:nth-child(8) {
+.tablePageClass ul li:nth-child(7), .tablePageClass ul li:nth-child(8) {
     width: 11%;
 }
 .action i {
@@ -89,17 +119,159 @@ i {
     color: black;
     text-decoration: none;
 }
-.addUser {
-    float: right;
-    margin: 20px 0;
+.classicButtonClass {
+    margin: 10px;
 }
-a.addUserLink {
+.classicButtonClass a {
     border: 1px solid #888;
     border-radius: 5px;
     color: #111;
     padding: 5px 10px;
     text-decoration: none;
 }
-a.addUserLink:hover {
+.classicButtonClass a:hover {
     background: none repeat scroll 0 0 #ccc;
+}
+/*Modal Dialog*/
+.modalDialogClass #signUpFormContainerId{
+    width: 94%;
+    margin: 3%;
+}
+.modalDialogClass{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity:0;
+    display: none;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+}
+.modalDialogClass:target{
+    opacity: 1;
+    display: block;
+}
+.modalFonClass{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: .5;
+    background: #555;
+}
+.modalDialogClass .modalTitleClass{
+    background: none repeat scroll 0 0 #fff;
+    border-bottom: 1px solid #e1e1e0;
+    padding: 20px 32px;
+}
+.modalDialogClass .modalTitleClass h2{
+    float: left;
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: normal;
+}
+.modalDialogClass .closeBtnClass{
+    background: url("../images/button_close.png") no-repeat scroll 0 0 / 10px 10px rgba(0, 0, 0, 0);
+    display: inline-block;
+    float: right;
+    height: 10px;
+    margin-top: 8px;
+    width: 10px;
+}
+.modalDialogClass .modalContClass{
+    background: none repeat scroll 0 0 #f6f9fc;
+    border-radius: 5px;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    width: 500px;
+    z-index: 999;
+    -webkit-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.2);
+}
+.modalDialogClass .modalContClass ul{
+    color: #2895F1;
+    float: left;
+    padding: 0;
+    font-size: 15px;
+    margin-left: 50px;
+    line-height: 25px;
+}
+.modalDialogClass .modalContClass ul:last-child{
+    float: right;
+    margin-right: 25px;
+}
+/*********
+**Forms**
+********/
+#logInFormContainerId form{
+    float:left;
+}
+#signUpFormContainerId{
+    float: left;
+    width:400px;
+}
+#logInFormContainerId{
+    width: 350px;
+    float: right;
+}
+.inputSubmitContainerClass input, .inputButtonContainerClass input{
+    color:#F0E68C ;
+    border:2px groove #DAA520;
+    padding:5px;
+}
+.inputSubmitContainerClass input{
+    background-color:#4169E1 ;
+    border-radius:5px;
+    margin-left:10px;
+}
+.inputButtonContainerClass input{
+    background-color:#DAA520;
+    border-radius:15px;
+    margin-left:10px;
+}
+.inputTextContainerClass,.selectContainerClass{
+    float: left;
+    width:100%;
+    margin-bottom:15px;
+}
+div.inputRadioContainerClass,div.inputSubmitContainerClass, div.inputButtonContainerClass{
+    float: right;
+    margin-bottom:15px;
+}
+.inputTextContainerClass input{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border:4px groove;
+    border-radius:10px;
+    padding:5px;
+    background-color:#EEE8AA;
+    float:right;
+}
+.inputTextContainerClass label{
+    float:left;
+}
+#ageId {
+    background-color:#E9967A;
+}
+.selectContainerClass select{
+    background-color:#DAA520;
+    border-radius:5px;
+    border:2px groove #DAA520;
+    float:right;
+    margin-left: 10px;
+    padding:4px 0 4px 7px;
+}
+.selectContainerClass label{
+    float:left;
+}
+#logInId {
+    background-color:#DAA520;
+    border-radius:15px;
+    border:2px groove #DAA520;
+    padding:5px;
 }
