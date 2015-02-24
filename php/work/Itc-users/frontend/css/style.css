@@ -4,7 +4,7 @@ body {
 a {
     text-decoration:none;
 }
-.clearfix:after {
+.clearfixClass:after {
     clear: both;
     content: ".";
     display: block;
@@ -32,7 +32,7 @@ a {
 .loginImgContainerClass{
     text-align:center;
 }
-.error{
+.errorClass{
     color:red;
     float:left;
     width:100%;
@@ -56,7 +56,7 @@ a {
     margin: 0;
     padding: 0;
 }
-.tablePageClass ul.title {
+.tablePageClass ul.titleClass {
     background: none repeat scroll 0 0 #ccc;
     float: left;
 }
@@ -74,7 +74,7 @@ a {
 .tablePageClass ul li:first-child {
     width: 3%;
 }
-.tablePageClass ul.title li:last-child {
+.tablePageClass ul.titleClass li:last-child {
     text-align: center;
     width: 22%;
 }
@@ -88,34 +88,34 @@ li div {
 .tablePageClass ul li:nth-child(7), .tablePageClass ul li:nth-child(8) {
     width: 11%;
 }
-.action i {
+.actionClass i {
     display: block;
     float: left;
     height: 20px;
     width: 20px;
 }
-.edit .action i {
+.editClass .actionClass i {
     background: url("../images/pen.jpeg") no-repeat scroll 0 0 / 20px 20px rgba(0, 0, 0, 0);
 }
-.action span, .action a {
+.actionClass span, .actionClass a {
     float: left;
 }
-.delete .action i {
+.deleteClass .actionClass i {
     background: url("../images/delete.jpeg") no-repeat scroll 0 0 / 20px 20px rgba(0, 0, 0, 0);
 }
-.action {
+.actionClass {
     float: left;
 }
 i {
     background: url("../images/pen.jpeg") no-repeat scroll 0 0 / 20px 20px rgba(0, 0, 0, 0);
 }
-.action span, .action a {
+.actionClass span, .actionClass a {
     float: left;
 }
-.action i {
+.actionClass i {
     margin: 0 5px;
 }
-.action a {
+.actionClass a {
     color: black;
     text-decoration: none;
 }

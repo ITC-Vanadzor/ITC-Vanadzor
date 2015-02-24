@@ -9,25 +9,8 @@ tmpId = 50;
 $(document).ready(function () {
     //myMain(tableTitlesJson, objUsers, tableId);
 });
-function getAllData(){
-    /*
-    var xmlhttp = new XMLHttpRequest();
-    var url = "http://192.168.33.76:8888/get_allusers";
-       xmlhttp.onreadystatechange = function() {
-       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-       var myArr = JSON.parse(xmlhttp.responseText);
-       alert(myArr);
-       }
-       }
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-    alert("OK");
-    alert(xmlhttp.responseText);
-    */
-    document.getElementById(tableId).innerHTML="";
-    myMain(tableTitlesJson, objUsers, tableId);
-}
 function myMain(tableTitlesJson, objUsers, tableId) {
+    document.getElementById(tableId).innerHTML="";
     printTitles(tableTitlesJson, tableId);
     printUsers(objUsers, tableId);
     sellectAllOrNull();
@@ -35,7 +18,7 @@ function myMain(tableTitlesJson, objUsers, tableId) {
 }
 function printTitles(tableTitlesJson, tableId) {
     var parentObj = document.getElementById(tableId);
-    ul = createElement(parentObj, "ul", {"class": "title"});
+    ul = createElement(parentObj, "ul", {"class": "titleClass"});
     //checkout column
     creatLiDiv();
     var input = createElement(div, "input", {"type": "checkbox", "name": tableTitlesJson.checkboxName});
@@ -56,7 +39,7 @@ function printUsers(objUsers, tableId) {
     //alert(objUsers.users.length);
     for (i = 0; i < objUsers.users.length; i++) {
         var parentObj = document.getElementById(tableId);
-        ul = createElement(parentObj, "ul", {"class": "user"});
+        ul = createElement(parentObj, "ul", {"class": "userClass"});
         //checkout column
         idColumn(ul, objUsers.users[i].userId);
         userInfoColumn(ul, "name", objUsers.users[i].name);
@@ -83,16 +66,16 @@ function creatLiDiv() {
 function idColumn(ul, id) {
     var li = createElement(ul, "li", {});
     var div = createElement(li, "div", {});
-    var input = createElement(div, "input", {"type": "checkbox", "name": "user" + id, "value": id, "class": "checkUser"});
+    var input = createElement(div, "input", {"type": "checkbox", "name": "user" + id, "value": id, "class": "checkUserClass"});
 }
 function userInfoColumn(ul, classVal, value) {
     var li = createElement(ul, "li", {"class": classVal});
-    var div = createElement(li, "div", {"class": "text"});
+    var div = createElement(li, "div", {"class": "textClass"});
     div.textContent = value;
 }
 function actionColumn(ul, classVal, value) {
-    var li = createElement(ul, "li", {"class": classVal});
-    var div = createElement(li, "div", {"class": "action"});
+    var li = createElement(ul, "li", {"class": classVal+"Class"});
+    var div = createElement(li, "div", {"class": "actionClass"});
     var iTag = createElement(div, "i", {});
     var a = createElement(div, "a", {"href": "#", "rel": objUsers.users[i].userId, "onclick": classVal + "User(this.getAttribute('rel'))"});
     a.textContent = value;
@@ -101,45 +84,81 @@ function  editUser(userId) {
     userJson = objUsers.users[getUsersArrayIndex(objUsers, userId)];
     editedUserJson = getEditedUserJson(userJson);
     objUsers.users[getUsersArrayIndex(objUsers, userId)] = editedUserJson;
-    document.getElementById(tableId).innerHTML = "";
     myMain(tableTitlesJson, objUsers, tableId);
 }
 function  deleteUser(userId) {
     var index = getUsersArrayIndex(objUsers, userId);
     objUsers.users.splice(index, 1);
-    document.getElementById(tableId).innerHTML = "";
     myMain(tableTitlesJson, objUsers, tableId);
 }
 function addUser() {
     addedUserJson = getAddedUserJson();
     objUsers.users[objUsers.users.length] = addedUserJson;
-    document.getElementById(tableId).innerHTML = "";
     myMain(tableTitlesJson, objUsers, tableId);
+}
+function getAllData(){
+    /*
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://192.168.33.76:8888/get_allusers";
+       xmlhttp.onreadystatechange = function() {
+       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+       var myArr = JSON.parse(xmlhttp.responseText);
+       alert(myArr);
+       }
+       }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    alert("OK");
+    alert(xmlhttp.responseText);
+    */
+    //TODO QUERY
+    document.getElementById(tableId).innerHTML="";
+    myMain(tableTitlesJson, objUsers, tableId);
+}
+function deleteSelected() {
+    var usersIdes = getSelectedUsersIdes();
+    //TODO QUERY
+    objUsers = {"users": []};
+    myMain(tableTitlesJson, objUsers, tableId);
+}
+function getSelectedUsersIdes(){
+    var allUsers=document.getElementsByClassName("checkUserClass");
+    var selectedUsersIdes = [];
+    for (i = 0; i < allUsers.length; i++) {
+        if(allUsers[i].checked){
+            selectedUsersIdes.push(allUsers[i].value);
+        }
+    }
+    return selectedUsersIdes;
+}
+function signUpModal(){
+        
 }
 function  getEditedUserJson(userJson) {
     return {"userId": "15", "name": "Edited Name", "lastname": "Edited last n", "email": "edited email", "sex": "Edited sex", "birthday": "Edited birthday"};
 }
 function  getAddedUserJson() {
+    //TODO QUERY
     return {"userId": tmpId++, "name": "Added Name", "lastname": "Added last n", "email": "Added email", "sex": "Added sex", "birthday": "Added birthday"};
 }
 //checked first checkbox: all select box in begin line make selected,
 //and remove checked in first checkbox: all make no selected 
 function sellectAllOrNull() {
-    $('#' + tableId + ' .title li input[name="' + tableTitlesJson.checkboxName + '"]').click(function () {
+    $('#' + tableId + ' .titleClass li input[name="' + tableTitlesJson.checkboxName + '"]').click(function () {
         if (this.checked) {
-            $('#' + tableId + ' ul li .checkUser').each(function () {
+            $('#' + tableId + ' ul li .checkUserClass').each(function () {
                 this.checked = true;
             });
         } else {
-            $('#' + tableId + ' ul li .checkUser').each(function () {
+            $('#' + tableId + ' ul li .checkUserClass').each(function () {
                 this.checked = false;
             });
         }
     });
 }
 function getJson() {
-    var modalHtml = document.getElementById("modal-content");
-    var list = modalHtml.getElementsByClassName("text");
+    var modalHtml = document.getElementById(modalId);
+    var list = modalHtml.getElementsByClassName("textClass");
     var i;
     var key;
     var val;
@@ -149,7 +168,8 @@ function getJson() {
         key = list[i].getAttribute("name");
         json[key] = val;
     }
-    updateTable(json);
+    
+    //updateTable(json);
     return json;
 }
 function updateTable(json) {
@@ -186,12 +206,16 @@ function validateSignUpForm() {
     if (validated != 4) {
         return false;
     }
+    var json = getJson();
+    alert(json.lastname);
+    //addUser();
+    return false;
 }
 //Validation Field
 function validField(fieldId, pattern) {
     var element = document.getElementById(fieldId);
         div = element.parentNode;
-        error=div.getElementsByClassName("error");
+        error=div.getElementsByClassName("errorClass");
     if (pattern.test(element.value)) {
         if (error[0]) {
             error[0].remove();
@@ -199,7 +223,7 @@ function validField(fieldId, pattern) {
         validated++;
     } else {
         if (!error[0]) {
-            createElement(div, "p", {"class":"error"});
+            createElement(div, "p", {"class":"errorClass"});
         }
         div.lastChild.innerHTML=getErrorsMesages(fieldId);
         return false;

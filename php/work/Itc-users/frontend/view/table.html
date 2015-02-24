@@ -8,23 +8,23 @@
         <script type="text/javascript" src="../js/functions.js"></script>
     </head>
     <body>
-        <div class="wrapperClass clearfix">
+        <div class="wrapperClass clearfixClass">
             <div class="tableWrapperClass">
                 <div class="tablePageClass" id="tablePageID">
 
                 </div>
-                <div class="clearfix">
+                <div class="clearfixClass">
                     <div class="classicButtonClass floatLeftClass">
                         <a href="#" onclick="deleteSelected();" >Delete selected</a>
                     </div>
                     <div class="classicButtonClass floatRightClass">
-                        <a href="#modalDialogClass" onclick="addUser();" class="addUserLink">Add user</a>
+                        <a href="#modalDialogClass" onclick="addUser();" >Add user</a>
                     </div>                
                     <div class="classicButtonClass floatRightClass">
                         <a href="#" onclick="getAllData();" >Print users</a>
                     </div>
                     <div class="classicButtonClass floatRightClass">
-                        <a href="#modalId">Sign up</a>
+                        <a href="#modalId" onclick="signUpModal();">Sign up</a>
                     </div>           
                 </div>
             </div>
@@ -33,27 +33,27 @@
         <div class='modalDialogClass' id='modalId'>
             <div class="modalFonClass"></div>
             <div class="modalContClass">
-                <div class="modalTitleClass clearfix">
+                <div class="modalTitleClass clearfixClass">
                     <h2>Sign Up</h2>
                     <a href="#" title="Close" class="closeBtnClass"></a>
                 </div>
                 <div id="signUpFormContainerId">
-                    <form action="login.html" method="post">
+                    <form action="" method="post">
                         <div class="inputTextContainerClass">
                             <label>Name* :</label>
-                            <input name="name" type="text" id="nameId" placeholder="Name" />
+                            <input name="name" type="text" id="nameId" placeholder="Name" class="textClass" />
                         </div>
                         <div class="inputTextContainerClass">
                             <label>Last name* : </label>
-                            <input name="lastname" type="text" id="lastNameId" placeholder="Last Name" />
+                            <input name="lastname" type="text" id="lastNameId" placeholder="Last Name" class="textClass" />
                         </div>
                         <div class="inputTextContainerClass">
                             <label>Email* : </label>
-                            <input type="text" name="email" id="emailId" placeholder="Email" />
+                            <input type="text" name="email" id="emailId" placeholder="Email" class="textClass" />
                         </div>
                         <div class="inputTextContainerClass">
                             <label>Password* : </label>
-                            <input name="password" type="password" id="passwordId" placeholder="Password" />
+                            <input name="password" type="password" id="passwordId" placeholder="Password" class="textClass" />
                         </div>
                         <div class="NoRequiredClass selectContainerClass">
                             <label>Date Of Birth:</label>

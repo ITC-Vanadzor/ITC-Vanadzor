@@ -1,21 +1,19 @@
-function check (log,passwd) {
-  alert("aa");
+function check (log,passwd) {alert("saaa");
   var mail=document.getElementById("email").value;
   var pass=document.getElementById("password").value;
   var chk = document.getElementById("checkbox").checked;
   if (mail==log &&  pass==passwd){
     alert(chk);
-  }
+  };
   jQuery.ajax({
     type: "POST",
     url: 'adddel.php',
-    data: {functionname: 'add', arguments: chk},
+    data: {functionname: 'add', argument: chk, 'pass':pass},
     success: function (data) {
-      alert ("yes");
+      alert (data);
     }
   });
 }
-
 function logout() {
   alert("close");
   jQuery.ajax({

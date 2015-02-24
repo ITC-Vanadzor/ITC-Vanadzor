@@ -1,5 +1,5 @@
 <?php
-include 'adddel.php';
+//include 'adddel.php';
 //add($_POST['checkbox']);*/
 ?>
 <html>
@@ -8,9 +8,8 @@ include 'adddel.php';
     <script src="login.js"></script> 
  </head>
    <body>
-   <button onclick="logout()">Click me</button>
 <form action="cookie.php" method="post">
-<button name="logout" value="logout" onclick="logout()">LogOut</button>
+<button onclick="logout()">LOGOUT</button>
   </form>
 </body>
 </html>
