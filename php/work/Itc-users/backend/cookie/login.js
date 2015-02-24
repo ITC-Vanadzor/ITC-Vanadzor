@@ -1,4 +1,4 @@
-function check (log,passwd) {
+function check (log,passwd) {alert("saaa");
   var mail=document.getElementById("email").value;
   var pass=document.getElementById("password").value;
   var chk = document.getElementById("checkbox").checked;
