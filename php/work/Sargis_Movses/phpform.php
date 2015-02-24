@@ -10,13 +10,13 @@ switch($_SERVER['REQUEST_METHOD'])
 function Validate() {
     $name = $_POST["name"];
     if (!preg_match("/^[a-zA-Z ]*$/",$name) ||$name=="") {
-        $nameErr = "Only letters and white space allowed"; 
+        $nameErr = "Name can contain only letters and white spaces"; 
         throw new Exception($nameErr);
         return false;
     }
     $lname = $_POST["lname"];
     if (!preg_match("/^[a-zA-Z ]*$/",$lname) || $lname =="") {
-        $lnameErr = "Only letters and white space allowed"; 
+        $lnameErr = "LAstname can contain only  letters and white spaces"; 
         throw new Exception($lnameErr);
         return false;
 
@@ -28,7 +28,7 @@ function Validate() {
         return false;
     }
     if(strlen($_POST['pswd'])<6 || strlen($_POST['pswd'])>20 || $_POST['pswd']==""){
-        $pswdErr = "Should be more than 6 simbols and less than 20";
+        $pswdErr = "Password should be more than 6 simbols and less than 20";
         throw new Exception($pswdErr);
         return false;
     }
