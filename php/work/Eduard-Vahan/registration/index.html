@@ -1,8 +1,8 @@
 <link rel="stylesheet" type="text/css" href="style.css"></link>
 <div class="sheet">
-    <form name="myForm" action="ban.php" method="POST">
+    <form name="myForm" action="ban.php" target="_blank" method="POST">
         <div class="field">
-        <p id="w1"></p>
+            <p id="w1"><?php echo $fnameErr;?></p>
            <span class="title">Name:</span> <input  class="inputStyle" name="fname" type="text"></input><span id="fName">*</span>
         </div>
         <div class="field">
@@ -136,7 +136,7 @@
             <span class="title">Age:</span> <input  class="inputStyle" type="number"> 
         </div>
         <div class="field">
-            <input onclick="isValid();regMassege()" id="butt" type="submit" value="Submit" >
+            <input type="submit">
             <input type="checkbox" id="myCheck" onclick="hideFields()"><p id="vbox">Hide</p>
         </div>
     </form>
