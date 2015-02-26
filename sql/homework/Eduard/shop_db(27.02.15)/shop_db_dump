@@ -1,0 +1,773 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: firms; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE firms (
+    id integer NOT NULL,
+    names character(20)
+);
+
+
+ALTER TABLE public.firms OWNER TO postgres;
+
+--
+-- Name: firms_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE firms_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.firms_id_seq OWNER TO postgres;
+
+--
+-- Name: firms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE firms_id_seq OWNED BY firms.id;
+
+
+--
+-- Name: hdd; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE hdd (
+    id integer NOT NULL,
+    size character(20),
+    price character(10),
+    quantity integer,
+    firms_id integer
+);
+
+
+ALTER TABLE public.hdd OWNER TO postgres;
+
+--
+-- Name: hdd_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE hdd_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hdd_id_seq OWNER TO postgres;
+
+--
+-- Name: hdd_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE hdd_id_seq OWNED BY hdd.id;
+
+
+--
+-- Name: keyboards; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE keyboards (
+    id integer NOT NULL,
+    price character(10),
+    quantity integer,
+    firms_id integer
+);
+
+
+ALTER TABLE public.keyboards OWNER TO postgres;
+
+--
+-- Name: keyboards_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE keyboards_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.keyboards_id_seq OWNER TO postgres;
+
+--
+-- Name: keyboards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE keyboards_id_seq OWNED BY keyboards.id;
+
+
+--
+-- Name: monitors; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE monitors (
+    id integer NOT NULL,
+    size character(20),
+    price character(10),
+    quantity integer,
+    firms_id integer
+);
+
+
+ALTER TABLE public.monitors OWNER TO postgres;
+
+--
+-- Name: monitors_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE monitors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.monitors_id_seq OWNER TO postgres;
+
+--
+-- Name: monitors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE monitors_id_seq OWNED BY monitors.id;
+
+
+--
+-- Name: mouse; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE mouse (
+    id integer NOT NULL,
+    price character(10),
+    quantity integer,
+    firms_id integer
+);
+
+
+ALTER TABLE public.mouse OWNER TO postgres;
+
+--
+-- Name: mouse_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE mouse_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.mouse_id_seq OWNER TO postgres;
+
+--
+-- Name: mouse_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE mouse_id_seq OWNED BY mouse.id;
+
+
+--
+-- Name: pc; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pc (
+    id integer NOT NULL,
+    monitors_id integer,
+    keyboards_id integer,
+    mouse_id integer,
+    processor_id integer
+);
+
+
+ALTER TABLE public.pc OWNER TO postgres;
+
+--
+-- Name: pc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pc_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pc_id_seq OWNER TO postgres;
+
+--
+-- Name: pc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pc_id_seq OWNED BY pc.id;
+
+
+--
+-- Name: processor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE processor (
+    id integer NOT NULL,
+    hdd_id integer,
+    ram_id integer,
+    firms_id integer
+);
+
+
+ALTER TABLE public.processor OWNER TO postgres;
+
+--
+-- Name: processor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE processor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.processor_id_seq OWNER TO postgres;
+
+--
+-- Name: processor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE processor_id_seq OWNED BY processor.id;
+
+
+--
+-- Name: ram; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ram (
+    id integer NOT NULL,
+    size character(20),
+    type character(20),
+    price character(10),
+    quantity integer,
+    firms_id integer
+);
+
+
+ALTER TABLE public.ram OWNER TO postgres;
+
+--
+-- Name: ram_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ram_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ram_id_seq OWNER TO postgres;
+
+--
+-- Name: ram_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ram_id_seq OWNED BY ram.id;
+
+
+--
+-- Name: sold; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sold (
+    id integer NOT NULL,
+    pc_id integer,
+    monitors_id integer,
+    keyboards_id integer,
+    mouse_id integer,
+    processor_id integer,
+    quantity integer,
+    date date
+);
+
+
+ALTER TABLE public.sold OWNER TO postgres;
+
+--
+-- Name: sold_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sold_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sold_id_seq OWNER TO postgres;
+
+--
+-- Name: sold_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sold_id_seq OWNED BY sold.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY firms ALTER COLUMN id SET DEFAULT nextval('firms_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY hdd ALTER COLUMN id SET DEFAULT nextval('hdd_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY keyboards ALTER COLUMN id SET DEFAULT nextval('keyboards_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY monitors ALTER COLUMN id SET DEFAULT nextval('monitors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY mouse ALTER COLUMN id SET DEFAULT nextval('mouse_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pc ALTER COLUMN id SET DEFAULT nextval('pc_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY processor ALTER COLUMN id SET DEFAULT nextval('processor_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ram ALTER COLUMN id SET DEFAULT nextval('ram_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sold ALTER COLUMN id SET DEFAULT nextval('sold_id_seq'::regclass);
+
+
+--
+-- Data for Name: firms; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY firms (id, names) FROM stdin;
+\.
+
+
+--
+-- Name: firms_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('firms_id_seq', 1, false);
+
+
+--
+-- Data for Name: hdd; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY hdd (id, size, price, quantity, firms_id) FROM stdin;
+\.
+
+
+--
+-- Name: hdd_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hdd_id_seq', 1, false);
+
+
+--
+-- Data for Name: keyboards; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY keyboards (id, price, quantity, firms_id) FROM stdin;
+\.
+
+
+--
+-- Name: keyboards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('keyboards_id_seq', 1, false);
+
+
+--
+-- Data for Name: monitors; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY monitors (id, size, price, quantity, firms_id) FROM stdin;
+\.
+
+
+--
+-- Name: monitors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('monitors_id_seq', 1, false);
+
+
+--
+-- Data for Name: mouse; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY mouse (id, price, quantity, firms_id) FROM stdin;
+\.
+
+
+--
+-- Name: mouse_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mouse_id_seq', 1, false);
+
+
+--
+-- Data for Name: pc; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY pc (id, monitors_id, keyboards_id, mouse_id, processor_id) FROM stdin;
+\.
+
+
+--
+-- Name: pc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pc_id_seq', 1, false);
+
+
+--
+-- Data for Name: processor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY processor (id, hdd_id, ram_id, firms_id) FROM stdin;
+\.
+
+
+--
+-- Name: processor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('processor_id_seq', 1, false);
+
+
+--
+-- Data for Name: ram; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ram (id, size, type, price, quantity, firms_id) FROM stdin;
+\.
+
+
+--
+-- Name: ram_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ram_id_seq', 1, false);
+
+
+--
+-- Data for Name: sold; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sold (id, pc_id, monitors_id, keyboards_id, mouse_id, processor_id, quantity, date) FROM stdin;
+\.
+
+
+--
+-- Name: sold_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sold_id_seq', 1, false);
+
+
+--
+-- Name: firms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY firms
+    ADD CONSTRAINT firms_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hdd_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY hdd
+    ADD CONSTRAINT hdd_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: keyboards_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY keyboards
+    ADD CONSTRAINT keyboards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: monitors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY monitors
+    ADD CONSTRAINT monitors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mouse_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY mouse
+    ADD CONSTRAINT mouse_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pc
+    ADD CONSTRAINT pc_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: processor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY processor
+    ADD CONSTRAINT processor_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ram_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ram
+    ADD CONSTRAINT ram_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sold_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sold
+    ADD CONSTRAINT sold_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hdd_firms_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY hdd
+    ADD CONSTRAINT hdd_firms_id_fkey FOREIGN KEY (firms_id) REFERENCES firms(id);
+
+
+--
+-- Name: keyboards_firms_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY keyboards
+    ADD CONSTRAINT keyboards_firms_id_fkey FOREIGN KEY (firms_id) REFERENCES firms(id);
+
+
+--
+-- Name: monitors_firms_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY monitors
+    ADD CONSTRAINT monitors_firms_id_fkey FOREIGN KEY (firms_id) REFERENCES firms(id);
+
+
+--
+-- Name: mouse_firms_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY mouse
+    ADD CONSTRAINT mouse_firms_id_fkey FOREIGN KEY (firms_id) REFERENCES firms(id);
+
+
+--
+-- Name: pc_keyboards_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pc
+    ADD CONSTRAINT pc_keyboards_id_fkey FOREIGN KEY (keyboards_id) REFERENCES keyboards(id);
+
+
+--
+-- Name: pc_monitors_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pc
+    ADD CONSTRAINT pc_monitors_id_fkey FOREIGN KEY (monitors_id) REFERENCES monitors(id);
+
+
+--
+-- Name: pc_mouse_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pc
+    ADD CONSTRAINT pc_mouse_id_fkey FOREIGN KEY (mouse_id) REFERENCES mouse(id);
+
+
+--
+-- Name: pc_processor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pc
+    ADD CONSTRAINT pc_processor_id_fkey FOREIGN KEY (processor_id) REFERENCES processor(id);
+
+
+--
+-- Name: processor_firms_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY processor
+    ADD CONSTRAINT processor_firms_id_fkey FOREIGN KEY (firms_id) REFERENCES firms(id);
+
+
+--
+-- Name: processor_hdd_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY processor
+    ADD CONSTRAINT processor_hdd_id_fkey FOREIGN KEY (hdd_id) REFERENCES hdd(id);
+
+
+--
+-- Name: processor_ram_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY processor
+    ADD CONSTRAINT processor_ram_id_fkey FOREIGN KEY (ram_id) REFERENCES ram(id);
+
+
+--
+-- Name: ram_firms_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ram
+    ADD CONSTRAINT ram_firms_id_fkey FOREIGN KEY (firms_id) REFERENCES firms(id);
+
+
+--
+-- Name: sold_keyboards_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sold
+    ADD CONSTRAINT sold_keyboards_id_fkey FOREIGN KEY (keyboards_id) REFERENCES keyboards(id);
+
+
+--
+-- Name: sold_monitors_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sold
+    ADD CONSTRAINT sold_monitors_id_fkey FOREIGN KEY (monitors_id) REFERENCES monitors(id);
+
+
+--
+-- Name: sold_mouse_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sold
+    ADD CONSTRAINT sold_mouse_id_fkey FOREIGN KEY (mouse_id) REFERENCES mouse(id);
+
+
+--
+-- Name: sold_pc_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sold
+    ADD CONSTRAINT sold_pc_id_fkey FOREIGN KEY (pc_id) REFERENCES pc(id);
+
+
+--
+-- Name: sold_processor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sold
+    ADD CONSTRAINT sold_processor_id_fkey FOREIGN KEY (processor_id) REFERENCES processor(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
