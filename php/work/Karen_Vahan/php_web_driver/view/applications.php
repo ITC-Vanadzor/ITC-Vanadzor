@@ -16,10 +16,10 @@
                 die("Connection failed: " . $conn->connect_error);
             } 
 
-echo "HELLO!!!";
             $sql = "SELECT id, name FROM apps";
             $result = $conn->query($sql);
 
+echo "HELLO!!!";
             
             if ($result->num_rows > 0) {
                 // output data of each row
