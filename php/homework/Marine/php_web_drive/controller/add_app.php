@@ -7,10 +7,11 @@ $conn = mysqli_connect($servername, $username, $passwd, $dbname);
 if (!$conn) {
     die('Could cot connect: ' . mysql_error());
 }
+// check coonection POST or GET
 echo 'Connected successfully'."\n";
 $app=$_GET['appname'];
 $sql = "INSERT INTO APP (app_name)
-VALUES ('{$app}')";
+  VALUES ('{$app}')";
 
 if (mysqli_query($conn, $sql)) {
     echo "New record created successfully";

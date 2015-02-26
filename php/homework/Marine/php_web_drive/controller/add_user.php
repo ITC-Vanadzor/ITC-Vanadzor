@@ -1,5 +1,4 @@
 <?php
-echo $_POST['username'] ;
 $servername='localhost';
 $username='root';
 $passwd='student2014';
@@ -8,11 +7,12 @@ $conn = mysqli_connect($servername, $username, $passwd, $dbname);
 if (!$conn) {
     die('Could cot connect: ' . mysql_error());
 }
+// GET
 echo 'Connected successfully'."\n";
 $user=$_POST['username'];
 $pass=$_POST['pass'];
 $sql = "INSERT INTO Users (name, password)
-VALUES ('{$user}','{$pass}')";
+VALUES ('$user','$pass')";
 
 if (mysqli_query($conn, $sql)) {
     echo "New record created successfully";
