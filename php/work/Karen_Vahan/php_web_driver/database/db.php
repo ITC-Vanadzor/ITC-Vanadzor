@@ -23,45 +23,48 @@ function close_connection_db($conn){
 function create_db($db_name){
     // Create database
     $conn=check_connection_db();
-    $sql = "CREATE DATABASE ".$db_name;
+    $sql = "CREATE DATABASE IF NOT EXISTS ".$db_name;
     if ($conn->query($sql) === TRUE) {
-        echo "Database created successfully";
+        echo "Database created successfully\n";
     } else {
         echo "Error creating database: " . $conn->error;
     }
 }
 
 
-//create_db("my_web_db");
+create_db("my_web_db");
 
 $conn = check_connection_db("my_web_db");
-$sql ="CREATE TABLE users (
+$sql = "CREATE TABLE IF NOT EXISTS users (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     name VARCHAR(30) NOT NULL,
     password VARCHAR(30) NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
-        echo "Table users created successfully";
+    echo "Table users created successfully\n";
 } else {
-        echo "Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error;
 }
-$sql ="CREATE TABLE apps (
+$sql = "CREATE TABLE IF NOT EXISTS apps (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     name VARCHAR(30) NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
-        echo "Table users created successfully";
+    echo "Table users created successfully\n";
 } else {
-        echo "Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error;
 }
-$sql ="CREATE TABLE history (
+$sql = "CREATE TABLE IF NOT EXISTS history (
+    user_id INT(6) UNSIGNED NOT NULL,
+    app_id INT(6) UNSIGNED NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (app_id) REFERENCES apps(id),
     time DATETIME NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
-        echo "Table users created successfully";
+    echo "Table users created successfully\n";
 } else {
-        echo "Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error;
 }
-echo "\ntest\n";
+$conn->close();
+?>
