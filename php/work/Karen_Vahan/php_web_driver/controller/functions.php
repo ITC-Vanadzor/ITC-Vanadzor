@@ -9,7 +9,7 @@ $app_name = "ekdxdtuzhncacfj";
 
 //Main
 //add_history($user_name, $app_name);
-var_dump(get_history("history"));
+//var_dump(get_history("history"));
 
 //Add data in history by user name and application name
 function add_history($user_name, $app_name){
@@ -66,3 +66,27 @@ function get_history($table_name){
 	//Close connection DB
 	$conn->close();
 }
+
+function get_apps(){
+	$conn = check_connection_db("my_web_db");
+	$sql = "SELECT * FROM apps";
+    $result = $conn->query($sql);
+    $table_array=array();
+
+	if ($result->num_rows > 0) {
+		// output data of each row
+		while($row = $result->fetch_assoc()) {
+			$table_array[] = $row["name"];
+		}
+	} else {
+		return false;
+	}
+	//Close connection DB
+	$conn->close();
+    return $table_array;
+}
+echo "\nokk\n";
+//var_dump(get_apps());
+//print_r(get_apps());
+echo implode('","', get_apps());
+add_history("hvfrgb","mgnbeiiu");
