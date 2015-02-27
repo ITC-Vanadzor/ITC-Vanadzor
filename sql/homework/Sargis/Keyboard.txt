@@ -1,0 +1,2 @@
+1	4	60	3	50	MC184LL/B	Apple Wireless keyboard	2 AA battery, Bluetooth connection
+2	1	40	12	35	VG-KBD2000	Samsung Wireless keyboard	LED H6400, FH6030

@@ -1,0 +1,2 @@
+1	10	200	4	165	#400/84/69	EVGA GeForce GTX 960 SuperSC	ACX 2.0+ 2GB GDDR5 128bit, PCI-E 3.0 Dual-Link DVI-I
+2	10	360	6	290	#400/84/71	Gigabyte GeForce GTX 970 G1	G1 Gaming GDDR5 Pcie Video Graphics Card, 4GB
