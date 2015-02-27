@@ -1,0 +1,2 @@
+1	7	340	5	270	#333/44/55	Core i7-4790K Processor	8M Cache, up to 4.40 GHz
+2	7	300	6	240	#333/44/77	Core i5 Processor	6M Cache, up to 4.20 GHz
