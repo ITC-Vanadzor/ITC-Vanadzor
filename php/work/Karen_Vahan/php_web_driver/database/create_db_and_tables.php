@@ -44,4 +44,4 @@ if ($conn->query($sql) === TRUE) {
 }
 
 //Close connection DB
-close_connection_db($conn);
+$conn->close();

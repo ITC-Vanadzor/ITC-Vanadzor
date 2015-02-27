@@ -17,11 +17,6 @@ function check_connection_db($db_name=false){
 	return $conn;
 }
 
-//Close connection on DB
-function close_connection_db($conn){
-	$conn->close();
-}
-
 //Create datebase 
 function create_db($db_name){
 	// Create database
@@ -62,7 +57,7 @@ function insert_rand_users($count){
 	$stmt->close();
 
 	//Close connection DB
-	close_connection_db($conn);
+	$conn->close();
 }
 
 //Insert random applications in table apps by '$count'
@@ -83,7 +78,7 @@ function insert_rand_apps($count){
 	$stmt->close();
 
 	//Close connection DB
-	close_connection_db($conn);
+	$conn->close();
 }
 
 //Insert random history in table history by '$count'
@@ -108,5 +103,5 @@ function insert_rand_dates($count){
 	$stmt->close();
 
 	//Close connection DB
-	close_connection_db($conn);
+	$conn->close();
 }
