@@ -1,2 +1,0 @@
-1	4	80	10	50	#400/84/45	Crucial 8 GB Kit (4 GB x 2) DDR3	8GB KIT(4GB*2)
-2	7	110	8	75	#400/84/68	Corsair Vengeance  DDR3 1600 MHz	16 GB KIT(8GB*2)
