@@ -7,7 +7,7 @@ public class topBottomBorder{
     public void printBorder(){
         String line = ""; 
         for(int i = 0;i < columns;i++){
-            line += "*";
+            line += "* ";
         }
         System.out.println(line);
     }

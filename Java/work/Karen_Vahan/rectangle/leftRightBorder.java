@@ -9,9 +9,9 @@ public class leftRightBorder{
         String line = "";
         for(int i = 1;i <= columns;i++){
             if((i == 1) || (i == columns) ){
-                line += "*";
+                line += "* ";
             }else{
-                line += " ";
+                line += "  ";
             }
         }
         System.out.println(line);
