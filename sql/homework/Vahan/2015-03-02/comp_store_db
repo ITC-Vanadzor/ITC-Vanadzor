@@ -1,0 +1,767 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: firms; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE firms (
+    id integer NOT NULL,
+    name character varying(30)
+);
+
+
+ALTER TABLE public.firms OWNER TO postgres;
+
+--
+-- Name: firms_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE firms_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.firms_id_seq OWNER TO postgres;
+
+--
+-- Name: firms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE firms_id_seq OWNED BY firms.id;
+
+
+--
+-- Name: product; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE product (
+    id integer NOT NULL,
+    unit_id integer NOT NULL,
+    firm_id integer NOT NULL,
+    price numeric,
+    quantity integer,
+    serial_number character varying(30),
+    CONSTRAINT product_price_check CHECK ((price > (0)::numeric))
+);
+
+
+ALTER TABLE public.product OWNER TO postgres;
+
+--
+-- Name: product_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE product_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.product_id_seq OWNER TO postgres;
+
+--
+-- Name: product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE product_id_seq OWNED BY product.id;
+
+
+--
+-- Name: property; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE property (
+    id integer NOT NULL,
+    product_id integer NOT NULL,
+    name text,
+    value text
+);
+
+
+ALTER TABLE public.property OWNER TO postgres;
+
+--
+-- Name: property_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE property_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.property_id_seq OWNER TO postgres;
+
+--
+-- Name: property_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE property_id_seq OWNED BY property.id;
+
+
+--
+-- Name: sales; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sales (
+    id integer NOT NULL,
+    unit_id integer NOT NULL,
+    firm_id integer NOT NULL,
+    product_id integer NOT NULL,
+    price numeric,
+    quantity integer,
+    "time" timestamp with time zone,
+    amount numeric,
+    CONSTRAINT sales_price_check CHECK ((price > (0)::numeric))
+);
+
+
+ALTER TABLE public.sales OWNER TO postgres;
+
+--
+-- Name: sales_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sales_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sales_id_seq OWNER TO postgres;
+
+--
+-- Name: sales_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sales_id_seq OWNED BY sales.id;
+
+
+--
+-- Name: unit; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE unit (
+    id integer NOT NULL,
+    name text
+);
+
+
+ALTER TABLE public.unit OWNER TO postgres;
+
+--
+-- Name: unit_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE unit_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.unit_id_seq OWNER TO postgres;
+
+--
+-- Name: unit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE unit_id_seq OWNED BY unit.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY firms ALTER COLUMN id SET DEFAULT nextval('firms_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product ALTER COLUMN id SET DEFAULT nextval('product_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY property ALTER COLUMN id SET DEFAULT nextval('property_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sales ALTER COLUMN id SET DEFAULT nextval('sales_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY unit ALTER COLUMN id SET DEFAULT nextval('unit_id_seq'::regclass);
+
+
+--
+-- Data for Name: firms; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY firms (id, name) FROM stdin;
+1	Fujitsu
+2	Samsung
+3	Toshiba
+4	Lenovo
+\.
+
+
+--
+-- Name: firms_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('firms_id_seq', 4, true);
+
+
+--
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY product (id, unit_id, firm_id, price, quantity, serial_number) FROM stdin;
+1	1	1	200	50	AN1235446lk
+2	2	2	100	10	LT122344
+3	3	3	2000	8	LT3652344
+4	7	4	50	30	GB122344
+6	1	1	1	1	\N
+7	2	2	2	2	\N
+8	3	3	3	3	\N
+10	5	1	5	0	\N
+11	6	2	6	1	\N
+12	7	3	7	2	\N
+14	9	1	9	4	\N
+15	10	2	10	0	\N
+16	11	3	11	1	\N
+18	1	1	13	3	\N
+19	2	2	14	4	\N
+20	3	3	15	0	\N
+22	5	1	17	2	\N
+23	6	2	18	3	\N
+24	7	3	19	4	\N
+26	9	1	21	1	\N
+27	10	2	22	2	\N
+28	11	3	23	3	\N
+30	1	1	25	0	\N
+31	2	2	26	1	\N
+32	3	3	27	2	\N
+34	5	1	29	4	\N
+35	6	2	30	0	\N
+36	7	3	31	1	\N
+38	9	1	33	3	\N
+39	10	2	34	4	\N
+40	11	3	35	0	\N
+42	1	1	37	2	\N
+43	2	2	38	3	\N
+44	3	3	39	4	\N
+46	5	1	41	1	\N
+47	6	2	42	2	\N
+48	7	3	43	3	\N
+50	9	1	45	0	\N
+51	10	2	46	1	\N
+52	11	3	47	2	\N
+54	1	1	49	4	\N
+55	2	2	50	0	\N
+56	3	3	51	1	\N
+58	5	1	53	3	\N
+59	6	2	54	4	\N
+60	7	3	55	0	\N
+62	9	1	57	2	\N
+63	10	2	58	3	\N
+64	11	3	59	4	\N
+66	1	1	61	1	\N
+67	2	2	62	2	\N
+68	3	3	63	3	\N
+70	5	1	65	0	\N
+71	6	2	66	1	\N
+72	7	3	67	2	\N
+74	9	1	69	4	\N
+75	10	2	70	0	\N
+76	11	3	71	1	\N
+78	1	1	73	3	\N
+79	2	2	74	4	\N
+80	3	3	75	0	\N
+82	5	1	77	2	\N
+83	6	2	78	3	\N
+84	7	3	79	4	\N
+86	9	1	81	1	\N
+87	10	2	82	2	\N
+88	11	3	83	3	\N
+90	1	1	85	0	\N
+91	2	2	86	1	\N
+92	3	3	87	2	\N
+94	5	1	89	4	\N
+95	6	2	90	0	\N
+96	7	3	91	1	\N
+98	9	1	93	3	\N
+99	10	2	94	4	\N
+100	11	3	95	0	\N
+102	1	1	97	2	\N
+103	2	2	98	3	\N
+104	3	3	99	4	\N
+\.
+
+
+--
+-- Name: product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('product_id_seq', 104, true);
+
+
+--
+-- Data for Name: property; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY property (id, product_id, name, value) FROM stdin;
+1	1	frequancy	50 mhz
+\.
+
+
+--
+-- Name: property_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('property_id_seq', 1, true);
+
+
+--
+-- Data for Name: sales; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sales (id, unit_id, firm_id, product_id, price, quantity, "time", amount) FROM stdin;
+1	1	1	1	300	2	2015-01-08 04:05:06+04	\N
+1209	1	1	1	1	1	\N	1
+3	2	2	2	150	1	2015-01-08 04:10:06+04	\N
+4	3	4	2	180	1	2015-01-08 05:10:06+04	\N
+5	3	4	2	180	1	2015-01-08 05:10:06+04	\N
+6	1	1	1	300	2	2015-01-08 04:05:06+04	\N
+1210	2	2	2	2	2	\N	4
+9	1	1	1	1	1	\N	1
+10	2	2	2	2	2	\N	4
+11	3	3	3	3	3	\N	9
+12	4	4	4	4	4	\N	16
+1211	3	3	3	3	3	\N	9
+1214	6	2	6	6	1	\N	6
+1215	7	3	7	7	2	\N	14
+1218	10	2	10	10	0	\N	0
+1219	11	3	11	11	1	\N	11
+1222	2	2	14	14	4	\N	56
+1223	3	3	15	15	0	\N	0
+1226	6	2	18	18	3	\N	54
+1227	7	3	19	19	4	\N	76
+1230	10	2	22	22	2	\N	44
+1231	11	3	23	23	3	\N	69
+1234	2	2	26	26	1	\N	26
+1235	3	3	27	27	2	\N	54
+39	7	1	1	31	1	\N	31
+41	1	3	3	33	3	\N	99
+42	2	4	4	34	4	\N	136
+1238	6	2	30	30	0	\N	0
+1239	7	3	31	31	1	\N	31
+1242	10	2	34	34	4	\N	136
+1243	11	3	35	35	0	\N	0
+1246	2	2	38	38	3	\N	114
+1247	3	3	39	39	4	\N	156
+1250	6	2	42	42	2	\N	84
+1251	7	3	43	43	3	\N	129
+1254	10	2	46	46	1	\N	46
+1255	11	3	47	47	2	\N	94
+1258	2	2	50	50	0	\N	0
+1259	3	3	51	51	1	\N	51
+1262	6	2	54	54	4	\N	216
+1263	7	3	55	55	0	\N	0
+69	5	1	1	61	1	\N	61
+70	6	2	2	62	2	\N	124
+71	7	3	3	63	3	\N	189
+1266	10	2	58	58	3	\N	174
+1267	11	3	59	59	4	\N	236
+1270	2	2	62	62	2	\N	124
+1271	3	3	63	63	3	\N	189
+1274	6	2	66	66	1	\N	66
+1275	7	3	67	67	2	\N	134
+1278	10	2	70	70	0	\N	0
+1279	11	3	71	71	1	\N	71
+1282	2	2	74	74	4	\N	296
+1283	3	3	75	75	0	\N	0
+1286	6	2	78	78	3	\N	234
+1287	7	3	79	79	4	\N	316
+1289	9	1	1	81	1	\N	81
+1290	10	2	2	82	2	\N	164
+99	3	1	1	91	1	\N	91
+100	4	2	2	92	2	\N	184
+101	5	3	3	93	3	\N	279
+102	6	4	4	94	4	\N	376
+1291	11	3	3	83	3	\N	249
+1294	2	2	6	86	1	\N	86
+1295	3	3	7	87	2	\N	174
+1298	6	2	10	90	0	\N	0
+1299	7	3	11	91	1	\N	91
+1302	10	2	14	94	4	\N	376
+1303	11	3	15	95	0	\N	0
+1306	2	2	18	98	3	\N	294
+1307	3	3	19	99	4	\N	396
+129	1	1	1	121	1	\N	121
+130	2	2	2	122	2	\N	244
+131	3	3	3	123	3	\N	369
+132	4	4	4	124	4	\N	496
+159	7	1	1	151	1	\N	151
+161	1	3	3	153	3	\N	459
+162	2	4	4	154	4	\N	616
+189	5	1	1	181	1	\N	181
+190	6	2	2	182	2	\N	364
+191	7	3	3	183	3	\N	549
+219	3	1	1	211	1	\N	211
+220	4	2	2	212	2	\N	424
+221	5	3	3	213	3	\N	639
+222	6	4	4	214	4	\N	856
+249	1	1	1	241	1	\N	241
+250	2	2	2	242	2	\N	484
+251	3	3	3	243	3	\N	729
+252	4	4	4	244	4	\N	976
+279	7	1	1	271	1	\N	271
+281	1	3	3	273	3	\N	819
+282	2	4	4	274	4	\N	1096
+309	5	1	1	301	1	\N	301
+310	6	2	2	302	2	\N	604
+311	7	3	3	303	3	\N	909
+339	3	1	1	331	1	\N	331
+340	4	2	2	332	2	\N	664
+341	5	3	3	333	3	\N	999
+342	6	4	4	334	4	\N	1336
+369	1	1	1	361	1	\N	361
+370	2	2	2	362	2	\N	724
+371	3	3	3	363	3	\N	1089
+372	4	4	4	364	4	\N	1456
+399	7	1	1	391	1	\N	391
+401	1	3	3	393	3	\N	1179
+402	2	4	4	394	4	\N	1576
+429	5	1	1	421	1	\N	421
+430	6	2	2	422	2	\N	844
+431	7	3	3	423	3	\N	1269
+459	3	1	1	451	1	\N	451
+460	4	2	2	452	2	\N	904
+461	5	3	3	453	3	\N	1359
+462	6	4	4	454	4	\N	1816
+489	1	1	1	481	1	\N	481
+490	2	2	2	482	2	\N	964
+491	3	3	3	483	3	\N	1449
+492	4	4	4	484	4	\N	1936
+519	7	1	1	511	1	\N	511
+521	1	3	3	513	3	\N	1539
+522	2	4	4	514	4	\N	2056
+549	5	1	1	541	1	\N	541
+550	6	2	2	542	2	\N	1084
+551	7	3	3	543	3	\N	1629
+579	3	1	1	571	1	\N	571
+580	4	2	2	572	2	\N	1144
+581	5	3	3	573	3	\N	1719
+582	6	4	4	574	4	\N	2296
+609	1	1	1	601	1	\N	601
+610	2	2	2	602	2	\N	1204
+611	3	3	3	603	3	\N	1809
+612	4	4	4	604	4	\N	2416
+639	7	1	1	631	1	\N	631
+641	1	3	3	633	3	\N	1899
+642	2	4	4	634	4	\N	2536
+669	5	1	1	661	1	\N	661
+670	6	2	2	662	2	\N	1324
+671	7	3	3	663	3	\N	1989
+699	3	1	1	691	1	\N	691
+700	4	2	2	692	2	\N	1384
+701	5	3	3	693	3	\N	2079
+702	6	4	4	694	4	\N	2776
+729	1	1	1	721	1	\N	721
+730	2	2	2	722	2	\N	1444
+731	3	3	3	723	3	\N	2169
+732	4	4	4	724	4	\N	2896
+759	7	1	1	751	1	\N	751
+761	1	3	3	753	3	\N	2259
+762	2	4	4	754	4	\N	3016
+789	5	1	1	781	1	\N	781
+790	6	2	2	782	2	\N	1564
+791	7	3	3	783	3	\N	2349
+819	3	1	1	811	1	\N	811
+820	4	2	2	812	2	\N	1624
+821	5	3	3	813	3	\N	2439
+822	6	4	4	814	4	\N	3256
+849	1	1	1	841	1	\N	841
+850	2	2	2	842	2	\N	1684
+851	3	3	3	843	3	\N	2529
+852	4	4	4	844	4	\N	3376
+879	7	1	1	871	1	\N	871
+881	1	3	3	873	3	\N	2619
+882	2	4	4	874	4	\N	3496
+909	5	1	1	901	1	\N	901
+910	6	2	2	902	2	\N	1804
+911	7	3	3	903	3	\N	2709
+939	3	1	1	931	1	\N	931
+940	4	2	2	932	2	\N	1864
+941	5	3	3	933	3	\N	2799
+942	6	4	4	934	4	\N	3736
+969	1	1	1	961	1	\N	961
+970	2	2	2	962	2	\N	1924
+971	3	3	3	963	3	\N	2889
+972	4	4	4	964	4	\N	3856
+999	7	1	1	991	1	\N	991
+1001	1	3	3	993	3	\N	2979
+1002	2	4	4	994	4	\N	3976
+1009	1	1	1	1	1	\N	1
+1010	2	2	2	2	2	\N	4
+1011	3	3	3	3	3	\N	9
+1012	4	4	4	4	4	\N	16
+1039	7	1	1	31	1	\N	31
+1041	1	3	3	33	3	\N	99
+1042	2	4	4	34	4	\N	136
+1069	5	1	1	61	1	\N	61
+1070	6	2	2	62	2	\N	124
+1071	7	3	3	63	3	\N	189
+1099	3	1	1	91	1	\N	91
+1100	4	2	2	92	2	\N	184
+1101	5	3	3	93	3	\N	279
+1102	6	4	4	94	4	\N	376
+1309	1	1	1	1	1	\N	1
+1310	2	2	2	2	2	\N	4
+1311	3	3	3	3	3	\N	9
+1314	6	2	6	6	1	\N	6
+1315	7	3	7	7	2	\N	14
+1318	10	2	10	10	0	\N	0
+1319	11	3	11	11	1	\N	11
+1322	2	2	14	14	4	\N	56
+1323	3	3	15	15	0	\N	0
+1326	6	2	18	18	3	\N	54
+1327	7	3	19	19	4	\N	76
+1330	10	2	22	22	2	\N	44
+1331	11	3	23	23	3	\N	69
+1334	2	2	26	26	1	\N	26
+1335	3	3	27	27	2	\N	54
+1338	6	2	30	30	0	\N	0
+1339	7	3	31	31	1	\N	31
+1342	10	2	34	34	4	\N	136
+1343	11	3	35	35	0	\N	0
+1346	2	2	38	38	3	\N	114
+1347	3	3	39	39	4	\N	156
+1350	6	2	42	42	2	\N	84
+1351	7	3	43	43	3	\N	129
+1354	10	2	46	46	1	\N	46
+1355	11	3	47	47	2	\N	94
+1358	2	2	50	50	0	\N	0
+1359	3	3	51	51	1	\N	51
+1362	6	2	54	54	4	\N	216
+1363	7	3	55	55	0	\N	0
+1366	10	2	58	58	3	\N	174
+1367	11	3	59	59	4	\N	236
+1370	2	2	62	62	2	\N	124
+1371	3	3	63	63	3	\N	189
+1374	6	2	66	66	1	\N	66
+1375	7	3	67	67	2	\N	134
+1378	10	2	70	70	0	\N	0
+1379	11	3	71	71	1	\N	71
+1382	2	2	74	74	4	\N	296
+1383	3	3	75	75	0	\N	0
+1386	6	2	78	78	3	\N	234
+1387	7	3	79	79	4	\N	316
+1389	9	1	1	81	1	\N	81
+1390	10	2	2	82	2	\N	164
+1391	11	3	3	83	3	\N	249
+1394	2	2	6	86	1	\N	86
+1395	3	3	7	87	2	\N	174
+1398	6	2	10	90	0	\N	0
+1399	7	3	11	91	1	\N	91
+1402	10	2	14	94	4	\N	376
+1403	11	3	15	95	0	\N	0
+1406	2	2	18	98	3	\N	294
+1407	3	3	19	99	4	\N	396
+\.
+
+
+--
+-- Name: sales_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sales_id_seq', 1407, true);
+
+
+--
+-- Data for Name: unit; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY unit (id, name) FROM stdin;
+1	cpu
+2	case_box
+3	hard_disc_drive
+4	keyboard
+5	monitor
+6	motherboard
+7	mouse
+8	optic_disc_drive
+9	power_supply
+10	ram
+11	speakers
+12	videocard
+\.
+
+
+--
+-- Name: unit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('unit_id_seq', 12, true);
+
+
+--
+-- Name: firms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY firms
+    ADD CONSTRAINT firms_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT product_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: property_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY property
+    ADD CONSTRAINT property_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sales_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sales
+    ADD CONSTRAINT sales_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unit_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY unit
+    ADD CONSTRAINT unit_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: time_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX time_idx ON sales USING btree ("time");
+
+
+--
+-- Name: product_firm_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT product_firm_id_fkey FOREIGN KEY (firm_id) REFERENCES firms(id);
+
+
+--
+-- Name: product_unit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT product_unit_id_fkey FOREIGN KEY (unit_id) REFERENCES unit(id);
+
+
+--
+-- Name: property_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY property
+    ADD CONSTRAINT property_product_id_fkey FOREIGN KEY (product_id) REFERENCES product(id);
+
+
+--
+-- Name: sales_firm_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sales
+    ADD CONSTRAINT sales_firm_id_fkey FOREIGN KEY (firm_id) REFERENCES firms(id);
+
+
+--
+-- Name: sales_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sales
+    ADD CONSTRAINT sales_product_id_fkey FOREIGN KEY (product_id) REFERENCES product(id);
+
+
+--
+-- Name: sales_unit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sales
+    ADD CONSTRAINT sales_unit_id_fkey FOREIGN KEY (unit_id) REFERENCES unit(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

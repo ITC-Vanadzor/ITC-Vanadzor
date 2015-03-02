@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `All_devices`
+--
+
+DROP TABLE IF EXISTS `All_devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `All_devices` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `products_id` int(6) NOT NULL,
+  `prod_id` int(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `products_id` (`products_id`),
+  CONSTRAINT `All_devices_ibfk_1` FOREIGN KEY (`products_id`) REFERENCES `Products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `All_devices`
+--
+
+LOCK TABLES `All_devices` WRITE;
+/*!40000 ALTER TABLE `All_devices` DISABLE KEYS */;
+INSERT INTO `All_devices` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,2,1),(6,2,2),(7,2,3),(8,2,4),(9,2,5),(10,2,6),(11,3,1),(12,3,2),(13,3,3),(14,4,1),(15,4,2),(16,4,3),(17,4,4),(18,5,1),(19,5,2),(20,5,3),(21,5,4),(22,6,1),(23,6,2),(24,6,3),(25,7,1),(26,7,2),(27,7,3);
+/*!40000 ALTER TABLE `All_devices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Cases`
 --
 
@@ -26,12 +53,12 @@ CREATE TABLE `Cases` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `firm_id` int(6) NOT NULL,
-  `cost` varchar(30) NOT NULL,
-  `count` int(6) DEFAULT NULL,
+  `cost` int(6) NOT NULL,
+  `count` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `firm_id` (`firm_id`),
   CONSTRAINT `Cases_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +67,7 @@ CREATE TABLE `Cases` (
 
 LOCK TABLES `Cases` WRITE;
 /*!40000 ALTER TABLE `Cases` DISABLE KEYS */;
+INSERT INTO `Cases` VALUES (1,'LG case',2,80,29),(2,'Genius case',6,60,29),(3,'Sony case',3,90,19);
 /*!40000 ALTER TABLE `Cases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +82,7 @@ CREATE TABLE `Firms` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +91,7 @@ CREATE TABLE `Firms` (
 
 LOCK TABLES `Firms` WRITE;
 /*!40000 ALTER TABLE `Firms` DISABLE KEYS */;
+INSERT INTO `Firms` VALUES (1,'Samsung'),(2,'LG'),(3,'Sony'),(4,'Intel'),(5,'AMD'),(6,'Genius');
 /*!40000 ALTER TABLE `Firms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,12 +107,12 @@ CREATE TABLE `Hard_Discs` (
   `name` varchar(50) NOT NULL,
   `firm_id` int(6) NOT NULL,
   `size` varchar(30) NOT NULL,
-  `cost` varchar(30) NOT NULL,
-  `count` int(6) DEFAULT NULL,
+  `cost` int(6) NOT NULL,
+  `count` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `firm_id` (`firm_id`),
   CONSTRAINT `Hard_Discs_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +121,41 @@ CREATE TABLE `Hard_Discs` (
 
 LOCK TABLES `Hard_Discs` WRITE;
 /*!40000 ALTER TABLE `Hard_Discs` DISABLE KEYS */;
+INSERT INTO `Hard_Discs` VALUES (1,'LG 1TB',2,'1TB',100,30),(2,'Sony 500GB',3,'500GB',70,35),(3,'Sony 2TB',3,'2TB',150,25);
 /*!40000 ALTER TABLE `Hard_Discs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `History`
+--
+
+DROP TABLE IF EXISTS `History`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `History` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `firm_id` int(6) NOT NULL,
+  `products_id` int(6) NOT NULL,
+  `device_id` int(6) NOT NULL,
+  `count` int(6) NOT NULL,
+  `cost` int(6) NOT NULL,
+  `saledate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `firm_id` (`firm_id`),
+  KEY `products_id` (`products_id`),
+  CONSTRAINT `History_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`),
+  CONSTRAINT `History_ibfk_2` FOREIGN KEY (`products_id`) REFERENCES `Products` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `History`
+--
+
+LOCK TABLES `History` WRITE;
+/*!40000 ALTER TABLE `History` DISABLE KEYS */;
+INSERT INTO `History` VALUES (1,1,1,1,1,200,'2015-01-01 20:00:00'),(3,2,7,1,1,100,'2015-01-08 20:00:00'),(4,6,3,1,1,20,'2015-02-24 20:00:00'),(5,1,4,1,1,50,'2015-01-11 20:00:00'),(6,6,5,1,1,70,'2015-02-24 20:00:00'),(7,1,1,1,1,200,'2015-03-02 06:51:06');
+/*!40000 ALTER TABLE `History` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -107,12 +170,12 @@ CREATE TABLE `Keyboards` (
   `name` varchar(50) NOT NULL,
   `firm_id` int(6) NOT NULL,
   `type` varchar(30) NOT NULL,
-  `cost` varchar(30) NOT NULL,
-  `count` int(6) DEFAULT NULL,
+  `cost` int(6) NOT NULL,
+  `count` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `firm_id` (`firm_id`),
   CONSTRAINT `Keyboards_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +184,7 @@ CREATE TABLE `Keyboards` (
 
 LOCK TABLES `Keyboards` WRITE;
 /*!40000 ALTER TABLE `Keyboards` DISABLE KEYS */;
+INSERT INTO `Keyboards` VALUES (1,'Genius wired',6,'wired',20,40),(2,'LG wirless',2,'wirless',30,30),(3,'Samsung wirless',1,'wirless',40,30);
 /*!40000 ALTER TABLE `Keyboards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,12 +200,12 @@ CREATE TABLE `Monitors` (
   `name` varchar(50) NOT NULL,
   `firm_id` int(6) NOT NULL,
   `diagonal` varchar(50) NOT NULL,
-  `cost` varchar(30) NOT NULL,
-  `count` int(6) DEFAULT NULL,
+  `cost` int(6) NOT NULL,
+  `count` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `firm_id` (`firm_id`),
   CONSTRAINT `Monitors_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +214,7 @@ CREATE TABLE `Monitors` (
 
 LOCK TABLES `Monitors` WRITE;
 /*!40000 ALTER TABLE `Monitors` DISABLE KEYS */;
+INSERT INTO `Monitors` VALUES (1,'Samsung 19d led',1,'19d',200,20),(2,'Samsung 21d led',1,'21d',230,15),(3,'LG 21d led',2,'21d',180,25),(4,'LG 19d led',2,'19d',150,23);
 /*!40000 ALTER TABLE `Monitors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,12 +230,12 @@ CREATE TABLE `Mouses` (
   `name` varchar(50) NOT NULL,
   `firm_id` int(6) NOT NULL,
   `type` varchar(30) NOT NULL,
-  `cost` varchar(30) NOT NULL,
-  `count` int(6) DEFAULT NULL,
+  `cost` int(6) NOT NULL,
+  `count` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `firm_id` (`firm_id`),
   CONSTRAINT `Mouses_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,6 +244,7 @@ CREATE TABLE `Mouses` (
 
 LOCK TABLES `Mouses` WRITE;
 /*!40000 ALTER TABLE `Mouses` DISABLE KEYS */;
+INSERT INTO `Mouses` VALUES (1,'Samsung whireless',1,'whireless',50,30),(2,'Genius wired',6,'whired',40,30),(3,'Genius wireless',6,'whireless',60,20),(4,'Sony wired',3,'whired',50,25);
 /*!40000 ALTER TABLE `Mouses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +259,7 @@ CREATE TABLE `Processor_powers` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,6 +268,7 @@ CREATE TABLE `Processor_powers` (
 
 LOCK TABLES `Processor_powers` WRITE;
 /*!40000 ALTER TABLE `Processor_powers` DISABLE KEYS */;
+INSERT INTO `Processor_powers` VALUES (1,'2.2ghz'),(2,'2.5ghz'),(3,'3.0ghz'),(4,'3.2ghz');
 /*!40000 ALTER TABLE `Processor_powers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +283,7 @@ CREATE TABLE `Processor_types` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,6 +292,7 @@ CREATE TABLE `Processor_types` (
 
 LOCK TABLES `Processor_types` WRITE;
 /*!40000 ALTER TABLE `Processor_types` DISABLE KEYS */;
+INSERT INTO `Processor_types` VALUES (1,'i3'),(2,'i5'),(3,'i7'),(4,'7'),(5,'9'),(6,'5');
 /*!40000 ALTER TABLE `Processor_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,8 +309,8 @@ CREATE TABLE `Processors` (
   `firm_id` int(6) NOT NULL,
   `type_id` int(6) NOT NULL,
   `power_id` int(6) NOT NULL,
-  `cost` varchar(30) NOT NULL,
   `count` int(6) DEFAULT NULL,
+  `cost` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `firm_id` (`firm_id`),
   KEY `type_id` (`type_id`),
@@ -250,7 +318,7 @@ CREATE TABLE `Processors` (
   CONSTRAINT `Processors_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`) ON DELETE CASCADE,
   CONSTRAINT `Processors_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `Processor_types` (`id`) ON DELETE CASCADE,
   CONSTRAINT `Processors_ibfk_3` FOREIGN KEY (`power_id`) REFERENCES `Processor_powers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,6 +327,7 @@ CREATE TABLE `Processors` (
 
 LOCK TABLES `Processors` WRITE;
 /*!40000 ALTER TABLE `Processors` DISABLE KEYS */;
+INSERT INTO `Processors` VALUES (1,'Intel i3 2.2ghz',4,1,1,15,150),(2,'Intel i5 2.5ghz',4,2,2,15,190),(3,'Intel i7 3.0ghz',4,3,3,13,250),(4,'Amd 7 2.5ghz',5,4,2,20,130),(5,'Amd 9 2.5ghz',5,5,2,22,160),(6,'Amd 5 3.2ghz',5,6,4,28,110);
 /*!40000 ALTER TABLE `Processors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +342,7 @@ CREATE TABLE `Products` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,6 +351,7 @@ CREATE TABLE `Products` (
 
 LOCK TABLES `Products` WRITE;
 /*!40000 ALTER TABLE `Products` DISABLE KEYS */;
+INSERT INTO `Products` VALUES (1,'Monitors'),(2,'Processors'),(3,'Keyboards'),(4,'Mouses'),(5,'RAM'),(6,'Cases'),(7,'Hard_Discs');
 /*!40000 ALTER TABLE `Products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,11 +368,11 @@ CREATE TABLE `RAM` (
   `firm_id` int(6) NOT NULL,
   `size` varchar(30) NOT NULL,
   `cost` varchar(30) NOT NULL,
-  `count` int(6) DEFAULT NULL,
+  `count` int(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `firm_id` (`firm_id`),
   CONSTRAINT `RAM_ibfk_1` FOREIGN KEY (`firm_id`) REFERENCES `Firms` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -311,6 +381,7 @@ CREATE TABLE `RAM` (
 
 LOCK TABLES `RAM` WRITE;
 /*!40000 ALTER TABLE `RAM` DISABLE KEYS */;
+INSERT INTO `RAM` VALUES (1,'Genius 2GB',6,'2GB','70',30),(2,'Sony 4GB',3,'4GB','110',35),(3,'Samsung 4GB',1,'4GB','120',32),(4,'LG 2GB',2,'2GB','75',29);
 /*!40000 ALTER TABLE `RAM` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -323,4 +394,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-27 11:30:29
+-- Dump completed on 2015-03-02 13:28:18

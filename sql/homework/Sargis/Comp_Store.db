@@ -1,0 +1,159 @@
+-- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: Comp_Store
+-- ------------------------------------------------------
+-- Server version	5.5.41-0ubuntu0.14.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Brand`
+--
+
+DROP TABLE IF EXISTS `Brand`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Brand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Brand`
+--
+
+LOCK TABLES `Brand` WRITE;
+/*!40000 ALTER TABLE `Brand` DISABLE KEYS */;
+INSERT INTO `Brand` VALUES (1,'Intel'),(2,'Samsung'),(3,'Apple'),(4,'Lenovo'),(5,'Sony'),(6,'LG'),(7,'G-Force'),(8,'N-Vidia');
+/*!40000 ALTER TABLE `Brand` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Category`
+--
+
+DROP TABLE IF EXISTS `Category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Category`
+--
+
+LOCK TABLES `Category` WRITE;
+/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
+INSERT INTO `Category` VALUES (1,'M_board'),(2,'CPU'),(3,'RAM'),(4,'V_card'),(5,'HDD'),(6,'Monitor'),(7,'Keyboard'),(8,'Mouse'),(9,'Case');
+/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Products`
+--
+
+DROP TABLE IF EXISTS `Products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cat_id` int(11) NOT NULL,
+  `B_id` int(11) NOT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cat_id` (`cat_id`),
+  KEY `B_id` (`B_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Products`
+--
+
+LOCK TABLES `Products` WRITE;
+/*!40000 ALTER TABLE `Products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Sales`
+--
+
+DROP TABLE IF EXISTS `Sales`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Sales` (
+  `C_id` int(11) NOT NULL,
+  `B_id` int(11) NOT NULL,
+  `P_id` int(11) NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
+  `sell_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `amount` decimal(10,2) DEFAULT NULL,
+  KEY `sell_date` (`sell_date`),
+  KEY `sell_date_2` (`sell_date`) USING BTREE,
+  KEY `sell_date_3` (`sell_date`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Sales`
+--
+
+LOCK TABLES `Sales` WRITE;
+/*!40000 ALTER TABLE `Sales` DISABLE KEYS */;
+INSERT INTO `Sales` VALUES (2,0,0,450.00,0,'2015-03-01 16:46:46',0.00),(3,1,1,451.00,1,'2015-03-01 16:46:46',451.00),(4,2,2,452.00,2,'2015-03-01 16:46:46',904.00),(5,3,3,453.00,3,'2015-03-01 16:46:46',1359.00),(6,4,4,454.00,4,'2015-03-01 16:46:46',1816.00),(7,5,5,455.00,0,'2015-03-01 16:46:46',0.00),(0,6,6,456.00,1,'2015-03-01 16:46:47',456.00),(1,7,7,457.00,2,'2015-03-01 16:46:47',914.00),(2,8,8,458.00,3,'2015-03-01 16:46:47',1374.00),(3,9,9,459.00,4,'2015-03-01 16:46:47',1836.00),(4,0,10,460.00,0,'2015-03-01 16:46:47',0.00),(5,1,11,461.00,1,'2015-03-01 16:46:47',461.00),(6,2,12,462.00,2,'2015-03-01 16:46:47',924.00),(7,3,13,463.00,3,'2015-03-01 16:46:47',1389.00),(0,4,14,464.00,4,'2015-03-01 16:46:47',1856.00),(1,5,15,465.00,0,'2015-03-01 16:46:47',0.00),(2,6,16,466.00,1,'2015-03-01 16:46:47',466.00),(3,7,17,467.00,2,'2015-03-01 16:46:47',934.00),(4,8,18,468.00,3,'2015-03-01 16:46:47',1404.00),(5,9,19,469.00,4,'2015-03-01 16:46:47',1876.00),(6,0,20,470.00,0,'2015-03-01 16:46:47',0.00),(7,1,21,471.00,1,'2015-03-01 16:46:47',471.00),(0,2,22,472.00,2,'2015-03-01 16:46:47',944.00),(1,3,23,473.00,3,'2015-03-01 16:46:47',1419.00),(2,4,24,474.00,4,'2015-03-01 16:46:47',1896.00),(3,5,25,475.00,0,'2015-03-01 16:46:47',0.00),(4,6,26,476.00,1,'2015-03-01 16:46:47',476.00),(5,7,27,477.00,2,'2015-03-01 16:46:47',954.00),(6,8,28,478.00,3,'2015-03-01 16:46:47',1434.00),(7,9,29,479.00,4,'2015-03-01 16:46:47',1916.00),(0,0,0,480.00,0,'2015-03-01 16:46:47',0.00),(1,1,1,481.00,1,'2015-03-01 16:46:47',481.00),(2,2,2,482.00,2,'2015-03-01 16:46:48',964.00),(3,3,3,483.00,3,'2015-03-01 16:46:48',1449.00),(4,4,4,484.00,4,'2015-03-01 16:46:48',1936.00),(5,5,5,485.00,0,'2015-03-01 16:46:48',0.00),(6,6,6,486.00,1,'2015-03-01 16:46:48',486.00),(7,7,7,487.00,2,'2015-03-01 16:46:48',974.00),(0,8,8,488.00,3,'2015-03-01 16:46:48',1464.00),(1,9,9,489.00,4,'2015-03-01 16:46:48',1956.00),(2,0,10,490.00,0,'2015-03-01 16:46:48',0.00),(3,1,11,491.00,1,'2015-03-01 16:46:48',491.00),(4,2,12,492.00,2,'2015-03-01 16:46:48',984.00),(5,3,13,493.00,3,'2015-03-01 16:46:48',1479.00),(6,4,14,494.00,4,'2015-03-01 16:46:48',1976.00),(7,5,15,495.00,0,'2015-03-01 16:46:48',0.00),(0,6,16,496.00,1,'2015-03-01 16:46:48',496.00),(1,7,17,497.00,2,'2015-03-01 16:46:48',994.00),(2,8,18,498.00,3,'2015-03-01 16:46:48',1494.00),(3,9,19,499.00,4,'2015-03-01 16:46:48',1996.00),(4,0,20,500.00,0,'2015-03-01 16:46:48',0.00);
+/*!40000 ALTER TABLE `Sales` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_properties`
+--
+
+DROP TABLE IF EXISTS `product_properties`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product_properties` (
+  `p_id` int(11) NOT NULL,
+  `p_name` varchar(30) DEFAULT NULL,
+  `p_value` varchar(30) DEFAULT NULL,
+  KEY `p_id` (`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_properties`
+--
+
+LOCK TABLES `product_properties` WRITE;
+/*!40000 ALTER TABLE `product_properties` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_properties` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-03-02 12:32:00
