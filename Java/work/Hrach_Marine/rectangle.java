@@ -4,7 +4,9 @@ public class rectangle {
   row line=new row();
   column col=new column();
   line.line(10);
-  col.col(5,10);
+  for (int i=1;i<=5;i++){
+    col.col(10);
+  }
   line.line(10);
   }
 }
