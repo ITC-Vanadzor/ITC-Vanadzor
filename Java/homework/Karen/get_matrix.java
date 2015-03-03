@@ -15,11 +15,13 @@ public class get_matrix{
 
 	public int[][] set_random_walls(int number){
 		d = get_start_matrix();
+        /*
 		for(int i = 0; i < math.floor(number/2); i++ ){
 			int  numJ = rand.nextInt(number);
 			int  numI = rand.nextInt(number);
 			d[numI][numJ] = max;
 		}
+        */
 		return d;
 	}
 /*
