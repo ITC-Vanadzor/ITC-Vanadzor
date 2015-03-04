@@ -7,16 +7,13 @@ public class labirintMatrix{
 	//TODO
 	} 
 	 */
-	public int n = 3;
-	public int size = n*n;
-	public int max = n*n*n*n;
-	public int[][] d = new int[size][size];
-	public String[][] away = new String[size][size];
-	int startI = 0;
-	int startJ = 0;
-	int endI = 2;
-	int endJ = 2;
 	Random rand = new Random();
+	int n 			= 4;
+	int size 		= n*n;
+	int max 		= n*n*n*n;
+	int[][] d 	= new int[size][size];
+	int end;
+	int start;
 
 	//Set 10 for empty values,and 0 in diagonal
 	public void getStartMatrix(){
@@ -33,7 +30,7 @@ public class labirintMatrix{
 
 	//Set walls for Labirint in random coordinates
 	public void setRandomWalls(){
-		for(int i = 0; i < Math.floor(size/2); i++ ){
+		for(int i = 0; i < Math.floor(size/1); i++ ){
 			int  numJ = rand.nextInt(size);
 			int  numI = rand.nextInt(size);
 			if(numI != numJ){
@@ -49,13 +46,14 @@ public class labirintMatrix{
 			}
 		}
 		for(int i = 0; i < size; i++ ){
-			if((i%n != 2) && ((i + 1) < size)){
+			if((i%n != (n-1)) && ((i + 1) < size)){
 				d[i][i+1] = 1;
 			}
 		}
 	}
 
 	public void algorithmFloyd(){
+		matrixMakeSymmetrical();
 		for(int i = 0; i < size; i++ ){
 			for(int u = 0; u < size; u++ ){
 				for(int v = 0; v < size; v++ ){
@@ -66,23 +64,55 @@ public class labirintMatrix{
 		}
 	}
 
+	//Get start and end random
+	void getStartAndEnd(){
+		do{
+			start	= rand.nextInt(size-1);
+			end	= rand.nextInt(size-1);
+		}
+		while((start >= end) || (d[start][end] == max));
+	}
+
 	//print matrix
-	public void printLabirint(){
+	public void printLabirintMatrix(){
 		for(int i = 0; i < size; i++ ){
 			for(int j = 0; j < size; j++ ){
 				System.out.print(d[i][j]+"\t");
 			}
 			System.out.println();
 		}
-		//System.out.print(away[0][8]);
-		int myI = startI * n;
+	}
+
+	public void matrixMakeSymmetrical(){
+		for(int i = 0; i < size; i++ ){
+			for(int j = i; j < size; j++ ){
+				d[j][i] = d[i][j];
+			}
+		}
+	}
+
+	//print Labirint
+	public void printLabirint(){
+		int[][] labirint = new int[n][n];
+		int i = -1;
 		System.out.println();
 		for(int j = 0; j < size; j++ ){
 			if((j % n) == 0 ){
 				System.out.println();
+				i++;
 			}
-			System.out.print(d[myI][j]+"\t");
+			labirint[i][j%n] = d[start][j];
+			System.out.print(d[start][j]+"("+j+")"+"\t");
 		}
+		
+		for(i = 0; i < n; i++ ){
+			for(int j = i; j < n; j++ ){
+				//labirint[][]
+			}
+		}
+
 		System.out.println();
+		System.out.println("Start = " + start);
+		System.out.println("End = " + end);
 	}
 }

@@ -5,7 +5,9 @@ public class printLabirint{
 		obj.getStartMatrix();
 		obj.setMatrixWeight();
 		obj.setRandomWalls();
+		obj.getStartAndEnd();
 		obj.algorithmFloyd();
+		obj.printLabirintMatrix();
 		obj.printLabirint();
 	}
 }
