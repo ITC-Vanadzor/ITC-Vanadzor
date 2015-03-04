@@ -1,4 +1,7 @@
+// AREG -> write yourself ;)
+// AREG: split the code into separate classes
 public class Labyrinth {
+    // AREG: use constants for 20, 19
     public static int matrix[][] = {
             { 0, 20, 20, 19, 19 },
             { 19, 19, 20, 19, 20 },
@@ -11,6 +14,7 @@ public class Labyrinth {
         int dx[] = {1,0,-1,0};
         int dy[] = {0,1,0,-1};
         int d = 0;
+        // AREG: find the matrix widht / height dynamically
         for(int i=0; i<5; i++){
             for(int j=0; j<5; j++){ 
                 matrix[i][j]=-3;
