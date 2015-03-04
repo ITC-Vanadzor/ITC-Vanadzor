@@ -4,14 +4,15 @@ import java.util.Scanner;
 
 public class Labyrinth {
 
-    public static int si;
-    public static int sj;
-    public static int ei;
-    public static int ej;
+    static int si;
+    static int sj;
+    static int ei;
+    static int ej;
     final static int n = 6;
     final static int wall = -3;
     final static int start = -1;
     final static int end = -2;
+    final static int max=1000;
     static int step = 1;
     static int u = 0;//index array length
     static int aa[] = new int[4];
@@ -57,16 +58,16 @@ public class Labyrinth {
 
     public static void GetFullPaths(int[][] lab, int si, int sj, int n, int step) {
         lab[si][sj] = step;
-        if ((sj + 1 < n) && (lab[si][sj + 1] == 0 || (lab[si][sj + 1] != -3 && lab[si][sj + 1] > step))) {
+        if ((sj + 1 < n) && (lab[si][sj + 1] == 0 || (lab[si][sj + 1] != wall && lab[si][sj + 1] > step))) {
             GetFullPaths(lab, si, sj + 1, n, step + 1);
         }
-        if ((si + 1 < n) && (lab[si + 1][sj] == 0 || (lab[si + 1][sj] != -3 && lab[si + 1][sj] > step))) {
+        if ((si + 1 < n) && (lab[si + 1][sj] == 0 || (lab[si + 1][sj] != wall && lab[si + 1][sj] > step))) {
             GetFullPaths(lab, si + 1, sj, n, step + 1);
         }
-        if ((sj - 1 >= 0) && (lab[si][sj - 1] == 0 || (lab[si][sj - 1] != -3 && lab[si][sj - 1] > step))) {
+        if ((sj - 1 >= 0) && (lab[si][sj - 1] == 0 || (lab[si][sj - 1] != wall && lab[si][sj - 1] > step))) {
             GetFullPaths(lab, si, sj - 1, n, step + 1);
         }
-        if ((si - 1 >= 0) && (lab[si - 1][sj] == 0 || (lab[si - 1][sj] != -3 && lab[si - 1][sj] > step))) {
+        if ((si - 1 >= 0) && (lab[si - 1][sj] == 0 || (lab[si - 1][sj] != wall && lab[si - 1][sj] > step))) {
             GetFullPaths(lab, si - 1, sj, n, step + 1);
         }
         /* (int i = 0; i < 6; i++) {
@@ -94,25 +95,25 @@ public class Labyrinth {
                 aa[m] = lab[ei][ej + 1];
                 m++;
             } else {
-                aa[m] = 1000;
+                aa[m] = max;
             }
             if (ei < n) {
                 aa[m] = lab[ei + 1][ej];
                 m++;
             } else {
-                aa[m] = 1000;
+                aa[m] = max;
             }
             if (ei > 0) {
                 aa[m] = lab[ei - 1][ej];
                 m++;
             } else {
-                aa[m] = 1000;
-            }
+                aa[m] = max;
+            }x
             if (ej > 0) {
                 aa[m] = lab[ei][ej - 1];
                 m++;
             } else {
-                aa[m] = 1000;
+                aa[m] = max;
             }
             int min = aa[0];
             int minIndex = 0;
@@ -120,7 +121,6 @@ public class Labyrinth {
                 if (aa[k] > aa[k + 1]) {
                     min = aa[k + 1];
                     minIndex = k + 1;
-                    System.out.println(minIndex);
                 }
             }
             switch (minIndex) {
