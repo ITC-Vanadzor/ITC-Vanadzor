@@ -7,7 +7,7 @@ public class PrintLabyrinth{
 		obj.setRandomWalls();
 		obj.getStartAndEnd();
 		obj.algorithmFloyd();
-		obj.printLabirintMatrix();
+		//obj.printLabirintMatrix();
 		obj.printLabirint();
 
         // AREG: pls change the public interface to something like this
