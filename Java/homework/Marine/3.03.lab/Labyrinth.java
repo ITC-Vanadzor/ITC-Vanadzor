@@ -19,11 +19,17 @@ public class Labyrinth {
     static int index[][] = new int[2][50];
 
     public static void main(String[] args) {
+        InputMatrix();
         InputCoordinates();
         GetFullPaths(lab, si, sj, n, step);
         ShortestPath(lab, ei, ej);
     }
-
+    public static void InputMatrix() {
+        for (int i=0;i<n;i++) {
+            for (int j=0;j<n;j++) {
+                lab[i][j]=0;
+            }
+        }
     public static void InputCoordinates() {
 
         Scanner in = new Scanner(System.in);
