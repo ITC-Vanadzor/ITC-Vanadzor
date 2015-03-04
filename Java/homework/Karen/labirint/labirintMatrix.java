@@ -1,21 +1,35 @@
 import java.lang.Math;
 import java.util.Random;
 
+// AREG: Pls change class names to start with capital letters
+// AREG: better to have a setter function for graph weight matrix like this
+// void setVerticesWeight(int i, int j, int weight) {
+//  weights[i][j] = weight;
+//  weights[j][i] = weight;
+// }
 public class labirintMatrix{
 	/*
 		 public void labirintMatrix(){
 	//TODO
+    // AREG: pls put explicit descriptions in comments and TODOs
 	} 
 	 */
+    // AREG: use "final" for constants
+    // AREG: follow up on :fields initialization" email
 	Random rand = new Random();
 	int n 			= 4;
+    // AREG: rename to something better
 	int size 		= n*n;
+    // AREG: rename to something better
 	int max 		= n*n*n*n;
+    // AREG: rename to something better
 	int[][] d 	= new int[size][size];
 	int end;
 	int start;
 
+    // AREG: use maxInt for "wall" edges cnd reflect it in the comments
 	//Set 10 for empty values,and 0 in diagonal
+    // AREG: change the name to somethign like "initializeGraphMatrix"
 	public void getStartMatrix(){
 		for(int i = 0; i < size; i++ ){
 			for(int j = 0; j < size; j++ ){
@@ -65,6 +79,7 @@ public class labirintMatrix{
 	}
 
 	//Get start and end random
+    // AREG: better to hprovide start and end frpom the outside 
 	void getStartAndEnd(){
 		do{
 			start	= rand.nextInt(size-1);
@@ -92,6 +107,7 @@ public class labirintMatrix{
 	}
 
 	//print Labirint
+    // AREG: separate labyrinth creation and printing
 	public void printLabirint(){
 		int[][] labirint = new int[n][n];
 		int i = -1;
