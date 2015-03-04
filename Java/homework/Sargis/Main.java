@@ -1,26 +1,58 @@
 import java.util.Stack;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main
 {
-    public static int findpath(int[][] maze, Coord pos_start, Coord pos_fin){
-        Stack <Coord> pos = new Stack<>();
-        
-
-    }
     public static void main(String[] args){
-        int[][] maze= { {0,0,1,0,0},
-                        {0,1,1,1,1},
-                        {0,1,0,0,0},
-                        {0,1,0,1,0},
-                        {0,0,0,1,0}};
-        for(int i=0;i<maze.length;i++){
-            for(int j=0; j<maze.length; j++){
-                System.out.print(maze[i][j]+"|");
-            }
-            System.out.println();
+        Maze mymaze = new Maze();
+        mymaze.printMaze();
+        Coord start = setStartCoord(mymaze.getMaze());
+        Coord end  = setEndCoord(mymaze.getMaze());
+        System.out.println("aaaaa  "+start.getX());
+        mymaze.setElement(start.getX(),start.getY(),0);
+        Stack <Coord> path = new Stack<>();
+        if(mymaze.findShortPath(start, end,0) != 0){
+           int dist = mymaze.findShortPath(start,end,0);
+           System.out.println(dist);
+           mymaze.printMazeAfter();
         }
-       System.out.println("path start is matrix's (0,0) posision");
-       System.out.println("path end is matrix's (4,4) posision");
+        else {
+            System.out.println("there is no path between the points you entered");
+            System.exit(0);
+        }
+        mymaze.printMazeAfter();
+        //mymaze.printPath(path);
     }
-    findpath(maze, maze[0][0],maze[4][4]);
+
+    public static Coord setStartCoord(int[][] somemaze){
+        System.out.println("Please insert path's start co-ordinates");
+        System.out.println("Row number: ");
+        Scanner scan= new Scanner(System.in);
+        int startRow= scan.nextInt();
+        System.out.println("Column number: ");
+        int startCol= scan.nextInt();               //TODO throw exception if input is out of bounds
+        if (somemaze[startRow][startCol]==-1){
+            System.out.println("["+startRow+"]["+startCol+"] is wall !!! The next time be attentive");
+            System.exit(0);
+        }
+        Coord start = new Coord(startRow,startCol);
+        return start;
+    }
+    public static Coord setEndCoord(int[][] somemaze){
+        System.out.println("Please insert path's end  co-ordinates");
+        System.out.println("Row number: ");
+        Scanner scan= new Scanner(System.in);
+        int endRow= scan.nextInt();
+        System.out.println("Column number: ");
+        int endCol= scan.nextInt();
+        if (somemaze[endRow][endCol]==-1){
+            System.out.println("["+endRow+"]["+endCol+"] is wall !!! The next time be attentive");
+            System.exit(0);
+        }
+        Coord end = new Coord(endRow,endCol);
+        return end;
+    }
 }
+
+
