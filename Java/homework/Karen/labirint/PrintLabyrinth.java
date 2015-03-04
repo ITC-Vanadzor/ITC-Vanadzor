@@ -1,7 +1,7 @@
-public class printLabirint{
+public class PrintLabyrinth{
 
 	public static void main(String[] args){
-		labirintMatrix obj = new labirintMatrix();
+		Labyrinth obj = new Labyrinth();
 		obj.getStartMatrix();
 		obj.setMatrixWeight();
 		obj.setRandomWalls();

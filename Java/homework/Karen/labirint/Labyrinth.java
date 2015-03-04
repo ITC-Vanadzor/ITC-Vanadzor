@@ -7,7 +7,7 @@ import java.util.Random;
 //  weights[i][j] = weight;
 //  weights[j][i] = weight;
 // }
-public class labirintMatrix{
+public class Labyrinth{
 	/*
 		 public void labirintMatrix(){
 	//TODO
