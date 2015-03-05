@@ -9,10 +9,11 @@ public class Main
         mymaze.printMaze();
         Coord start = setStartCoord(mymaze.getMaze());
         Coord end  = setEndCoord(mymaze.getMaze());
-        System.out.println("aaaaa  "+start.getX());
+        System.out.println("go from ("+start.getX()+","+start.getY()+")  to....end");
+        System.out.println("("+end.getX()+","+end.getY()+")");
         mymaze.setElement(start.getX(),start.getY(),0);
         Stack <Coord> path = new Stack<>();
-        if(mymaze.findShortPath(start, end,0) != 0){
+        if(mymaze.findShortPath(start, end,0) != -1 ){
            int dist = mymaze.findShortPath(start,end,0);
            System.out.println(dist);
            mymaze.printMazeAfter();
@@ -21,7 +22,7 @@ public class Main
             System.out.println("there is no path between the points you entered");
             System.exit(0);
         }
-        mymaze.printMazeAfter();
+       // mymaze.printMazeAfter();
         //mymaze.printPath(path);
     }
 

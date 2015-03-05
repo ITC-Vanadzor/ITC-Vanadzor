@@ -41,13 +41,18 @@ public class Maze {
             System.out.print("   |");
             for(int j=0; j<maze[0].length; j++){
                 if (maze[i][j] !=-1 && (maze[i][j] ==-2)){
-                    System.out.print(" |");
+                    System.out.print("  |");
                 }
                 else if (maze[i][j] ==-1 ){
-                    System.out.print("H"+"|");
+                    System.out.print("H "+"|");
                 }
                 else {
-                    System.out.print(maze[i][j]+"|");
+                    if (maze[i][j]/10 == 0){
+                        System.out.print(maze[i][j]+" |");
+                    }
+                    else{
+                        System.out.print(maze[i][j]+"|");
+                    }
                 }
             }
             System.out.println();
@@ -73,39 +78,62 @@ public class Maze {
     public int findShortPath(Coord start, Coord end,int level){
         int i = start.getX();
         int j = start.getY();
-        if(maze[end.getX()][end.getY()] > 0 ){
+
+        level +=1;
+        if ((j+1)<10 && maze[i][j+1] == -2){
+            maze[i][j+1]=level;
+            Coord newStart = new Coord(i, j+1, level);
+            findShortPath(newStart,end, level);
+        }else
+        if (i+1<10 && maze[i+1][j] == -2){
+            maze[i+1][j]=level;
+            Coord newStart = new Coord(i+1, j, level);
+            findShortPath(newStart,end, level);
+        }else 
+        if ((j-1)>-1 && maze[i][j-1] == -2){
+            maze[i][j-1]=level;
+            Coord newStart = new Coord(i, j-1, level);
+            findShortPath(newStart,end, level);
+        }else 
+        if((i-1) > -1 && maze[i-1][j] == -2){
+            maze[i-1][j]=level;
+            Coord newStart = new Coord(i-1, j, level);
+            findShortPath(newStart,end, level);
+        }
+        if(i==end.getX() && j == end.getY()){
             return maze[end.getX()][end.getY()];
         }
-       // else if(end.getLevel() == -2 && (!hasFreeNeighbour(start))){
+        return level;
+    }
+       /*// else if(end.getLevel() == -2 && (!hasFreeNeighbour(start))){
          //  return 0;
        // }
         else{
+            level +=1;
+            Coord newStart;
             if (i+1<10 && maze[i+1][j] == -2){
-                level +=1;
                 maze[i+1][j]=level;
-                Coord newStart = new Coord(i+1, j, level);
-                return findShortPath(newStart,end, level);
+                newStart = new Coord(i+1, j, level);
+                findShortPath(newStart,end, level);
             }else if((i-1) > -1 && maze[i-1][j] == -2){
-                level +=1;
                 maze[i-1][j]=level;
-                Coord newStart = new Coord(i-1, j, level);
-                return findShortPath(newStart,end, level);
+                newStart = new Coord(i-1, j, level);
+                findShortPath(newStart,end, level);
             }else if ((j+1)<10 && maze[i][j+1] == -2){
-                level +=1;
                 maze[i][j+1]=level;
-                Coord newStart = new Coord(i, j+1, level);
-                return findShortPath(newStart,end, level);
+                newStart = new Coord(i, j+1, level);
+                findShortPath(newStart,end, level);
             }else if ((j-1)>-1 && maze[i][j-1] == -2){
-                level +=1;
                 maze[i][j-1]=level;
-                Coord newStart = new Coord(i, j-1, level);
-                return findShortPath(newStart,end, level);
+                newStart = new Coord(i, j-1, level);
+                findShortPath(newStart,end, level);
             }
-            else {
-                System.out.println("unpredicted error, should be handled ");
-                return 0;
-            }
+            //else {
+              //  System.out.println("unpredicted error, should be handled ");
+               // return 0;
+           // }
+        return findShortPath(newStart,end, level);    
         }         
-    }
+    }*/
 }
 
