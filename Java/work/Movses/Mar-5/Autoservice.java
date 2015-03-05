@@ -23,9 +23,9 @@ public class Autoservice {
     public static void showMaxRepModel() {
         System.out.println("ok");
     }
-    public static void showMaxRepDefects() {
+ /*   public static void showMaxRepDefects() {
         System.out.println("ok");    
-    }
+    }*/
 }
 
 
