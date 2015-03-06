@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Car car1 = new Car("525", "BMW","injector");
@@ -20,6 +20,23 @@ public class Main {
         myservice.repair(car8);
         System.out.println(myservice.GetMaxModel());
         System.out.println(myservice.GetMaxDefect());
+        System.out.print(" If you need: \n Most common defects, insert 1 \n Most common repaired models, insert 2 \n To reset, insert 3 \n To quit, insert 4 \n" );
+        while(true){
+        Scanner in = new Scanner(System.in);
+        int num = in.nextInt();
+        switch(num){
+            case 1: System.out.println(myservice.GetMaxDefect());
+                    break;
 
+            case 2: System.out.println(myservice.GetMaxModel());
+                    break;
+            case 3: myservice.resetall();
+                    break;
+            case 4: System.out.println("Exit");
+                    System.exit(0);
+            default: System.out.println("insert 1 or 2 or 3 or 4");
+                     break;
+        }
+     }
     }
 }

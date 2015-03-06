@@ -14,6 +14,13 @@ public class Autoservice {
         repairedModels = new ArrayList<String>();
         repairedDefects = new ArrayList<String>();
     }
+    public void resetall(){
+        maxRepairedModel = "";
+        maxRepaireddefect = "";
+        repairedModels = new ArrayList<String>();
+        repairedDefects = new ArrayList<String>();
+
+    }
     public void repair(Car car){
         repairedModels.add(car.getModel());
         repairedDefects.add(car.getDefects());
