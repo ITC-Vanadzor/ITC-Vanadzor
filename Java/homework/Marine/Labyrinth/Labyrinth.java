@@ -26,7 +26,7 @@ public class Labyrinth {
         inputStartEndCoordinates(start);
         inputStartEndCoordinates(end);
         getFullPaths(si, sj, n, step);
-        shortestPath(lab, ei, ej);
+        shortestPath(ei,ej);
         printLab();
     }
 
@@ -91,7 +91,7 @@ public class Labyrinth {
         }
     }
 
-    static void shortestPath(int[][] lab, int ei, int ej) {
+    static void shortestPath(int ei, int ej) {
         if (ei != si || ej != sj) {
             int m = 0;
             if (ej < n - 1 && lab[ei][ej + 1] > 0) {
@@ -130,33 +130,33 @@ public class Labyrinth {
                     index[0][u] = ei;
                     index[1][u] = ej + 1;
                     u++;
-                    shortestPath(lab, ei, ej + 1);
+                    shortestPath(ei, ej + 1);
                     break;
                 case 1:
                     index[0][u] = ei + 1;
                     index[1][u] = ej;
                     u++;
-                    shortestPath(lab, ei + 1, ej);
+                    shortestPath(ei + 1, ej);
                     break;
                 case 2:
                     index[0][u] = ei - 1;
                     index[1][u] = ej;
                     u++;
-                    shortestPath(lab, ei - 1, ej);
+                    shortestPath(ei - 1, ej);
                     break;
                 case 3:
                     index[0][u] = ei;
                     index[1][u] = ej - 1;
                     u++;
-                    shortestPath(lab, ei, ej - 1);
+                    shortestPath(ei, ej - 1);
                     break;
             }
         } else {
-            matrixConversions(index, u);
+            matrixConversions();
         }
     }
 
-    static void matrixConversions(int[][] index, int u) {
+    static void matrixConversions() {
         for (int j = 0; j < u; j++) {
             int j1 = index[0][j];
             int j2 = index[1][j];
