@@ -27,6 +27,8 @@ class Labyrinth {
 		printLabirint();
 	}
 
+    // AREG: use verbs for method names
+    // AREG: think about splitting data and algorithm into 2 different classes
 	public static void arrayElements () {
 		array[0][0] = way;
 		array[0][1] = wall;
@@ -63,7 +65,19 @@ class Labyrinth {
 		}
 	}
 
-	public static void applyLeeAlgorithm () {
+	public static void applyLeeAlgorithm (int x, int y, int weight) {
+        if (canComputePathForCell(x, y)) {
+            if (array[x][y] > weight) {
+                array[x][y] = weight;
+            }
+            applyLeeAlgorithm(x - 1, y, weight + 1);
+            applyLeeAlgorithm(x + 1, y, weight + 1);
+            applyLeeAlgorithm(x, y - 1, weight + 1);
+            applyLeeAlgorithm(x, y + 1, weight + 1);
+        }
+    }
+
+
 		while (true) {
 			for (int i = 0; i < r; i++) {
 				for (int j = 0; j < c; j++) {
@@ -106,6 +120,7 @@ class Labyrinth {
 		}
 	}
 
+    // AREG: this method is not necesary, print labyrinth as you want in the "print" method
 	public static void labirintNormalization () {//transform labirint to orogonal form and indicates the shortest path
 		int i = ei;
 		int j = ej;
