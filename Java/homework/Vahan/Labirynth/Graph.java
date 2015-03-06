@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Graph {
+    // AREG: start variables with lower case
     public int[] Vertexes;
     public int[][] distance;
     public Graph(int numVertex) {

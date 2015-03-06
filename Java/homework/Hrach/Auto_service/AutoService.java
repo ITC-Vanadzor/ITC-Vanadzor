@@ -38,6 +38,7 @@ class AutoService{
 		Scanner in = new Scanner(System.in);
 		System.out.println("Insert car model");
 		String model = in.next();
+        // AREG: use equals() to compare objects and == to compare references
 		/*for (int i=0; i<models.length; ++i) {
 			if (model==models[i]) {
 				n=1;
