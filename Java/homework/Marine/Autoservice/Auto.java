@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Example {
+public class Auto {
 
     public static void main(String[] args) {
         input();
