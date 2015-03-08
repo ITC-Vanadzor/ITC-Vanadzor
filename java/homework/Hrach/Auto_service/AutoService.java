@@ -29,8 +29,8 @@ class AutoService{
 	}
 
 	public static void repair(){
-		int n=0;
-		int m=0;
+		boolean n = true;
+		boolean m = true;
 		if(k==100) {
 			System.out.println("history refilled");
 			return;
@@ -39,28 +39,28 @@ class AutoService{
 		System.out.println("Insert car model");
 		String model = in.next();
         // AREG: use equals() to compare objects and == to compare references
-		/*for (int i=0; i<models.length; ++i) {
-			if (model==models[i]) {
-				n=1;
+		for (int i=0; i<models.length; ++i) {
+			if (model.equals(models[i])) {
+				n=false;
 				break;
 			}
 		}
-		if (n==0) {
+		if (n) {
 			System.out.println("Incorrect model");
 			repair();
-		}*/
+		}
 		System.out.println("Insert car defect");
 		String  defect = in.next();
-		/*for (int i=0; i<defects.length; ++i) {
-			if (defect==defects[i]) {
-				m=1;
+		for (int i=0; i<defects.length; ++i) {
+			if (defect.equals(defects[i])) {
+				m=false;
 				break;
 			}
 		}
-		if (m==0) {
+		if (m) {
 			System.out.println("Incorrect defect");
 			repair();
-		}*/
+		}
 		Car carsdata = new Car(model,defect);
 		history[k][0]=carsdata.getModel();
 		history[k][1]=carsdata.getDefect();
@@ -77,10 +77,10 @@ class AutoService{
 		for (int x=0; x<models.length; ++x) {
 			c=0;
 			for (int i=0; i<r; ++i) {
-				if (history[i][0]==models[x]) {
-					c++;
-				} else if (history[i][0]==null) {
+				if (history[i][0]==null) {
 					break;
+				} else if (history[i][0].equals(models[x])) {
+					c++;
 				}
 			}
 			if (c>max) {
@@ -101,10 +101,10 @@ class AutoService{
 		for (int x=0; x<defects.length; ++x) {
 			c=0;
 			for (int i=0; i<r; ++i) {
-				if (history[i][1]==defects[x]) {
-					c++;
-				} else if (history[i][1]==null) {
+				if (history[i][1]==null) {
 					break;
+				} else if (history[i][1].equals(defects[x])) {
+					c++;
 				}
 			}
 			if (c>max) {
