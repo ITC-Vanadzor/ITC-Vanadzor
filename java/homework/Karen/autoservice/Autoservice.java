@@ -21,7 +21,7 @@ class Autoservice {
 		int exit = 1;
 		Car[] cars = new Car [1000]; 
 		while(exit != 0 ){
-			while(action != 1 && action != 0 && action != 2 && action != 3){
+			while(action != 1 && action != 4 && action != 2 && action != 3){
 				System.out.println("set '4', if you want view statisticis\nset '1', if you want add repairing car,\nset '2', if you want print most frequent defect,\nset '3', if you want print most frequent model car.");
 				action = in.nextInt();
 			}
