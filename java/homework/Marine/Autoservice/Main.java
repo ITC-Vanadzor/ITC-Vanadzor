@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Auto {
+public class Main {
 
     public static void main(String[] args) {
         input();
@@ -23,7 +23,7 @@ public class Auto {
                 System.out.println("Insert car defect");
                 String defect = in.next();
                 Car car = new Car(model, defect);
-                Autoservice autoservice = new Autoservice();
+                AutoService autoservice = new AutoService();
                 autoservice.addRepairHistory(car);
                 input();
                 break;

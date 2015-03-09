@@ -1,9 +1,6 @@
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-public class Autoservice {
+public class AutoService {
     ArrayList<Car> history = new ArrayList<Car>();
 
     public void addRepairHistory(Car data) {
@@ -13,7 +10,7 @@ public class Autoservice {
     public int getModelCount(String mod) {
         int index = 0;
         for (Car carhistory : history) {
-            if (mod == carhistory.model) {
+            if (mod.equals(carhistory.model)) {
                 index++;
             }
         }
@@ -23,7 +20,7 @@ public class Autoservice {
     public int getDefectCount(String def) {
         int index = 0;
         for (Car carhistory : history) {
-            if (def == carhistory.defect) {
+            if (def.equals(carhistory.defect)) {
                 index++;
             }
         }
@@ -31,7 +28,7 @@ public class Autoservice {
     }
 
     public String getMaxRepairDefect() {
-        Map<String, Integer> defectlist = new HashMap<String, Integer>;
+        Map<String, Integer> defectlist = new HashMap<String, Integer>();
         int max = 0;
         String maxdef = "";
         for (Car carhistory : history) {
@@ -47,7 +44,7 @@ public class Autoservice {
         return maxdef;
     }
     public String getMaxRepairModel() {
-        Map<String, Integer> modellist = new HashMap<String, Integer>;
+        Map<String, Integer> modellist = new HashMap<String, Integer>();
         int max = 0;
         String maxmodel = "";
         for (Car carhistory : history) {
