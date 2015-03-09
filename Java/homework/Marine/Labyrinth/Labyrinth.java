@@ -93,6 +93,7 @@ public class Labyrinth {
 
     static void shortestPath(int ei, int ej) {
         if (ei != si || ej != sj) {
+            // AREG: think about removing "m" from the indices
             int m = 0;
             if (ej < n - 1 && lab[ei][ej + 1] > 0) {
                 aa[m] = lab[ei][ej + 1];
@@ -119,6 +120,7 @@ public class Labyrinth {
             }
             int min = aa[0];
             int minIndex = 0;
+            // AREG: change indexes in the iteration to 1->3
             for (int i = 0; i <= 2; ++i) {
                 if (min > aa[i + 1]) {
                     min = aa[i + 1];
