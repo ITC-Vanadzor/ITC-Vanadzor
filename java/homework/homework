@@ -1,1 +1,5 @@
 Homework #1. Implement an application that will find the shortest path in the given 2D labyrinth.
+
+Homework #2. IMplement a comand line application that models an autoiservice.
+- the autoservice should repair cars with the following data: model, brand, defect
+- it should be possible to repairs statistics information (max repaired defect, max repaired model name etc.)
