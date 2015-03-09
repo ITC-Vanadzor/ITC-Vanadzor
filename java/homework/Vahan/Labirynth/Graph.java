@@ -1,6 +1,13 @@
 import java.util.*;
 
+<<<<<<< HEAD:Java/homework/Vahan/Labirynth/Graph.java
 /*    public int[][] distance;
+=======
+public class Graph {
+    // AREG: start variables with lower case
+    public int[] Vertexes;
+    public int[][] distance;
+>>>>>>> ec2aec8fa75298c8d8b2aa0aaf3299773c64093a:java/homework/Vahan/Labirynth/Graph.java
     public Graph(int numVertex) {
         distance = new int[numVertex][numVertex];
     }

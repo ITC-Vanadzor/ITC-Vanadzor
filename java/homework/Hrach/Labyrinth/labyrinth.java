@@ -1,10 +1,3 @@
-/*
-20 - wall;
-19 - way;
-18 - end point;
-0 - start point;
--1 - shortest path;
-*/
 class Labyrinth {
 	final static int c = 4;//columns
 	final static int r = 5;//rows
@@ -22,11 +15,13 @@ class Labyrinth {
 		arrayElements();
 		printLabirint();
 		System.out.println();
-		applyLeeAlgorithm();
+		applyLeeAlgorithm(si, sj, k);
 		labirintNormalization();
 		printLabirint();
 	}
 
+    // AREG: use verbs for method names
+    // AREG: think about splitting data and algorithm into 2 different classes
 	public static void arrayElements () {
 		array[0][0] = way;
 		array[0][1] = wall;
@@ -35,7 +30,7 @@ class Labyrinth {
 		array[1][0] = way;
 		array[1][1] = start;
 		si = 1;
-		sj = 2;
+		sj = 1;
 		array[1][2] = way;
 		array[1][3] = wall;
 		array[2][0] = way;
@@ -57,58 +52,52 @@ class Labyrinth {
 	public static void printLabirint () {
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				System.out.print(array[i][j] + " ");
+				if (array[i][j]==start) {
+					System.out.print("s ");
+				} else if (array[i][j]==end) {
+					System.out.print("e ");
+				} else if (array[i][j]==wall) {
+					System.out.print("# ");
+				} else if (array[i][j]==shortestWay) {
+					System.out.print("* ");
+				} else {
+					System.out.print("+ ");
+				}
 			}
 			System.out.println();
 		}
 	}
 
-	public static void applyLeeAlgorithm () {
-		while (true) {
-			for (int i = 0; i < r; i++) {
-				for (int j = 0; j < c; j++) {
-					if (array[i][j]==k){
-						if (i-1 > -1) {
-							if (array[i-1][j] == end) {
-								return;
-							} else if (array[i-1][j] == way) {
-								array[i-1][j] = k+1;
-							}
-						}
+	public static void applyLeeAlgorithm (int x, int y, int weight) {
+        if (x > -1 && x < r && y > -1 && y < c && array[x][y] != end && array[x][y] != wall ) {
+            if (array[x][y] >= weight) {
+                array[x][y] = weight;
+            applyLeeAlgorithm(x - 1, y, weight + 1);
+            applyLeeAlgorithm(x + 1, y, weight + 1);
+            applyLeeAlgorithm(x, y - 1, weight + 1);
+            applyLeeAlgorithm(x, y + 1, weight + 1);
+            }
+        }
+    }
 
-						if (j-1 > -1) {
-							if (array[i][j-1] == end) {
-								return;
-							} else if (array[i][j-1] == way) {
-								array[i][j-1] = k+1;
-							}
-						}
 
-						if (i+1 < r) {
-							if (array[i+1][j] == end) {
-								return;
-							} else if (array[i+1][j] == way) {
-								array[i+1][j] = k+1;
-							}
-						}
-
-						if (j+1 < c) {
-							if (array[i][j+1] == end) {
-								return;
-							} else if (array[i][j+1] == way) {
-								array[i][j+1] = k+1;
-							}
-						}
-					}
-				}
-			}
-			k++;
-		}
-	}
-
-	public static void labirintNormalization () {//transform labirint to orogonal form and indicates the shortest path
+    // AREG: this method is not necesary, print labyrinth as you want in the "print" method
+	public static void labirintNormalization () {//indicates the shortest path
 		int i = ei;
 		int j = ej;
+		k = end;
+		if (i-1 > -1 && array[i-1][j] < k) {
+			k = array[i-1][j];
+		}
+		if (j-1 > -1 && array[i][j-1] < k) {
+			k = array[i][j-1];
+		}
+        if (i+1 < r && array[i+1][j] < k) {
+            k = array[i+1][j];
+        }
+        if (j+1 < c && array[i][j+1] < k) {
+            k = array[i][j+1];
+        }
 		while (k > start) {
 			if (i-1 > -1 && array[i-1][j] == k) {
 				array[i-1][j] = shortestWay;
@@ -124,14 +113,6 @@ class Labyrinth {
 				j++;
 			}
 		k--;
-		}
-
-		for (i = 0; i < r; i++) {
-			for (j = 0; j < c; j++) {
-				if(array[i][j] > start && array[i][j] < end) {
-					array[i][j] = way;
-				}
-			}
 		}
 	}
 }
