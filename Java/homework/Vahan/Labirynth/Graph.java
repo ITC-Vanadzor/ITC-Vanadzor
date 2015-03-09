@@ -1,18 +1,11 @@
 import java.util.*;
 
-public class Graph {
-    public int[] Vertexes;
-    public int[][] distance;
+/*    public int[][] distance;
     public Graph(int numVertex) {
-        Vertexes = new int[numVertex];
         distance = new int[numVertex][numVertex];
     }
     public void initializeGraph() {
-        Vertexes[0] = 0;
         Random random = new Random();
-        for ( int i = 1; i < Vertexes.length; ++i ) {
-            Vertexes[i] = Integer.MAX_VALUE;
-        }
 
         for( int i = 0 ; i < distance.length ; ++i ) { 
             for ( int j = 0 ; j < distance[i].length ; ++j ) {
@@ -26,12 +19,38 @@ public class Graph {
         }   
     }
 
+    public void addVertex() {
+        
+    }
+
+    public void addEdge() {
+        
+    }    
+
     public void printGraph() {
         for( int[] a : distance ) { 
             System.out.println( Arrays.toString( a ));
         }
     }
+*/
+public class Graph {
+    private final List<Vertex> vertexes;
+    private final List<Edge> edges;
 
+    public Graph(){
+        
+    }
+    
+    public List<Vertex> getVertexes() {
+        return this.vertexes;
+    }
+
+    public List<Edge> getEdges() {
+        return this.edges;
+    }
+    public void addEdge(Vertex v1, Vertex v2, int weight) {
+       //TODO 
+    }
 }
 
 
