@@ -1,175 +1,148 @@
+package mainlab;
+
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Labyrinth {
 
-    static int si;
-    static int sj;
-    static int ei;
-    static int ej;
-    static int n;
-    final static int wall = -3;
-    final static int start = -1;
-    final static int end = -2;
-    final static int max = 1000;
-    static int step = 1;
-    static int u = 0;//index array length
-    static int aa[] = new int[4];
-    static int lab[][] = new int[1000][1000];
-    static int index[][] = new int[2][50];
+    int startx;
+    int starty;
+    int endx;
+    int endy;
+    int labsize;
+    int wall = -3;
+    int start = -1;
+    final int end = -2;
+    final int max = Integer.MAX_VALUE;
+    int step = 1;
+    public int aa[] = new int[4];
+    public int lab[][] = new int[1000][1000];
+    ArrayList<PathIndex> pathindex = new ArrayList<>();
 
-    public static void main(String[] args) {
-        insertLabSize();
-        setStartMatrix();
-        setWallCoordinates();
-        printLab();
-        inputStartEndCoordinates(start);
-        inputStartEndCoordinates(end);
-        getFullPaths(si, sj, n, step);
-        shortestPath(ei,ej);
-        printLab();
-    }
-
-    static void insertLabSize() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Insert labyrinth size");
-        n = in.nextInt();
-    }
-
-    static void setStartMatrix() {
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                lab[i][j] = 0;
-            }
-        }
-    }
-
-    static void setWallCoordinates() {
+    public Labyrinth(int n) {
+        this.labsize = n;
         Random rand = new Random();
-        for (int i = 0; i < 2 * n; ++i) {
+        for (int i = 0; i < 2 * labsize; ++i) {
             int a = rand.nextInt(n);
             int b = rand.nextInt(n);
             lab[a][b] = wall;
         }
     }
 
-    static void inputStartEndCoordinates(int se) {
+    public void computeshortestpath() {
+        printLab();
+        inputStartEndCoordinates(start);
+        inputStartEndCoordinates(end);
+        getFullPaths(startx, starty, labsize, step);
+        shortestPath(endx, endy);
+        printLab();
+    }
+
+    void inputStartEndCoordinates(int se) {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Insert  coordinates x and y");
         int x = in.nextInt();
         int y = in.nextInt();
-        while (x < 0 || x > n - 1 || y < 0 || y > n - 1 || lab[x][y] != 0) {
-            System.out.println("Insert new  coordinates x and y(0<x<6,0<y<6)");
+        while (x < 0 || x > labsize - 1 || y < 0 || y > labsize - 1 || lab[x][y] != 0) {
+            System.out.println("Insert new  coordinates x and y(0<x<" + labsize + ",0<y<" + labsize + ")");
             x = in.nextInt();
             y = in.nextInt();
         }
         if (se == start) {
-            si = x;
-            sj = y;
+            startx = x;
+            starty = y;
             lab[x][y] = start;
         } else {
-            ei = x;
-            ej = y;
+            endx = x;
+            endy = y;
             lab[x][y] = end;
         }
     }
 
-    static void getFullPaths(int si, int sj, int n, int step) {
-        lab[si][sj] = step;
-        if ((sj + 1 < n) && (lab[si][sj + 1] == 0 || (lab[si][sj + 1] != wall && lab[si][sj + 1] > step))) {
-            getFullPaths(si, sj + 1, n, step + 1);
+    void getFullPaths(int startx, int starty, int labsize, int step) {
+        lab[startx][starty] = step;
+        if ((starty + 1 < labsize) && (lab[startx][starty + 1] == 0 || (lab[startx][starty + 1] != wall && lab[startx][starty + 1] > step))) {
+            getFullPaths(startx, starty + 1, labsize, step + 1);
         }
-        if ((si + 1 < n) && (lab[si + 1][sj] == 0 || (lab[si + 1][sj] != wall && lab[si + 1][sj] > step))) {
-            getFullPaths(si + 1, sj, n, step + 1);
+        if ((startx + 1 < labsize) && (lab[startx + 1][starty] == 0 || (lab[startx + 1][starty] != wall && lab[startx + 1][starty] > step))) {
+            getFullPaths(startx + 1, starty, labsize, step + 1);
         }
-        if ((sj - 1 >= 0) && (lab[si][sj - 1] == 0 || (lab[si][sj - 1] != wall && lab[si][sj - 1] > step))) {
-            getFullPaths(si, sj - 1, n, step + 1);
+        if ((starty - 1 >= 0) && (lab[startx][starty - 1] == 0 || (lab[startx][starty - 1] != wall && lab[startx][starty - 1] > step))) {
+            getFullPaths(startx, starty - 1, labsize, step + 1);
         }
-        if ((si - 1 >= 0) && (lab[si - 1][sj] == 0 || (lab[si - 1][sj] != wall && lab[si - 1][sj] > step))) {
-            getFullPaths(si - 1, sj, n, step + 1);
+        if ((startx - 1 >= 0) && (lab[startx - 1][starty] == 0 || (lab[startx - 1][starty] != wall && lab[startx - 1][starty] > step))) {
+            getFullPaths(startx - 1, starty, labsize, step + 1);
         }
     }
 
-    static void shortestPath(int ei, int ej) {
-        if (ei != si || ej != sj) {
-            // AREG: think about removing "m" from the indices
-            int m = 0;
-            if (ej < n - 1 && lab[ei][ej + 1] > 0) {
-                aa[m] = lab[ei][ej + 1];
+    void shortestPath(int endx, int endy) {
+        if (endx != startx || endy != starty) {
+            if (endy < labsize - 1 && lab[endx][endy + 1] > 0) {
+                aa[0] = lab[endx][endy + 1];
             } else {
-                aa[m] = max;
+                aa[0] = max;
             }
-            ++m;
-            if (ei < n - 1 && lab[ei + 1][ej] > 0) {
-                aa[m] = lab[ei + 1][ej];
+            if (endx < labsize - 1 && lab[endx + 1][endy] > 0) {
+                aa[1] = lab[endx + 1][endy];
             } else {
-                aa[m] = max;
+                aa[1] = max;
             }
-            ++m;
-            if (ei > 0 && lab[ei - 1][ej] > 0) {
-                aa[m] = lab[ei - 1][ej];
+            if (endx > 0 && lab[endx - 1][endy] > 0) {
+                aa[2] = lab[endx - 1][endy];
             } else {
-                aa[m] = max;
+                aa[2] = max;
             }
-            ++m;
-            if (ej > 0 && lab[ei][ej - 1] > 0) {
-                aa[m] = lab[ei][ej - 1];
+            if (endy > 0 && lab[endx][endy - 1] > 0) {
+                aa[3] = lab[endx][endy - 1];
             } else {
-                aa[m] = max;
+                aa[3] = max;
             }
             int min = aa[0];
             int minIndex = 0;
-            // AREG: change indexes in the iteration to 1->3
-            for (int i = 0; i <= 2; ++i) {
-                if (min > aa[i + 1]) {
-                    min = aa[i + 1];
-                    minIndex = i + 1;
+            for (int i = 1; i <= 3; ++i) {
+                if (min > aa[i]) {
+                    min = aa[i];
+                    minIndex = i;
                 }
             }
             switch (minIndex) {
                 case 0:
-                    index[0][u] = ei;
-                    index[1][u] = ej + 1;
-                    u++;
-                    shortestPath(ei, ej + 1);
+                    PathIndex shortestpathindex = new PathIndex(endx, endy + 1);
+                    pathindex.add(shortestpathindex);
+                    shortestPath(endx, endy + 1);
                     break;
                 case 1:
-                    index[0][u] = ei + 1;
-                    index[1][u] = ej;
-                    u++;
-                    shortestPath(ei + 1, ej);
+                    PathIndex shortestpathindex1 = new PathIndex(endx + 1, endy);
+                    pathindex.add(shortestpathindex1);
+                    shortestPath(endx + 1, endy);
                     break;
                 case 2:
-                    index[0][u] = ei - 1;
-                    index[1][u] = ej;
-                    u++;
-                    shortestPath(ei - 1, ej);
+                    PathIndex shortestpathindex2 = new PathIndex(endx - 1, endy);
+                    pathindex.add(shortestpathindex2);
+                    shortestPath(endx - 1, endy);
                     break;
                 case 3:
-                    index[0][u] = ei;
-                    index[1][u] = ej - 1;
-                    u++;
-                    shortestPath(ei, ej - 1);
+                    PathIndex shortestpathindex3 = new PathIndex(endx, endy - 1);
+                    pathindex.add(shortestpathindex3);
+                    shortestPath(endx, endy - 1);
                     break;
             }
         } else {
-            matrixConversions();
+            setShortestPathElements();
         }
     }
 
-    static void matrixConversions() {
-        for (int j = 0; j < u; j++) {
-            int j1 = index[0][j];
-            int j2 = index[1][j];
-            lab[j1][j2] = -4;
-        }
-        lab[si][sj] = start;
+    void setShortestPathElements() {
+        pathindex.stream().forEach((index) -> {
+            lab[index.x][index.y] = -4;
+        });
     }
 
-    static void printLab() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+    void printLab() {
+        for (int i = 0; i < labsize; i++) {
+            for (int j = 0; j < labsize; j++) {
                 if (lab[i][j] == wall) {
                     System.out.print("* ");
                 } else if (lab[i][j] == start) {
