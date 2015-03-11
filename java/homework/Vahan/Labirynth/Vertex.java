@@ -7,10 +7,6 @@ public class Vertex {
         this.value = value;
     }
     
-    public Vertex(Vertex vertex) {
-        this.id = vertex.id;
-        this.value = vertex.value;
-    }
 
     public String getId() {
         return this.id;
