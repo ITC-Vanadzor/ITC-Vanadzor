@@ -1,0 +1,52 @@
+#main {
+    width:60%;
+    margin: 5% auto;
+    margin-left:10%;
+    border:1px solid #bfbfbf;
+}
+#places {
+    width: 30%;
+    border:1px solid #bfbfbf;
+    height: 40px;
+    font-size: 16px;
+    border-radius:3px;
+}
+select {
+    padding: 0 0 0 5%;
+}
+#products {
+    width: 43%;
+    border:1px solid #bfbfbf;
+    background:rgb(221, 221, 221); 
+    height: 40px;
+    font-size: 16px;
+    border-radius:3px;
+}
+select {
+    padding: 0 0 0 3%;
+}
+#count {
+    width: 15%;
+    border:1px solid #bfbfbf;
+    height: 40px;
+    font-size: 16px;
+    border-radius:3px;
+}
+#add{
+    width: 10%;
+    border:1px solid #bfbfbf;
+    height: 40px;
+    font-size: 16px;
+    border-radius:3px;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #black;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #black;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #black;
+    opacity:  1;
+}
