@@ -1,0 +1,59 @@
+#distributorMainField {
+    width: 95%;
+    margin: auto;
+}
+
+#distributors {
+    width: 84%;
+    margin-top:28px;
+    margin: auto;
+
+}
+
+#productList1 {
+    width:44%;
+    margin-right:50px;
+    margin-top:28px;
+    float:left;
+}
+
+#productList2 {
+    width:44%;
+    margin-right:50px;
+    margin-top:28px;
+    float:left;
+}
+
+.clearfix:after {
+    content:"";
+    display:table;
+    clear:both;
+}
+table.table {
+    font-size:12px;
+    color:#333333;
+    width:100%;
+    border-width: 1px;
+    border-color: #a9a9a9;
+    border-collapse: collapse;
+}
+table.table th {
+    font-size:12px;
+    background-color:#b8b8b8;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9a9a9;
+    text-align:left;
+}
+table.table tr {
+    background-color:#ffffff;
+}
+table.table td {
+    font-size:12px;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9a9a9;
+}
+

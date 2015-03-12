@@ -5,7 +5,13 @@ public class BackEndTests {
 
 	@Test
 	public void testLoginResponse() {
-		HttpResponse response = new HttpResponse();
-		assertEquals(response.login("student", "student2014"), "sessionId");
+        HttpRequest request = new HttpRequest();
+        request.setBody(..)
+            request.setheader(H, V)
+
+
+		HttpResponse response = request.send(url)    
+
+		assertEquals(response.login("student", "student2014"), "sessionIdid");
 	}
-}			
+}
