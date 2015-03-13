@@ -1,5 +1,5 @@
 import java.sql.*;
-import java.util.Random;
+import java.util.*;
 
 public class Lunch {
 
@@ -33,11 +33,15 @@ public class Lunch {
 			while (rs.next()) {
 				System.out.println(rs.getString("id"));
 				System.out.println(rs.getString("place_name"));
+               
 			}
+            return rs;
 		} catch (SQLException ex) {
-			System.out.println("Select fail");
-		}
-		return rs;
+			System.out.println(ex);
+            return null;
+		
+        }
+//		return rs;
 	}
 	public String login(String username, String password) {
 		try {
@@ -56,7 +60,7 @@ public class Lunch {
 			return "-1";
 		}	
 	}
-	public ResultSet getOrderList(int session_id) {
+/*	public ResultSet getOrderList(int session_id) {
 		try {
 			st=connection.createStatement();
 			rs=st.executeQuery("SELECT * FROM place");
@@ -69,19 +73,21 @@ public class Lunch {
 		}
 		return rs;
 	}*/
-	public String deleteOrder(int session_id, int order_id) {
+	public ResultSet deleteOrder(int session_id, int order_id) {
         try {
             st=connection.createStatement();
-            rs=st.executeQuery("SELECT * FROM place");
+           rs =st.executeQuery("DELETE FROM Orders WHERE Orders.login_id=(SELECT login_id FROM session WHERE session_id="+session_id+") and Orders.id="+order_id+";");
+return rs;
       /*      while (rs.next()) {
                 System.out.println(rs.getString("id"));
                 System.out.println(rs.getString("place_name"));
-            }
+            }*/
         } catch (SQLException ex) {
-            System.out.println("Select fail");
+ex.printStackTrace();
+          //  System.out.println("Delete fail");
         }
-        return rs;
-    }*/
+     //   return "ok";
+    }
 
 }
 
