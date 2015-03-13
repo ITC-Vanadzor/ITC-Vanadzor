@@ -1,8 +1,11 @@
 #main {
-    width:60%;
+    width:70%;
     margin: 5% auto;
     margin-left:10%;
     border:1px solid #bfbfbf;
+}
+form {
+    height: 40px;
 }
 #places {
     width: 30%;
@@ -50,3 +53,16 @@ select {
     color:    #black;
     opacity:  1;
 }
+#part1 {
+    visibility: hidden;
+    width: 30%; 
+    border: #black;
+    float: left;
+}
+#product_list {
+   width: 43%;
+   overflow: hidden;
+   border: #black;
+   visibility: hidden;
+}
+
