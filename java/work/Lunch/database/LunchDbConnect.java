@@ -21,8 +21,8 @@ public class LunchDbConnect {
     }
 
     System.out.println("PostgreSQL JDBC Driver Registered!");
-    Lunch lunch=new Lunch("jdbc:postgresql://127.0.0.1:5432/lunch","postgres", "postgres");
-   // lunch.getPlaces();
+    Lunch lunch=new Lunch("jdbc:postgresql://127.0.0.1:5432/lunch","postgres", "marine1990");
+    lunch.getPlaces();
     lunch.login("Marine","marine");
   }
 }

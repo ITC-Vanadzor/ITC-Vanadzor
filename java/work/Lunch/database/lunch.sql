@@ -119,7 +119,7 @@ CREATE TABLE orders (
     login_id smallint,
     unique_product_id smallint,
     count integer NOT NULL,
-    date date NOT NULL,
+    date timestamp without time zone NOT NULL,
     status status NOT NULL,
     CONSTRAINT orders_count_check CHECK ((count > 0))
 );
@@ -254,12 +254,32 @@ ALTER SEQUENCE productsbyplaces_id_seq OWNED BY productsbyplaces.id;
 
 CREATE TABLE session (
     session_id integer NOT NULL,
-    login_id smallint NOT NULL,
-    CONSTRAINT session_session_id_check CHECK ((session_id > 0))
+    login_id integer NOT NULL
 );
 
 
 ALTER TABLE public.session OWNER TO postgres;
+
+--
+-- Name: session_session_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE session_session_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.session_session_id_seq OWNER TO postgres;
+
+--
+-- Name: session_session_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE session_session_id_seq OWNED BY session.session_id;
+
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -304,10 +324,18 @@ ALTER TABLE ONLY productsbyplaces ALTER COLUMN id SET DEFAULT nextval('productsb
 
 
 --
+-- Name: session_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY session ALTER COLUMN session_id SET DEFAULT nextval('session_session_id_seq'::regclass);
+
+
+--
 -- Data for Name: delivery; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY delivery (id, login_id, place_id, date) FROM stdin;
+1	5	1	2015-03-12
 \.
 
 
@@ -315,7 +343,7 @@ COPY delivery (id, login_id, place_id, date) FROM stdin;
 -- Name: delivery_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('delivery_id_seq', 1, false);
+SELECT pg_catalog.setval('delivery_id_seq', 1, true);
 
 
 --
@@ -323,6 +351,14 @@ SELECT pg_catalog.setval('delivery_id_seq', 1, false);
 --
 
 COPY login (id, username, password) FROM stdin;
+1	Marine	marine
+2	Vahan	vahan
+3	Karen	karen
+4	Hrach	hrach
+5	Movses	movses
+6	Sargis	sargis
+7	Stepan	stepan
+8	Eduard	eduard
 \.
 
 
@@ -330,7 +366,7 @@ COPY login (id, username, password) FROM stdin;
 -- Name: login_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('login_id_seq', 1, false);
+SELECT pg_catalog.setval('login_id_seq', 8, true);
 
 
 --
@@ -353,6 +389,8 @@ SELECT pg_catalog.setval('orders_id_seq', 1, false);
 --
 
 COPY place (id, place_name) FROM stdin;
+1	Tashir
+2	Smile
 \.
 
 
@@ -360,7 +398,7 @@ COPY place (id, place_name) FROM stdin;
 -- Name: place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('place_id_seq', 1, false);
+SELECT pg_catalog.setval('place_id_seq', 2, true);
 
 
 --
@@ -368,6 +406,9 @@ SELECT pg_catalog.setval('place_id_seq', 1, false);
 --
 
 COPY products (id, products_name) FROM stdin;
+1	pizza
+2	qyabab
+3	ttvaser
 \.
 
 
@@ -375,7 +416,7 @@ COPY products (id, products_name) FROM stdin;
 -- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('products_id_seq', 1, false);
+SELECT pg_catalog.setval('products_id_seq', 3, true);
 
 
 --
@@ -383,6 +424,8 @@ SELECT pg_catalog.setval('products_id_seq', 1, false);
 --
 
 COPY productsbyplaces (id, place_id, products_id) FROM stdin;
+1	1	1
+2	2	3
 \.
 
 
@@ -390,7 +433,7 @@ COPY productsbyplaces (id, place_id, products_id) FROM stdin;
 -- Name: productsbyplaces_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('productsbyplaces_id_seq', 1, false);
+SELECT pg_catalog.setval('productsbyplaces_id_seq', 2, true);
 
 
 --
@@ -399,6 +442,13 @@ SELECT pg_catalog.setval('productsbyplaces_id_seq', 1, false);
 
 COPY session (session_id, login_id) FROM stdin;
 \.
+
+
+--
+-- Name: session_session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('session_session_id_seq', 1, false);
 
 
 --
