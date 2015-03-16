@@ -1,6 +1,6 @@
 <html>
     <head>
-        <script src="functions.js"></script>
+        <script src="js/distributors.js"></script>
         <meta charset="UTF-8">
         <link rel="stylesheet" text/css href="css/style_distr.css">
         <link rel="shortcut icon" href="images/logo.png" >
@@ -10,14 +10,14 @@
         <div id="distributorMainField" class="clearfix">
             <h1 id="placeName" style="text-align: center;" > </h1>
             <div id="productList1">
-                <table  class="table" >
+                <table  class="table" id="productTable" onload="addProductList">
                     <tr><th colspan="2"style="text-align:center;">ProductList</th></tr>
                     <tr><td><h5>Product</h5></td><td><h5>Count</h5></td></tr>
                     <tr><td>---</td><td>---</td></tr>
                 </table>
             </div>
             <div id="productList2">    
-                <table  class="table" >
+                <table  class="table" id="orderTable" onlod="addOrderList">
                     <tr><th colspan="3" style="text-align:center;" >OrderList</th></tr>
                     <tr><td><h5>Name</h5></td><td><h5>Product</h5></td><td><h5>Count</h5></td></tr>
                     <tr><td>---</td><td>---</td><td>---</td></tr>
