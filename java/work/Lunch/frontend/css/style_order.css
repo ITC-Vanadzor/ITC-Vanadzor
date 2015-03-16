@@ -65,4 +65,38 @@ select {
    border: #black;
    visibility: hidden;
 }
-
+.table_part1{
+    width: 29.5%;
+    margin-right: 3px;
+    height: 22px;
+    float:left;
+    padding-left: 3px;
+    border: 1px solid #bfbfbf;   
+}
+.table_part2 {
+    width: 43%;
+    overflow:hidden;
+    margin-right: 3px;
+    height: 22px;
+    float:left;
+    padding-left: 3px;
+    border: 1px solid #bfbfbf;   
+}
+.table_part3 {
+    width: 14.5%;
+    height: 22px;
+    overflow:hidden;
+    margin-right: 4px;
+    float:left;
+    text-align: center;
+    border: 1px solid #bfbfbf;
+}
+.table_part4 {
+    width:10%;
+    overflow:hidden;
+    height:22px;
+    text-align:center;
+}
+.table_part4 button {
+    width:95%;
+}

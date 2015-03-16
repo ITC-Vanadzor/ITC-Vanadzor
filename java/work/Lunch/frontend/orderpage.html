@@ -6,7 +6,7 @@
     <title>Let's have tasty break </title>
     <script src="js/orderpage.js"></script>
 </head>
-<body>
+<body onload="printOldOrders()">
     <div id="main">
         <form name="orders" >
             <select name="places" id="places" onclick="getPlaces()">
@@ -34,13 +34,12 @@
         </div>
         <div id="product_list" >bbbbb 
         </div>    
-        <div id="table" style="border: black;">
-            
-                <div style="width: 30%; float:left;"> aa</div>
-                <div style="width: 43%;overflow:hidden;float: left;"> aa</div>
-                <div style="width: 15%;overflow:hidden;float: left;text-align:center;"> aa</div>
-                <div style="width: 11%;overflow:hidden; text-align:center;"> aa</div>
-            </tr>
+        <div id="table" >
+            <!--   
+                <div class="table_part1"> </div>
+                <div class="table_part2"> </div>
+                <div class="table_part3"></div>
+                <div class="table_part4"><button> Delete</button></div> -->
         </div>
     </div>    
 </body>
