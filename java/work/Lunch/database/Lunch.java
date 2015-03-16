@@ -9,88 +9,69 @@ public class Lunch {
     String password;
     public Statement st = null;
     public ResultSet rs = null;
+    public ResultSet resultSessionId=null;
     public Connection connection = null;
     public int session_id;
 
     public Lunch(String url, String user, String password) {
-        // AREG -> dont use members for local variables ;)
-        this.url = url;
-        this.user = user;
-        this.password = password;
         try {
             connection = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            // AREG -> give more details on error
-            System.out.println("Connection Failed");
+        } catch (SQLException error) {
+            System.out.println("Connection failed: incorrect username or password");
             return;
         }
-        if (connection != null) {
+/*        if (connection != null) {
             System.out.println("Connection made it, take control your database now!");
         } else {
             System.out.println("Failed to make connection!");
         }
+*/
     }
 
     public ResultSet getPlaces() {
         try {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT * FROM place");
-            while (rs.next()) {
-                System.out.println(rs.getString("id"));
-                System.out.println(rs.getString("place_name"));
-
-            }
             return rs;
-        } catch (SQLException ex) {
-            System.out.println(ex);
+        } catch (SQLException error) {
+            System.out.println(error);
             return null;
-
         }
 //		return rs;
     }
-
     // AREG -> be attentive while implementing API according to the discussed / confirmed spec
-    public String login(String username, String password) {
-        System.out.println(password);
-
+    public Integer login(String username, String password) {
         try {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'");
             if (rs.next()) {
-                // AREG -> use proper names for ALL variables (even for temporary ones)
-                int kk = rs.getInt("id");
-                System.out.println(kk);
-                st.executeUpdate("INSERT INTO session(login_id) VALUES ('" + kk + "')");
+                st.executeUpdate("INSERT INTO session(login_id) VALUES ('" +rs.getInt("id") + "')");
+                resultSessionId=st.executeQuery("SELECT session_id FROM session WHERE login_id="+rs.getInt("id"));
             }
-            return "1";
+            if (resultSessionId.next()) {
+              return resultSessionId.getInt("session_id");
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
-            return "-1";
+            return 404;  
         }
     }
 
-    public String getOrderList(int session_id) {
+    public ResultSet getOrderList(int session_id) {
         try {
             st = connection.createStatement();
-            // AREG -> use consistent coding style for all languages
-            rs = st.executeQuery("select products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status from productsByPlaces,Orders,products, place where unique_product_id=productsByPlaces.id and place_id=place.id and products_id=products.id and  Orders.login_id=(select login_id from session where session_id=" + session_id + ")");
-            while (rs.next()) {
-                System.out.println(rs.getString("place_name"));
-                System.out.println(rs.getString("products_name"));
-            }
-            return "1";
-
+            rs = st.executeQuery("SELECT products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND  Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ")");
+            return rs;
         } catch (SQLException ex) {
             System.out.println("Select fail");
-            return "-1";
+            return null;
         }
-        //	return rs;
     }
 
     public String deleteOrder(int session_id, int order_id) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("DELETE FROM Orders WHERE Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ") and Orders.id=" + order_id + ";");
+            st.executeUpdate("DELETE FROM Orders WHERE Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ") AND Orders.id=" + order_id + ";");
             return "1";
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -103,11 +84,9 @@ public class Lunch {
     public String getProducts(int place_id, String word) {
         try {
             st = connection.createStatement();
-            rs = st.executeQuery("select products_id, products_name from products,productsByPlaces where productsByPlaces.place_id=" + place_id + " and products_id=products.id and products_name Like '" + word + "%'");
+            rs = st.executeQuery("SELECT products_id, products_name FROM products,productsByPlaces WHERE productsByPlaces.place_id=" + place_id + " AND products_id=products.id AND products_name Like '" + word + "%'");
             while (rs.next()) {
-
                 System.out.println(rs.getString("products_name"));
-
             }
             return "1";
         } catch (SQLException ex) {
@@ -119,7 +98,7 @@ public class Lunch {
     public String addOrder(int session_id, int place_id, int products_id, int count) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("insert into Orders(login_id,unique_product_id,count,date,status) values ((select login_id from session where session_id=" + session_id + "),(select id from productsByPlaces where place_id=" + place_id + " and products_id=" + products_id + ")," + count + ",'2015.03.01','yes')");
+            st.executeUpdate("INSERT INTO Orders(login_id,unique_product_id,count,date,status) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + "),(SELECT id FROM productsByPlaces WHERE place_id=" + place_id + " AND products_id=" + products_id + ")," + count + ",'2015.03.01','yes')");
 
             return "1";
         } catch (SQLException ex) {
@@ -131,7 +110,7 @@ public class Lunch {
     public String getDistributors() {
         try {
             st = connection.createStatement();
-            rs = st.executeQuery("select username,delivery.login_id,place_name,delivery.place_id from login,place,delivery where delivery.login_id=login.id and delivery.place_id=place.id");
+            rs = st.executeQuery("SELECT username,delivery.login_id,place_name,delivery.place_id FROM login,place,delivery WHERE delivery.login_id=login.id AND delivery.place_id=place.id");
             while (rs.next()) {
                 System.out.println(rs.getString("username"));
             }
@@ -146,7 +125,7 @@ public class Lunch {
     public String becomeDistributors(int session_id, int place_id) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("insert INTO delivery(login_id,place_id,date) values ((select login_id from session where session_id=" + session_id + ")," + place_id + ",'2015.01.18')");
+            st.executeUpdate("INSERT INTO delivery(login_id,place_id,date) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + ")," + place_id + ",'2015.01.18')");
 
             return "1";
         } catch (SQLException ex) {
@@ -158,7 +137,7 @@ public class Lunch {
     public String getProducts(int place_id) {
         try {
             st = connection.createStatement();
-            rs = st.executeQuery("select products_name,products_id,sum(count) from products,Orders,productsByPlaces where productsByPlaces.products_id=products.id and Orders.unique_product_id=productsByPlaces.id and productsByPlaces.place_id=" + place_id + " group by products_name,products.id,productsByPlaces.id");
+            rs = st.executeQuery("SELECT products_name,products_id,SUM(count) FROM products,Orders,productsByPlaces WHERE productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,productsByPlaces.id");
             while (rs.next()) {
                 System.out.println(rs.getString("products_name"));
             }
@@ -173,11 +152,7 @@ public class Lunch {
     public String getOrders(int place_id, int login_id) {
         try {
             st = connection.createStatement();
-            rs = st.executeQuery("select products_name,sum(count),username from login,products,Orders,productsByPlaces where login.id=Orders.login_id and Orders.login_id=3 and productsByPlaces.products_id=products.id and Orders.unique_product_id=productsByPlaces.id and productsByPlaces.place_id=1 group by products_name,products.id,login.id");
-            while (rs.next()) {
-                System.out.println(rs.getString("products_name"));
-            }
-
+            rs = st.executeQuery("SELECT products_name,sum(count),username FROM login,products,Orders,productsByPlaces WHERE login.id=Orders.login_id AND Orders.login_id="+login_id+" AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id="+place_id+" GROUP BY products_name,products.id,login.id");
             return "1";
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -188,11 +163,7 @@ public class Lunch {
     public String getOrders(int place_id) {
         try {
             st = connection.createStatement();
-            rs = st.executeQuery("select products_name,sum(count),username from login,products,Orders,productsByPlaces where login.id=Orders.login_id and Orders.login_id=login_id and productsByPlaces.products_id=products.id and Orders.unique_product_id=productsByPlaces.id and productsByPlaces.place_id=1 group by products_name,products.id,login.id order by username");
-            while (rs.next()) {
-                System.out.println(rs.getString("username"));
-            }
-
+            rs = st.executeQuery("SELECT products_name,sum(count),username FROM login,products,Orders,productsByPlaces WHERE login.id=Orders.login_id AND Orders.login_id=login_id AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id="+place_id+" GROUP BY products_name,products.id,login.id ORDER BY username");
             return "1";
         } catch (SQLException ex) {
             System.out.println(ex);

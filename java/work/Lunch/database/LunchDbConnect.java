@@ -1,6 +1,5 @@
 
 import java.sql.*;
-import lunchdbconnect.Lunch;
 
 // AREG -> add Doxygen comments
 public class LunchDbConnect {
@@ -24,11 +23,11 @@ public class LunchDbConnect {
         }
 
         System.out.println("PostgreSQL JDBC Driver Registered!");
-        Lunch lunch = new Lunch("jdbc:postgresql://127.0.0.1:5432/lunch", "postgres", "marine1990");
-        lunch.getPlaces();
-        System.out.println("*************" + lunch.getPlaces() + "**********");
-        lunch.login("Sargis", "sargis");
-        //System.out.println(lunch.login("Stepan", "stepan"));
+        Lunch lunch = new Lunch("jdbc:postgresql://127.0.0.1:5432/lunch", "postgres", "postgres");
+//        lunch.getPlaces();
+  //      System.out.println("*************" + lunch.getPlaces() + "**********");
+        //lunch.login("Sargis", "sargis");
+        System.out.println(lunch.login("Movses", "movses"));
         //System.out.println(lunch.deleteOrder(2, 12));
         //System.out.println(lunch.getOrderList(2));
         //System.out.println(lunch.getProducts(2, "ttv"));
