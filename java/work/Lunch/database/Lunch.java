@@ -13,12 +13,14 @@ public class Lunch {
     public int session_id;
 
     public Lunch(String url, String user, String password) {
+        // AREG -> dont use members for local variables ;)
         this.url = url;
         this.user = user;
         this.password = password;
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
+            // AREG -> give more details on error
             System.out.println("Connection Failed");
             return;
         }
@@ -47,6 +49,7 @@ public class Lunch {
 //		return rs;
     }
 
+    // AREG -> be attentive while implementing API according to the discussed / confirmed spec
     public String login(String username, String password) {
         System.out.println(password);
 
@@ -54,6 +57,7 @@ public class Lunch {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'");
             if (rs.next()) {
+                // AREG -> use proper names for ALL variables (even for temporary ones)
                 int kk = rs.getInt("id");
                 System.out.println(kk);
                 st.executeUpdate("INSERT INTO session(login_id) VALUES ('" + kk + "')");
@@ -68,6 +72,7 @@ public class Lunch {
     public String getOrderList(int session_id) {
         try {
             st = connection.createStatement();
+            // AREG -> use consistent coding style for all languages
             rs = st.executeQuery("select products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status from productsByPlaces,Orders,products, place where unique_product_id=productsByPlaces.id and place_id=place.id and products_id=products.id and  Orders.login_id=(select login_id from session where session_id=" + session_id + ")");
             while (rs.next()) {
                 System.out.println(rs.getString("place_name"));

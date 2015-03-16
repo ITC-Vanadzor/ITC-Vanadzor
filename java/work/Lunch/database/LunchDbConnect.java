@@ -2,6 +2,7 @@
 import java.sql.*;
 import lunchdbconnect.Lunch;
 
+// AREG -> add Doxygen comments
 public class LunchDbConnect {
 
     public static void main(String[] argv) {
