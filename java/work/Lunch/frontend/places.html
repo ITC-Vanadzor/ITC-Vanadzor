@@ -6,18 +6,18 @@
         <link rel="shortcut icon" href="images/logo.png" >
         <title> Orders </title>
     </head>
-    <body onload="changeName()">
+    <body onload="changeName(); addProductList(); addOrderList()" >
         <div id="distributorMainField" class="clearfix">
             <h1 id="placeName" style="text-align: center;" > </h1>
             <div id="productList1">
-                <table  class="table" id="productTable" onload="addProductList">
+                <table  class="table" id="productTable">
                     <tr><th colspan="2"style="text-align:center;">ProductList</th></tr>
                     <tr><td><h5>Product</h5></td><td><h5>Count</h5></td></tr>
                     <tr><td>---</td><td>---</td></tr>
                 </table>
             </div>
             <div id="productList2">    
-                <table  class="table" id="orderTable" onlod="addOrderList">
+                <table  class="table" id="orderTable">
                     <tr><th colspan="3" style="text-align:center;" >OrderList</th></tr>
                     <tr><td><h5>Name</h5></td><td><h5>Product</h5></td><td><h5>Count</h5></td></tr>
                     <tr><td>---</td><td>---</td><td>---</td></tr>
