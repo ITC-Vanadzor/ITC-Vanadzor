@@ -25,11 +25,11 @@ public class LunchDbConnect {
         System.out.println("PostgreSQL JDBC Driver Registered!");
         Lunch lunch = new Lunch("jdbc:postgresql://127.0.0.1:5432/lunch", "postgres", "postgres");
 //        lunch.getPlaces();
-  //      System.out.println("*************" + lunch.getPlaces() + "**********");
+        //lunch.getPlaces(); 
         //lunch.login("Sargis", "sargis");
         //System.out.println(lunch.login("Marine", "marine"));
         //System.out.println(lunch.deleteOrder(2, 12));
-        System.out.println(lunch.getOrderList(1));
+        lunch.getOrderList(2);
         //System.out.println(lunch.getProducts(2, "ttv"));
         //System.out.println(lunch.addOrder(2, 1, 1, 6));
         //System.out.println(lunch.getDistributors());

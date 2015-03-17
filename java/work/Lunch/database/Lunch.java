@@ -10,12 +10,15 @@ public class Lunch {
     String password;
     public Statement st = null;
     public ResultSet rs = null;
-    public ResultSet resultSessionId = null;
+    //public ResultSet resultSessionId = null;
     public Connection connection = null;
     public int session_id;
     DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-    Date date = new Date();
-
+    //Date date = new Date();
+    ArrayList<Places> placesList = new ArrayList<Places>();
+    ArrayList<Order> orderList = new ArrayList<Order>();
+    ArrayList<Products> productsList = new ArrayList<Products>();
+    ArrayList<Distributors> distributorsList = new ArrayList<Distributors>();
     public Lunch(String url, String user, String password) {
         try {
             connection = DriverManager.getConnection(url, user, password);
@@ -31,13 +34,16 @@ public class Lunch {
          */
     }
 
-    public ResultSet getPlaces() {
+    public ArrayList getPlaces() {
         try {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT * FROM place");
-            return rs;
+            while(rs.next()) {
+                Places place=new Places(rs.getInt("id"),rs.getString("place_name"));
+                placesList.add(place);
+            }
+            return placesList;
         } catch (SQLException error) {
-            System.out.println(error);
             return null;
         }
     }
@@ -45,10 +51,8 @@ public class Lunch {
     // AREG -> be attentive while implementing API according to the discussed / confirmed spec
 
     public int login(String username, String password) {
-        try {
+        try {(rs.getString("place_name"),
             st = connection.createStatement();
-//            rs = st.executeQuery("SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'");
-            //          if (rs.next()) {
             st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))");
             rs = st.executeQuery("SELECT session_id FROM session WHERE login_id=(SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "')");
 
@@ -61,97 +65,100 @@ public class Lunch {
         return 404;
     }
 
-    public ResultSet getOrderList(int session_id) {
+    public Order getOrderList(int session_id) {
         try {
             st = connection.createStatement();
 
-            rs = st.executeQuery("SELECT products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND  Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ") AND Orders.date=" + dateFormat.format(date));
-
-            return rs;
+            rs = st.executeQuery("SELECT products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND  Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ")");
+            if (rs.next()) {
+                Order order = new Order(rs.getString("place_name"),rs.getInt("place_Id"),rs.getString("products_name"),rs.getInt("products_id"),rs.getInt("count"),rs.getString("date"),rs.getString("status"));
+                orderList.add(order);
+            }
+            return orderList;
         } catch (SQLException ex) {
             System.out.println("Select not failed.Session id not found");
             return null;
         }
     }
 
-    public String deleteOrder(int session_id, int order_id) {
+    public boolean deleteOrder(int session_id, int order_id) {
         try {
             st = connection.createStatement();
             st.executeUpdate("DELETE FROM Orders WHERE Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ") AND Orders.id=" + order_id + ";");
-            return "1";
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.out.println("Delete fail");
-
-            return "-1";
+            return false ;
         }
     }
 
-    public String getProducts(int place_id, String word) {
+    public ArrayList getProducts(int place_id, String word) {
         try {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT products_id, products_name FROM products,productsByPlaces WHERE productsByPlaces.place_id=" + place_id + " AND products_id=products.id AND products_name Like '" + word + "%'");
             while (rs.next()) {
-                System.out.println(rs.getString("products_name"));
+                Products products = new Products(rs.getString("products_name"),rs.getInt("products_id"));
+                productsList.add(products);
             }
-            return "1";
+            return productsList;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return "-1";
+            return null;
         }
     }
+                System.out.println(rs.getString("products_name"));
 
-    public String addOrder(int session_id, int place_id, int products_id, int count) {
+    public boolean addOrder(int session_id, int place_id, int products_id, int count) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("INSERT INTO Orders(login_id,unique_product_id,count,date,status) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + "),(SELECT id FROM productsByPlaces WHERE place_id=" + place_id + " AND products_id=" + products_id + ")," + count + ",'" + dateFormat.format(date) + ",'yes')");
+            st.executeUpdate("INSERT INTO Orders(login_id,unique_product_id,count,date,status) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + "),(SELECT id FROM productsByPlaces WHERE place_id=" + place_id + " AND products_id=" + products_id + ")," + count + ",'2015.13.05','yes')");
 
-            return "1";
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return "-1";
+            return false;
         }
     }
 
-    public String getDistributors() {
+    public ArrayList getDistributors() {
         try {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT username,delivery.login_id,place_name,delivery.place_id FROM login,place,delivery WHERE delivery.login_id=login.id AND delivery.place_id=place.id");
             while (rs.next()) {
-                System.out.println(rs.getString("username"));
+            Distributors distributor = new Distributors(rs.getString("username"),rs.getInt("login_id"),rs.getString("place_name"),rs.getInt("place_id"));
+            distributorsList.add(distributor);
             }
-
-            return "1";
+            return distributorsList;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return "-1";
+            return null;
         }
     }
 
-    public String becomeDistributors(int session_id, int place_id) {
+    public boolean becomeDistributors(int session_id, int place_id) {
         try {
             st = connection.createStatement();
             st.executeUpdate("INSERT INTO delivery(login_id,place_id,date) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + ")," + place_id + ",'2015.01.18')");
 
-            return "1";
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return "-1";
+            return false;
         }
     }
 
-    public String getProducts(int place_id) {
+    public ArrayList getProducts(int place_id) {
         try {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT products_name,products_id,SUM(count) FROM products,Orders,productsByPlaces WHERE productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,productsByPlaces.id");
             while (rs.next()) {
-                System.out.println(rs.getString("products_name"));
+            Products products = new Products(rs.getString("products_name"), rs.getInt("products_id"), rs.getInt("count"));
+            productsList.add(products);
             }
-
-            return "1";
+            return productsList;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return "-1";
+            return null;
         }
     }
 
@@ -177,15 +184,15 @@ public class Lunch {
         }
     }
 
-    public int logout(int session_id) {
+    public boolean logout(int session_id) {
         try {
             st = connection.createStatement();
             st.executeUpdate("DELETE FROM session WHERE session_id=" + session_id);
-            return 200;
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("Session id not found.Delete failed");
-            return 500;
+            return false;
         }
     }
 }
