@@ -11,14 +11,20 @@
 }
 
 #productList1 {
-    width:44%;
+    width:40%;
     margin-right:50px;
     margin-top:28px;
     float:left;
 }
 
 #productList2 {
-    width:44%;
+    width:22%;
+    margin-right:50px;
+    margin-top:28px;
+    float:left;
+}
+#productList3 {
+    width:22%;
     margin-right:50px;
     margin-top:28px;
     float:left;
