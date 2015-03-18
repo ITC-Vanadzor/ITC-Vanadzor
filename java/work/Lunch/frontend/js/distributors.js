@@ -36,7 +36,12 @@ function addUserList() {
     var td = document.createElement("td");
     var user_id = document.createTextNode(users[i].user_id);
     var name = document.createTextNode(users[i].user_name);
-    //TODO
+    td.appendChild(user_id);
+    tr.appendChild(td);
+    var td1 = document.createElement("td");
+    td1.appendChild(name);
+    tr.appendChild(td1);
+    document.getElementById("nameTable").appendChild(tr);
     } 
 }
 
