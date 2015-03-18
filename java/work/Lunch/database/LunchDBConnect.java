@@ -27,7 +27,7 @@ public class LunchDBConnect {
      * it only connected to database 
      */
 
-    public Lunch(String url, String user, String password) {
+    public LunchDBConnect(String url, String user, String password) {
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException error) {
@@ -87,15 +87,6 @@ public class LunchDBConnect {
             while (rs.next()) {
                 Order order = new Order(rs.getString("place_name"),rs.getInt("place_Id"),rs.getString("products_name"),rs.getInt("products_id"),rs.getInt("count"),rs.getString("date"),rs.getString("status"));
                 orderList.add(order);
-            }
-            for (Order elem:orderList) {
-                System.out.println(elem.placeName);
-                System.out.println(elem.placeId);
-                System.out.println(elem.productName);
-                System.out.println(elem.productId);
-                System.out.println(elem.count);
-                System.out.println(elem.date);
-                System.out.println(elem.status);
             }
             return orderList;
         } catch (SQLException ex) {

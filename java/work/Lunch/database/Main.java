@@ -1,4 +1,9 @@
-//*********** Testing LunchDBConnect class methods **************
+/*********** Testing LunchDBConnect class methods **************
+/********* Version 1.0 *****************************************/
+
+/**
+ * Using standart library
+ */
 
 import java.sql.*;
 
@@ -21,21 +26,6 @@ public class Main {
             return;
         }
         System.out.println("PostgreSQL JDBC Driver Registered!");
-        Lunch lunch = new Lunch("jdbc:postgresql://127.0.0.1:5432/lunch", "postgres", "postgres");
-//      lunch.getPlaces();
-        //lunch.getPlaces(); 
-       // lunch.login("Sargis", "sargis");
- //       System.out.println(lunch.login("Marine", "marine"));
-        //System.out.println(lunch.deleteOrder(2, 12));
-    //    lunch.getOrderList(38);
-        //System.out.println(lunch.getProducts(2, "ttv"));
-      System.out.println(lunch.addOrder(38, 1, 2, 5));
-        //System.out.println(lunch.getDistributors());
-        //System.out.println(lunch.becomeDistributors(15, 1));
-        //System.out.println(lunch.getProducts(1));
-        //System.out.println(lunch.getOrders(1, 3));
-        //System.out.println(lunch.getOrders(1));
-   //     System.out.println(lunch.logout(40));
-  //lunch.test();
+        LunchDBConnect lunch = new LunchDBConnect("jdbc:postgresql://127.0.0.1:5432/lunch", "postgres", "postgres");
     }
 }
