@@ -20,11 +20,17 @@ select {
 #products {
     width: 43%;
     border:1px solid #bfbfbf;
+    /*
+     * AREG -> use consistent syntax to define colors ( either rgb() or # )
+     */
     background:rgb(221, 221, 221); 
     height: 40px;
     font-size: 16px;
     border-radius:3px;
 }
+/*
+ * AREG -> remove duplicate styles
+ */
 select {
     padding: 0 0 0 3%;
 }
@@ -65,6 +71,9 @@ select {
    border: #black;
    visibility: hidden;
 }
+/*
+ * AREG -> use more informative names for styles (e.g .in this case could be table_part_places)
+ */
 .table_part1{
     width: 29.5%;
     margin-right: 3px;

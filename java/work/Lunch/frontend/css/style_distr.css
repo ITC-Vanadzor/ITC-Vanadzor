@@ -17,6 +17,9 @@
     float:left;
 }
 
+/*
+ * AREG -> dont duplicate the same style
+ */
 #productList2 {
     width:22%;
     margin-right:50px;
@@ -35,6 +38,9 @@
     display:table;
     clear:both;
 }
+/*
+ * AREG -> discuss style "inheritance" with Vahan
+ */
 table.table {
     font-size:12px;
     color:#333333;

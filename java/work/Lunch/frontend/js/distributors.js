@@ -54,6 +54,7 @@ function addOrderList() {
         var count = document.createTextNode(productList[i].count);
 //        td.appendChild(name);
 //        tr.appendChild(td);
+// AREG -> avoid using numbers in variable / class / function names
         var td1 = document.createElement("td");
         td1.appendChild(product);
         tr.appendChild(td1);
