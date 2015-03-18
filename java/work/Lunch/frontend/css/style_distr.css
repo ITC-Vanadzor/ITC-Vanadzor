@@ -17,16 +17,7 @@
     float:left;
 }
 
-/*
- * AREG -> dont duplicate the same style
- */
-#productList2 {
-    width:22%;
-    margin-right:50px;
-    margin-top:28px;
-    float:left;
-}
-#productList3 {
+.productList2 {
     width:22%;
     margin-right:50px;
     margin-top:28px;
