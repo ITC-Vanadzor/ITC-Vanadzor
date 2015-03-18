@@ -6,31 +6,17 @@
     <title>Let's have tasty break </title>
     <script src="js/orderpage.js"></script>
 </head>
-<body onload="printOldOrders()">
+<body onload="printOldOrders(),getPlaces()">
     <div id="main">
         <form name="orders" >
-            <select name="places" id="places" onclick="getPlaces()">
-                <option value="Shop/Bistro">Shop/Bistro</option>
-                <option value="Tashir">Tashir</option>
-                <option value="Hamegh Patar">Hamegh Patar</option>
+            <select id="places" >
             </select>    
-            <input name="products" id="products" type="text" placeholder="Type product name" onkeyup="loadproducts()">
+            <input name="products" id="products" type="text" placeholder="Type product name" onkeyup="setTimeout(function() { loadproducts(); }, 2000)">
             <!--
             AREG -> change count field fro select to input
+            Sargis-> changed
             -->
-            <select name="count" id="count" >
-                <option value="0">Count</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>    
+            <input type="number" id="count" placeholder="Input count"  min="1" >
             <!--
             AREG -> clarify usage of name and id attributes
             -->

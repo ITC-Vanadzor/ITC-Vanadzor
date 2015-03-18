@@ -1,8 +1,39 @@
+
 function loadproducts(){
-    document.getElementById("products").value = "Qyabab";
+    var product_list = ["qyabab", "iqibir", "hamburger", "sendwich", "et cetera"];
+    var value = document.getElementById("products").value;
+    if (value.length==2){
+        //sendRequestProductList(document.getElementById("places").value, document.getElementById("products").value );
+        //if(requst@ OK){
+        //  var jsontext = sendRequestProductList(..................).responseBody;
+        //  var obj = JSON.parse(jsontext);
+        //  ...
+        //  ...
+        var sel = document.createElement("select");
+        sel.setAttribute("size","product_list.length");
+        for (var j=0; j < product_list.length; ++j){
+            var option = document.createElement("option");
+            var option_text = document.createTextNode(product_list[j]);
+            option.appendChild(option_text);
+        }
+        var parent_div = document.getElementById("product_list");
+        parent_div.setAttribute("style","visibility: visible;");
+        parent_div.appendChild(sel);// SHARUNAKELI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
 }
 function getPlaces (){
-    document.getElementById("places").innerHTML = "aaa";
+    var places_list = ["Tashir", "Volodya", "Another place"];
+    var head_option = document.createElement("option");
+    var head_option_text = document.createTextNode("Shop/Bistro");
+    head_option.appendChild(head_option_text);
+    document.getElementById("places"). appendChild(head_option);
+    for (var i = 0; i< places_list.length; ++i){
+        var option = document.createElement("option");
+        var option_text = document.createTextNode(places_list[i]);
+        option.appendChild(option_text);
+        document.getElementById("places"). appendChild(option);
+        
+    }
 }
 function getOrders(user_id){
     var jsontext;
