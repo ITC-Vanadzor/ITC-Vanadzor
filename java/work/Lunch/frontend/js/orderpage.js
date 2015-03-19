@@ -1,6 +1,9 @@
-
+function hideDiv(el){
+    el.setAttribute("style","visibility: hidden;");
+}
 function loadproducts(){
-    var product_list = ["qyabab", "iqibir", "hamburger", "sendwich", "et cetera"];
+    var prod_text ='[{"productId":"01","productName":"qyabab"},{"productId":"02","productName":"iqibir"},{"productId":"03","productName":"hamburger"},{"productId":"04","productName":"sendwich"},{"productId":"05","productName":"et cetera"}]';
+    var product_list = JSON.parse(prod_text);
     var value = document.getElementById("products").value;
     if (value.length==2){
         //sendRequestProductList(document.getElementById("places").value, document.getElementById("products").value );
@@ -10,15 +13,19 @@ function loadproducts(){
         //  ...
         //  ...
         var sel = document.createElement("select");
-        sel.setAttribute("size","product_list.length");
-        for (var j=0; j < product_list.length; ++j){
+        sel.setAttribute("size",product_list.length);
+        for (var j in product_list){
             var option = document.createElement("option");
-            var option_text = document.createTextNode(product_list[j]);
+            var option_text = document.createTextNode(product_list[j].productName);
             option.appendChild(option_text);
+            option.setAttribute("onclick","document.getElementById('products').value = this.value; hideDiv(this.parentNode.parentNode);");
+            //var product_id =      GTNEL EV HISHEL PRODUCT_ID VOR FORMI SUBMITTI JAMANAK OGTAGORXCENQ!!!!!!!!!!  ,
+            sel.appendChild(option);
         }
         var parent_div = document.getElementById("product_list");
+        parent_div.innerHTML = "";
         parent_div.setAttribute("style","visibility: visible;");
-        parent_div.appendChild(sel);// SHARUNAKELI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        parent_div.appendChild(sel);
     }
 }
 function getPlaces (){
