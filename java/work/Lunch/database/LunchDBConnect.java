@@ -1,5 +1,6 @@
 /*********** JAVA Project which working with Databases ***************
-/********* Version 1.0 *********************************************/
+********* Version 1.0 *********************************************/
+
 
 /**
  * Using standart libraries
@@ -9,23 +10,26 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * This class connects to database(Lunch) and 
- * there are declared base methods
+@brief  Class to work with the database 
+@detailed Connects to the database, when creating
  */
 public class LunchDBConnect {
-
-    String url;
-    String user;
-    String password;
+/**
+@param st preparating to database request
+@param rs saving request answer 
+@param connection creating connection to database 
+ */
     public Statement st = null;
     public ResultSet rs = null;
     public Connection connection = null;
-    public int session_id;
 
-    /**
-     * This is constructor for this class and
-     * it only connected to database 
-     */
+/**
+@brief Constructor
+@param url full path to database for connect
+@param user username for database
+@param password password for user in  database
+@throw DatabaseError if an error occurred, when connected to a database
+*/
 
     public LunchDBConnect(String url, String user, String password) {
         try {
@@ -36,9 +40,11 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method returns places list
-     */
+/**
+@brief Select from the database a list of places
+@return  List of places or null if exception error 
+@throw sqlexception error if an error occurred working with database
+*/
 
     public ArrayList getPlaces() {
         ArrayList<Places> placesList = new ArrayList<Places>();
@@ -55,10 +61,13 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets username and password
-     * and returns session id
-     */
+/**
+@detailed This method gets login id with username and password and returns generated session id
+@param username for logged in user
+@param password for logged in user
+@returns session id for current user, and 404 error, when throw 
+@throw sqlexception error, when wrong username or password 
+*/
 
     public String login(String username, String password) {
         try {
@@ -74,10 +83,13 @@ public class LunchDBConnect {
         return "404!";
     }
 
-    /**
-     * This method gets session id and 
-     * returns order list for current user
-     */
+/**
+@detailed This method gets session id and 
+returns order list for current user
+@param session_id generating, when gets login id
+@returns order list or empty list or null
+@throw sqlexception error, when wrong session id
+*/
 
     public ArrayList getOrderList(int session_id) {
         ArrayList<Order> orderList = new ArrayList<Order>();
@@ -95,10 +107,14 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets session id and order id
-     * and removes order for current user
-     */
+/**
+@detailed This method gets session id and order id
+and removes order for current user
+@param session_id generating, when gets login id
+@param order_id unique value of order 
+@returns true, when successfully removed order or false, when not removed
+@throw sqlexception error if an error occurred working with database
+*/
 
     public boolean deleteOrder(int session_id, int order_id) {
         try {
@@ -111,10 +127,14 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets place id and a few letters for product name
-     * and returns product name list, which starting with that letters
-     */
+/**
+@detailed This method gets place id and a few letters for product name
+and returns product name list, which starting with that letters
+@param place_id unique values of places
+@param word part of letters for product name 
+@returns products list or null, when sqlexception error
+@throw sqlexception error if an error occurred working with database
+*/
 
     public ArrayList getProducts(int place_id, String word) {
         ArrayList<Products> productsList = new ArrayList<Products>();
@@ -132,10 +152,16 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets session id , place id , products id
-     * and product count, and inserts its to order list
-     */
+/**
+@detailed This method gets session id , place id , products id
+and product count, and inserts its to order list
+@param session_id unique value for current user
+@param place_id unique values for places
+@param products_id unique values for products 
+@param count count of product
+@returns true, when order added into database or false, when sqlexception
+@throw sqlexception error if an error occurred working with database
+*/
 
     public boolean addOrder(int session_id, int place_id, int products_id, int count) {
         try {
@@ -148,9 +174,11 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method returns distributors list
-     */
+/**
+@brief This method returns distributors list
+@returns distributors list or null if sqlexception error 
+@throw sqlexception error if an error occurred working with database
+*/
 
     public ArrayList getDistributors() {
         ArrayList<Distributors> distributorsList = new ArrayList<Distributors>();
@@ -168,10 +196,14 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets session id, place id 
-     * and inserts into delivery list current username
-     */
+/**
+@detailed This method gets session id, place id 
+and inserts into delivery list current username
+@param session_id unique value for current user
+@param place_id unique values for places
+@returns true, when successfully inserted order or false, when not inserted 
+@throw sqlexception error if an error occurred working with database
+*/
 
     public boolean becomeDistributors(int session_id, int place_id) {
         try {
@@ -184,10 +216,13 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method  gets place id and
-     * returns overall count of orders by product name and product id
-     */
+/**
+@detailed This method  gets place id and
+returns overall count of orders by product name and product id
+@param place_id unique values for places
+@returns Products list or sqlexception error
+@throw sqlexception error if an error occurred working with database
+*/
 
     public ArrayList getProducts(int place_id) {
         ArrayList<Products> productsList = new ArrayList<Products>();
@@ -205,10 +240,14 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets place id and login id
-     * and returns orders for the current user at current day
-     */
+/**
+@detailed This method gets place id and login id
+and returns orders for the current user at current day
+@param place_id unique values of places
+@param login_id unique value for current user
+@returns orders by places list or null, when sqlexception error
+@throw sqlexception error if an error occurred working with database
+*/
 
     public ArrayList getOrders(int place_id, int login_id) {
         ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
@@ -226,11 +265,14 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets place id and 
-     * returns overall count of orders by product name and product id
-     * for all users at current day
-     */
+/**
+@detailed This method gets place id and 
+returns overall count of orders by product name and product id
+for all users at current day
+@param place_id unique values of places
+@returns Products by places list or null, when sqlexception error
+@throw sqlexception error if an error occurred working with database
+*/
 
     public ArrayList getOrders(int place_id) {
         ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
@@ -248,10 +290,13 @@ public class LunchDBConnect {
         }
     }
 
-    /**
-     * This method gets session id and
-     * removes it from database (log outing)
-     */
+/**
+@detailed This method gets session id and
+removes it from database (log outing)
+@param session_id unique value for current user
+@returns true, when session removed in database or false, when not removed
+@throw sqlexception error if an error occurred working with database
+*/
 
     public boolean logout(int session_id) {
         try {
