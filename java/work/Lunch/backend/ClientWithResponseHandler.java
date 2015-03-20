@@ -17,13 +17,13 @@ public class ClientWithResponseHandler {
         try {
             /*URI uri = new URIBuilder()
             .setScheme("http")
-            .setHost("localhost")
-            .setPath("/login")
-            .setParameter("name", "Hrach")
-            .setParameter("password", "231996")
+            .setHost("192.168.33.89:8080")
+            .setPath("/helloWorld-0.1-dev/hello")
+            .setParameter("first_name", "Hrach")
+            .setParameter("last_name", "Mkrtchyan")
             .build();*/
 
-            HttpGet httpget = new HttpGet("http://localhost/");
+            HttpGet httpget = new HttpGet("http://192.168.33.64:8080/helloWorld-0.1-dev/hello?first_name=Hrach&last_name=Mkrtchyan");
             //HttpGet httpgetnew = new HttpGet(uri);
             System.out.println("Executing request " + httpget.getRequestLine());
             //System.out.println("Executing request " + httpgetnew.getRequestLine());
