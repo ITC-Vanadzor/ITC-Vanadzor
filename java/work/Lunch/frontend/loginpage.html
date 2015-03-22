@@ -3,27 +3,30 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="images/logo.png" >
     <link rel="stylesheet" text/css href="css/style.css">
+    <script src="js/orderpage.js"></script>
     <title>Log In </title>
 </head>
 <body>
-<form name="Login" >
+    <div id="test"></div>
     <div class="loginbox">
         <div><center> Sign in  <center></div>
         <div id="login-content">
+            <!--<form name="login_form"  >-->
+            <div><center id="errormsg"></center></div>
             <div class="login-component">
-                <input type="email" placeholder="Email">
+                <input type="email" name="email" id="email"  placeholder="Email" required>
             </div>
             <div class="login-component">
-                <input type="password" placeholder="Password">
+                <input type="password" id = "pswd" placeholder="Password" required>
             </div>     
             <div style="float: left; margin-left: 50px; margin-top: 10px; ">
                 <input type="checkbox"> Remember me </input>
             </div>
             <div>
-                <input name="singin" value="Sign in" type="submit" id="botton" >
+                <input name="singin" value="Sign in" type="button" id="botton" onclick="return login()" >
             </div> <br>
+            <!--</form>-->
         </div>
     </div>
-</form>    
 </body>
 </html>

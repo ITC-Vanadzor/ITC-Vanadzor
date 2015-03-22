@@ -1,4 +1,7 @@
-
+#errormsg{
+    font-size: 16px;
+    color: #ff0000;
+}
 center {
     font-size: 28px;
     margin-bottom: 10px;

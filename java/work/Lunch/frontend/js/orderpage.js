@@ -1,3 +1,37 @@
+function ValidateEmail(inputText) {  
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+    if(inputText.value.match(mailformat)) {  
+        //document.getElementById("email").focus();  
+        return true;  
+    }  
+    else  {  
+        //document.getElementById("email").focus();          
+        return false;  
+    }  
+}
+
+function login(){
+    if(!ValidateEmail(document.getElementById("email"))){
+        document.getElementById("errormsg").innerHTML = "You have entered an invalid email address!";  
+        return false;
+    }
+    else if(document.getElementById("pswd").value.length < 6 ){
+        document.getElementById("errormsg").innerHTML = "Password should be at least 6 symbol";
+        return false;
+    }
+    ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function(){
+        if(ajaxRequest.readyState == 4 ){
+               //document.getElementById("test").innerHTML =
+               alert (ajaxRequest.responseText);
+        }
+    }
+    ajaxRequest.open("POST", "http://192.168.0.102:8080/helloWorld-0.1-dev/hello", true);
+    ajaxRequest.send("text");//document.getElementById("email").value);
+    return true;
+}
+
+
 function hideDiv(el){
     el.setAttribute("style","visibility: hidden;");
 }
