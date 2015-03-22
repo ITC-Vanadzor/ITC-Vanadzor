@@ -10,7 +10,8 @@ import java.sql.*;
 import java.util.*;
 
 /**
-@detailed class Connects to the database and when working with it
+@brief  Class to work with the database 
+@detailed Connects to the database, when creating
  */
 public class LunchDBConnect {
 /**
@@ -64,22 +65,23 @@ public class LunchDBConnect {
 @detailed This method gets login id with username and password and returns generated session id
 @param username for logged in user
 @param password for logged in user
-@returns session id for current user, and null, when throw 
+@returns session id for current user, and 404 error, when throw 
 @throw sqlexception error, when wrong username or password 
 */
 
     public String login(String username, String password) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))");
-            rs = st.executeQuery("SELECT session_id FROM session WHERE login_id=(SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "')");
+            st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))",Statement.RETURN_GENERATED_KEYS);
+			rs=st.getGeneratedKeys();
+//            rs = st.executeQuery("SELECT session_id FROM session WHERE login_id=(SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "')");
             if (rs.next()) {
                 return rs.getString("session_id");
             }
         } catch (SQLException ex) {
             System.out.println("User not found");
         }
-        return null;
+        return "404!";
     }
 
 /**
@@ -308,4 +310,19 @@ removes it from database (log outing)
             return false;
         }
     }
+	boolean isSessionId(session_id) {
+        try {
+            st = connection.createStatement();
+            rs=st.executeQuery("SELECT session_id FROM session WHERE session_id=" + session_id);
+			if(rs.next()) {
+            	return true;
+			}
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Session id not found.");
+            return false;
+        }
+	
+	}
+
 }
