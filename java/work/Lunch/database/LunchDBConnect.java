@@ -72,8 +72,9 @@ public class LunchDBConnect {
     public String login(String username, String password) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))");
-            rs = st.executeQuery("SELECT session_id FROM session WHERE login_id=(SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "')");
+            st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))",Statement.RETURN_GENERATED_KEYS);
+			rs=st.getGeneratedKeys();
+//            rs = st.executeQuery("SELECT session_id FROM session WHERE login_id=(SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "')");
             if (rs.next()) {
                 return rs.getString("session_id");
             }
@@ -309,4 +310,19 @@ removes it from database (log outing)
             return false;
         }
     }
+	boolean isSessionId(session_id) {
+        try {
+            st = connection.createStatement();
+            rs=st.executeQuery("SELECT session_id FROM session WHERE session_id=" + session_id);
+			if(rs.next()) {
+            	return true;
+			}
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Session id not found.");
+            return false;
+        }
+	
+	}
+
 }
