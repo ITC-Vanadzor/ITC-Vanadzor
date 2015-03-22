@@ -15,4 +15,7 @@ public class Point {
         return y;
     }
     
+    /*public int getEdge() {
+        
+    } */ 
 }
