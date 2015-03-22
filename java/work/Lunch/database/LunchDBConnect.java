@@ -10,8 +10,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
-@brief  Class to work with the database 
-@detailed Connects to the database, when creating
+@detailed class Connects to the database and when working with it
  */
 public class LunchDBConnect {
 /**
@@ -65,7 +64,7 @@ public class LunchDBConnect {
 @detailed This method gets login id with username and password and returns generated session id
 @param username for logged in user
 @param password for logged in user
-@returns session id for current user, and 404 error, when throw 
+@returns session id for current user, and null, when throw 
 @throw sqlexception error, when wrong username or password 
 */
 
@@ -80,7 +79,7 @@ public class LunchDBConnect {
         } catch (SQLException ex) {
             System.out.println("User not found");
         }
-        return "404!";
+        return null;
     }
 
 /**

@@ -1,4 +1,4 @@
-/*********** Testing LunchDBConnect class methods **************
+/*********** Testing Main class methods **************
 /********* Version 1.0 *****************************************/
 
 /**
