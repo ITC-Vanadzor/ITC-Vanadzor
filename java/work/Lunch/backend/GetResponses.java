@@ -27,16 +27,16 @@ public class GetResponses {
         try {
             Map<String, String> jsonObj = (Map<String, String>) parser.parse(loginPass);
             sessionId = lunch.login(jsonObj.get("username"), jsonObj.get("password")).toString();
-            result.add(sessionId);
             result.add("200");
+            result.add(sessionId);
             return result;
         } catch (RuntimeException re) {
-            result.add("Error message");
-            result.add("Error Code");
+            result.add("404");
+            result.add("Invalid order and password!");
             return result;
         } catch (ParseException pe) {
-            result.add("Error Code");
-            result.add("Error message");
+            result.add("404");
+            result.add("Invalid order and password!");
             return result;
         }
     }
@@ -47,18 +47,19 @@ public class GetResponses {
             List<Places> placesList = new ArrayList<>();
             placesList = lunch.getPlaces();
             JSONArray jsonArr = new JSONArray();
+            
             for (Places place : placesList) {
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("placeId", place.id);
                 jsonObj.put("placeName", place.placeName);
                 jsonArr.add(jsonObj);
             }
-            result.add(jsonArr.toString());
             result.add("200");
+            result.add(jsonArr.toString());
             return result;
         } catch (RuntimeException re) {
-            result.add("Error Code");
-            result.add("Error message");
+            result.add("404");
+            result.add("Places not found!");
             return result;
         }
     }
@@ -68,7 +69,6 @@ public class GetResponses {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
-
             List<Order> ordersList = new ArrayList<>();
             ordersList = lunch.getOrderList(Integer.parseInt((String) jsonObj.get("sessionId")));
             JSONArray jsonArr = new JSONArray();
@@ -83,8 +83,8 @@ public class GetResponses {
                 json.put("status", ord.status);
                 jsonArr.add(jsonObj);
             }
-            result.add(jsonArr.toString());
             result.add("200");
+            result.add(jsonArr.toString());
             return result;
         } catch (RuntimeException re) {
             result.add("Error Code");
@@ -109,8 +109,8 @@ public class GetResponses {
                 json.put("count", order.count);
                 jsonArr.add(json);
             }
-            result.add(jsonArr.toString());
             result.add("200");
+            result.add(jsonArr.toString());
             return result;
         } catch (RuntimeException re) {
             result.add("Error Code");
@@ -124,7 +124,6 @@ public class GetResponses {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
-
             List<OrdersByPlaces> ordersList = new ArrayList<>();
             JSONArray jsonArr = new JSONArray();
             ordersList = lunch.getOrders(Integer.parseInt((String) jsonObj.get("placeId")));
@@ -136,8 +135,8 @@ public class GetResponses {
                 json.put("count", order.count);
                 jsonArr.add(json);
             }
-            result.add(jsonArr.toString());
             result.add("200");
+            result.add(jsonArr.toString());
             return result;
         } catch (RuntimeException re) {
             result.add("Error Code");
@@ -161,8 +160,8 @@ public class GetResponses {
                 json.put("productName", product.productName);
                 jsonArr.add(json);
             }
-            result.add(jsonArr.toString());
             result.add("200");
+            result.add(jsonArr.toString());
             return result;
         } catch (RuntimeException re) {
             result.add("Error Code");
@@ -172,48 +171,66 @@ public class GetResponses {
     }
 
     public int responseDeleteOrder(String queryJson) {
-
-        Object obj = JSONValue.parse(queryJson);
-        JSONObject jsonObj = (JSONObject) obj;
-        System.out.println();
-
-        boolean result = lunch.deleteOrder(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("orderId")));
-        if (result) {
-            return 200;
-        } else {
-            return 404;
+        ArrayList<String> result = new ArrayList<String>();
+        try {
+            Object obj = JSONValue.parse(queryJson);
+            JSONObject jsonObj = (JSONObject) obj;
+            String response = lunch.deleteOrder(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("orderId")));
+            
+            if (response == "#200") {
+                result.add("200");
+            } else if (response == "#404") {
+                result.add("404");
+                result.add("Conflict distributors!");
+            }
+            return result;
+        } catch (RuntimeException re) {
+            result.add("404");
+            return result;
         }
     }
 
     public int responseAddOrder(String queryJson) {
+        ArrayList<String> result = new ArrayList<String>();
+        try {
+            Object obj = JSONValue.parse(queryJson);
+            JSONObject jsonObj = (JSONObject) obj;
+            int sessId = Integer.parseInt((String) jsonObj.get("sessionId"));
+            int placeId = Integer.parseInt((String) jsonObj.get("placeId"));
+            int productId = Integer.parseInt((String) jsonObj.get("productId"));
+            int count = Integer.parseInt((String) jsonObj.get("count"));
+            String response = lunch.addOrder(sessId, placeId, productId, count);
 
-        Object obj = JSONValue.parse(queryJson);
-        JSONObject jsonObj = (JSONObject) obj;
-
-        int sessId = Integer.parseInt((String) jsonObj.get("sessionId"));
-        int placeId = Integer.parseInt((String) jsonObj.get("placeId"));
-        int productId = Integer.parseInt((String) jsonObj.get("productId"));
-        int count = Integer.parseInt((String) jsonObj.get("count"));
-
-        boolean result = lunch.addOrder(sessId, placeId, productId, count);
-        if (result) {
-            return 200;
-        } else {
-            return 404;
+            if (response == "#200") {
+                result.add("200");
+            } else if (response == "#404") {
+                result.add("404");
+                result.add("Conflict distributors!");
+            }
+            return result;
+        } catch (RuntimeException re) {
+            result.add("404");
+            return result;
         }
     }
 
     public int responseLogOut(String queryJson) {
-
-        Object obj = JSONValue.parse(queryJson);
-        JSONObject jsonObj = (JSONObject) obj;
-        System.out.println();
-
-        boolean result = lunch.logout(Integer.parseInt((String) jsonObj.get("sessionId")));
-        if (result) {
-            return 200;
-        } else {
-            return 404;
+        ArrayList<String> result = new ArrayList<String>();
+        try {
+            Object obj = JSONValue.parse(queryJson);
+            JSONObject jsonObj = (JSONObject) obj;
+            String response = lunch.logout(Integer.parseInt((String) jsonObj.get("sessionId")));
+            
+            if (response == "#204") {
+                result.add("204");
+            } else if (response == "#404") {
+                result.add("404");
+                result.add("Conflict distributors!");
+            }
+            return result;
+        } catch (RuntimeException re) {
+            result.add("404");
+            return result;
         }
     }
 
@@ -232,29 +249,34 @@ public class GetResponses {
                 jsonObj.put("name", distrib.name);
                 jsonArr.add(jsonObj);
             }
-            result.add(jsonArr.toString());
             result.add("200");
+            result.add(jsonArr.toString());
             return result;
         } catch (RuntimeException re) {
-            result.add("Error Code");
-            result.add("Error message");
+            result.add("404");
             return result;
         }
     }
 
     public ArrayList responseBecomeDistributor(String queryJson) {
         ArrayList<String> result = new ArrayList<String>();
-        Object obj = JSONValue.parse(queryJson);
-        JSONObject jsonObj = (JSONObject) obj;
-        boolean response = lunch.becomeDistributors(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("placeId")));
+        try {
+            Object obj = JSONValue.parse(queryJson);
+            JSONObject jsonObj = (JSONObject) obj;
+            String response = lunch.becomeDistributors(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("placeId")));
 
-        if (response) {
-            result.add("204");
+            if (response == "#204") {
+                result.add("204");
+            } else if (response == "#409") {
+                result.add("409");
+                result.add("Conflict distributors!");
+            }
             return result;
-        } else {
+        } catch (RuntimeException re) {
             result.add("404");
             return result;
         }
     }
 
 }
+
