@@ -1,3 +1,6 @@
+var sessionId = 0;
+
+
 function ValidateEmail(inputText) {  
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
     if(inputText.value.match(mailformat)) {  
@@ -19,15 +22,23 @@ function login(){
         document.getElementById("errormsg").innerHTML = "Password should be at least 6 symbol";
         return false;
     }
+    var login_json = [{"email":document.getElementById("email").value},{"password":document.getElementById("pswd").value}];    
     ajaxRequest = new XMLHttpRequest();
     ajaxRequest.onreadystatechange = function(){
-        if(ajaxRequest.readyState == 4 ){
-               //document.getElementById("test").innerHTML =
-               alert (ajaxRequest.responseText);
+        if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){// here can be added '&& ajaxRequest.statusText=="success"'
+               sessionId = ajaxRequest.responseText;     
+               window.location = "orderpage.html";
+               //alert (ajaxRequest.responseText);
+               alert(sessionId);
         }
+        else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){
+               document.getElementById("errormsg").innerHTML = "You entered invalid email or password ";
+        }
+            
     }
-    ajaxRequest.open("POST", "http://192.168.0.102:8080/helloWorld-0.1-dev/hello", true);
-    ajaxRequest.send("text");//document.getElementById("email").value);
+    ajaxRequest.open("POST", "http://localhost:8080", true);
+    ajaxRequest.setRequestHeader("Content-type", "application/json");
+    ajaxRequest.send(JSON.stringify(login_json));
     return true;
 }
 
@@ -40,12 +51,6 @@ function loadproducts(){
     var product_list = JSON.parse(prod_text);
     var value = document.getElementById("products").value;
     if (value.length==2){
-        //sendRequestProductList(document.getElementById("places").value, document.getElementById("products").value );
-        //if(requst@ OK){
-        //  var jsontext = sendRequestProductList(..................).responseBody;
-        //  var obj = JSON.parse(jsontext);
-        //  ...
-        //  ...
         var sel = document.createElement("select");
         sel.setAttribute("size",product_list.length);
         for (var j in product_list){
@@ -62,7 +67,9 @@ function loadproducts(){
         parent_div.appendChild(sel);
     }
 }
+
 function getPlaces (){
+
     var places_list = ["Tashir", "Volodya", "Another place"];
     var head_option = document.createElement("option");
     var head_option_text = document.createTextNode("Shop/Bistro");
@@ -76,42 +83,68 @@ function getPlaces (){
         
     }
 }
-function getOrders(user_id){
-    var jsontext;
-    return jsontext;
-}
 function printOldOrders(){
-    var orders = '{"order_id":['+'{"place_id":"Valod","product_id":"Iqibir","count_id":"2"},{"place_id":"Tashir","product_id":"Pizza","count_id":"2"}]}';
+    
+    var orders = '[{"orderId":"01","place_id":"Valod","product_id":"Iqibir","count_id":"2"},{"orderId":"02","place_id":"Tashir","product_id":"Pizza","count_id":"2"}]';
     var obj = JSON.parse(orders);
-    for(var i = 0; i<obj.order_id.length; ++i ){
+    for(var i = 0; i<obj.length; ++i ){
         var row = document.createElement("div");
         
-        var newdiv1 = document.createElement("div");
-        var textnode1 = document.createTextNode(obj.order_id[i].place_id);
-        newdiv1.appendChild(textnode1);
-        newdiv1.setAttribute("class", "table_part1");
-        row.appendChild(newdiv1);
-        var newdiv2 = document.createElement("div");
-        var textnode2 = document.createTextNode(obj.order_id[i].product_id);
-        newdiv2.appendChild(textnode2);
-        newdiv2.setAttribute("class", "table_part2");
-        row.appendChild(newdiv2);
-        var newdiv3 = document.createElement("div");
-        var textnode3 = document.createTextNode(obj.order_id[i].count_id);
-        newdiv3.appendChild(textnode3);
-        newdiv3.setAttribute("class", "table_part3");
-        row.appendChild(newdiv3);
+        var place_part_div = document.createElement("div");
+        var textnode_place = document.createTextNode(obj[i].place_id);
+        place_part_div.appendChild(textnode_place);
+        place_part_div.setAttribute("class", "table_part1");
+        row.appendChild(place_part_div);
+        var product_part_div = document.createElement("div");
+        var textnode_product = document.createTextNode(obj[i].product_id);
+        product_part_div.appendChild(textnode_product);
+        product_part_div.setAttribute("class", "table_part2");
+        row.appendChild(product_part_div);
+        var count_div = document.createElement("div");
+        var textnode_count = document.createTextNode(obj[i].count_id);
+        count_div.appendChild(textnode_count);
+        count_div.setAttribute("class", "table_part3");
+        row.appendChild(count_div);
         var btn  = document.createElement("BUTTON");
         var textbtn = document.createTextNode("Delete");
         btn.appendChild(textbtn);
+        var value_div=document.createElement("div")
+        var value =document.createTextNode(obj[i].orderId);
+        value_div.setAttribute("style", "visibility: hidden");
+        btn.appendChild(value_div);
         btn.setAttribute("class", "table_part4");
-        btn.setAttribute("onclick", "deleteRow(this)");
+        btn.setAttribute("onclick", "return deleteRow(this)");
         row.appendChild(btn);
         document.getElementById("table").appendChild(row);
     }
 }
 function deleteRow(e)
 {
-        e.parentNode.parentNode.removeChild(e.parentNode);
+        var orderId = e.childNodes[0].nodeValue;
+        var delete_json = [{"sessionId":sessionId},{ "orderId":orderId }];
+        ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
+                e.parentNode.parentNode.removeChild(e.parentNode);//deletes graphically row if everything is OK
+                return true;
+            }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){//code shoul be changed!!!!!!!!!
+                document.getElementById("main").innerHTML = " Can't delete becouse of wrong sesionId";
+                return false;
+            }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==500 ){
+                document.getElementById("main").innerHTML = " Crash!!!!!";
+                return false;
+            }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==414 ){// status code should be changed
+                document.getElementById("main").innerHTML = " Can't delete becouse of wrong orderId";
+                return false;
+            }
+                
+        }
+        ajaxRequest.open("POST", "http://localhost:8080", true);
+        ajaxRequest.setRequestHeader("Content-type", "application/json");
+        ajaxRequest.send(JSON.stringify(delete_json));
+        return false;
 }
 
