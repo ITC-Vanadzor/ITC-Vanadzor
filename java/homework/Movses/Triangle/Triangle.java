@@ -6,7 +6,7 @@ public class Triangle {
     public double perimeter;
     public double area;
 
-    public int Perimeter() {
+    public double Perimeter(double a, double b, double c) {
         double perimeter = a + b + c;
         return perimeter; 
     }

@@ -31,10 +31,8 @@ public class Main {
         a=(Math.sqrt((Math.pow((x2-x1),2)+Math.pow((y2-y1),2))));
         b=(Math.sqrt((Math.pow((x3-x1),2)+Math.pow((y3-y1),2))));
         c=(Math.sqrt((Math.pow((x3-x2),2)+Math.pow((y3-y2),2))));
-        System.out.println(a);
         
         Triangle myTri = new Triangle();
-        myTri.Perimeter();
-
+        System.out.println(myTri.Perimeter(a,b,c));
     }    
 }
