@@ -74,14 +74,12 @@ public class LunchDBConnect {
             st = connection.createStatement();
             st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))",Statement.RETURN_GENERATED_KEYS);
 			rs=st.getGeneratedKeys();
-//            rs = st.executeQuery("SELECT session_id FROM session WHERE login_id=(SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "')");
             if (rs.next()) {
                 return rs.getString("session_id");
             }
         } catch (SQLException ex) {
-            System.out.println("User not found");
-        }
-        return "404!";
+        	return "#404";
+		}
     }
 
 /**
@@ -117,14 +115,14 @@ and removes order for current user
 @throw sqlexception error if an error occurred working with database
 */
 
-    public boolean deleteOrder(int session_id, int order_id) {
+    public String deleteOrder(int session_id, int order_id) {
         try {
             st = connection.createStatement();
             st.executeUpdate("DELETE FROM Orders WHERE Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ") AND Orders.id=" + order_id + ";");
-            return true;
+            return "#200";
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return false ;
+            return "#404" ;
         }
     }
 
@@ -148,7 +146,6 @@ and returns product name list, which starting with that letters
             }
             return productsList;
         } catch (SQLException ex) {
-            System.out.println(ex);
             return null;
         }
     }
@@ -164,14 +161,16 @@ and product count, and inserts its to order list
 @throw sqlexception error if an error occurred working with database
 */
 
-    public boolean addOrder(int session_id, int place_id, int products_id, int count) {
+    public String addOrder(int session_id, int place_id, int products_id, int count) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("INSERT INTO Orders(login_id,unique_product_id,count,date,status) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + "),(SELECT id FROM productsByPlaces WHERE place_id=" + place_id + " AND products_id=" + products_id + ")," + count + ",CURRENT_DATE,'yes')");
-            return true;
+            st.executeUpdate("INSERT INTO Orders(login_id,unique_product_id,count,date,status) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + "),(SELECT id FROM productsByPlaces WHERE place_id=" + place_id + " AND products_id=" + products_id + ")," + count + ",CURRENT_DATE,'yes')",Statement.RETURN_GENERATED_KEYS);
+            rs=st.getGeneratedKeys();
+			if (rs.next()) {
+                return rs.getString("id");
+            }
         } catch (SQLException ex) {
-            System.out.println(ex);
-            return false;
+            return "#404";
         }
     }
 
@@ -206,16 +205,20 @@ and inserts into delivery list current username
 @throw sqlexception error if an error occurred working with database
 */
 
-    public boolean becomeDistributors(int session_id, int place_id) {
+    public String becomeDistributors(int session_id, int place_id) {
         try {
             st = connection.createStatement();
-            st.executeUpdate("INSERT INTO delivery(login_id,place_id,date) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + ")," + place_id + ",CURRENT_DATE)");
-            return true;
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return false;
+			rs = st.executeQuery("SELECT id FROM delivery WHERE date=CURRENT_DATE AND place_id="+place_id);
+			if(rs.next()) {
+            	st.executeUpdate("INSERT INTO delivery(login_id,place_id,date) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + ")," + place_id + ",CURRENT_DATE)");
+        	    return "#200";
+			} else {
+				throw new Exception();
+			}
+        } catch (Exception ex) {
+            return "#409";
         }
-    }
+	}  
 
 /**
 @detailed This method  gets place id and
@@ -299,28 +302,27 @@ removes it from database (log outing)
 @throw sqlexception error if an error occurred working with database
 */
 
-    public boolean logout(int session_id) {
+    public String logout(int session_id) {
         try {
             st = connection.createStatement();
             st.executeUpdate("DELETE FROM session WHERE session_id=" + session_id);
-            return true;
+            return "#200";
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("Session id not found.Delete failed");
-            return false;
+            return "#404";
         }
     }
-	boolean isSessionId(session_id) {
+	public String isSessionId(int session_id) {
         try {
             st = connection.createStatement();
             rs=st.executeQuery("SELECT session_id FROM session WHERE session_id=" + session_id);
 			if(rs.next()) {
-            	return true;
+            	return "#200";
 			}
         } catch (SQLException ex) {
-            ex.printStackTrace();
             System.out.println("Session id not found.");
-            return false;
+            return "#404";
         }
 	
 	}
