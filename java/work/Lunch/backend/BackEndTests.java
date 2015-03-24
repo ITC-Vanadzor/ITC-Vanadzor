@@ -153,7 +153,7 @@ public class BackEndTests {
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
                 .setPath("lunchOrder-1/getPlaces")
-                .serParameter("a", "A")
+                .setParameter("a", "A")
                 .build();
             HttpGet httpget = new HttpGet(uri);
             responseBody = httpclient.execute(httpget, responseHandler);
@@ -573,6 +573,7 @@ public class BackEndTests {
             httpclient.close();
         }
         assertEquals(status, 200);
+		assertEquals(responseBody, "");
     }
 
     @Test
@@ -611,7 +612,7 @@ public class BackEndTests {
     }
 
     @Test
-    public void testResponseLogOuts404() throws Exception {
+    public void testResponseLogOut404() throws Exception {
         try {
             URI uri = new URIBuilder()
                 .setScheme("http")
