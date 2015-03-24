@@ -46,19 +46,17 @@ public class LunchDBConnect {
 @throw sqlexception error if an error occurred working with database
 */
 
-    public ArrayList getPlaces() {
+    public ArrayList getPlaces() throws SQLException{
         ArrayList<Places> placesList = new ArrayList<Places>();
-        try {
             st = connection.createStatement();
             rs = st.executeQuery("SELECT * FROM place");
+            if (rs==null) {
+            throw new SQLException();}
             while(rs.next()) {
                 Places place=new Places(rs.getInt("id"),rs.getString("place_name"));
                 placesList.add(place);
             }
             return placesList;
-        } catch (SQLException error) {
-            return null;
-        }
     }
 
 /**
@@ -69,16 +67,19 @@ public class LunchDBConnect {
 @throw sqlexception error, when wrong username or password 
 */
 
-    public String login(String username, String password) {
+    public String login(String username, String password) throws SQLException{
         try {
             st = connection.createStatement();
             st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))",Statement.RETURN_GENERATED_KEYS);
 			rs=st.getGeneratedKeys();
             if (rs.next()) {
                 return rs.getString("session_id");
+            } else {
+                return "#404";
             }
         } catch (SQLException ex) {
-        	return "#404";
+            ex.printStackTrace();
+        	return "#500";
 		}
     }
 
@@ -168,9 +169,11 @@ and product count, and inserts its to order list
             rs=st.getGeneratedKeys();
 			if (rs.next()) {
                 return rs.getString("id");
+            } else {
+                return "#404";
             }
         } catch (SQLException ex) {
-            return "#404";
+            return "#500";
         }
     }
 
@@ -319,10 +322,12 @@ removes it from database (log outing)
             rs=st.executeQuery("SELECT session_id FROM session WHERE session_id=" + session_id);
 			if(rs.next()) {
             	return "#200";
-			}
+			} else {
+                return "#404";
+            }
         } catch (SQLException ex) {
-            System.out.println("Session id not found.");
-            return "#404";
+            //System.out.println("Session id not found.");
+            return "#500";
         }
 	
 	}
