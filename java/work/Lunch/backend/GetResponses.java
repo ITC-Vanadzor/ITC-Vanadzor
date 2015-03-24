@@ -10,10 +10,13 @@ import org.json.simple.parser.JSONParser;
 import java.util.*;
 import org.json.simple.JSONValue;
 
+// AREG -> comments, comments ;)
 public class GetResponses {
 
+    // AREG -> dont forget about the encapsulation and keep class members PRIVATE
     public JSONParser parser = new JSONParser();
 
+    // AREG -> it doesnt look like you are actually using this variable as a member; its just being used in the "getSessionId" method. A local variable would be correct in this case.
     public String sessionId;
 
     LunchDBConnect lunch;
@@ -26,10 +29,12 @@ public class GetResponses {
         ArrayList<String> result = new ArrayList<String>();
         try {
             Map<String, String> jsonObj = (Map<String, String>) parser.parse(loginPass);
+            // AREG -> dont use hardocded constants inside the code. Keep separate definitions for them.
             sessionId = lunch.login(jsonObj.get("username"), jsonObj.get("password")).toString();
             result.add("200");
             result.add(sessionId);
             return result;
+        // AREG -> have the same code inside of two different "catch" statements is not a good sign ;) Maybe you should unify them, or change the response code / message?
         } catch (RuntimeException re) {
             result.add("404");
             result.add("Invalid order and password!");
@@ -199,6 +204,7 @@ public class GetResponses {
             int placeId = Integer.parseInt((String) jsonObj.get("placeId"));
             int productId = Integer.parseInt((String) jsonObj.get("productId"));
             int count = Integer.parseInt((String) jsonObj.get("count"));
+            // AREG -> lets discuss this mysterious method with Marine :)
             String response = lunch.addOrder(sessId, placeId, productId, count);
 
             if (response == "#200") {

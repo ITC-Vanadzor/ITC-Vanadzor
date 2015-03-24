@@ -34,6 +34,8 @@ public class GetResponces {
     public String getSessionId(String loginPass) {
         try {
             Map<String, String> jsonObj = (Map<String, String>) parser.parse(loginPass);
+            // AREG -> verify that jsonObj.get("username") != null
+            // AREG -> don't use hardcoded strings in the code
             sessionId = lunch.login(jsonObj.get("username"), jsonObj.get("password")).toString();
             return sessionId;
         } catch (ParseException pe) {
@@ -43,6 +45,7 @@ public class GetResponces {
         return "";
     }
 
+    // AREG -> return Strings from all methods (so Vahan can use them)
     public void responsePlacesList() {
 
         List<Places> placesList = new ArrayList<>();
@@ -134,6 +137,7 @@ public class GetResponces {
         System.out.println(jsonArr);
     }
 
+    // AREG -> return code and body from all methods (e.g. by List)
     public void responseDeleteOrder(String queryJson) {
         
         Object obj = JSONValue.parse(queryJson);
