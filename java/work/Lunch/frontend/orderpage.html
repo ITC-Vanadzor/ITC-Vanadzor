@@ -7,7 +7,7 @@
     <title>Let's have tasty break </title>
     <script src="js/orderpage.js"></script>
 </head>
-<body onload="printOldOrders(),getPlaces()">
+<body onload="getOrderList(),getPlaces()">
     <div id="main">
         <form name="orders" >
             <div id="placesDiv">
@@ -15,7 +15,7 @@
                 </select>    
             </div>
             <div id="productsDiv">
-                <input name="products" id="products" type="text" placeholder="Type product name" onkeyup="setTimeout(function() { loadproducts(); }, 1500)">
+                <input id="products" type="text" placeholder="Type product name" onkeyup="setTimeout(function() { loadproducts(); }, 1500)">
                 <div id="product_list" >bbbbb 
                 </div> 
             </div>    
@@ -29,7 +29,7 @@
             <!--
             AREG -> clarify usage of name and id attributes
             -->
-            <button name="addButton"id="addButton" >Add</button>
+            <button id="addButton" >Add</button>
         </form>    
         <div id="table" >
         </div>

@@ -46,12 +46,7 @@ function login(){
 function hideDiv(el){
     el.setAttribute("style","visibility: hidden;");
 }
-function loadproducts(){
-    var prod_text ='[{"productId":"01","productName":"qyabab"},{"productId":"02","productName":"iqibir"},{"productId":"03","productName":"hamburger"},{"productId":"04","productName":"sendwich"},{"productId":"05","productName":"et cetera"}]';
-    var product_list = JSON.parse(prod_text);
-    var value = document.getElementById("products").value;
-    if (value.length==2){
-        var sel = document.createElement("select");
+function printProducts(product_list){  
         sel.setAttribute("size",product_list.length);
         for (var j in product_list){
             var option = document.createElement("option");
@@ -65,12 +60,47 @@ function loadproducts(){
         parent_div.innerHTML = "";
         parent_div.setAttribute("style","visibility: visible;");
         parent_div.appendChild(sel);
+}
+function loadproducts(){
+   // var prod_text ='[{"productId":"01","productName":"qyabab"},{"productId":"02","productName":"iqibir"},{"productId":"03","productName":"hamburger"},{"productId":"04","productName":"sendwich"},{"productId":"05","productName":"et cetera"}]';
+    var value = document.getElementById("products").value;
+    var e = document.getElementById("places");
+    var strPlace = e.options[e.selectedIndex].text;
+    if (value.length==2){
+        var prod_json = [{"place_id":strPlace, "input_str":value }];
+        jaxRequest = new XMLHttpRequest();
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
+                var jsontext = ajaxRequest.responseText;
+                var product_list = JSON.parse(jsontext);
+                printProducts(product_list);
+            }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){//code should be changed!!!!!!!!!
+                document.getElementById("main").innerHTML = " Can't find ";
+            }
+        }
+        ajaxRequest.open("POST", "http://localhost:8080", true);//method should be corrected
+        ajaxRequest.send(JSON.stringify(prod_json));
     }
 }
+function getPlaces(){
+    jaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function(){
+        if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
+            var jsontext = ajaxRequest.responseText;
+            var places_list = JSON.parse(jsontext);
+            printPlaces(places_list);
+        }
+        else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){//code should be changed!!!!!!!!!
+            document.getElementById("main").innerHTML = " Can't find ";
+        }
+    }
+    ajaxRequest.open("POST", "http://localhost:8080", true);//method should be corrected
+    ajaxRequest.send(null);
+}
 
-function getPlaces (){
-
-    var places_list = ["Tashir", "Volodya", "Another place"];
+function printPlaces (places_list){
+    //var places_list = ["Tashir", "Volodya", "Another place"];
     var head_option = document.createElement("option");
     var head_option_text = document.createTextNode("Shop/Bistro");
     head_option.appendChild(head_option_text);
@@ -83,9 +113,29 @@ function getPlaces (){
         
     }
 }
-function printOldOrders(){
-    
-    var orders = '[{"orderId":"01","place_id":"Valod","product_id":"Iqibir","count_id":"2"},{"orderId":"02","place_id":"Tashir","product_id":"Pizza","count_id":"2"}]';
+function getOrderList(){
+    var session_json = [{"sessionId":sessionId}];
+    ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function(){
+        if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
+            var jsontext = ajaxRequest.responseText;
+            var orders = JSON.parse(jsontext);
+            printOldOrders(orders);
+        }
+        else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){//code should be changed!!!!!!!!!
+            document.getElementById("main").innerHTML = " Can't find ";
+        }
+        else if(ajaxRequest.readyState == 4 && ajaxRequest.status==500 ){
+            document.getElementById("main").innerHTML = " Crash!!!!!";
+        }
+    }
+    ajaxRequest.open("POST", "http://localhost:8080", true);
+    ajaxRequest.setRequestHeader("Content-type", "application/json");
+    ajaxRequest.send(JSON.stringify(session_json))
+}
+
+function printOldOrders(orders){
+ //   var orders = '[{"orderId":"01","place_id":"Valod","product_id":"Iqibir","count_id":"2"},{"orderId":"02","place_id":"Tashir","product_id":"Pizza","count_id":"2"}]';
     var obj = JSON.parse(orders);
     for(var i = 0; i<obj.length; ++i ){
         var row = document.createElement("div");
@@ -118,8 +168,7 @@ function printOldOrders(){
         document.getElementById("table").appendChild(row);
     }
 }
-function deleteRow(e)
-{
+function deleteRow(e){
         var orderId = e.childNodes[0].nodeValue;
         var delete_json = [{"sessionId":sessionId},{ "orderId":orderId }];
         ajaxRequest = new XMLHttpRequest();
@@ -147,4 +196,58 @@ function deleteRow(e)
         ajaxRequest.send(JSON.stringify(delete_json));
         return false;
 }
+function validateOrder(){
+    var e = document.getElementById("places");
+    var placeValue = e.options[e.selectedIndex].text;
+    var productValue = document.getElementById("products").value;
+    var countValue =   document.getElementById("count").value;
+    if( placeValue == "" || productValue == "" || countValue == "" ){
+        return false;
+    }
+    return true;
+}
+function printNewRow(){
+
+}
+/*function addOrder(){
+    if(validateOrder()){
+        var order_json = [{"sessionId":sessionId},{"place_id":??????},{"product_id":?}, {"count":document.getElementById("count").value}];
+        ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
+                printNewRow();                
+            }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){
+                document.getElementById("main").innerHTML = " Can't add becouse of wrong sesionId";
+            }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==500 ){
+                document.getElementById("main").innerHTML = " Crash!!!!!";
+            }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==414 ){// status code should be changed
+                document.getElementById("main").innerHTML = " Can't delete becouse of wrong orderId";
+                return false;
+            }
+
+        }
+        ajaxRequest.open("POST", "http://localhost:8080", true);
+        ajaxRequest.setRequestHeader("Content-type", "application/json");
+        ajaxRequest.send(JSON.stringify(order_json));
+
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
