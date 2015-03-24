@@ -1,8 +1,3 @@
-
-/**
- *
- *
- */
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
@@ -10,16 +5,34 @@ import org.json.simple.parser.JSONParser;
 import java.util.*;
 import org.json.simple.JSONValue;
 
-// AREG -> comments, comments ;)
+/*This class have a functions, who can get requests in format 
+ *json and returned array list. Array list first element is a 
+ *cade response and second element is a response body (or error message). 
+ *This class used json parser librery, java util librery and librery from 
+ *connectiong data base. 
+*/
+
 public class GetResponses {
 
-    // AREG -> dont forget about the encapsulation and keep class members PRIVATE
-    public JSONParser parser = new JSONParser();
+    private JSONParser parser = new JSONParser();
 
-    // AREG -> it doesnt look like you are actually using this variable as a member; its just being used in the "getSessionId" method. A local variable would be correct in this case.
-    public String sessionId;
+    private String sessionId;
 
     LunchDBConnect lunch;
+
+    private final String codeOk = "200";
+    private final String codeNoContent = "204";
+    private final String codeNotFound = "404";
+    private final String codeUnauthorized = "401";
+    private final String codeForbidden = "403";
+    private final String codeConflict = "409";
+    private final String codeInternalServer = "500";
+
+    private final String errorMessageNotFound = "Not Found";
+    private final String errorMessageUnauthorized = "Unauthorized";
+    private final String errorMessageForbidden = "Forbidden";
+    private final String errorMessageConflict = "Conflict";
+    private final String errorMessageInternalServer = "Internal Server Error";
 
     public GetResponses(String host, String user, String password) {
         lunch = new LunchDBConnect(host, user, password);
@@ -27,44 +40,62 @@ public class GetResponses {
 
     public ArrayList getSessionId(String loginPass) {
         ArrayList<String> result = new ArrayList<String>();
+        String login = "email";
+        String pass = "password";
         try {
             Map<String, String> jsonObj = (Map<String, String>) parser.parse(loginPass);
-            // AREG -> dont use hardocded constants inside the code. Keep separate definitions for them.
-            sessionId = lunch.login(jsonObj.get("username"), jsonObj.get("password")).toString();
-            result.add("200");
-            result.add(sessionId);
-            return result;
-        // AREG -> have the same code inside of two different "catch" statements is not a good sign ;) Maybe you should unify them, or change the response code / message?
-        } catch (RuntimeException re) {
-            result.add("404");
-            result.add("Invalid order and password!");
+            if ((jsonObj.get(login) != null) && (jsonObj.get(pass) != null)) {
+                sessionId = lunch.login(jsonObj.get(login), jsonObj.get(pass));
+                result.add(codeOk);
+                result.add(sessionId);
+            } else {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
+            }
             return result;
         } catch (ParseException pe) {
-            result.add("404");
-            result.add("Invalid order and password!");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (RuntimeException re) {
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
 
+    //Karen:401? 
     public ArrayList responsePlacesList() {
         ArrayList<String> result = new ArrayList<String>();
         try {
             List<Places> placesList = new ArrayList<>();
             placesList = lunch.getPlaces();
             JSONArray jsonArr = new JSONArray();
-            
+
             for (Places place : placesList) {
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("placeId", place.id);
                 jsonObj.put("placeName", place.placeName);
                 jsonArr.add(jsonObj);
             }
-            result.add("200");
-            result.add(jsonArr.toString());
+            if (jsonArr != null) {
+                result.add(codeOk);
+                result.add(jsonArr.toString());
+            } else {
+                result.add(codeNoContent);
+            }
             return result;
         } catch (RuntimeException re) {
-            result.add("404");
-            result.add("Places not found!");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
@@ -74,6 +105,11 @@ public class GetResponses {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
+            if (jsonObj.get("sessionId") == null) {
+                result.add(codeUnauthorized);
+                result.add(errorMessageUnauthorized);
+                return result;
+            }
             List<Order> ordersList = new ArrayList<>();
             ordersList = lunch.getOrderList(Integer.parseInt((String) jsonObj.get("sessionId")));
             JSONArray jsonArr = new JSONArray();
@@ -88,12 +124,20 @@ public class GetResponses {
                 json.put("status", ord.status);
                 jsonArr.add(jsonObj);
             }
-            result.add("200");
-            result.add(jsonArr.toString());
+            if (jsonArr != null) {
+                result.add(codeOk);
+                result.add(jsonArr.toString());
+            } else {
+                result.add(codeNoContent);
+            }
             return result;
         } catch (RuntimeException re) {
-            result.add("Error Code");
-            result.add("Error message");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
@@ -114,12 +158,20 @@ public class GetResponses {
                 json.put("count", order.count);
                 jsonArr.add(json);
             }
-            result.add("200");
-            result.add(jsonArr.toString());
+            if (jsonArr != null) {
+                result.add(codeOk);
+                result.add(jsonArr.toString());
+            } else {
+                result.add(codeNoContent);
+            }
             return result;
         } catch (RuntimeException re) {
-            result.add("Error Code");
-            result.add("Error message");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
@@ -140,12 +192,20 @@ public class GetResponses {
                 json.put("count", order.count);
                 jsonArr.add(json);
             }
-            result.add("200");
-            result.add(jsonArr.toString());
+            if (jsonArr != null) {
+                result.add(codeOk);
+                result.add(jsonArr.toString());
+            } else {
+                result.add(codeNoContent);
+            }
             return result;
         } catch (RuntimeException re) {
-            result.add("Error Code");
-            result.add("Error message");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
@@ -165,77 +225,133 @@ public class GetResponses {
                 json.put("productName", product.productName);
                 jsonArr.add(json);
             }
-            result.add("200");
-            result.add(jsonArr.toString());
-            return result;
-        } catch (RuntimeException re) {
-            result.add("Error Code");
-            result.add("Error message");
-            return result;
-        }
-    }
-
-    public int responseDeleteOrder(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
-        try {
-            Object obj = JSONValue.parse(queryJson);
-            JSONObject jsonObj = (JSONObject) obj;
-            String response = lunch.deleteOrder(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("orderId")));
-            
-            if (response == "#200") {
-                result.add("200");
-            } else if (response == "#404") {
-                result.add("404");
-                result.add("Conflict distributors!");
+            if (jsonArr != null) {
+                result.add(codeOk);
+                result.add(jsonArr.toString());
+            } else {
+                result.add(codeNoContent);
             }
             return result;
         } catch (RuntimeException re) {
-            result.add("404");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
 
-    public int responseAddOrder(String queryJson) {
+    //Karen:403?
+    public ArrayList responseDeleteOrder(String queryJson) {
         ArrayList<String> result = new ArrayList<String>();
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
+            if (jsonObj.get("sessionId") == null) {
+                result.add(codeUnauthorized);
+                result.add(errorMessageUnauthorized);
+                return result;
+            }
+            boolean response = lunch.deleteOrder(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("orderId")));
+            if (response == true) {
+                result.add(codeNoContent);
+            } else {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
+            }
+            return result;
+        } catch (RuntimeException re) {
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
+            return result;
+        }
+    }
+
+    //Karen:403?
+    public ArrayList responseAddOrder(String queryJson) {
+        ArrayList<String> result = new ArrayList<String>();
+        try {
+            Object obj = JSONValue.parse(queryJson);
+            JSONObject jsonObj = (JSONObject) obj;
+            if (jsonObj.get("sessionId") == null) {
+                result.add(codeUnauthorized);
+                result.add(errorMessageUnauthorized);
+                return result;
+            }
             int sessId = Integer.parseInt((String) jsonObj.get("sessionId"));
+            if (sessId == null) {
+                result.add(codeUnauthorized);
+                result.add(errorMessageUnauthorized);
+                return result;
+            }
             int placeId = Integer.parseInt((String) jsonObj.get("placeId"));
+            if (placeId == null) {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
+                return result;
+            }
             int productId = Integer.parseInt((String) jsonObj.get("productId"));
+            if (productId == null) {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
+                return result;
+            }
             int count = Integer.parseInt((String) jsonObj.get("count"));
-            // AREG -> lets discuss this mysterious method with Marine :)
-            String response = lunch.addOrder(sessId, placeId, productId, count);
-
-            if (response == "#200") {
-                result.add("200");
-            } else if (response == "#404") {
-                result.add("404");
-                result.add("Conflict distributors!");
+            if (count == null) {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
+                return result;
+            }
+            boolean response = lunch.addOrder(sessId, placeId, productId, count);
+            if (response == true) {
+                result.add(codeNoContent);
+            } else {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
             }
             return result;
         } catch (RuntimeException re) {
-            result.add("404");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
 
-    public int responseLogOut(String queryJson) {
+    public ArrayList responseLogOut(String queryJson) {
         ArrayList<String> result = new ArrayList<String>();
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
-            String response = lunch.logout(Integer.parseInt((String) jsonObj.get("sessionId")));
-            
-            if (response == "#204") {
-                result.add("204");
-            } else if (response == "#404") {
-                result.add("404");
-                result.add("Conflict distributors!");
+            if (jsonObj.get("sessionId") == null) {
+                result.add(codeUnauthorized);
+                result.add(errorMessageUnauthorized);
+                return result;
+            }
+            boolean response = lunch.logout(Integer.parseInt((String) jsonObj.get("sessionId")));
+            if (response == true) {
+                result.add(codeNoContent);
+            } else {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
             }
             return result;
         } catch (RuntimeException re) {
-            result.add("404");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
@@ -255,11 +371,20 @@ public class GetResponses {
                 jsonObj.put("name", distrib.name);
                 jsonArr.add(jsonObj);
             }
-            result.add("200");
-            result.add(jsonArr.toString());
+            if (jsonArr != null) {
+                result.add(codeOk);
+                result.add(jsonArr.toString());
+            } else {
+                result.add(codeNoContent);
+            }
             return result;
         } catch (RuntimeException re) {
-            result.add("404");
+            result.add(codeNotFound);
+            result.add(errorMessageNotFound);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
             return result;
         }
     }
@@ -269,20 +394,28 @@ public class GetResponses {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
-            String response = lunch.becomeDistributors(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("placeId")));
-
-            if (response == "#204") {
-                result.add("204");
-            } else if (response == "#409") {
-                result.add("409");
-                result.add("Conflict distributors!");
+            if (jsonObj.get("sessionId") == null) {
+                result.add(codeUnauthorized);
+                result.add(errorMessageUnauthorized);
+                return result;
+            }
+            boolean response = lunch.becomeDistributors(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("placeId")));
+            if (response == true) {
+                result.add(codeNoContent);
+            } else {
+                result.add(codeNotFound);
+                result.add(errorMessageNotFound);
             }
             return result;
-        } catch (RuntimeException re) {
-            result.add("404");
+        } catch (/*TODO*/ex) {
+            result.add(codeInternalServer);
+            result.add(errorMessageInternalServer);
+            return result;
+        } catch (/*TODO*/ex) {
+            result.add(codeUnauthorized);
+            result.add(errorMessageUnauthorized);
             return result;
         }
     }
 
 }
-
