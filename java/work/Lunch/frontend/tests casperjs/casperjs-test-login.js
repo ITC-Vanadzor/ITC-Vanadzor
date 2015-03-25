@@ -1,4 +1,4 @@
-casper.test.begin('The heading exists', 35, function suite(test) {
+casper.test.begin('The heading exists', 37, function suite(test) {
     casper.start('http://localhost/Lunch/loginpage.html', function() {
         test.assertTitle('Log In', 'Title is exist');
         test.assertTitleMatch(/Log In/, 'Ok');
@@ -30,19 +30,21 @@ casper.test.begin('The heading exists', 35, function suite(test) {
         test.assertExists('div#checkbox>input[type="checkbox"]');
 	test.assertSelectorHasText('div#checkbox', 'Remember me');
 	test.assertExists('div#botton');
+	test.assertExists('div#botton>input[name="signin"]');
+	test.assertExists('div#botton.parentNode>input[type="botton"]');
 	test.assertExists('div#botton>input[value="Sign in"]');
-	test.assertExists('div#botton>input[type="button"]');
+	test.assertExists('div#botton>input[id="botton"]');
 	test.assertExists('div#botton>input[onclick="return login()"]');
         test.assertHttpStatus(200);
         test.assertUrlMatch(/^http:\/\//, 'localhost is served in http://');
-                        
     }).run(function() {
         test.done();
     });
-
 });
 
-
- //     test.assertSelectorHasText('div > input', 'Remember me');
+casper.thenClick('div#botton', function() {
+    this.echo("PASS I clicked on first link found, the page is now loaded.");
+});
+casper.run();
 
 

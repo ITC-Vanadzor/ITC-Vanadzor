@@ -25,15 +25,24 @@ casper.test.begin('The heading exists', 25, function suite(test) {
 	test.assertExists('tr>td>a[id="tashir"]');
 	test.assertExists('tr>td>a[id="valod"]');
         test.assertExists('tr>td>a[href="placespage.html"]');
-//	test.assertExists('tr>td>a[onclick="changePlaceName('Tashir')"]');
-//      test.assertExists('tr>td>a[onclick="changePlaceName('Valod')"]');
-	                   
-    }).run(function() {
+	
+
+   }).run(function() {
         test.done();
-    });
+   });
 
 });
 
 
- 
+casper.thenEvaluate(function(term) {
+}, 'CasperJS');
+casper.then(function() {
+    this.click('tr>td>a#valod');
+    this.click('tr>td>a#tashir');
+});
+casper.then(function() {
+    console.log('PASS clicked ok, new location is ' + this.getCurrentUrl());
+});
+casper.run();
+
 

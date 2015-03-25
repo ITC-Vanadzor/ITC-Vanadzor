@@ -1,15 +1,15 @@
-casper.test.begin('The heading exists', 37, function suite(test) {
+casper.test.begin('The heading exists', 38, function suite(test) {
     casper.start('http://localhost/Lunch/orderpage.html', function() {
-        test.assertTitle('Lets have tasty Break', 'Title is exist');
-        test.assertTitleMatch(/Lets have tasty Break/, 'Ok');
+        test.assertTitle('Let\'s have tasty break', 'Title is exist');
+        test.assertTitleMatch(/Let\'s have tasty break/, 'Ok');
         test.assertExists('head');
         test.assertExists('head > meta');
         test.assertExists('head > link');
         test.assertElementCount('link', 2);
         test.assertExists('head > script');
         test.assertExists('head > title');
-        test.assertSelectorHasText('title', 'Lets have tasty Break');
-	test.assertElementCount('div', 16);
+        test.assertSelectorHasText('title', 'Let\'s have tasty break');
+	test.assertElementCount('div', 14);
  	test.assertElementCount('input', 2);
 	test.assertHttpStatus(200, 'Successfully opened page.');
 	test.assertUrlMatch(/^http:\/\//, 'localhost is served in http://');
@@ -37,6 +37,7 @@ casper.test.begin('The heading exists', 37, function suite(test) {
         test.assertExists('form>button[id="addButton"]');
    	test.assertSelectorHasText('form>button', 'Add');
 	test.assertExists('div#table');
+        test.assertExists('div#table', "empty");
 	                   
     }).run(function() {
         test.done();
