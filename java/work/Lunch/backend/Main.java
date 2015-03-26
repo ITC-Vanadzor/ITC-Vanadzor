@@ -1,5 +1,6 @@
 //*********** Testing LunchDBConnect class methods ************
 
+import backend.GetResponses;
 import java.sql.*;
 import java.util.*;
 
@@ -14,7 +15,7 @@ public class Main {
         //LunchDBConnect dbClass = new LunchDBConnect("jdbc:postgresql://localhost:5432/","postgres", "postgres");
         
         GetResponses getResponse = new GetResponses("jdbc:postgresql://localhost:5432/","postgres", "postgres"); 
-        //System.out.println(getResponse.getSessionId("{\"username\": \"Karen\", \"password\": \"karen\"}"));
+        System.out.println(getResponse.getSessionId("{\"email\": \"Karen\", \"password\": \"karen\"}"));
         //System.out.println(getResponse.responsePlacesList());
         //System.out.println(getResponse.responseAddOrder("{\"sessionId\":\"2\",\"placeId\":\"13\",\"productId\":\"2\",\"count\":\"4\"}"));
         //System.out.println(getResponse.responseAddOrder("{\"sessionId\":\"2\",\"placeId\":\"14\",\"productId\":\"1\",\"count\":\"2\"}"));

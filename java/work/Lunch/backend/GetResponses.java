@@ -1,9 +1,18 @@
+package backend;
+
+import database.Distributors;
+import database.LunchDBConnect;
+import database.Order;
+import database.OrdersByPlaces;
+import database.Places;
+import database.Products;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
-import java.util.*;
 import org.json.simple.JSONValue;
+import java.sql.*;
+import java.util.*;
 
 /*This class have a functions, who can get requests in format 
  *json and returned array list. Array list first element is a 
@@ -61,7 +70,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -93,7 +102,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -135,7 +144,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -169,7 +178,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -203,7 +212,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -236,14 +245,13 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
         }
     }
 
-    //Karen:403?
     public ArrayList responseDeleteOrder(String queryJson) {
         ArrayList<String> result = new ArrayList<String>();
         try {
@@ -266,14 +274,13 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
         }
     }
 
-    //Karen:403?
     public ArrayList responseAddOrder(String queryJson) {
         ArrayList<String> result = new ArrayList<String>();
         try {
@@ -284,31 +291,31 @@ public class GetResponses {
                 result.add(errorMessageUnauthorized);
                 return result;
             }
-            int sessId = Integer.parseInt((String) jsonObj.get("sessionId"));
+            Integer sessId = Integer.parseInt((String) jsonObj.get("sessionId"));
             if (sessId == null) {
                 result.add(codeUnauthorized);
                 result.add(errorMessageUnauthorized);
                 return result;
             }
-            int placeId = Integer.parseInt((String) jsonObj.get("placeId"));
+            Integer placeId = Integer.parseInt((String) jsonObj.get("placeId"));
             if (placeId == null) {
                 result.add(codeNotFound);
                 result.add(errorMessageNotFound);
                 return result;
             }
-            int productId = Integer.parseInt((String) jsonObj.get("productId"));
+            Integer productId = Integer.parseInt((String) jsonObj.get("productId"));
             if (productId == null) {
                 result.add(codeNotFound);
                 result.add(errorMessageNotFound);
                 return result;
             }
-            int count = Integer.parseInt((String) jsonObj.get("count"));
+            Integer count = Integer.parseInt((String) jsonObj.get("count"));
             if (count == null) {
                 result.add(codeNotFound);
                 result.add(errorMessageNotFound);
                 return result;
             }
-            boolean response = lunch.addOrder(sessId, placeId, productId, count);
+            String response = lunch.addOrder(sessId, placeId, productId, count);
             if (response == true) {
                 result.add(codeNoContent);
             } else {
@@ -320,7 +327,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -349,7 +356,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -382,7 +389,7 @@ public class GetResponses {
             result.add(codeNotFound);
             result.add(errorMessageNotFound);
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
             return result;
@@ -407,13 +414,9 @@ public class GetResponses {
                 result.add(errorMessageNotFound);
             }
             return result;
-        } catch (/*TODO*/ex) {
+        } catch (Exception ex) {
             result.add(codeInternalServer);
             result.add(errorMessageInternalServer);
-            return result;
-        } catch (/*TODO*/ex) {
-            result.add(codeUnauthorized);
-            result.add(errorMessageUnauthorized);
             return result;
         }
     }
