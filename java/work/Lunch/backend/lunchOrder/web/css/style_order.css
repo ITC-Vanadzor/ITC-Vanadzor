@@ -1,0 +1,126 @@
+#main {
+    width:70%;
+    padding-bottom: 6px;
+    margin: 5% auto;
+    margin-left:10%;
+    border:1px solid #bfbfbf;
+}
+form {
+    height: 40px;
+    margin-bottom: 0px;
+}
+#places {
+    width: 100%;
+    border:1px solid #bfbfbf;
+    height: 44px;
+    font-size: 16px;
+    border-radius:3px;
+}
+#placesDiv{
+    width: 30%;
+    float:left;
+}
+#productsDiv{
+    width:43.4%;
+    position: relative;
+    float: left;
+    padding-left:2px;
+}
+#products {
+    width: 100%;
+    border:1px solid #bfbfbf;
+    /*
+     * AREG -> use consistent syntax to define colors ( either rgb() or # )
+     */
+    background:#DDDDDD; 
+    height: 40px;
+    font-size: 16px;
+    border-radius:3px;
+}
+/*
+ * AREG -> remove duplicate styles
+ */
+select {
+    padding: 0 0 0 3%;
+}
+#countDiv{
+    float: left;
+    padding-left:4px;
+    width: 14.5%;
+}
+#count {
+    width: 100%;
+    border:1px solid #bfbfbf;
+    height: 40px;
+    font-size: 16px;
+    background:#DDDDDD;
+    border-radius:3px;
+}
+#addButton{
+    margin-left: 6px;
+    width: 10%;
+    border:1px solid #bfbfbf;
+    height: 44px;
+    font-size: 16px;
+    border-radius:3px;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #black;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #black;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #black;
+    opacity:  1;
+}
+#product_list {
+    position: absolute;
+    z-index:1;
+   width: 43%;
+   overflow: hidden;
+   border: #black;
+   visibility: hidden;
+}
+/*
+ * AREG -> use more informative names for styles (e.g .in this case could be table_part_places)
+ */
+#table{
+    margin-top:8px;
+}
+.table_part1{
+    width: 29.5%;
+    margin-right: 3px;
+    height: 22px;
+    float:left;
+    padding-left: 3px;
+    border: 1px solid #bfbfbf;   
+}
+.table_part2 {
+    width: 43%;
+    overflow:hidden;
+    margin-right: 3px;
+    height: 22px;
+    float:left;
+    padding-left: 3px;
+    border: 1px solid #bfbfbf;   
+}
+.table_part3 {
+    width: 14.5%;
+    height: 22px;
+    overflow:hidden;
+    margin-right: 4px;
+    float:left;
+    text-align: center;
+    border: 1px solid #bfbfbf;
+}
+.table_part4 {
+    width:10%;
+    overflow:hidden;
+    height:22px;
+    text-align:center;
+}
+.table_part4 button {
+    width:95%;
+}
