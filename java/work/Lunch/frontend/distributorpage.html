@@ -9,16 +9,12 @@ AREG -> add comments
         <link rel="shortcut icon" href="images/logo.png" >
         <title> Distributor </title>
     </head>
-    <body>
-        <div id="distributorMainField" class="clearfix">
+    <body onload="addDistributorList()">
+        <div id="distributorMainField" class="clearfix" >
             <div id="distributors">
-                <table class="table" border="1">
+                <table class="table" id="distrTable">
                     <tr><th>Place</th><th>Distributor</th></tr>
-                    <!--
-                    AREG -> dont use generic function names
-                    -->
-                    <tr><td><a id="tashir" href="placespage.html" onclick="changePlaceName('Tashir');" >Tashir</a> </td><td>---</td></tr>
-                    <tr><td><a id="valod" href="placespage.html" onclick="changePlaceName('Valod');" >Valod </a></td><td>---</td></tr>
+                    <tr><td><a id="jazz" href="placespage.html" onclick="changePlaceName('Jazz');" >Jazz</a></td><td>---</td></tr>
                 </table>
             </div>
         </div>
