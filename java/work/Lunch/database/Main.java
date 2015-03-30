@@ -1,3 +1,5 @@
+//package database
+
 /*********** Testing Main class methods **************
 /********* Version 1.0 *****************************************/
 
@@ -27,5 +29,6 @@ public class Main {
         }
         System.out.println("PostgreSQL JDBC Driver Registered!");
         LunchDBConnect lunch = new LunchDBConnect("jdbc:postgresql://127.0.0.1:5432/lunch", "postgres", "postgres");
+        String str="hfhFSDfre";
     }
 }
