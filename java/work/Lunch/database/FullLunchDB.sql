@@ -357,14 +357,14 @@ SELECT pg_catalog.setval('delivery_id_seq', 7, true);
 --
 
 COPY login (id, username, password) FROM stdin;
-1	Marine	marine
-2	Vahan	vahan
-3	Karen	karen
-4	Hrach	hrach
-5	Movses	movses
-6	Sargis	sargis
-7	Stepan	stepan
-8	Eduard	eduard
+1	Marine@gmail.com	marine
+2	Vahan@gmail.com	vahan
+3	Karen@gmail.com	karen
+4	Hrach@gmail.com	hrach
+5	Movses@gmail.com	movses
+6	Sargis@gmail.com	sargis
+7	Stepan@gmail.com	stepan
+8	Eduard@gmail.com	eduard
 \.
 
 
