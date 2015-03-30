@@ -23,4 +23,7 @@ public class Places {
     public int getPlaceId() {
         return placeId;
     }
+    public String getPlaceName() {
+        return placeName;
+    }
 }

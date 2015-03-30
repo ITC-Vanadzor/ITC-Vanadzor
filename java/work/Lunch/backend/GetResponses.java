@@ -1,4 +1,4 @@
-package backend;
+package requestController;
 
 import database.Distributors;
 import database.LunchDBConnect;
@@ -6,6 +6,7 @@ import database.Order;
 import database.OrdersByPlaces;
 import database.Places;
 import database.Products;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
@@ -19,8 +20,7 @@ import java.util.*;
  *cade response and second element is a response body (or error message). 
  *This class used json parser librery, java util librery and librery from 
  *connectiong data base. 
-*/
-
+ */
 public class GetResponses {
 
     private JSONParser parser = new JSONParser();
@@ -29,13 +29,13 @@ public class GetResponses {
 
     LunchDBConnect lunch;
 
-    private final String codeOk = "200";
-    private final String codeNoContent = "204";
-    private final String codeNotFound = "404";
-    private final String codeUnauthorized = "401";
-    private final String codeForbidden = "403";
-    private final String codeConflict = "409";
-    private final String codeInternalServer = "500";
+    private final int codeOk = 200;
+    private final int codeNoContent = 204;
+    private final int codeNotFound = 404;
+    private final int codeUnauthorized = 401;
+    private final int codeForbidden = 403;
+    private final int codeConflict = 409;
+    private final int codeInternalServer = 500;
 
     private final String errorMessageNotFound = "Not Found";
     private final String errorMessageUnauthorized = "Unauthorized";
@@ -47,39 +47,32 @@ public class GetResponses {
         lunch = new LunchDBConnect(host, user, password);
     }
 
-    public ArrayList getSessionId(String loginPass) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode getSessionId(String loginPass) {
         String login = "email";
         String pass = "password";
         try {
             Map<String, String> jsonObj = (Map<String, String>) parser.parse(loginPass);
             if ((jsonObj.get(login) != null) && (jsonObj.get(pass) != null)) {
                 sessionId = lunch.login(jsonObj.get(login), jsonObj.get(pass));
-                result.add(codeOk);
-                result.add(sessionId);
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, sessionId);
+                return result;
             } else {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
+                return result;
             }
-            return result;
         } catch (ParseException pe) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    //Karen:401? 
-    public ArrayList responsePlacesList() {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responsePlacesList() {
         try {
             List<Places> placesList = new ArrayList<>();
             placesList = lunch.getPlaces();
@@ -87,36 +80,32 @@ public class GetResponses {
 
             for (Places place : placesList) {
                 JSONObject jsonObj = new JSONObject();
-                jsonObj.put("placeId", place.id);
-                jsonObj.put("placeName", place.placeName);
+                jsonObj.put("placeId", place.getPlaceId());
+                jsonObj.put("placeName", place.getPlaceName());
                 jsonArr.add(jsonObj);
             }
             if (jsonArr != null) {
-                result.add(codeOk);
-                result.add(jsonArr.toString());
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, jsonArr.toString());
+                return result;
             } else {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, "");
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseOrdersList(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseOrdersList(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
             if (jsonObj.get("sessionId") == null) {
-                result.add(codeUnauthorized);
-                result.add(errorMessageUnauthorized);
+                ResponseBodyCode result = new ResponseBodyCode(codeUnauthorized, errorMessageUnauthorized);
                 return result;
             }
             List<Order> ordersList = new ArrayList<>();
@@ -134,25 +123,22 @@ public class GetResponses {
                 jsonArr.add(jsonObj);
             }
             if (jsonArr != null) {
-                result.add(codeOk);
-                result.add(jsonArr.toString());
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, jsonArr.toString());
+                return result;
             } else {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseOrdersByPerson(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseOrdersByPerson(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
@@ -162,31 +148,28 @@ public class GetResponses {
 
             for (OrdersByPlaces order : ordersList) {
                 JSONObject json = new JSONObject();
-                json.put("userName", order.username);
-                json.put("productName", order.productName);
-                json.put("count", order.count);
+                json.put("userName", order.getEmail());
+                json.put("productName", order.getProductName());
+                json.put("count", order.getCount());
                 jsonArr.add(json);
             }
             if (jsonArr != null) {
-                result.add(codeOk);
-                result.add(jsonArr.toString());
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, jsonArr.toString());
+                return result;
             } else {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseOrdersByPlace(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseOrdersByPlace(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
@@ -196,31 +179,28 @@ public class GetResponses {
 
             for (OrdersByPlaces order : ordersList) {
                 JSONObject json = new JSONObject();
-                json.put("userName", order.username);
-                json.put("productName", order.productName);
-                json.put("count", order.count);
+                json.put("email", order.getEmail());
+                json.put("productName", order.getProductName());
+                json.put("count", order.getCount());
                 jsonArr.add(json);
             }
             if (jsonArr != null) {
-                result.add(codeOk);
-                result.add(jsonArr.toString());
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, jsonArr.toString());
+                return result;
             } else {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseProductsList(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseProductsList(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
@@ -234,137 +214,119 @@ public class GetResponses {
                 json.put("productName", product.productName);
                 jsonArr.add(json);
             }
+
             if (jsonArr != null) {
-                result.add(codeOk);
-                result.add(jsonArr.toString());
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, jsonArr.toString());
+                return result;
             } else {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseDeleteOrder(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseDeleteOrder(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
             if (jsonObj.get("sessionId") == null) {
-                result.add(codeUnauthorized);
-                result.add(errorMessageUnauthorized);
+                ResponseBodyCode result = new ResponseBodyCode(codeUnauthorized, errorMessageUnauthorized);
                 return result;
             }
             boolean response = lunch.deleteOrder(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("orderId")));
             if (response == true) {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             } else {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseAddOrder(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseAddOrder(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
             if (jsonObj.get("sessionId") == null) {
-                result.add(codeUnauthorized);
-                result.add(errorMessageUnauthorized);
+                ResponseBodyCode result = new ResponseBodyCode(codeUnauthorized, errorMessageUnauthorized);
                 return result;
             }
             Integer sessId = Integer.parseInt((String) jsonObj.get("sessionId"));
             if (sessId == null) {
-                result.add(codeUnauthorized);
-                result.add(errorMessageUnauthorized);
+                ResponseBodyCode result = new ResponseBodyCode(codeUnauthorized, errorMessageUnauthorized);
                 return result;
             }
             Integer placeId = Integer.parseInt((String) jsonObj.get("placeId"));
             if (placeId == null) {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
                 return result;
             }
             Integer productId = Integer.parseInt((String) jsonObj.get("productId"));
             if (productId == null) {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
                 return result;
             }
             Integer count = Integer.parseInt((String) jsonObj.get("count"));
             if (count == null) {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
                 return result;
             }
             String response = lunch.addOrder(sessId, placeId, productId, count);
-            if (response == true) {
-                result.add(codeNoContent);
+            if (response != null) {
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
+                return result;
             } else {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseLogOut(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseLogOut(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
             if (jsonObj.get("sessionId") == null) {
-                result.add(codeUnauthorized);
-                result.add(errorMessageUnauthorized);
+                ResponseBodyCode result = new ResponseBodyCode(codeUnauthorized, errorMessageUnauthorized);
                 return result;
             }
             boolean response = lunch.logout(Integer.parseInt((String) jsonObj.get("sessionId")));
             if (response == true) {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             } else {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseGetDistributors() {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseGetDistributors() {
         try {
             List<Distributors> distributorsList = new ArrayList<>();
             distributorsList = lunch.getDistributors();
@@ -372,51 +334,49 @@ public class GetResponses {
 
             for (Distributors distrib : distributorsList) {
                 JSONObject jsonObj = new JSONObject();
-                jsonObj.put("placeId", distrib.placeId);
-                jsonObj.put("placeName", distrib.placeName);
-                jsonObj.put("nameId", distrib.nameId);
-                jsonObj.put("name", distrib.name);
+                jsonObj.put("placeId", distrib.getPlaceId());
+                jsonObj.put("placeName", distrib.getPlaceName());
+                jsonObj.put("nameId", distrib.getEmailId());
+                jsonObj.put("name", distrib.getEmail());
                 jsonArr.add(jsonObj);
             }
             if (jsonArr != null) {
-                result.add(codeOk);
-                result.add(jsonArr.toString());
+                ResponseBodyCode result = new ResponseBodyCode(codeOk, jsonArr.toString());
+                return result;
             } else {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             }
-            return result;
         } catch (RuntimeException re) {
-            result.add(codeNotFound);
-            result.add(errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
 
-    public ArrayList responseBecomeDistributor(String queryJson) {
-        ArrayList<String> result = new ArrayList<String>();
+    public ResponseBodyCode responseBecomeDistributor(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
             if (jsonObj.get("sessionId") == null) {
-                result.add(codeUnauthorized);
-                result.add(errorMessageUnauthorized);
+                ResponseBodyCode result = new ResponseBodyCode(codeUnauthorized, errorMessageUnauthorized);
                 return result;
             }
             boolean response = lunch.becomeDistributors(Integer.parseInt((String) jsonObj.get("sessionId")), Integer.parseInt((String) jsonObj.get("placeId")));
             if (response == true) {
-                result.add(codeNoContent);
+                ResponseBodyCode result = new ResponseBodyCode(codeNoContent, "");
+                return result;
             } else {
-                result.add(codeNotFound);
-                result.add(errorMessageNotFound);
+                ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
+                return result;
             }
+        } catch (RuntimeException re) {
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         } catch (Exception ex) {
-            result.add(codeInternalServer);
-            result.add(errorMessageInternalServer);
+            ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         }
     }
