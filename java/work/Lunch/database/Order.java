@@ -1,3 +1,4 @@
+
 /**
 @detailed class working with database Orders table
 */
@@ -31,6 +32,27 @@ public class Order {
       this.count = count;
       this.date = date;
       this.status = status;
+    }
+    public String getPlaceName() {
+        return placeName;
+    }
+    public int getPlaceId() {
+        return placeId;
+    }
+    public String getProductName() {
+        return productName;
+    }
+    public int getProductId() {
+        return productId;
+    }
+    public int getCount() {
+        return count;
+    }
+    public String getDate() {
+        return date;
+    }
+    public String getStatus() {
+        return status;
     }
 }
 

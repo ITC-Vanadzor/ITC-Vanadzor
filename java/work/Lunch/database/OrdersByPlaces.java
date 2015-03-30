@@ -1,3 +1,4 @@
+
 public class OrdersByPlaces {
 
 /**
@@ -8,7 +9,7 @@ public class OrdersByPlaces {
 
     String productName;
     int count;
-    String username;
+    String email;
 
 /**
 @detailed This method gets productName, count, username and saves it
@@ -17,7 +18,17 @@ public class OrdersByPlaces {
     public OrdersByPlaces (String productName,int count,String username) {
       this.productName = productName;
       this.count = count;
-      this.username = username;
+      this.email = email;
     }
+    public String getProductName() {
+        return productName;
+    }
+    public int getCount() {
+        return count;
+    }
+    public String getEmail() {
+        return email;
+    }
+      
 }
 

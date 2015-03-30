@@ -1,3 +1,4 @@
+
 /**
 @detailed class working with database Products table
 */
@@ -31,5 +32,13 @@ public class Products {
         this.productId = productId;
         this.count = count;
     }
-
+    public String getProductName() {
+        return productName;
+    }
+    public int getProductId() {
+        return productId;
+    }
+    public int getCount() {
+        return count;
+    }
 }
