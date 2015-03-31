@@ -5,15 +5,14 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
-    <display-name>HelloWorld Application</display-name>
+    <display-name>Lunch Application</display-name>
     <description>
-        This is a simple web application with a source code organization
-        based on the recommendations of the Application Developer's Guide.
+        This is a web application created by ITC-Vanadzor 2015.
     </description>
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>examples.Login</servlet-class>
+        <servlet-class>servlets.Login</servlet-class>
     </servlet>
 
     <servlet-mapping>
