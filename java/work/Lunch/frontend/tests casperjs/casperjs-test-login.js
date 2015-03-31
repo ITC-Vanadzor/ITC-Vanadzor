@@ -1,4 +1,4 @@
-casper.test.begin('The heading exists', 37, function suite(test) {
+casper.test.begin('The heading exists', 35, function suite(test) {
     casper.start('http://localhost/Lunch/loginpage.html', function() {
         test.assertTitle('Log In', 'Title is exist');
         test.assertTitleMatch(/Log In/, 'Ok');
@@ -27,14 +27,12 @@ casper.test.begin('The heading exists', 37, function suite(test) {
         test.assertExists('div.login-component>input[type="password"]');
         test.assertExists('div.login-component>input[id="pswd"]');
    	test.assertExists('div.login-component>input[placeholder="Password"]');
-        test.assertExists('div#checkbox>input[type="checkbox"]');
+        test.assertExists('div>input[type="checkbox"]');
 	test.assertSelectorHasText('div#checkbox', 'Remember me');
-	test.assertExists('div#botton');
-	test.assertExists('div#botton>input[name="signin"]');
-	test.assertExists('div#botton.parentNode>input[type="botton"]');
-	test.assertExists('div#botton>input[value="Sign in"]');
-	test.assertExists('div#botton>input[id="botton"]');
-	test.assertExists('div#botton>input[onclick="return login()"]');
+	test.assertExists('div>input[type="button"]');
+	test.assertExists('div>input[value="Sign in"]');
+	test.assertExists('div>input[id="botton"]');
+	test.assertExists('div>input[onclick="return login()"]');
         test.assertHttpStatus(200);
         test.assertUrlMatch(/^http:\/\//, 'localhost is served in http://');
     }).run(function() {
@@ -42,7 +40,7 @@ casper.test.begin('The heading exists', 37, function suite(test) {
     });
 });
 
-casper.thenClick('div#botton', function() {
+casper.thenClick('div>input#botton', function() {
     this.echo("PASS I clicked on first link found, the page is now loaded.");
 });
 casper.run();
