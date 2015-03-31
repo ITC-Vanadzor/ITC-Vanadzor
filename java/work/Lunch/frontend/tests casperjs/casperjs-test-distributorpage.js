@@ -1,4 +1,4 @@
-casper.test.begin('The heading exists', 25, function suite(test) {
+casper.test.begin('The heading exists', 21, function suite(test) {
     casper.start('http://localhost/Lunch/distributorpage.html', function() {
         test.assertTitle('Distributor', 'Title is exist');
         test.assertTitleMatch(/Distributor/, 'Ok');
@@ -17,32 +17,22 @@ casper.test.begin('The heading exists', 25, function suite(test) {
  	test.assertExists('div#distributors');
 	test.assertExists('div>table');
         test.assertExists('div>table.table');
-	test.assertExists('div>table[border="1"]');
+	test.assertExists('div>table#distrTable');
         test.assertSelectorHasText('tr>th', 'Place');
 	test.assertSelectorHasText('tr>th', 'Distributor');
-   	test.assertSelectorHasText('tr>td>a', 'Tashir');
-	test.assertSelectorHasText('tr>td>a', 'Valod');
-	test.assertExists('tr>td>a[id="tashir"]');
-	test.assertExists('tr>td>a[id="valod"]');
-        test.assertExists('tr>td>a[href="placespage.html"]');
-	
-
+   	test.assertSelectorHasText('tr>td>a', 'Jazz');
    }).run(function() {
         test.done();
    });
-
 });
-
 
 casper.thenEvaluate(function(term) {
 }, 'CasperJS');
 casper.then(function() {
-    this.click('tr>td>a#valod');
-    this.click('tr>td>a#tashir');
+    this.click('tr>td>a#Jazz');
 });
 casper.then(function() {
     console.log('PASS clicked ok, new location is ' + this.getCurrentUrl());
 });
 casper.run();
-
 
