@@ -1,3 +1,4 @@
+//package database
 
 /**
  * ********* JAVA Project which working with Databases *************** ********
@@ -43,8 +44,9 @@ public class LunchDBConnect {
 
     /**
      * @brief Select from the database a list of places
-     * @return List of places or null if exception error
+     * @return List of places
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if the placesList is empty 
      */
 
     public ArrayList getPlaces() throws Exception {
@@ -68,17 +70,18 @@ public class LunchDBConnect {
     /**
      * @detailed This method gets login id with username and password and
      * returns generated session id
-     * @param username for logged in user
+     * @param email for logged in user
      * @param password for logged in user
-     * @returns session id for current user, and 404 error, when throw
+     * @returns session id for current user
+     * @throw sqlexception error if an error occurred working with database
      * @throw sqlexception error, when wrong username or password
      */
-    public String login(String username, String password) throws Exception {
+    public String login(String email, String password) throws Exception {
         st = connection.createStatement();
         if (st==null) {
             throw new SQLException();
         }
-        st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE username='" + username + "' AND password='" + password + "'))", Statement.RETURN_GENERATED_KEYS);
+        st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE email='" + email + "' AND password='" + password + "'))", Statement.RETURN_GENERATED_KEYS);
         rs = st.getGeneratedKeys();
         if (rs.next()) {
             return rs.getString("session_id");
@@ -91,8 +94,9 @@ public class LunchDBConnect {
      * @detailed This method gets session id and returns order list for current
      * user
      * @param session_id generating, when gets login id
-     * @returns order list or empty list or null
-     * @throw sqlexception error, when wrong session id
+     * @returns order list
+     * @throw sqlexception error if an error occurred working with database
+     * @throw exception error, if the orderList is empty
      */
 
     public ArrayList getOrderList(int session_id) throws Exception {
@@ -106,7 +110,7 @@ public class LunchDBConnect {
             Order order = new Order(rs.getString("place_name"), rs.getInt("place_Id"), rs.getString("products_name"), rs.getInt("products_id"), rs.getInt("count"), rs.getString("date"), rs.getString("status"));
             orderList.add(order);
         }
-        if (orderList.isEmpty()) {
+        if (!(orderList.isEmpty())) {
             return orderList;
         } else {
             throw new Exception("List of order is empty");
@@ -118,8 +122,9 @@ public class LunchDBConnect {
      * current user
      * @param session_id generating, when gets login id
      * @param order_id unique value of order
-     * @returns true, when successfully removed order or false, when not removed
+     * @returns true, when successfully removed order or false
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if an invalid order id and order not removed 
      */
 
     public boolean deleteOrder(int session_id, int order_id) throws Exception {
@@ -140,8 +145,9 @@ public class LunchDBConnect {
      * and returns product name list, which starting with that letters
      * @param place_id unique values of places
      * @param word part of letters for product name
-     * @returns products list or null, when sqlexception error
+     * @returns products list
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if an products list is empty 
      */
 
     public ArrayList getProducts(int place_id, String word) throws Exception {
@@ -150,7 +156,7 @@ public class LunchDBConnect {
         if (st==null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT products_id, products_name FROM products,productsByPlaces WHERE productsByPlaces.place_id=" + place_id + " AND products_id=products.id AND products_name Like '" + word + "%'");
+        rs = st.executeQuery("SELECT products_id, products_name FROM products,productsByPlaces WHERE productsByPlaces.place_id=" + place_id + " AND products_id=products.id AND products_name Like '" + word.toLowerCase() + "%'");
         while (rs.next()) {
             Products products = new Products(rs.getString("products_name"), rs.getInt("products_id"));
             productsList.add(products);
@@ -169,8 +175,9 @@ public class LunchDBConnect {
      * @param place_id unique values for places
      * @param products_id unique values for products
      * @param count count of product
-     * @returns true, when order added into database or false, when sqlexception
+     * @returns true, when order added into database or false
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if this place doesn't have this product 
      */
 
     public String addOrder(int session_id, int place_id, int products_id, int count) throws Exception {
@@ -189,8 +196,9 @@ public class LunchDBConnect {
 
     /**
      * @brief This method returns distributors list
-     * @returns distributors list or null if sqlexception error
+     * @returns distributors list
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if an distributors list is empty 
      */
     public ArrayList getDistributors() throws Exception{
         ArrayList<Distributors> distributorsList = new ArrayList<Distributors>();
@@ -198,7 +206,7 @@ public class LunchDBConnect {
         if (st==null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT username,delivery.login_id,place_name,delivery.place_id FROM login,place,delivery WHERE delivery.login_id=login.id AND delivery.place_id=place.id AND delivery.date=CURRENT_DATE");
+        rs = st.executeQuery("SELECT email,delivery.login_id,place_name,delivery.place_id FROM login,place,delivery WHERE delivery.login_id=login.id AND delivery.place_id=place.id AND delivery.date=CURRENT_DATE");
         while (rs.next()) {
             Distributors distributor = new Distributors(rs.getString("username"), rs.getInt("login_id"), rs.getString("place_name"), rs.getInt("place_id"));
             distributorsList.add(distributor);
@@ -215,9 +223,10 @@ public class LunchDBConnect {
      * list current username
      * @param session_id unique value for current user
      * @param place_id unique values for places
-     * @returns true, when successfully inserted order or false, when not
-     * inserted
+     * @returns true, when successfully inserted order
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if an insert into delivery failed 
+     * @throw exception error if an there are people going to this place 
      */
     
     public boolean becomeDistributors(int session_id, int place_id) throws Exception {
@@ -243,8 +252,9 @@ public class LunchDBConnect {
      * @detailed This method gets place id and returns overall count of orders
      * by product name and product id
      * @param place_id unique values for places
-     * @returns Products list or sqlexception error
+     * @returns Products list
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if an products list is empty 
      */
     public ArrayList getProducts(int place_id) throws Exception {
         ArrayList<Products> productsList = new ArrayList<Products>();
@@ -269,8 +279,9 @@ public class LunchDBConnect {
      * the current user at current day
      * @param place_id unique values of places
      * @param login_id unique value for current user
-     * @returns orders by places list or null, when sqlexception error
+     * @returns orders by places list 
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if an orders by places list is empty
      */
     public ArrayList getOrders(int place_id, int login_id) throws Exception {
         ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
@@ -278,9 +289,9 @@ public class LunchDBConnect {
         if (st==null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT products_name,sum(count),username FROM login,products,Orders,productsByPlaces WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=" + login_id + " AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id");
+        rs = st.executeQuery("SELECT products_name,sum(count),email FROM login,products,Orders,productsByPlaces WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=" + login_id + " AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id");
         while (rs.next()) {
-            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("count"), rs.getString("username"));
+            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("count"), rs.getString("email"));
             ordersByPlacesList.add(orderByPlaces);
         }
         if (!(ordersByPlacesList.isEmpty())) {
@@ -294,8 +305,9 @@ public class LunchDBConnect {
      * @detailed This method gets place id and returns overall count of orders
      * by product name and product id for all users at current day
      * @param place_id unique values of places
-     * @returns Products by places list or null, when sqlexception error
+     * @returns Products by places list 
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if an orders by places list is empty
      */
     public ArrayList getOrders(int place_id) throws Exception {
         ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
@@ -303,9 +315,9 @@ public class LunchDBConnect {
         if (st==null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT products_name,sum(count),username FROM login,products,Orders,productsByPlaces WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=login_id AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id ORDER BY username");
+        rs = st.executeQuery("SELECT products_name,sum(count),email FROM login,products,Orders,productsByPlaces WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=login_id AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id");
         while (rs.next()) {
-            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("count"), rs.getString("username"));
+            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("count"), rs.getString("email"));
             ordersByPlacesList.add(orderByPlaces);
         }
         if (!(ordersByPlacesList.isEmpty())) {
@@ -319,9 +331,9 @@ public class LunchDBConnect {
      * @detailed This method gets session id and removes it from database (log
      * outing)
      * @param session_id unique value for current user
-     * @returns true, when session removed in database or false, when not
-     * removed
+     * @returns true, when session removed in database
      * @throw sqlexception error if an error occurred working with database
+     * @throw exception error if session id not found ant delete failed
      */
 
     public boolean logout(int session_id) throws Exception {

@@ -7,7 +7,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -33,11 +33,11 @@ public class BackEndTests {
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
                 .setPath("lunchOrder-1/login")
-                .setParameter("name", "Hrach")
+                .setParameter("email", "Hrach.M.96@mail.ru")
                 .setParameter("password", "231996")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -53,8 +53,8 @@ public class BackEndTests {
                 .setHost("192.168.33.64:8080")
                 .setPath("lunchOrder-1/login")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -70,8 +70,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getOrderList")
                 .setParameter("sessionId","id")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -88,8 +88,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getOrderList")
                 .setParameter("sessionId","id")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -105,8 +105,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getOrderList")
                 .setParameter("sessionId","invalidId")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -121,8 +121,8 @@ public class BackEndTests {
                 .setHost("192.168.33.64:8080")
                 .setPath("lunchOrder-1/getOrderList")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -137,8 +137,8 @@ public class BackEndTests {
                 .setHost("192.168.33.64:8080")
                 .setPath("lunchOrder-1/getPlaces")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -155,8 +155,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getPlaces")
                 .setParameter("a", "A")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -171,8 +171,8 @@ public class BackEndTests {
                 .setHost("192.168.33.64:8080")
                 .setPath("lunchOrder-1/getProducts")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -189,8 +189,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getProducts")
                 .setParameter("a", "A")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -209,8 +209,8 @@ public class BackEndTests {
 				.setParameter("product", "qyabab")
 				.setParameter("count", 2)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -229,8 +229,8 @@ public class BackEndTests {
                 .setParameter("product", "qyabab")
                 .setParameter("count", 2)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -249,8 +249,8 @@ public class BackEndTests {
                 .setParameter("product", "pizza")
                 .setParameter("count", 2)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -269,8 +269,8 @@ public class BackEndTests {
                 .setParameter("product", "grich")
                 .setParameter("count", 2)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -287,8 +287,8 @@ public class BackEndTests {
                 .setParameter("sessionId", "id")
                 .setParameter("orderId", 1)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -305,8 +305,8 @@ public class BackEndTests {
                 .setParameter("sessionId", "invalidId")
                 .setParameter("orderId", 1)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -323,8 +323,8 @@ public class BackEndTests {
                 .setParameter("sessionId", "id")
                 .setParameter("orderId", 2)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -341,8 +341,8 @@ public class BackEndTests {
                 .setParameter("sessionId", "id")
                 .setParameter("orderId", 100500)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -357,8 +357,8 @@ public class BackEndTests {
                 .setHost("192.168.33.64:8080")
                 .setPath("lunchOrder-1/getDistributors")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -374,8 +374,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getDistributors")
 				.setParameter("a", "A")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -392,8 +392,8 @@ public class BackEndTests {
 				.setParameter("sessionId", "id")
 				.setParameter("place", "Valod")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -410,8 +410,8 @@ public class BackEndTests {
                 .setParameter("sessionId", "invalidId")
 				.setParameter("place", "Valod")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -427,8 +427,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/becomeDistributor")
                 .setParameter("sessionId", "id")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -445,8 +445,8 @@ public class BackEndTests {
                 .setParameter("sessionId", "id")
 				.setParameter("place", "Tashir")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -462,8 +462,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getProducts")
                 .setParameter("place", "Valod")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -480,8 +480,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getProducts")
                 .setParameter("place", "Tashir")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -497,8 +497,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getProducts")
                 .setParameter("place", "")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -514,8 +514,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getCostumers")
                 .setParameter("place", "Valod")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -532,8 +532,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getCustomers")
                 .setParameter("place", "Tashir")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -549,8 +549,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/getCostumers")
                 .setParameter("place", "0")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -567,8 +567,8 @@ public class BackEndTests {
                 .setParameter("place", "Valod")
 				.setParameter("userId", 1)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -586,8 +586,8 @@ public class BackEndTests {
                 .setParameter("place", "Tashir")
 				.setParameter("userId", 100500)
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -603,8 +603,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/logOut")
                 .setParameter("sessionId", "id")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }
@@ -620,8 +620,8 @@ public class BackEndTests {
                 .setPath("lunchOrder-1/logOut")
                 .setParameter("sesssionId", "invalidId")
                 .build();
-            HttpGet httpget = new HttpGet(uri);
-            responseBody = httpclient.execute(httpget, responseHandler);
+            HttpPost httpPost = new HttpPost(uri);
+            responseBody = httpclient.execute(httpPost, responseHandler);
         } finally {
             httpclient.close();
         }

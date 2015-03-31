@@ -82,7 +82,7 @@ ALTER SEQUENCE delivery_id_seq OWNED BY delivery.id;
 
 CREATE TABLE login (
     id integer NOT NULL,
-    username character varying(20) NOT NULL,
+    email character varying(20) NOT NULL,
     password character varying(20) NOT NULL
 );
 
@@ -356,7 +356,7 @@ SELECT pg_catalog.setval('delivery_id_seq', 7, true);
 -- Data for Name: login; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY login (id, username, password) FROM stdin;
+COPY login (id, email, password) FROM stdin;
 1	Marine@gmail.com	marine
 2	Vahan@gmail.com	vahan
 3	Karen@gmail.com	karen

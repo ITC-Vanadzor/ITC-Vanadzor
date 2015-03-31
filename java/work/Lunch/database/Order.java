@@ -1,3 +1,4 @@
+//package database
 
 /**
 @detailed class working with database Orders table

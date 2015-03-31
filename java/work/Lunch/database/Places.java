@@ -1,3 +1,4 @@
+//package database
 
 /**
 @detailed class working with database Places table
@@ -21,5 +22,8 @@ public class Places {
     }
     public int getPlaceId() {
         return placeId;
+    }
+    public String getPlaceName() {
+        return placeName;
     }
 }
