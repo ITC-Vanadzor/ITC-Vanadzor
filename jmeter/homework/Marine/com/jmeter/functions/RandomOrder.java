@@ -12,10 +12,10 @@ import org.apache.jmeter.functions.InvalidVariableException;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 
-public class RandomOrder extends AbstractFunction {
+public class AddRandomOrder extends AbstractFunction {
 
     private static final List<String> desc = new LinkedList<String>();
-    private static final String KEY = "__RandomOrder";
+    private static final String KEY = "__AddRandomOrder";
     private Object[] values;
     private int sessionId;
     private int placeId;
@@ -32,7 +32,7 @@ public class RandomOrder extends AbstractFunction {
     /**
      *      * No-arg constructor.
      *           */
-    public RandomOrder() {
+    public AddRandomOrder() {
         super();
     }
 
