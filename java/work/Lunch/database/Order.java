@@ -14,6 +14,7 @@ public class Order {
 @param status current status 
 */
 
+    int id;
     String placeName;
     int placeId;
     String productName;
@@ -25,7 +26,8 @@ public class Order {
 /**
 @detailed This method gets placeName, placeId, productName, productId, count, date and status, and saves it
 */
-    public Order (String placeName,int placeId, String productName, int productId, int count, String date, String status) {
+    public Order (int id, String placeName,int placeId, String productName, int productId, int count, String date, String status) {
+      this.id=id;
       this.placeName = placeName;
       this.placeId = placeId;
       this.productName = productName;
@@ -33,6 +35,9 @@ public class Order {
       this.count = count;
       this.date = date;
       this.status = status;
+    }
+    public int getId() {
+        return id;
     }
     public String getPlaceName() {
         return placeName;

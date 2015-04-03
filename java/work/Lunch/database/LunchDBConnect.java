@@ -19,7 +19,7 @@ public class LunchDBConnect {
 
     /**
      * @param st preparating to database request
-     * @param rs saving request answer
+     * @param rs saving2ssss request answer
      * @param connection creating connection to database
      */
     public Statement st = null;
@@ -48,7 +48,7 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if the placesList is empty 
      */
-
+//3**********
     public ArrayList getPlaces() throws Exception,SQLException {
         ArrayList<Places> placesList = new ArrayList<Places>();
         st = connection.createStatement();
@@ -76,15 +76,17 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw sqlexception error, when wrong username or password
      */
-    public String login(String email, String password) throws SQLException {
+    //*-********************1
+    public int login(String email, String password) throws SQLException {
         st = connection.createStatement();
         if (st==null) {
+
             throw new SQLException();
         }
         st.executeUpdate("INSERT INTO session(login_id) VALUES ((SELECT id FROM login WHERE email='" + email + "' AND password='" + password + "'))", Statement.RETURN_GENERATED_KEYS);
         rs = st.getGeneratedKeys();
         if (rs.next()) {
-            return rs.getString("session_id");
+            return rs.getInt("session_id");
         } else {
             throw new SQLException("Invalid username or password");
         }
@@ -98,16 +100,16 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error, if the orderList is empty
      */
-
+//****************2
     public ArrayList getOrderList(int session_id) throws Exception,SQLException {
         ArrayList<Order> orderList = new ArrayList<Order>();
         st = connection.createStatement();
         if (st==null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND Orders.date=CURRENT_DATE AND Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ")");
+        rs = st.executeQuery("SELECT Orders.id,products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND Orders.date=CURRENT_DATE AND Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ")");
         while (rs.next()) {
-            Order order = new Order(rs.getString("place_name"), rs.getInt("place_Id"), rs.getString("products_name"), rs.getInt("products_id"), rs.getInt("count"), rs.getString("date"), rs.getString("status"));
+            Order order = new Order(rs.getInt("id"), rs.getString("place_name"), rs.getInt("place_Id"), rs.getString("products_name"), rs.getInt("products_id"), rs.getInt("count"), rs.getString("date"), rs.getString("status"));
             orderList.add(order);
         }
         if (!(orderList.isEmpty())) {
@@ -126,7 +128,7 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if an invalid order id and order not removed 
      */
-
+//****************6
     public boolean deleteOrder(int session_id, int order_id) throws Exception, SQLException {
         st = connection.createStatement();
         if (st==null) {
@@ -149,7 +151,7 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if an products list is empty 
      */
-
+//***********************4
     public ArrayList getProducts(int place_id, String word) throws Exception, SQLException {
         ArrayList<Products> productsList = new ArrayList<Products>();
         st = connection.createStatement();
@@ -179,7 +181,7 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if this place doesn't have this product 
      */
-
+//***********************5
     public String addOrder(int session_id, int place_id, int products_id, int count) throws Exception, SQLException {
         st = connection.createStatement();
         if (st==null) {
@@ -200,6 +202,7 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if an distributors list is empty 
      */
+    // **************************7
     public ArrayList getDistributors() throws Exception, SQLException {
         ArrayList<Distributors> distributorsList = new ArrayList<Distributors>();
         st = connection.createStatement();
@@ -228,7 +231,7 @@ public class LunchDBConnect {
      * @throw exception error if an insert into delivery failed 
      * @throw exception error if an there are people going to this place 
      */
-    
+    //*************************************8
     public boolean becomeDistributors(int session_id, int place_id) throws Exception, SQLException {
         st = connection.createStatement();
         if (st==null) {
@@ -255,6 +258,8 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if an products list is empty 
      */
+
+    //*******************9
     public ArrayList getProducts(int place_id) throws Exception, SQLException {
         ArrayList<Products> productsList = new ArrayList<Products>();
         st = connection.createStatement();
@@ -282,15 +287,16 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if an orders by places list is empty
      */
+    //*********************11
     public ArrayList getOrders(int place_id, int login_id) throws Exception, SQLException {
         ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
         st = connection.createStatement();
         if (st==null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT products_name,sum(count),username FROM login,products,Orders,productsByPlaces WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=" + login_id + " AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id");
+        rs = st.executeQuery("SELECT products_name,sum(count) FROM products,Orders,productsByPlaces,login WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=" + login_id + " AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id");
         while (rs.next()) {
-            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("sum"), rs.getString("username"));
+            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("sum"));//////new class
             ordersByPlacesList.add(orderByPlaces);
         }
         if (!(ordersByPlacesList.isEmpty())) {
@@ -308,15 +314,16 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if an orders by places list is empty
      */
+    //****************10
     public ArrayList getOrders(int place_id) throws Exception {
         ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
         st = connection.createStatement();
         if (st==null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT products_name,sum(count),username FROM login,products,Orders,productsByPlaces WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=login_id AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id");
+        rs = st.executeQuery("select Orders.login_id,login.username  from Orders,login,productsByPlaces where unique_product_id=productsByPlaces.id and productsByPlaces.place_id="+place_id+" AND date=CURRENT_DATE and Orders.login_id=login.id Group by login_id,login.id");
         while (rs.next()) {
-            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("sum"), rs.getString("username"));
+            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("login_id"), rs.getString("username"));
             ordersByPlacesList.add(orderByPlaces);
         }
         if (!(ordersByPlacesList.isEmpty())) {
@@ -334,7 +341,7 @@ public class LunchDBConnect {
      * @throw sqlexception error if an error occurred working with database
      * @throw exception error if session id not found ant delete failed
      */
-
+//**********************12
     public boolean logout(int session_id) throws Exception, SQLException {
         st = connection.createStatement();
         if (st==null) {
