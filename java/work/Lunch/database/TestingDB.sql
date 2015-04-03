@@ -345,6 +345,10 @@ COPY delivery (id, login_id, place_id, date) FROM stdin;
 7	7	1	2015-01-18
 10	4	6	2015-04-01
 11	3	5	2015-04-01
+12	2	3	2015-04-03
+13	6	4	2015-04-03
+14	2	2	2015-04-03
+15	5	1	2015-04-03
 \.
 
 
@@ -352,7 +356,7 @@ COPY delivery (id, login_id, place_id, date) FROM stdin;
 -- Name: delivery_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('delivery_id_seq', 11, true);
+SELECT pg_catalog.setval('delivery_id_seq', 15, true);
 
 
 --
@@ -396,6 +400,10 @@ COPY orders (id, login_id, unique_product_id, count, date, status) FROM stdin;
 36	6	6	5	2015-04-01 00:00:00	yes
 37	3	2	5	2015-04-01 00:00:00	yes
 39	3	5	5	2015-04-01 00:00:00	yes
+43	6	5	3	2015-04-03 00:00:00	yes
+44	1	1	5	2015-04-03 00:00:00	yes
+45	3	1	1	2015-04-03 00:00:00	yes
+46	6	6	1	2015-04-03 00:00:00	yes
 \.
 
 
@@ -403,7 +411,7 @@ COPY orders (id, login_id, unique_product_id, count, date, status) FROM stdin;
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('orders_id_seq', 41, true);
+SELECT pg_catalog.setval('orders_id_seq', 46, true);
 
 
 --
