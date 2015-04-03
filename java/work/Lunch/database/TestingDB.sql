@@ -364,14 +364,14 @@ SELECT pg_catalog.setval('delivery_id_seq', 15, true);
 --
 
 COPY login (id, email, password, username) FROM stdin;
-1	Marine@gmail.com	marine	Marine
-2	Vahan@gmail.com	vahan	Vahan
-3	Karen@gmail.com	karen	Karen
-4	Hrach@gmail.com	hrach	Hrach
-6	Sargis@gmail.com	sargis	Sargis
-7	Stepan@gmail.com	stepan	Stepan
-8	Eduard@gmail.com	eduard	Eduard
-5	Movses@gmail.com	movses	Movses
+2	vahan@itc.com	vahan	Vahan
+3	karen@itc.com	karen	Karen
+1	marine@itc.com	marine	Marine
+4	hrach@itc.com	hrach	Hrach
+5	movses@itc.com	movses	Movses
+7	stepan@itc.com	stepan	Stepan
+6	sargis@itc.com	sargis	Sargis
+8	eduard@itc.com	eduard	Eduard
 \.
 
 
@@ -443,17 +443,27 @@ COPY products (id, products_name) FROM stdin;
 1	pizza
 2	qyabab
 3	ttvaser
-4	ttvaser Marianna
-5	Xorovac
-6	Shaurma
-7	Lahmajo
-8	Fri
-9	Sendvich
-10	Coca-Cola
-11	Fanta
-12	Sprite
-13	Tan
-14	Jermuk
+5	xrovac
+6	shaurma
+7	lahmajo
+8	fri
+9	sendvich
+10	coca-cola
+11	fanta
+12	sprite
+13	tan
+14	jermuk
+4	katlet
+15	dzuk ishxan
+16	dzuk siga
+17	dzuk asetrina
+18	tan aparani
+19	hac qari
+20	hac hrazdan
+21	hac buxanka
+22	lavash
+23	lavash aparani
+24	katlet kievski
 \.
 
 
@@ -461,7 +471,7 @@ COPY products (id, products_name) FROM stdin;
 -- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('products_id_seq', 14, true);
+SELECT pg_catalog.setval('products_id_seq', 24, true);
 
 
 --
