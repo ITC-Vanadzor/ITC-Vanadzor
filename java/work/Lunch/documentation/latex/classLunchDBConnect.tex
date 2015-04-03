@@ -1,0 +1,395 @@
+\hypertarget{classLunchDBConnect}{\section{Lunch\-D\-B\-Connect Class Reference}
+\label{classLunchDBConnect}\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}}
+}
+
+
+Class to work with the database  Connects to the database, when creating.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLunchDBConnect_a0733140a8c041be1ee93f8c57ecde0c5}{Lunch\-D\-B\-Connect} (String url, String user, String password)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+Array\-List \hyperlink{classLunchDBConnect_a0fb977cd02885fed4ec85778fb572572}{get\-Places} ()  throws Exception,\-S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Select from the database a list of places. \end{DoxyCompactList}\item 
+String \hyperlink{classLunchDBConnect_afbee1733687dd347e3edb97760b42e8b}{login} (String email, String password)  throws S\-Q\-L\-Exception 
+\item 
+Array\-List \hyperlink{classLunchDBConnect_a7e8b49ef8eaf872668f0542e540c52e8}{get\-Order\-List} (int session\-\_\-id)  throws Exception,\-S\-Q\-L\-Exception 
+\item 
+boolean \hyperlink{classLunchDBConnect_aeaebc7f01d4b720647309d3ef6dba638}{delete\-Order} (int session\-\_\-id, int order\-\_\-id)  throws Exception, S\-Q\-L\-Exception 
+\item 
+Array\-List \hyperlink{classLunchDBConnect_a1ee913364bce20e940a01e3c8ff35e13}{get\-Products} (int place\-\_\-id, String word)  throws Exception, S\-Q\-L\-Exception 
+\item 
+String \hyperlink{classLunchDBConnect_a773fdaed5b7842d1de1fd1a7c21c6db8}{add\-Order} (int session\-\_\-id, int place\-\_\-id, int products\-\_\-id, int count)  throws Exception, S\-Q\-L\-Exception 
+\item 
+Array\-List \hyperlink{classLunchDBConnect_aee30ee2c50bc62cff7c90c008a9dfaca}{get\-Distributors} ()  throws Exception, S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em This method returns distributors list. \end{DoxyCompactList}\item 
+boolean \hyperlink{classLunchDBConnect_a157f79bfaf2bbcdec75359bdf367dd13}{become\-Distributors} (int session\-\_\-id, int place\-\_\-id)  throws Exception, S\-Q\-L\-Exception 
+\item 
+Array\-List \hyperlink{classLunchDBConnect_ae27a160ac7fb6d9479a846702ebd369a}{get\-Products} (int place\-\_\-id)  throws Exception, S\-Q\-L\-Exception 
+\item 
+Array\-List \hyperlink{classLunchDBConnect_a3cbd1e6a559d53ba9cc6fab30960822b}{get\-Orders} (int place\-\_\-id, int login\-\_\-id)  throws Exception, S\-Q\-L\-Exception 
+\item 
+Array\-List \hyperlink{classLunchDBConnect_afb748b0d9622a4359d616c8eec001f38}{get\-Orders} (int place\-\_\-id)  throws Exception 
+\item 
+boolean \hyperlink{classLunchDBConnect_abe6933d6541998fd1ba42dbea48ee68f}{logout} (int session\-\_\-id)  throws Exception, S\-Q\-L\-Exception 
+\item 
+\hypertarget{classLunchDBConnect_a7fe996882e748aa053606041fd6d3434}{boolean {\bfseries is\-Session\-Id} (int session\-\_\-id)  throws Exception, S\-Q\-L\-Exception }\label{classLunchDBConnect_a7fe996882e748aa053606041fd6d3434}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Statement \hyperlink{classLunchDBConnect_a2b9de5ddf98993d2f862b5e387f36f55}{st} = null
+\item 
+\hypertarget{classLunchDBConnect_ac26817820c519e262ac3e1831da9bf5a}{Result\-Set {\bfseries rs} = null}\label{classLunchDBConnect_ac26817820c519e262ac3e1831da9bf5a}
+
+\item 
+\hypertarget{classLunchDBConnect_a77a8519758217bb2ac62cafbed92d931}{Connection {\bfseries connection} = null}\label{classLunchDBConnect_a77a8519758217bb2ac62cafbed92d931}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to work with the database  Connects to the database, when creating. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classLunchDBConnect_a0733140a8c041be1ee93f8c57ecde0c5}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}}
+\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{Lunch\-D\-B\-Connect}]{\setlength{\rightskip}{0pt plus 5cm}Lunch\-D\-B\-Connect.\-Lunch\-D\-B\-Connect (
+\begin{DoxyParamCaption}
+\item[{String}]{url, }
+\item[{String}]{user, }
+\item[{String}]{password}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_a0733140a8c041be1ee93f8c57ecde0c5}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & full path to database for connect \\
+\hline
+{\em user} & username for database \\
+\hline
+{\em password} & password for user in database \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Database\-Error} & if an error occurred, when connected to a database \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classLunchDBConnect_a773fdaed5b7842d1de1fd1a7c21c6db8}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!add\-Order@{add\-Order}}
+\index{add\-Order@{add\-Order}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{add\-Order}]{\setlength{\rightskip}{0pt plus 5cm}String Lunch\-D\-B\-Connect.\-add\-Order (
+\begin{DoxyParamCaption}
+\item[{int}]{session\-\_\-id, }
+\item[{int}]{place\-\_\-id, }
+\item[{int}]{products\-\_\-id, }
+\item[{int}]{count}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_a773fdaed5b7842d1de1fd1a7c21c6db8}
+This method gets session id , place id , products id and product count, and inserts its to order list 
+\begin{DoxyParams}{Parameters}
+{\em session\-\_\-id} & unique value for current user \\
+\hline
+{\em place\-\_\-id} & unique values for places \\
+\hline
+{\em products\-\_\-id} & unique values for products \\
+\hline
+{\em count} & count of product \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, when order added into database or false 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if this place doesn't have this product \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_a157f79bfaf2bbcdec75359bdf367dd13}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!become\-Distributors@{become\-Distributors}}
+\index{become\-Distributors@{become\-Distributors}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{become\-Distributors}]{\setlength{\rightskip}{0pt plus 5cm}boolean Lunch\-D\-B\-Connect.\-become\-Distributors (
+\begin{DoxyParamCaption}
+\item[{int}]{session\-\_\-id, }
+\item[{int}]{place\-\_\-id}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_a157f79bfaf2bbcdec75359bdf367dd13}
+This method gets session id, place id and inserts into delivery list current username 
+\begin{DoxyParams}{Parameters}
+{\em session\-\_\-id} & unique value for current user \\
+\hline
+{\em place\-\_\-id} & unique values for places \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, when successfully inserted order 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if an insert into delivery failed \\
+\hline
+{\em exception} & error if an there are people going to this place \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_aeaebc7f01d4b720647309d3ef6dba638}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!delete\-Order@{delete\-Order}}
+\index{delete\-Order@{delete\-Order}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{delete\-Order}]{\setlength{\rightskip}{0pt plus 5cm}boolean Lunch\-D\-B\-Connect.\-delete\-Order (
+\begin{DoxyParamCaption}
+\item[{int}]{session\-\_\-id, }
+\item[{int}]{order\-\_\-id}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_aeaebc7f01d4b720647309d3ef6dba638}
+This method gets session id and order id and removes order for current user 
+\begin{DoxyParams}{Parameters}
+{\em session\-\_\-id} & generating, when gets login id \\
+\hline
+{\em order\-\_\-id} & unique value of order \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, when successfully removed order or false 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if an invalid order id and order not removed \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_aee30ee2c50bc62cff7c90c008a9dfaca}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!get\-Distributors@{get\-Distributors}}
+\index{get\-Distributors@{get\-Distributors}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{get\-Distributors}]{\setlength{\rightskip}{0pt plus 5cm}Array\-List Lunch\-D\-B\-Connect.\-get\-Distributors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_aee30ee2c50bc62cff7c90c008a9dfaca}
+
+
+This method returns distributors list. 
+
+\begin{DoxyReturn}{Returns}
+distributors list 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if an distributors list is empty \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_a7e8b49ef8eaf872668f0542e540c52e8}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!get\-Order\-List@{get\-Order\-List}}
+\index{get\-Order\-List@{get\-Order\-List}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{get\-Order\-List}]{\setlength{\rightskip}{0pt plus 5cm}Array\-List Lunch\-D\-B\-Connect.\-get\-Order\-List (
+\begin{DoxyParamCaption}
+\item[{int}]{session\-\_\-id}
+\end{DoxyParamCaption}
+) throws Exception,S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_a7e8b49ef8eaf872668f0542e540c52e8}
+This method gets session id and returns order list for current user 
+\begin{DoxyParams}{Parameters}
+{\em session\-\_\-id} & generating, when gets login id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+order list 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error, if the order\-List is empty \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_a3cbd1e6a559d53ba9cc6fab30960822b}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!get\-Orders@{get\-Orders}}
+\index{get\-Orders@{get\-Orders}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{get\-Orders}]{\setlength{\rightskip}{0pt plus 5cm}Array\-List Lunch\-D\-B\-Connect.\-get\-Orders (
+\begin{DoxyParamCaption}
+\item[{int}]{place\-\_\-id, }
+\item[{int}]{login\-\_\-id}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_a3cbd1e6a559d53ba9cc6fab30960822b}
+This method gets place id and login id and returns orders for the current user at current day 
+\begin{DoxyParams}{Parameters}
+{\em place\-\_\-id} & unique values of places \\
+\hline
+{\em login\-\_\-id} & unique value for current user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+orders by places list 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if an orders by places list is empty \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_afb748b0d9622a4359d616c8eec001f38}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!get\-Orders@{get\-Orders}}
+\index{get\-Orders@{get\-Orders}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{get\-Orders}]{\setlength{\rightskip}{0pt plus 5cm}Array\-List Lunch\-D\-B\-Connect.\-get\-Orders (
+\begin{DoxyParamCaption}
+\item[{int}]{place\-\_\-id}
+\end{DoxyParamCaption}
+) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_afb748b0d9622a4359d616c8eec001f38}
+This method gets place id and returns overall count of orders by product name and product id for all users at current day 
+\begin{DoxyParams}{Parameters}
+{\em place\-\_\-id} & unique values of places \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classProducts}{Products} by places list 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if an orders by places list is empty \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_a0fb977cd02885fed4ec85778fb572572}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!get\-Places@{get\-Places}}
+\index{get\-Places@{get\-Places}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{get\-Places}]{\setlength{\rightskip}{0pt plus 5cm}Array\-List Lunch\-D\-B\-Connect.\-get\-Places (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throws Exception,S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_a0fb977cd02885fed4ec85778fb572572}
+
+
+Select from the database a list of places. 
+
+\begin{DoxyReturn}{Returns}
+List of places 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if the places\-List is empty \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_a1ee913364bce20e940a01e3c8ff35e13}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!get\-Products@{get\-Products}}
+\index{get\-Products@{get\-Products}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{get\-Products}]{\setlength{\rightskip}{0pt plus 5cm}Array\-List Lunch\-D\-B\-Connect.\-get\-Products (
+\begin{DoxyParamCaption}
+\item[{int}]{place\-\_\-id, }
+\item[{String}]{word}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_a1ee913364bce20e940a01e3c8ff35e13}
+This method gets place id and a few letters for product name and returns product name list, which starting with that letters 
+\begin{DoxyParams}{Parameters}
+{\em place\-\_\-id} & unique values of places \\
+\hline
+{\em word} & part of letters for product name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+products list 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if an products list is empty \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_ae27a160ac7fb6d9479a846702ebd369a}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!get\-Products@{get\-Products}}
+\index{get\-Products@{get\-Products}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{get\-Products}]{\setlength{\rightskip}{0pt plus 5cm}Array\-List Lunch\-D\-B\-Connect.\-get\-Products (
+\begin{DoxyParamCaption}
+\item[{int}]{place\-\_\-id}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_ae27a160ac7fb6d9479a846702ebd369a}
+This method gets place id and returns overall count of orders by product name and product id 
+\begin{DoxyParams}{Parameters}
+{\em place\-\_\-id} & unique values for places \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classProducts}{Products} list 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if an products list is empty \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_afbee1733687dd347e3edb97760b42e8b}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!login@{login}}
+\index{login@{login}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{login}]{\setlength{\rightskip}{0pt plus 5cm}String Lunch\-D\-B\-Connect.\-login (
+\begin{DoxyParamCaption}
+\item[{String}]{email, }
+\item[{String}]{password}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_afbee1733687dd347e3edb97760b42e8b}
+This method gets login id with username and password and returns generated session id 
+\begin{DoxyParams}{Parameters}
+{\em email} & for logged in user \\
+\hline
+{\em password} & for logged in user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+session id for current user 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em sqlexception} & error, when wrong username or password \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classLunchDBConnect_abe6933d6541998fd1ba42dbea48ee68f}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!logout@{logout}}
+\index{logout@{logout}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{logout}]{\setlength{\rightskip}{0pt plus 5cm}boolean Lunch\-D\-B\-Connect.\-logout (
+\begin{DoxyParamCaption}
+\item[{int}]{session\-\_\-id}
+\end{DoxyParamCaption}
+) throws Exception, S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classLunchDBConnect_abe6933d6541998fd1ba42dbea48ee68f}
+This method gets session id and removes it from database (log outing) 
+\begin{DoxyParams}{Parameters}
+{\em session\-\_\-id} & unique value for current user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, when session removed in database 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em sqlexception} & error if an error occurred working with database \\
+\hline
+{\em exception} & error if session id not found ant delete failed \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classLunchDBConnect_a2b9de5ddf98993d2f862b5e387f36f55}{\index{Lunch\-D\-B\-Connect@{Lunch\-D\-B\-Connect}!st@{st}}
+\index{st@{st}!LunchDBConnect@{Lunch\-D\-B\-Connect}}
+\subsubsection[{st}]{\setlength{\rightskip}{0pt plus 5cm}Statement Lunch\-D\-B\-Connect.\-st = null}}\label{classLunchDBConnect_a2b9de5ddf98993d2f862b5e387f36f55}
+
+\begin{DoxyParams}{Parameters}
+{\em st} & preparating to database request \\
+\hline
+{\em rs} & saving request answer \\
+\hline
+{\em connection} & creating connection to database \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Lunch\-D\-B\-Connect.\-java\end{DoxyCompactItemize}
