@@ -289,18 +289,18 @@ public class LunchDBConnect {
      */
     //*********************11
     public ArrayList getOrders(int place_id, int login_id) throws Exception, SQLException {
-        ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
+        ArrayList<OrdersByCostumer> ordersByCostumerList = new ArrayList<OrdersByCostumer>();
         st = connection.createStatement();
         if (st==null) {
             throw new SQLException();
         }
         rs = st.executeQuery("SELECT products_name,sum(count) FROM products,Orders,productsByPlaces,login WHERE Orders.date=CURRENT_DATE AND login.id=Orders.login_id AND Orders.login_id=" + login_id + " AND productsByPlaces.products_id=products.id AND Orders.unique_product_id=productsByPlaces.id AND productsByPlaces.place_id=" + place_id + " GROUP BY products_name,products.id,login.id");
         while (rs.next()) {
-            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("products_name"), rs.getInt("sum"));//////new class
-            ordersByPlacesList.add(orderByPlaces);
+            OrdersByCostumer orderByCostumer = new OrdersByCostumer(rs.getString("products_name"), rs.getInt("sum"));
+            ordersByCostumerList.add(orderByCostumer);
         }
-        if (!(ordersByPlacesList.isEmpty())) {
-            return ordersByPlacesList;
+        if (!(ordersByCostumerList.isEmpty())) {
+            return ordersByCostumerList;
         } else {
             throw new Exception("List of order by places is empty");
         }
@@ -316,18 +316,18 @@ public class LunchDBConnect {
      */
     //****************10
     public ArrayList getOrders(int place_id) throws Exception {
-        ArrayList<OrdersByPlaces> ordersByPlacesList = new ArrayList<OrdersByPlaces>();
+        ArrayList<CostumersByPlace> costumersByPlaceList = new ArrayList<CostumersByPlace>();
         st = connection.createStatement();
         if (st==null) {
             throw new SQLException();
         }
         rs = st.executeQuery("select Orders.login_id,login.username  from Orders,login,productsByPlaces where unique_product_id=productsByPlaces.id and productsByPlaces.place_id="+place_id+" AND date=CURRENT_DATE and Orders.login_id=login.id Group by login_id,login.id");
         while (rs.next()) {
-            OrdersByPlaces orderByPlaces = new OrdersByPlaces(rs.getString("login_id"), rs.getString("username"));
-            ordersByPlacesList.add(orderByPlaces);
+            CostumersByPlace costumersByPlace = new CostumersByPlace(rs.getInt("login_id"), rs.getString("username"));
+            costumersByPlaceList.add(costumersByPlace);
         }
-        if (!(ordersByPlacesList.isEmpty())) {
-            return ordersByPlacesList;
+        if (!(costumersByPlaceList.isEmpty())) {
+            return costumersByPlaceList;
         } else {
             throw new Exception("List of order by places is empty");
         }

@@ -1,6 +1,6 @@
 //package database
 
-public class OrdersByPlaces {
+public class OrdersByCostumer {
 
 /**
 @param productName name of product, which will be bought by username
@@ -10,16 +10,14 @@ public class OrdersByPlaces {
 
     String productName;
     int count;
-    String email;
 
 /**
 @detailed This method gets productName, count, username and saves it
 */
 
-    public OrdersByPlaces (String productName,int count,String username) {
+    public OrdersByCostumer (String productName,int count) {
       this.productName = productName;
       this.count = count;
-      this.email = email;
     }
     public String getProductName() {
         return productName;
@@ -27,9 +25,5 @@ public class OrdersByPlaces {
     public int getCount() {
         return count;
     }
-    public String getEmail() {
-        return email;
-    }
-      
 }
 
