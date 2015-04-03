@@ -1,4 +1,3 @@
-
 function changePlaceName(place) {
     localStorage[place]=place;
 }
@@ -6,6 +5,9 @@ function changePlaceName(place) {
 function changeName(place) {
     document.getElementById("placeName").innerHTML = localStorage[place];
 }
+
+
+//not finished function
 function becomeDistributor(json_distributor) {
     //json_disributor has such structure [{"sessionId:"01"},{"placeId":"0364"}]
     var xmlhttp;
@@ -21,20 +23,8 @@ function becomeDistributor(json_distributor) {
 }
 
 
-/*function getOrderList() {
-    var xmlhttp;
-    xmlhttp=new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function() {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            //Todo
-        }
-    }
-    xmlhttp.open("POST","http://localhost:8080",true);
-    xmlhttp.send();
-}
-*/
-
-function getDistributors() {
+function getDistributors(sessionId,placeId) {
+    var distr_json = [{"sessionId":sessionId},{"placeId":placeId}]
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -42,45 +32,46 @@ function getDistributors() {
             addProductList(distributors);  
         }
     }
-    xmlhttp.open("GET","http://localhost:8080",true);
-    xmlhttp.send();
+    xmlhttp.setRequestHeader("Content-Type","application/json");
+    xmlhttp.open("GET","http://localhost:8080/lunch-1/getDistributors",true);
+    xmlhttp.send(JSON.stringify(distr_json));
 }
 
-
-function replaceExample(btnid) {
-    alert(btnid);
-    var item = document.getElementById(btnid).parentNode.nodeName;
+//example for becomeDistributor
+function replaceExample(btnid, usrName) {
+    var item = document.getElementById(btnid)//.parentNode.nodeName;
     alert("Hi");
-    item.innerHTML= "item";
+    item.innerHTML= usrName;
 }
 
 //Function filling distributors table(1.1)
 function addDistributorList(distributors) {
-    var distributors = [{ "placeID":"Tashir", "userID":"Movses" },
-    { "placeID":"Valod", "userID":"" }]
+    var distributors = [{ "placeID":"Tashir", "userName":"" },
+    { "placeID":"Valod", "userName":"Eduard" }]
     for(i in distributors) {
         var tableRow = document.createElement("tr");
         var tableData = document.createElement("td");
-        var userName = document.createTextNode(distributors[i].userID);
+        userName = document.createTextNode(distributors[i].userName);
         var placeName = document.createTextNode(distributors[i].placeID); 
-        var Name = distributors[i].placeID;
+        usrName = distributors[i].userName; 
+        Name = distributors[i].placeID;
         changePlaceName(Name);
         var btn = document.createElement("button");
         tableA = document.createElement('a');
         tableData.appendChild(tableA);
         tableA.appendChild(placeName);
         tableA.setAttribute("href","placespage.html");
-        tableA.setAttribute("onclick", "changeName(Name)");
+        tableA.setAttribute("onclick", "changePlaceName(Name)");
         tableRow.appendChild(tableData);
         var tableData1 =document.createElement("td");
         tableData1.appendChild(userName);
-        if (distributors[i].userID == "") {
+        if (distributors[i].userName == "") {
             tableData1.appendChild(btn);
             var btnName = document.createTextNode("Add");
             btn.appendChild(btnName);
             btn.setAttribute("id",i);
             btn.setAttribute("value","i");
-            btn.setAttribute("onclick", "replaceExample(i);");
+            btn.setAttribute("onclick", "replaceExample(i, usrName);");
         }
         tableRow.appendChild(tableData1);
         document.getElementById("distrTable").appendChild(tableRow);
@@ -88,7 +79,8 @@ function addDistributorList(distributors) {
 
 }
 
-function getProductList() {
+function getProductList(placeId) { 
+    var place_json = [{"placeId":placeId}];
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -96,21 +88,21 @@ function getProductList() {
             addProductList(productList);  
         }
     }
-    xmlhttp.open("GET","http://localhost:8080",true);
-    xmlhttp.send();
+    xmlhttp.setRequestHeader("Content-Type","application/json");
+    xmlhttp.open("GET","http://localhost:8080/lunch-1/getProducts",true);
+    xmlhttp.send(JSON.stringify(place_json));
 }
 
 //Function filling product table(2.1)
 function addProductList(productList) {
-    var productList = [ {"product": "Iqibir", "count": "3"},
-        {"product": "Qyabab", "count": "2"},
-       {"product": "Pizza", "count": "4"} ];
+    var productList = [ {"productName": "Iqibir", "count": "3"},
+        {"productName": "Qyabab", "count": "2"},
+       {"productName": "Pizza", "count": "4"} ];
     //response body [{"product":""},{"count":""}]
     for(i in productList) {
-       // for(j  in productList[i]) {
             var tableRow = document.createElement("tr");
             var tableData = document.createElement("td");
-            var product = document.createTextNode(productList[i].product);
+            var product = document.createTextNode(productList[i].productName);
             var count = document.createTextNode(productList[i].count);
             tableData.appendChild(product);
             tableRow.appendChild(tableData);
@@ -118,7 +110,6 @@ function addProductList(productList) {
             tableData1.appendChild(count);
             tableRow.appendChild(tableData1);
             document.getElementById("productTable").appendChild(tableRow);
-        //}
     }
 }
 
@@ -130,7 +121,8 @@ function getUserList() {
             addUserList(users);
         }
     }
-    xmlhttp.open("POST","http://localhost:8080",true);
+    xmlhttp.setRequestHeader("Content-Type","application/json");
+    xmlhttp.open("POST","http://localhost:8080/lunch-1/getCustomers",true);
     xmlhttp.send();
 }
 
@@ -139,7 +131,7 @@ function addUserList(users) {
     var users = [ {"userId": "1", "userName": "Movses" },
     {"userId": "2", "userName": "Hrach" }
     ];
-    //response body [{"userID":"","userName":""}]
+    //response body [{"userId":"","userName":""}]
     for(i=0; i<users.length; i++) {
         var tableRow = document.createElement("tr");   
         var tableData = document.createElement("td");
@@ -149,13 +141,14 @@ function addUserList(users) {
         tableData.appendChild(btn);
         var btnName = document.createTextNode("List");
         btn.appendChild(btnName);
-        btn.setAttribute("onclick", "addOrderList();");
+        btn.setAttribute("onclick", "getOrdersByUser();");
         tableRow.appendChild(tableData);
         document.getElementById("nameTable").appendChild(tableRow);
     } 
 }
 
-function getOrdersByUser() {
+function getOrdersByUser(userId) {
+    var user_json = [{"userId":userId}];
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -163,12 +156,16 @@ function getOrdersByUser() {
             addOrderList(orderList);
         }
     }
-    xmlhttp.open("GET","http://localhost:8080",true);
-    xmlhttp.send();
+    xmlhttp.setRequestHeader("Content-Type","application/json");
+    xmlhttp.open("POST","http://localhost:8080/lunch-1/getOrders",true);
+    xmlhttp.send(JSON.stringify(user_json));
 }
 
 //Function filling order tablei (2.3)
 function addOrderList(orderList) {
+    var orderList = [ {"product": "Iqibir", "count": "3"},
+        {"product": "Qyabab", "count": "2"},
+       {"product": "Pizza", "count": "4"} ];
     //response body [{"productID":""},{"count":""}]
     var list = document.getElementById("orderTable")
     var childsCount = list.childNodes.length;
@@ -176,11 +173,10 @@ function addOrderList(orderList) {
         list.removeChild(list.childNodes[2]); 
     }
     for(i in orderList){
-        for(j in orderList[i]) {
             var tableRow = document.createElement("tr");
             var tableData = document.createElement("td");
-            var product = document.createTextNode(orderList[i][j].product);
-            var count = document.createTextNode(orderList[i][j].count);
+            var product = document.createTextNode(orderList[i].product);
+            var count = document.createTextNode(orderList[i].count);
             tableData.appendChild(product);
             tableRow.appendChild(tableData);
             var tableData1 = document.createElement("td");
@@ -188,5 +184,4 @@ function addOrderList(orderList) {
             tableRow.appendChild(tableData1);
             list.appendChild(tableRow);
         }   
-    }
 }
