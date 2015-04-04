@@ -10,6 +10,12 @@
 
 }
 
+.placeNameClass {
+    color: blue;
+    cursor: pointer;
+
+}
+
 #productList1 {
     width:40%;
     margin-right:50px;

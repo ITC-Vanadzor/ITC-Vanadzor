@@ -1,26 +1,13 @@
-function changePlaceName(place) {
-    localStorage[place]=place;
+function changePlaceName(id) {
+    place = document.getElementById(id).innerHTML;
+    localStorage["place"]=place;
+    window.location.href = "placespage.html";
 }
 
 function changeName(place) {
-    document.getElementById("placeName").innerHTML = localStorage[place];
+    document.getElementById("placeName").innerHTML = localStorage["place"];
 }
 
-
-//not finished function
-function becomeDistributor(json_distributor) {
-    //json_disributor has such structure [{"sessionId:"01"},{"placeId":"0364"}]
-    var xmlhttp;
-    xmlhttp=new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function() {
-        if (xmlhttp.readyState==4 && xmlhttp.status==204) {
-            //Todo
-        }
-    }
-    xmlhttp.open("POST","http://localhost:8080",true);
-    xmlhttp.send(jsondistributor);
-
-}
 
 
 function getDistributors(sessionId,placeId) {
@@ -38,30 +25,40 @@ function getDistributors(sessionId,placeId) {
 }
 
 //example for becomeDistributor
-function replaceExample(btnid, usrName) {
+function becomeDistributor(btnid,placeId,sessionId) {
     var item = document.getElementById(btnid)//.parentNode.nodeName;
-    alert("Hi");
-    item.innerHTML= usrName;
+    item.innerHTML = "usrName";//var coming from localStorge
+    
+
+    
+        
+    var json_distr = {"sessionId":sessionId,"placeId":placeId};
+    var placeName = document.getElementById("distrTable").rows[btnid*1+1].cells[0].innerHTML;
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==204) {
+         
+        }
+    }
+    xmlhttp.open("POST","http://localhost:8080/lunch-1/becomeDistributor",true);
+    xmlhttp.send(JSON.stringify(json_distr));
 }
 
 //Function filling distributors table(1.1)
 function addDistributorList(distributors) {
-    var distributors = [{ "placeID":"Tashir", "userName":"" },
-    { "placeID":"Valod", "userName":"Eduard" }]
+    var distributors = [{ "placeName":"Tashir", "userName":"" },
+    { "placeName":"Valod", "userName":"" }]
     for(i in distributors) {
         var tableRow = document.createElement("tr");
         var tableData = document.createElement("td");
-        userName = document.createTextNode(distributors[i].userName);
-        var placeName = document.createTextNode(distributors[i].placeID); 
-        usrName = distributors[i].userName; 
-        Name = distributors[i].placeID;
-        changePlaceName(Name);
+        var userName = document.createTextNode(distributors[i].userName);
+        var placeName = document.createTextNode(distributors[i].placeName); 
+        Name = distributors[i].placeName;
         var btn = document.createElement("button");
-        tableA = document.createElement('a');
-        tableData.appendChild(tableA);
-        tableA.appendChild(placeName);
-        tableA.setAttribute("href","placespage.html");
-        tableA.setAttribute("onclick", "changePlaceName(Name)");
+        tableData.appendChild(placeName);
+        tableData.setAttribute("class","placeNameClass");
+        tableData.setAttribute("id", Name);
+        tableData.setAttribute("onclick", "changePlaceName(this.id)");
         tableRow.appendChild(tableData);
         var tableData1 =document.createElement("td");
         tableData1.appendChild(userName);
@@ -70,8 +67,7 @@ function addDistributorList(distributors) {
             var btnName = document.createTextNode("Add");
             btn.appendChild(btnName);
             btn.setAttribute("id",i);
-            btn.setAttribute("value","i");
-            btn.setAttribute("onclick", "replaceExample(i, usrName);");
+            btn.setAttribute("onclick", "becomeDistributor(this.id);");
         }
         tableRow.appendChild(tableData1);
         document.getElementById("distrTable").appendChild(tableRow);
@@ -80,7 +76,7 @@ function addDistributorList(distributors) {
 }
 
 function getProductList(placeId) { 
-    var place_json = [{"placeId":placeId}];
+    var place_json = {"placeId":placeId};
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -113,7 +109,8 @@ function addProductList(productList) {
     }
 }
 
-function getUserList() {
+function getUserList(placeId) {
+    var place_json = {"placeId":placeId};
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -123,7 +120,7 @@ function getUserList() {
     }
     xmlhttp.setRequestHeader("Content-Type","application/json");
     xmlhttp.open("POST","http://localhost:8080/lunch-1/getCustomers",true);
-    xmlhttp.send();
+    xmlhttp.send(JSON.stringify(place_json));
 }
 
 //Function filling user table (2.2)
@@ -147,8 +144,8 @@ function addUserList(users) {
     } 
 }
 
-function getOrdersByUser(userId) {
-    var user_json = [{"userId":userId}];
+function getOrdersByUser(userId,placeId) {
+    var user_json = {"userId":userId,"placeId":placeId};
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
