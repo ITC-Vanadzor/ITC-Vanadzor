@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="images/logo.png" >
+    <link rel="stylesheet" text/css href="css/style.css">
+    <script src="js/orderpage.js"></script>
+    <title>Log In </title>
+</head>
+<body>
+    <div id="test"></div>
+    <div class="loginbox">
+        <div><center> Sign in  <center></div>
+        <div id="login-content">
+           
+            <div><center id="errormsg"></center></div>
+            <div class="login-component">
+                <input type="email"  id="email"  placeholder="Email" required>
+            </div>
+            <div class="login-component">
+                <input type="password" id = "pswd" placeholder="Password" required>
+            </div>     
+            <div style="float: left; margin-left: 50px; margin-top: 10px; ">
+                <input type="checkbox"> Remember me </input>
+            </div>
+            <div>
+                <input  value="Sign in" type="button" id="botton" onclick="return login()" >
+            </div> <br>
+        </div>
+    </div>
+</body>
+</html>
