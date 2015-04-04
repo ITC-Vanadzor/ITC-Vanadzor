@@ -177,7 +177,7 @@ public class LunchDBConnect {
      * @throw exception error if this place doesn't have this product
      */
 //***********************5
-    public String addOrder(int session_id, int place_id, int products_id, int count) throws Exception, SQLException {
+    public int  addOrder(int session_id, int place_id, int products_id, int count) throws Exception, SQLException {
         st = connection.createStatement();
         if (st == null) {
             throw new SQLException();
@@ -185,7 +185,7 @@ public class LunchDBConnect {
         st.executeUpdate("INSERT INTO Orders(login_id,unique_product_id,count,date,status) VALUES ((SELECT login_id FROM session WHERE session_id=" + session_id + "),(SELECT id FROM productsByPlaces WHERE place_id=" + place_id + " AND products_id=" + products_id + ")," + count + ",CURRENT_DATE,'yes')", Statement.RETURN_GENERATED_KEYS);
         rs = st.getGeneratedKeys();
         if (rs.next()) {
-            return rs.getString("id");
+            return rs.getInt("id");
         } else {
             throw new Exception("This place doesn't have this product");
         }
@@ -309,7 +309,7 @@ public class LunchDBConnect {
      * @throw exception error if an orders by places list is empty
      */
     //****************10
-    public ArrayList getOrders(int place_id) throws Exception {
+    public ArrayList getCostumers(int place_id) throws Exception {
         ArrayList<CostumersByPlace> costumersByPlaceList = new ArrayList<CostumersByPlace>();
         st = connection.createStatement();
         if (st == null) {
