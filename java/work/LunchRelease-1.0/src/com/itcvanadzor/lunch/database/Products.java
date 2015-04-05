@@ -1,3 +1,7 @@
+/**
+ * @package com.itcvanadzor.lunch.database
+ */
+
 package com.itcvanadzor.lunch.database;
 
 /**
@@ -7,9 +11,9 @@ package com.itcvanadzor.lunch.database;
 public class Products {
 
 /**
-@param productName product name of current order
-@param productId unique value for product name 
-@param count count of products 
+*@param productName product name of current order
+*@param productId unique value for product name 
+*@param count count of products 
 */
 
     String productName;
@@ -33,12 +37,30 @@ public class Products {
         this.productId = productId;
         this.count = count;
     }
+
+    /**
+     *@detailed This method get product name
+     *@return productName
+     */
+
     public String getProductName() {
         return productName;
     }
+
+    /**
+     *@detailed This method get product id
+     *@return productId
+     */
+
     public int getProductId() {
         return productId;
     }
+
+    /**
+     *@detailed This method get product count 
+     *@return count
+     */
+
     public int getCount() {
         return count;
     }
