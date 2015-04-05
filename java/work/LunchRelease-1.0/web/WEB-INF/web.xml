@@ -9,8 +9,6 @@
     <description>
         This is a web application created by ITC-Vanadzor 2015.
     </description>
-    AddOrder.java           DeleteOrder.java   GetDistributors.java  GetOrders.java  GetProducts.java      Login.java
-    BecomeDistributor.java  GetCustomers.java  GetOrderList.java     GetPlaces.java  GetProductsList.java  Logout.java
 
     <!--1. login -->
     <servlet>

@@ -102,16 +102,14 @@ public class LunchDBConnect {
         if (st == null) {
             throw new SQLException();
         }
-        rs = st.executeQuery("SELECT Orders.id,products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND Orders.date=CURRENT_DATE AND Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ")");
+        /*rs = st.executeQuery("SELECT Orders.id,products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND Orders.date=CURRENT_DATE AND Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ")");
+        */
+          rs = st.executeQuery("SELECT Orders.id,products_id,products_name,place_id,place_name,Orders.count, Orders.login_id,Orders.date,status FROM productsByPlaces,Orders,products, place WHERE unique_product_id=productsByPlaces.id AND place_id=place.id AND products_id=products.id AND Orders.login_id=(SELECT login_id FROM session WHERE session_id=" + session_id + ")");
         while (rs.next()) {
             Order order = new Order(rs.getInt("id"), rs.getString("place_name"), rs.getInt("place_Id"), rs.getString("products_name"), rs.getInt("products_id"), rs.getInt("count"), rs.getString("date"), rs.getString("status"));
             orderList.add(order);
         }
-        if (!(orderList.isEmpty())) {
-            return orderList;
-        } else {
-            throw new Exception("List of order is empty");
-        }
+        return orderList;
     }
 
     /**
