@@ -26,21 +26,16 @@ function getDistributors(sessionId,placeId) {
 
 //example for becomeDistributor
 function becomeDistributor(btnid,placeId,sessionId) {
-    var item = document.getElementById(btnid)//.parentNode.nodeName;
-    item.innerHTML = "usrName";//var coming from localStorge
-    
-
-    
-        
     var json_distr = {"sessionId":sessionId,"placeId":placeId};
     var placeName = document.getElementById("distrTable").rows[btnid*1+1].cells[0].innerHTML;
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==204) {
-         
+            document.getElementById('distrTable').rows[btnid*1+1].cells[1].innerHTML = "usrname";
         }
+
     }
-    xmlhttp.open("POST","http://localhost:8080/lunch-1/becomeDistributor",true);
+    xmlhttp.open("POST","http://localhost:8080/lunch-1/becomedistributor",true);
     xmlhttp.send(JSON.stringify(json_distr));
 }
 
@@ -153,8 +148,8 @@ function getOrdersByUser(userId,placeId) {
             addOrderList(orderList);
         }
     }
-    xmlhttp.setRequestHeader("Content-Type","application/json");
     xmlhttp.open("POST","http://localhost:8080/lunch-1/getOrders",true);
+    xmlhttp.setRequestHeader("Content-Type","application/json");
     xmlhttp.send(JSON.stringify(user_json));
 }
 

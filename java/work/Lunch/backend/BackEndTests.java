@@ -18,6 +18,7 @@ public class BackEndTests {
 
     String responseBody;
     int status;
+    int id = 83;
     CloseableHttpClient httpclient = HttpClients.createDefault();
     ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
         public String handleResponse(final HttpResponse response) throws IOException {
@@ -33,10 +34,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/login")
+                .setPath("/lunch-1/login")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"email\": \"karen@itc.com\", \"password\": \"karen\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"email\": \"hrach@itc.com\", \"password\": \"hrach\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -44,7 +45,7 @@ public class BackEndTests {
             httpclient.close();
         }
         assertEquals(status, 200);
-        assertEquals(responseBody, "{\"sessionId\":\"50\"}");
+        assertEquals(responseBody, "{\"sessionId\":\""+id+"\"}");
     }
 
     @Test
@@ -53,7 +54,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/login")
+                .setPath("/lunch-1/login")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -69,10 +70,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getOrderList")
+                .setPath("/lunch-1/getorderlist")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\": \"38\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\": \"25\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -80,7 +81,7 @@ public class BackEndTests {
             httpclient.close();
         }
         assertEquals(status, 200);
-        assertEquals(responseBody, "[{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":58,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":57,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":56,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":55,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":54,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":53,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":52,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":51,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":50,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":49,\"productId\":3},{\"count\":3,\"status\":\"yes\",\"placeId\":2,\"placeName\":\"Smile\",\"productName\":\"ttvaser\",\"orderId\":47,\"productId\":3}");
+        assertEquals(responseBody, "{\"count\":5,\"status\":\"yes\",\"placeId\":1,\"placeName\":\"Tashir\",\"productName\":\"ttvaser\",\"orderId\":26,\"productId\":3}");
     }
 
     @Test
@@ -89,10 +90,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getOrderList")
+                .setPath("/lunch-1/getorderlist")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":\"2\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":\""+id+"\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -108,7 +109,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getOrderList")
+                .setPath("/lunch-1/getorderlist")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"sessionId\":\"1\"}", "UTF-8");
@@ -127,7 +128,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getOrderList")
+                .setPath("/lunch-1/getorderlist")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -143,7 +144,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getPlaces")
+                .setPath("/lunch-1/getplaces")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -160,7 +161,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getPlaces")
+                .setPath("/lunch-1/getplaces")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"A\":\"a\"}", "UTF-8");
@@ -179,10 +180,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getProducts")
+                .setPath("/lunch-1/getproducts")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"placeId\":\"2\", \"inputStr\":\"ttv\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"placeId\":\"1\", \"inputStr\":\"pi\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -199,7 +200,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getProducts")
+                .setPath("/lunch-1/getproducts")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"A\":\"a\"}", "UTF-8");
@@ -218,10 +219,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/addOrder")
+                .setPath("/lunch-1/addorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":\"38\",\"placeId\":\"2\",\"productId\":\"3\",\"count\":\"3\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":\""+id+"\",\"placeId\":\"1\",\"productId\":\"1\",\"count\":\"1\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -229,7 +230,7 @@ public class BackEndTests {
             httpclient.close();
         }
         assertEquals(status, 200);
-		assertEquals(responseBody, "{\"orderId\":\"59\"}");
+		assertEquals(responseBody, "{\"orderId\":\"49\"}");
     }
 
     @Test
@@ -238,7 +239,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/addOrder")
+                .setPath("/lunch-1/addorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"{\"sessionId\":\"1\",\"placeId\":\"2\",\"productId\":\"3\",\"count\":\"3\"}", "UTF-8");
@@ -251,16 +252,16 @@ public class BackEndTests {
         assertEquals(status, 401);
     }
 
-    @Test
+   /* @Test
     public void testResponseAddOrder403() throws Exception {
         try {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/addOrder")
+                .setPath("/lunch-1/addorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"{\"sessionId\":\"1\",\"placeId\":\"2\",\"productId\":\"3\",\"count\":\"3\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"{\"sessionId\":\""+id+"\",\"placeId\":\"2\",\"productId\":\"3\",\"count\":\"3\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -268,7 +269,7 @@ public class BackEndTests {
             httpclient.close();
         }
         assertEquals(status, 403);
-    }
+    }*/
 
     @Test
     public void testResponseAddOrder404() throws Exception {
@@ -276,10 +277,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/addOrder")
+                .setPath("/lunch-1/addorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":\"1\",\"placeId\":\"100500\",\"productId\":\"3\",\"count\":\"3\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":\""+id+"\",\"placeId\":\"100500\",\"productId\":\"3\",\"count\":\"3\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -295,10 +296,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/deleteOrder")
+                .setPath("/lunch-1/deleteorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":\"38\",\"orderId\":\"48\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":\""+id+"\",\"orderId\":\"48\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -314,7 +315,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/deleteOrder")
+                .setPath("/lunch-1/deleteorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"sessionId\":\"1\",\"orderId\":\"48\"}", "UTF-8");
@@ -327,13 +328,13 @@ public class BackEndTests {
         assertEquals(status, 401);
     }
 
-    @Test
+    /*@Test
     public void testResponseDeleteOrder403() throws Exception {
         try {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/deleteOrder")
+                .setPath("/lunch-1/deleteorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"sessionId\":\"38\",\"orderId\":\"48\"}", "UTF-8");
@@ -344,7 +345,7 @@ public class BackEndTests {
             httpclient.close();
         }
         assertEquals(status, 403);
-    }
+    }*/
 
     @Test
     public void testResponseDeleteOrder404() throws Exception {
@@ -352,7 +353,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/deleteOrder")
+                .setPath("/lunch-1/deleteorder")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"sessionId\":\"38\",\"orderId\":\"100500\"}", "UTF-8");
@@ -371,7 +372,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getDistributors")
+                .setPath("/lunch-1/getdistributors")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -388,7 +389,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getDistributors")
+                .setPath("/lunch-1/getdistributors")
 				.setParameter("a", "A")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
@@ -405,10 +406,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/becomeDistributor")
+                .setPath("/lunch-1/becomedistributor")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":\"40\",\"placeId\":\"2\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":\""+id+"\",\"placeId\":\"4\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -424,10 +425,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/becomeDistributor")
+                .setPath("/lunch-1/becomedistributor")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":\"40\",\"placeId\":\"2\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":\"1\",\"placeId\":\"2\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -443,10 +444,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/becomeDistributor")
+                .setPath("/lunch-1/becomedistributor")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":1}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":38}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -462,10 +463,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/becomeDistributor")
+                .setPath("/lunch-1/becomedistributor")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\":\"40\",\"placeId\":\"2\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\":\""+id+"\",\"placeId\":\"4\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -481,7 +482,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getProducts")
+                .setPath("/lunch-1/getproducts")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"placeId\":\"2\"}", "UTF-8");
@@ -501,10 +502,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getProducts")
+                .setPath("/lunch-1/getproducts")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"placeId\":\"4\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"placeId\":\"6\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -520,7 +521,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getProducts")
+                .setPath("/lunch-1/getproducts")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"placeId\":\"-1\"}", "UTF-8");
@@ -534,12 +535,12 @@ public class BackEndTests {
     }
 
     @Test
-    public void testResponseGetCostumers200() throws Exception {
+    public void testResponseGetCustomers200() throws Exception {
         try {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getCostumers")
+                .setPath("/lunch-1/getcustomers")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"placeId\":\"2\"}", "UTF-8");
@@ -550,19 +551,19 @@ public class BackEndTests {
             httpclient.close();
         }
         assertEquals(status, 200);
-        assertEquals(responseBody, "");
+        assertEquals(responseBody, "[{\"userId\":1,\"userName\":\"Marine\"}]");
     }
 
     @Test
-    public void testResponseGetCostumers204() throws Exception {
+    public void testResponseGetCustomers204() throws Exception {
         try {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getCustomers")
+                .setPath("/lunch-1/getcustomers")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"placeId\":\"2\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"placeId\":\"6\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -573,12 +574,12 @@ public class BackEndTests {
     }
 
 	@Test
-    public void testResponseGetCostumers404() throws Exception {
+    public void testResponseGetCustomers404() throws Exception {
         try {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getCostumers")
+                .setPath("/lunch-1/getcustomers")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"placeId\":\"Valod\"}", "UTF-8");
@@ -597,7 +598,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getOrders")
+                .setPath("/lunch-1/getorders")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"placeId\":\"2\",\"userId\":\"8\"}", "UTF-8");
@@ -617,7 +618,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/getOrders")
+                .setPath("/lunch-1/getorders")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"placeId\":\"2\",\"userId\":\"100500\"}", "UTF-8");
@@ -636,10 +637,10 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/logOut")
+                .setPath("/lunch-1/logout")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
-            StringEntity entity = new StringEntity("{\"sessionId\": \"50\"}", "UTF-8");
+            StringEntity entity = new StringEntity("{\"sessionId\": \""+id+"\"}", "UTF-8");
             entity.setContentType("application/json");
             httpPost.setEntity(entity);
             responseBody = httpclient.execute(httpPost, responseHandler);
@@ -655,7 +656,7 @@ public class BackEndTests {
             URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("192.168.33.64:8080")
-                .setPath("lunchOrder-1/logOut")
+                .setPath("/lunch-1/logout")
                 .build();
             HttpPost httpPost = new HttpPost(uri);
             StringEntity entity = new StringEntity("{\"sessionId\":\"a\"}", "UTF-8");
