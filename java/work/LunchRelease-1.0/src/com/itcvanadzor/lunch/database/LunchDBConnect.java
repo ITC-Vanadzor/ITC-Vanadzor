@@ -307,7 +307,7 @@ public class LunchDBConnect {
      * @throw exception error if an orders by places list is empty
      */
     //****************10
-    public ArrayList getCostumers(int place_id) throws Exception {
+    public ArrayList getCustomers(int place_id) throws Exception {
         ArrayList<CostumersByPlace> costumersByPlaceList = new ArrayList<CostumersByPlace>();
         st = connection.createStatement();
         if (st == null) {

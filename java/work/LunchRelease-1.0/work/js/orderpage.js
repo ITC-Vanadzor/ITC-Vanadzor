@@ -1,6 +1,23 @@
-var sessionId = 0;
-
-
+var places_list = "" ;
+function swapJsonKeyValues(input) {
+    var one, output = {};
+    for (one in input) {
+        if (input.hasOwnProperty(one)) {
+            output[input[one]] = one;
+        }
+     }
+    return output;
+}
+function findValueJson (jsonarray, key){
+    var value ;
+    for (var j in jsonarray){
+        console.log(j.key);
+        if(j.key){
+            value = j.key ;
+        }
+    }
+    return value;
+}
 function ValidateEmail(inputText) {  
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
     if(inputText.value.match(mailformat)) {  
@@ -18,7 +35,7 @@ function login(){
         document.getElementById("errormsg").innerHTML = "You have entered an invalid email address!";  
         return false;
     }
-    else if(document.getElementById("pswd").value.length < 6 ){
+    else if(document.getElementById("pswd").value.length < 4 ){
         document.getElementById("errormsg").innerHTML = "Password should be at least 6 symbol";
         return false;
     }
@@ -26,22 +43,18 @@ function login(){
     ajaxRequest = new XMLHttpRequest();
     ajaxRequest.onreadystatechange = function(){
         if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){// here can be added '&& ajaxRequest.statusText=="success"'
-               sessionId = ajaxRequest.responseText;     
+               localStorage.session_json = ajaxRequest.responseText;     
                window.location = "orderpage.html";
-               //alert (ajaxRequest.responseText);
-               alert(sessionId);
         }
         else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){
                document.getElementById("errormsg").innerHTML = "You entered invalid email or password ";
         }
-            
     }
     ajaxRequest.open("POST", "http://localhost:8080/lunch-1/login", true);
     ajaxRequest.setRequestHeader("Content-type", "application/json");
     ajaxRequest.send(JSON.stringify(login_json));
     return true;
 }
-
 
 function hideDiv(el){
     el.setAttribute("style","visibility: hidden;");
@@ -65,62 +78,73 @@ function loadproducts(){
    // var prod_text ='[{"productId":"01","productName":"qyabab"},{"productId":"02","productName":"iqibir"},{"productId":"03","productName":"hamburger"},{"productId":"04","productName":"sendwich"},{"productId":"05","productName":"et cetera"}]';
     var value = document.getElementById("products").value;
     var e = document.getElementById("places");
+    var swappedPlaceList = swapJsonKeyValues(places_list);
     var strPlace = e.options[e.selectedIndex].text;
+    console.log(strPlace);
+   // console.log(strPlace);
+    var strPlaceId = findValueJson(swappedPlaceList,strPlace);
+    console.log(strPlaceId);
     if (value.length==2){
-        var prod_json = [{"place_id":strPlace, "input_str":value }];
-        jaxRequest = new XMLHttpRequest();
+        var prod_json = {"placeId":strPlaceId, "inputStr":value };
+        ajaxRequest = new XMLHttpRequest();
         ajaxRequest.onreadystatechange = function(){
             if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
                 var jsontext = ajaxRequest.responseText;
-                var product_list = JSON.parse(jsontext);
+                product_list = JSON.parse(jsontext);
                 printProducts(product_list);
             }
             else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){//code should be changed!!!!!!!!!
                 document.getElementById("main").innerHTML = " Can't find ";
             }
+            else if(ajaxRequest.readyState == 4 && ajaxRequest.status==500 ){
+                document.getElementById("main").innerHTML = " nerqin Server error.  ";
+            }
         }
-        ajaxRequest.open("POST", "http://localhost:8080", true);//method should be corrected
+        ajaxRequest.open("POST", "http://localhost:8080/lunch-1/getproductlist", true);
         ajaxRequest.send(JSON.stringify(prod_json));
     }
 }
 function getPlaces(){
-    jaxRequest = new XMLHttpRequest();
+    var ajaxRequest = new XMLHttpRequest();
     ajaxRequest.onreadystatechange = function(){
         if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
             var jsontext = ajaxRequest.responseText;
-            var places_list = JSON.parse(jsontext);
+            places_list = JSON.parse(jsontext);
             printPlaces(places_list);
         }
         else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){//code should be changed!!!!!!!!!
             document.getElementById("main").innerHTML = " Can't find ";
         }
     }
-    ajaxRequest.open("POST", "http://localhost:8080", true);//method should be corrected
+    ajaxRequest.open("POST", "http://localhost:8080/lunch-1/getplaces", true);//method should be corrected
     ajaxRequest.send(null);
 }
 
 function printPlaces (places_list){
-    //var places_list = ["Tashir", "Volodya", "Another place"];
+    //var places_list = [{"placeId":1,"placeName":"Tashir"},....];
     var head_option = document.createElement("option");
     var head_option_text = document.createTextNode("Shop/Bistro");
     head_option.appendChild(head_option_text);
     document.getElementById("places"). appendChild(head_option);
     for (var i = 0; i< places_list.length; ++i){
         var option = document.createElement("option");
-        var option_text = document.createTextNode(places_list[i]);
+        var option_text = document.createTextNode(places_list[i].placeName);
         option.appendChild(option_text);
+        /*create hidden div for keeping placeId */
+        /*var idDiv = document.createElement("div");
+        idDiv.setAttribute("style","visibility: hidden;");
+        var idDivValue = document.createTextNode(places_list[i].placeId);
+        option.appendChild(idDiv);*/
         document.getElementById("places"). appendChild(option);
         
     }
 }
 function getOrderList(){
-    var session_json = [{"sessionId":sessionId}];
-    ajaxRequest = new XMLHttpRequest();
+    var ajaxRequest = new XMLHttpRequest();
     ajaxRequest.onreadystatechange = function(){
         if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
-            var jsontext = ajaxRequest.responseText;
-            var orders = JSON.parse(jsontext);
-            printOldOrders(orders);
+           var jsontext = ajaxRequest.responseText;
+           printOldOrders(jsontext);
         }
         else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){//code should be changed!!!!!!!!!
             document.getElementById("main").innerHTML = " Can't find ";
@@ -129,29 +153,28 @@ function getOrderList(){
             document.getElementById("main").innerHTML = " Crash!!!!!";
         }
     }
-    ajaxRequest.open("POST", "http://localhost:8080", true);
+    ajaxRequest.open("POST", "http://localhost:8080/lunch-1/getorderlist", true);
     ajaxRequest.setRequestHeader("Content-type", "application/json");
-    ajaxRequest.send(JSON.stringify(session_json))
+    ajaxRequest.send(localStorage.session_json);
 }
 
 function printOldOrders(orders){
- //   var orders = '[{"orderId":"01","place_id":"Valod","product_id":"Iqibir","count_id":"2"},{"orderId":"02","place_id":"Tashir","product_id":"Pizza","count_id":"2"}]';
     var obj = JSON.parse(orders);
     for(var i = 0; i<obj.length; ++i ){
         var row = document.createElement("div");
         
         var place_part_div = document.createElement("div");
-        var textnode_place = document.createTextNode(obj[i].place_id);
+        var textnode_place = document.createTextNode(obj[i].placeName);
         place_part_div.appendChild(textnode_place);
         place_part_div.setAttribute("class", "table_part1");
         row.appendChild(place_part_div);
         var product_part_div = document.createElement("div");
-        var textnode_product = document.createTextNode(obj[i].product_id);
+        var textnode_product = document.createTextNode(obj[i].productName);
         product_part_div.appendChild(textnode_product);
         product_part_div.setAttribute("class", "table_part2");
         row.appendChild(product_part_div);
         var count_div = document.createElement("div");
-        var textnode_count = document.createTextNode(obj[i].count_id);
+        var textnode_count = document.createTextNode(obj[i].count);
         count_div.appendChild(textnode_count);
         count_div.setAttribute("class", "table_part3");
         row.appendChild(count_div);

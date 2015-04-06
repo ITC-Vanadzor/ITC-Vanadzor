@@ -180,13 +180,13 @@ public class GetResponses {
         }
     }
 
-    public ResponseBodyCode getCostumers(String queryJson) {
+    public ResponseBodyCode getCustomers(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
             List<CostumersByPlace> ordersList = new ArrayList<CostumersByPlace>();
             JSONArray jsonArr = new JSONArray();
-            ordersList = lunch.getCostumers(Integer.parseInt((String) jsonObj.get("placeId")));
+            ordersList = lunch.getCustomers(Integer.parseInt((String) jsonObj.get("placeId")));
 
             for (CostumersByPlace order : ordersList) {
                 JSONObject json = new JSONObject();
@@ -211,13 +211,20 @@ public class GetResponses {
     }
 
     public ResponseBodyCode getProductsList(String queryJson) {
-        try {
-            Object obj = JSONValue.parse(queryJson);
-            JSONObject jsonObj = (JSONObject) obj;
-            List<Products> productsList = new ArrayList<Products>();
-            JSONArray jsonArr = new JSONArray();
-            productsList = lunch.getProducts(Integer.parseInt((String) jsonObj.get("placeId")), (String) jsonObj.get("inputStr"));
+        int code =  0;
 
+        try {
+            ++code;
+            Object obj = JSONValue.parse(queryJson);
+            ++code;
+            JSONObject jsonObj = (JSONObject) obj;
+            ++code;
+            List<Products> productsList = new ArrayList<Products>();
+            ++code;
+            JSONArray jsonArr = new JSONArray();
+           ++code;
+            productsList = lunch.getProducts(Integer.parseInt((String) jsonObj.get("placeId")), (String) jsonObj.get("inputStr"));
+            ++code;
             for (Products product : productsList) {
                 JSONObject json = new JSONObject();
                 json.put("productId", product.getProductId());
@@ -236,7 +243,7 @@ public class GetResponses {
             ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         } catch (Exception ex) {
-            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(code, errorMessageNotFound);
             return result;
         }
     }
