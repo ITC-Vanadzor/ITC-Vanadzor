@@ -27,8 +27,8 @@ public class GetOrderList extends HttpServlet {
             e.printStackTrace();
         }
         GetResponses getResponse = new GetResponses("jdbc:postgresql://localhost:5432/lunchdb","postgres", "postgres");
-        ResponseBodyCode orders = getResponse.getOrdersList(session_id);
-        response.setStatus(orders.getCode());
-        out.print(orders.getBody());
+        ResponseBodyCode results = getResponse.getOrdersList(session_id);
+        response.setStatus(results.getCode());
+        out.print(results.getBody());
     }
 }

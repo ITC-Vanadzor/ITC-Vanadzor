@@ -51,7 +51,7 @@
 
     <servlet-mapping>
         <servlet-name>GetProductsListServlet</servlet-name>
-        <url-pattern>/getproductslist</url-pattern>
+        <url-pattern>/getproductlist</url-pattern>
     </servlet-mapping>
 
     <!--5. getorders -->

@@ -180,13 +180,13 @@ public class GetResponses {
         }
     }
 
-    public ResponseBodyCode getCostumers(String queryJson) {
+    public ResponseBodyCode getCustomers(String queryJson) {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
             List<CostumersByPlace> ordersList = new ArrayList<CostumersByPlace>();
             JSONArray jsonArr = new JSONArray();
-            ordersList = lunch.getCostumers(Integer.parseInt((String) jsonObj.get("placeId")));
+            ordersList = lunch.getCustomers(Integer.parseInt((String) jsonObj.get("placeId")));
 
             for (CostumersByPlace order : ordersList) {
                 JSONObject json = new JSONObject();
@@ -217,7 +217,6 @@ public class GetResponses {
             List<Products> productsList = new ArrayList<Products>();
             JSONArray jsonArr = new JSONArray();
             productsList = lunch.getProducts(Integer.parseInt((String) jsonObj.get("placeId")), (String) jsonObj.get("inputStr"));
-
             for (Products product : productsList) {
                 JSONObject json = new JSONObject();
                 json.put("productId", product.getProductId());
