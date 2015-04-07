@@ -319,7 +319,7 @@ public class LunchDBConnect {
 
     public ArrayList getCostumers(int place_id) throws Exception {
 =======
-    //****************10
+    
     public ArrayList getCustomers(int place_id) throws Exception {
 >>>>>>> lunchDevelopSargis
         ArrayList<CostumersByPlace> costumersByPlaceList = new ArrayList<CostumersByPlace>();
