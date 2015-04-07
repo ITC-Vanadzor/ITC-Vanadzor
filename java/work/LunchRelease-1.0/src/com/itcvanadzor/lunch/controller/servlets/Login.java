@@ -19,7 +19,7 @@ public class Login extends HttpServlet {
         while ((str = r.readLine()) != null) {
             sb.append(str);
         }
-        String login_pswd = sb.toString();
+        String queryJson = sb.toString();
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -29,10 +29,9 @@ public class Login extends HttpServlet {
           
         }
         GetResponses getResponse = new GetResponses("jdbc:postgresql://localhost:5432/lunchdb","postgres", "postgres"); 
-        ResponseBodyCode sessionId = getResponse.getSessionId(login_pswd);
-        response.setStatus(sessionId.getCode());
-        out.print(sessionId.getBody());
-        //out.print("aaaaa");
+        ResponseBodyCode result = getResponse.getSessionId(queryJson);
+        response.setStatus(result.getCode());
+        out.print(result.getBody());
     }
 }
 
