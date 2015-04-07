@@ -27,7 +27,7 @@ public class Logout extends HttpServlet {
             e.printStackTrace();
         }
         GetResponses getResponse = new GetResponses("jdbc:postgresql://localhost:5432/lunchdb","postgres", "postgres");
-        ResponseBodyCode result = getResponse.addOrder(queryJson);
+        ResponseBodyCode result = getResponse.logOut(queryJson);
         response.setStatus(result.getCode());
         out.print(result.getBody());
     }
