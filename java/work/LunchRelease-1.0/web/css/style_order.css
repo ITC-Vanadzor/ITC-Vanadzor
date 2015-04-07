@@ -29,17 +29,11 @@ form {
 #products {
     width: 100%;
     border:1px solid #bfbfbf;
-    /*
-     * AREG -> use consistent syntax to define colors ( either rgb() or # )
-     */
     background:#DDDDDD; 
     height: 40px;
     font-size: 16px;
     border-radius:3px;
 }
-/*
- * AREG -> remove duplicate styles
- */
 select {
     padding: 0 0 0 3%;
 }
@@ -120,7 +114,18 @@ select {
     overflow:hidden;
     height:22px;
     text-align:center;
+    margin-bottom:3px;
 }
 .table_part4 button {
     width:95%;
+}
+#logout {
+    width: 97%;
+    height: 26px;
+}
+#logout button {
+    float: right;
+    height: 26px;
+    width: 72px;
+
 }

@@ -211,20 +211,12 @@ public class GetResponses {
     }
 
     public ResponseBodyCode getProductsList(String queryJson) {
-        int code =  0;
-
         try {
-            ++code;
             Object obj = JSONValue.parse(queryJson);
-            ++code;
             JSONObject jsonObj = (JSONObject) obj;
-            ++code;
             List<Products> productsList = new ArrayList<Products>();
-            ++code;
             JSONArray jsonArr = new JSONArray();
-           ++code;
             productsList = lunch.getProducts(Integer.parseInt((String) jsonObj.get("placeId")), (String) jsonObj.get("inputStr"));
-            ++code;
             for (Products product : productsList) {
                 JSONObject json = new JSONObject();
                 json.put("productId", product.getProductId());
@@ -243,7 +235,7 @@ public class GetResponses {
             ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
         } catch (Exception ex) {
-            ResponseBodyCode result = new ResponseBodyCode(code, errorMessageNotFound);
+            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
             return result;
         }
     }

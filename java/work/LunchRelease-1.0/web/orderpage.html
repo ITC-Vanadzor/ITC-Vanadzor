@@ -8,29 +8,24 @@
     <script src="js/orderpage.js"></script>
 </head>
 <body onload="getPlaces(); getOrderList() ">
+    <div id="logout"><button id="logout_button" onclick="signout()" >Sign Out</button> </div>
     <div id="main">
-        <form name="orders" >
             <div id="placesDiv">
                  <select id="places">
                 </select>    
             </div>
             <div id="productsDiv">
-                <input id="products" type="text" placeholder="Type product name" onkeyup="setTimeout(function() { loadproducts(); }, 1500)">
+                <input id="products" type="text" placeholder="Type product name" onkeyup="setTimeout(function() { loadproducts(); }, 1500)"> 
                 <div id="product_list" >bbbbb 
                 </div> 
             </div>    
-            <!--
-            AREG -> change count field fro select to input
-            Sargis-> changed
-            -->
             <div id="countDiv">
                 <input type="number" id="count" placeholder="Input count"  min="1" >
             </div>
             <!--
             AREG -> clarify usage of name and id attributes
             -->
-            <button id="addButton" >Add</button>
-        </form>    
+            <button id="addButton" onclick="addOrder()">Add</button>
         <div id="table" >
         </div>
     </div>    
