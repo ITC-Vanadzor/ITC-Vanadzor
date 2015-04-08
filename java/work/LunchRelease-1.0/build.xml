@@ -7,7 +7,7 @@
     <property name="dist.home"     value="${basedir}/dist"/>
     <property name="src.home"      value="${basedir}/src"/>
     <property name="web.home"      value="${basedir}/web"/>
-    <property name="lib.home"      value="${basedir}/lib/*"/>
+    <property name="lib.home"      value="${basedir}/lib"/>
 
     <target name="help">
         <echo>You can use the following targets:</echo>
@@ -29,8 +29,9 @@
         </fileset>
         <pathelement location="${tcserver.home}/lib"/>
         <pathelement location="${lib.home}"/>
-        <pathelement location="/home/student/Desktop/lunch/lib/json-simple-1.1.jar"/>
-        <pathelement location="/home/student/Desktop/lunch/lib/postgresql-9.4-1201.jdbc4.jar"/>
+        <fileset dir="${lib.home}">
+            <include name="*.jar"/>
+        </fileset>
 
         <fileset dir="${tcserver.home}/lib">
             <include name="*.jar"/>
@@ -50,6 +51,7 @@
         description="Create working dirs and copy static files to work dir">
         <mkdir  dir="${dist.home}"/>
         <mkdir  dir="${work.home}/WEB-INF/classes"/>
+        <mkdir  dir="${work.home}/WEB-INF/lib"/>
         <!-- Copy static HTML and JSP files to work dir -->
         <copy todir="${work.home}">
             <fileset dir="${web.home}"/>
@@ -64,6 +66,9 @@
         </javac>
         <copy  todir="${work.home}/WEB-INF/classes">
             <fileset dir="${src.home}" excludes="**/*.java"/>
+        </copy>
+        <copy  todir="${work.home}/WEB-INF/lib">
+            <fileset dir="${lib.home}" includes="**/*.jar"/>
         </copy>
 
     </target>

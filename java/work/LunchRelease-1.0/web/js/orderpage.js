@@ -1,3 +1,4 @@
+var host = "http://192.168.33.64:8080"
 var places_list = {} ;
 function findKeyJson (jsonarray, value){
     var key ;
@@ -37,11 +38,14 @@ function login(){
                localStorage.session_json = ajaxRequest.responseText;     
                window.location = "orderpage.html";
         }
-        else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){
+        else if(ajaxRequest.readyState == 4 && ajaxRequest.status==500 ){
                document.getElementById("errormsg").innerHTML = "You entered invalid email or password ";
         }
+        else if(ajaxRequest.readyState == 4 && ajaxRequest.status==404 ){
+               document.getElementById("errormsg").innerHTML = "Page Not Found ";
+        }
     }
-    ajaxRequest.open("POST", "http://localhost:8080/lunch-1/login", true);
+    ajaxRequest.open("POST", host+"/lunch-1/login", true);
     ajaxRequest.setRequestHeader("Content-type", "application/json");
     ajaxRequest.send(JSON.stringify(login_json));
     return true;
@@ -87,7 +91,7 @@ function loadproducts(){
                 document.getElementById("main").innerHTML = " nerqin Server error.  ";
             }
         }
-        ajaxRequest.open("POST", "http://localhost:8080/lunch-1/getproductlist", true);
+        ajaxRequest.open("POST", host+"/lunch-1/getproductlist", true);
         ajaxRequest.send(JSON.stringify(prod_json));
     }
 }
@@ -104,7 +108,7 @@ function getPlaces(){
             document.getElementById("main").innerHTML = " Can't find ";
         }
     }
-    ajaxRequest.open("POST", "http://localhost:8080/lunch-1/getplaces", true);
+    ajaxRequest.open("POST", host+"/lunch-1/getplaces", true);
     ajaxRequest.send(null);
 }
 
@@ -138,7 +142,7 @@ function getOrderList(){
             document.getElementById("main").innerHTML = " Crash!!!!!";
         }
     }
-    ajaxRequest.open("POST", "http://localhost:8080/lunch-1/getorderlist", true);
+    ajaxRequest.open("POST", host+"/lunch-1/getorderlist", true);
     ajaxRequest.setRequestHeader("Content-type", "application/json");
     ajaxRequest.send(localStorage.session_json);
 }
@@ -197,7 +201,7 @@ function deleteRow(e){
             }
                 
         }
-        ajaxRequest.open("POST", "http://localhost:8080/lunch-1/deleteorder", true);
+        ajaxRequest.open("POST", host+"/lunch-1/deleteorder", true);
         ajaxRequest.setRequestHeader("Content-type", "application/json");
         ajaxRequest.send(JSON.stringify(delete_json));
         return false;
@@ -240,7 +244,7 @@ function addOrder(){
             }
 
         }
-        ajaxRequest.open("POST", "http://localhost:8080/lunch-1/addorder", true);
+        ajaxRequest.open("POST", host+"/lunch-1/addorder", true);
         ajaxRequest.setRequestHeader("Content-type", "application/json");
         ajaxRequest.send(JSON.stringify(order_json));
     }
@@ -258,7 +262,7 @@ function signout(){
         }
 
     }
-    ajaxRequest.open("POST", "http://localhost:8080/lunch-1/logout", true);
+    ajaxRequest.open("POST", host+"/lunch-1/logout", true);
     ajaxRequest.setRequestHeader("Content-type", "application/json");
     ajaxRequest.send(localStorage.session_json);
 

@@ -17,8 +17,8 @@ public class Distributors {
  *@param placeId unique value for placeName
  */
 
-    String username;
-    int loginId;
+    String email;
+    int emailId;
     String placeName;
     int  placeId;
 
@@ -26,9 +26,9 @@ public class Distributors {
  *@detailed This method gets name, nameId, placeName, placeId and saves it
  */
 
-    public Distributors (String username, int loginId, String placeName, int placeId) {
-        this.username=username;
-        this.loginId=loginId;
+    public Distributors (String email, int emailId, String placeName, int placeId) {
+        this.email = email;
+        this.emailId = emailId;
         this.placeName=placeName;
         this.placeId=placeId;
     }
@@ -38,8 +38,8 @@ public class Distributors {
      *@return username
      */
 
-    public String getUsername() {
-        return this.username;
+    public String getEmail() {
+        return this.email;
     }
 
     /**
@@ -47,8 +47,8 @@ public class Distributors {
      *@return loginId
      */
 
-    public int getLoginId() {
-        return this.loginId;
+    public int getEmailId() {
+        return this.emailId;
     }
 
     /**

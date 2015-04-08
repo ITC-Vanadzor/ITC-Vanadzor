@@ -9,7 +9,7 @@ import java.sql.*;
 import org.postgresql.Driver;
 
 public class GetDistributors extends HttpServlet {
-    public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         ServletOutputStream out=response.getOutputStream();
         /*ServletInputStream input=request.getInputStream();
         BufferedReader r = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
