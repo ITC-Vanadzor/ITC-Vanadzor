@@ -84,8 +84,14 @@ function getProductList() {
             var productList = JSON.parse(xmlhttp.responseText);
             addProductList(productList);  
         }
+        if (xmlhttp.readyState==4 && xmlhttp.status==404) {
+            document.getElementById("productList1").innerHTML = "Not Found";  
+        }
+        if (xmlhttp.readyState==4 && xmlhttp.status==500) {
+            document.getElementById("productList1").innerHTML = "Server error";  
+        }
     }
-    xmlhttp.open("GET","http://localhost:8080/lunch-1/getProducts",true);
+    xmlhttp.open("POST","http://192.168.33.64:8080/lunch-1/getproducts",true);
     xmlhttp.setRequestHeader("Content-Type","application/json");
     xmlhttp.send(JSON.stringify(place_json));
 }
@@ -95,7 +101,6 @@ function addProductList(productList) {
    /* var productList = [ {"productName": "Iqibir", "count": "3"},
         {"productName": "Qyabab", "count": "2"},
        {"productName": "Pizza", "count": "4"} ];*/
-    //response body [{"product":""},{"count":""}]
     for(i in productList) {
             var tableRow = document.createElement("tr");
             var tableData = document.createElement("td");
@@ -110,61 +115,72 @@ function addProductList(productList) {
     }
 }
 
-function getUserList(placeId) {
-    var place_json = {"placeId":placeId};
+function getUserList() {
+    var place_json = {"placeId":localStrage.distPlaceId};
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
             var users = JSON.parse(xmlhttp.responseText);
             addUserList(users);
         }
+        if (xmlhttp.readyState==4 && xmlhttp.status==404) {
+            document.getElementById("productList2").innerHTML = "Not Found";  
+        }
+        if (xmlhttp.readyState==4 && xmlhttp.status==500) {
+            document.getElementById("productList2").innerHTML = "Server error";  
+        }
     }
-    xmlhttp.open("POST","http://localhost:8080/lunch-1/getCustomers",true);
+    xmlhttp.open("POST","http://192.168.33.64:8080/lunch-1/getcustomers",true);
     xmlhttp.setRequestHeader("Content-Type","application/json");
     xmlhttp.send(JSON.stringify(place_json));
 }
 
 //Function filling user table (2.2)
 function addUserList(users) {
-    var users = [ {"userId": "1", "userName": "Movses" },
-    {"userId": "2", "userName": "Hrach" }
-    ];
-    //response body [{"userId":"","userName":""}]
+    //var users = [ {"userId": "1", "userName": "Movses" },
+    //{"userId": "2", "userName": "Hrach" }
+    //];
     for(i=0; i<users.length; i++) {
         var tableRow = document.createElement("tr");   
         var tableData = document.createElement("td");
         var name = document.createTextNode(users[i].userName);
         var btn = document.createElement("button");
         tableData.appendChild(name);
+        tableData.setAttribute("id", i)
         tableData.appendChild(btn);
         var btnName = document.createTextNode("List");
         btn.appendChild(btnName);
-        btn.setAttribute("onclick", "getOrdersByUser();");
+        btn.setAttribute("onclick", "getOrdersByUser(this.id);");
         tableRow.appendChild(tableData);
         document.getElementById("nameTable").appendChild(tableRow);
     } 
 }
 
-function getOrdersByUser(userId,placeId) {
-    var user_json = {"userId":userId,"placeId":placeId};
+function getOrdersByUser(userId) {
+    var user_json = {"userId":userId,"placeId":localStorage.distPlaceId};
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
             var orderList = JSON.parse(xmlhttp.responseText);
             addOrderList(orderList);
         }
+        if (xmlhttp.readyState==4 && xmlhttp.status==404) {
+            document.getElementById("productList2").innerHTML = "Not Found";  
+        }
+        if (xmlhttp.readyState==4 && xmlhttp.status==500) {
+            document.getElementById("productList2").innerHTML = "Server error";  
+        }
     }
-    xmlhttp.open("POST","http://localhost:8080/lunch-1/getOrders",true);
+    xmlhttp.open("POST","http://192.168.33.64:8080/lunch-1/getorders",true);
     xmlhttp.setRequestHeader("Content-Type","application/json");
     xmlhttp.send(JSON.stringify(user_json));
 }
 
 //Function filling order tablei (2.3)
 function addOrderList(orderList) {
-    var orderList = [ {"product": "Iqibir", "count": "3"},
-        {"product": "Qyabab", "count": "2"},
-       {"product": "Pizza", "count": "4"} ];
-    //response body [{"productID":""},{"count":""}]
+    //var orderList = [ {"product": "Iqibir", "count": "3"},
+    //    {"product": "Qyabab", "count": "2"},
+    //   {"product": "Pizza", "count": "4"} ];
     var list = document.getElementById("orderTable")
     var childsCount = list.childNodes.length;
     for(j=0; j<childsCount-2; j++) {
