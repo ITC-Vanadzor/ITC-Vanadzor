@@ -315,13 +315,8 @@ public class LunchDBConnect {
      * @throws java.sql.SQLException error if an error occurred working with database
      * @throws Exception error if an orders by places list is empty
      */
-<<<<<<< HEAD
-
-    public ArrayList getCostumers(int place_id) throws Exception {
-=======
     
     public ArrayList getCustomers(int place_id) throws Exception {
->>>>>>> lunchDevelopSargis
         ArrayList<CostumersByPlace> costumersByPlaceList = new ArrayList<CostumersByPlace>();
         st = connection.createStatement();
         if (st == null) {
