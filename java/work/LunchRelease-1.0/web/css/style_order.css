@@ -119,18 +119,18 @@ select {
 .table_part4 button {
     width:95%;
 }
-#logout {
-    width: 97%;
-    height: 26px;
+.topmanu{
+    width: 92%;
+    padding-top: 12px;
 }
-#logout button {
+.topmanu button {
     float: right;
-    height: 26px;
-    width: 72px;
+    padding: 5px;
+    border-radius:3px;
 
 }
-#logout a {
-    margin-left: 85%;
+.topmanu a {
+    margin-left: 10%;
     font-size: 18px;
     text-decoration: none;
 }

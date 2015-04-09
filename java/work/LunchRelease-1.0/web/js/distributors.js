@@ -109,9 +109,11 @@ function printProductList(productList) {
         var product = document.createTextNode(productList[i].productName);
         var count = document.createTextNode(productList[i].count);
         tableData.appendChild(product);
+        tableData.setAttribute('style', 'font-size: 16px');
         tableRow.appendChild(tableData);
         var tableData1 = document.createElement("td");
         tableData1.appendChild(count);
+        tableData1.setAttribute('style', 'font-size: 16px');
         tableRow.appendChild(tableData1);
         document.getElementById("productTable").appendChild(tableRow);
     }
@@ -142,9 +144,10 @@ function printUserList(users) {
     for(i=0; i<users.length; i++) {
         var tableRow = document.createElement("tr");   
         var tableData = document.createElement("td");
-        var name = document.createTextNode(users[i].userName);
+        var name = document.createTextNode(users[i].userName+"  ");
         var btn = document.createElement("button");
         tableData.appendChild(name);
+        tableData.setAttribute('style', 'font-size: 16px;')
         tableData.appendChild(btn);
         var btnName = document.createTextNode("List");
         btn.appendChild(btnName);
@@ -195,7 +198,7 @@ function printOrderList(orderList) {
         list.appendChild(tableRow);
     }   
 }
-function signout(){
+/*function signout(){
     var ajaxRequest = new XMLHttpRequest();
     ajaxRequest.onreadystatechange = function(){
         if(ajaxRequest.readyState == 4 && ajaxRequest.status==204){
@@ -211,5 +214,4 @@ function signout(){
     ajaxRequest.setRequestHeader("Content-type", "application/json");
     ajaxRequest.send(localStorage.session_json);
 
-
-}
+}*/
