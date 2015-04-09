@@ -4,7 +4,7 @@
  */
 package com.itcvanadzor.lunch.controller.functions;
 
-import com.itcvanadzor.lunch.database.CostumersByPlace;
+import com.itcvanadzor.lunch.database.CustomersByPlace;
 import com.itcvanadzor.lunch.database.Distributors;
 import com.itcvanadzor.lunch.database.LunchDBConnect;
 import com.itcvanadzor.lunch.database.Order;
@@ -71,9 +71,6 @@ public class GetResponses {
                 ResponseBodyCode result = new ResponseBodyCode(codeUnauthorized, errorMessageUnauthorized);
                 return result;
             }
-        } catch (ParseException pe) {
-            ResponseBodyCode result = new ResponseBodyCode(codeNotFound, errorMessageNotFound);
-            return result;
         } catch (SQLException se) {
             ResponseBodyCode result = new ResponseBodyCode(codeInternalServer, errorMessageInternalServer);
             return result;
@@ -184,11 +181,11 @@ public class GetResponses {
         try {
             Object obj = JSONValue.parse(queryJson);
             JSONObject jsonObj = (JSONObject) obj;
-            List<CostumersByPlace> ordersList = new ArrayList<CostumersByPlace>();
+            List<CustomersByPlace> ordersList = new ArrayList<CustomersByPlace>();
             JSONArray jsonArr = new JSONArray();
             ordersList = lunch.getCustomers(Integer.parseInt((String) jsonObj.get("placeId")));
 
-            for (CostumersByPlace order : ordersList) {
+            for (CustomersByPlace order : ordersList) {
                 JSONObject json = new JSONObject();
                 json.put("userId", order.getLoginId());
                 json.put("userName", order.getUsername());
@@ -360,8 +357,8 @@ public class GetResponses {
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("placeId", distrib.getPlaceId());
                 jsonObj.put("placeName", distrib.getPlaceName());
-                jsonObj.put("nameId", distrib.getEmailId());
-                jsonObj.put("name", distrib.getEmail());
+                jsonObj.put("nameId", distrib.getLoginId());
+                jsonObj.put("name", distrib.getUserName());
                 jsonArr.add(jsonObj);
             }
             if (jsonArr != null) {

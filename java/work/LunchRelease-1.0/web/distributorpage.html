@@ -6,16 +6,21 @@ AREG -> add comments
         <script src="js/distributors.js"></script>
         <meta charset="UTF-8">
         <link rel="stylesheet" text/css href="css/style_distr.css">
+        <link rel="stylesheet" text/css href="css/style_order.css">
         <link rel="shortcut icon" href="images/logo.png" >
         <title> Distributor </title>
     </head>
     <body onload="getDistributors()">
-        <div id="distributorMainField" class="clearfix" >
-            <div id="distributors">
-                <table class="table" id="distrTable">
-                    <tr><th>Place</th><th>Distributor</th></tr>
-                </table>
-            </div>
+    <div id="distributorMainField" class="clearfix" >
+        <div id="logout">
+            <a href="orderpage.html">Orders</a>
+            <button id="logout_button" onclick="signout()" >Sign Out</button>
         </div>
+        <div id="distributors">
+            <table class="table" id="distrTable">
+                <tr><th>Place</th><th>Distributor</th></tr>
+            </table>
+        </div>
+    </div>
     </body>
 </html>

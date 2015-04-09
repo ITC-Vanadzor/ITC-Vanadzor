@@ -1,4 +1,4 @@
-var host = "http://192.168.33.64:8080"
+var host = "http://localhost:8080"
 var places_list = {} ;
 function findKeyJson (jsonarray, value){
     var key ;

@@ -4,7 +4,7 @@
 
 package com.itcvanadzor.lunch.database;
 
-public class CostumersByPlace {
+public class CustomersByPlace {
 
 /**
  *@param loginId  unique value for username
@@ -18,7 +18,7 @@ public class CostumersByPlace {
  *@detailed This method gets productName, count, username and saves it
 */
 
-    public CostumersByPlace (int loginId, String username) {
+    public CustomersByPlace (int loginId, String username) {
       this.loginId = loginId;
       this.username = username;
     }
